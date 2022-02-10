@@ -8,8 +8,9 @@ public class RangedUnit extends Unit{
     }
 
     @Override
-    public int getAttackBonus() {
-        return 3;
+    public int getAttackBonus(Unit opponent) {
+        if(opponent instanceof InfantryUnit)return 7;
+        return 4;
     }
 
     @Override

@@ -62,7 +62,7 @@ public abstract class Unit {
      * This method must be defined in subclasses.
      * @return int attack bonus of the unit
      */
-    public abstract int getAttackBonus();
+    public abstract int getAttackBonus(Unit opponent);
     /**
      * Abstract method that will define the resist bonus of the unit.
      * This method must be defined in subclasses.
@@ -76,7 +76,7 @@ public abstract class Unit {
      * @param opponent
      */
     public void attack(Unit opponent){
-        int newHealth= opponent.getHealth() -(this.getAttack()+this.getAttackBonus())+
+        int newHealth= opponent.getHealth() -(this.getAttack()+this.getAttackBonus(opponent))+
                 (opponent.getArmor()+opponent.getResistBonus());
         opponent.setHealth(Math.max(newHealth, 0));
     }
@@ -88,4 +88,5 @@ public abstract class Unit {
                 "Attack points of the unit: " + this.getAttack() + "\n" +
                 "Armor points of the unit: " + this.getArmor() + "\n";
     }
+
 }

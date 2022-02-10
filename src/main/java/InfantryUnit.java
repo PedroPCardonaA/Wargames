@@ -7,11 +7,12 @@ public class InfantryUnit extends Unit{
         super(NAME,health,15,10);
     }
     @Override
-    public int getAttackBonus(){
+    public int getAttackBonus(Unit opponent){
+        if(opponent instanceof CavalryUnit)return 4;
         return 2;
     }
     @Override
     public int getResistBonus(){
-        return 1;
+        return 3;
     }
 }
