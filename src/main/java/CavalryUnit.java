@@ -1,5 +1,8 @@
+
 public class CavalryUnit extends Unit{
+
     private Boolean isCharging = true;
+
     public CavalryUnit(String NAME, int health, int attack, int armor) throws IllegalArgumentException {
         super(NAME, health, attack, armor);
     }
@@ -9,7 +12,7 @@ public class CavalryUnit extends Unit{
     }
 
     @Override
-    public int getAttackBonus(Unit opponent) {
+    protected int getAttackBonus(Unit opponent) {
         if(isCharging && opponent instanceof RangedUnit){
             this.setCharging(false);
             return 8;}
@@ -28,8 +31,14 @@ public class CavalryUnit extends Unit{
     }*/
 
     @Override
-    public int getResistBonus() {
-        return 2;
+    protected int getResistBonus(Unit mainUnit) {
+        if(mainUnit instanceof RangedUnit)return 7;
+        if(mainUnit instanceof InfantryUnit) return -2;
+        return 4;
+    }
+    @Override
+    protected Unit clone(){
+        return new CavalryUnit(this.getNAME(),this.getHealth(),this.getATTACK(),this.getARMOR());
     }
 
     public void setCharging(Boolean charging) {
