@@ -1,11 +1,12 @@
 
 public class RangedUnit extends Unit{
-    public RangedUnit(String NAME, int health, int attack, int armor) throws IllegalArgumentException {
-        super(NAME, health, attack, armor);
+    public RangedUnit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND)
+            throws IllegalArgumentException {
+        super(NAME, health, ATTACK, ARMOR,ATTACK_SPEED_PER_SECOND );
     }
 
-    public RangedUnit(String NAME, int health) {
-        super(NAME,health,15,8);
+    public RangedUnit(String NAME, int health){
+        super(NAME,health,15,8,3 );
     }
 
     @Override
@@ -22,6 +23,7 @@ public class RangedUnit extends Unit{
     }
     @Override
     protected Unit clone(){
-        return new RangedUnit(this.getNAME(),this.getHealth(),this.getATTACK(),this.getARMOR());
+        return new RangedUnit(this.getNAME(),this.getHealth(),
+                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND());
     }
 }

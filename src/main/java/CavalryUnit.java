@@ -3,12 +3,13 @@ public class CavalryUnit extends Unit{
 
     private Boolean isCharging = true;
 
-    public CavalryUnit(String NAME, int health, int attack, int armor) throws IllegalArgumentException {
-        super(NAME, health, attack, armor);
+    public CavalryUnit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND)
+            throws IllegalArgumentException {
+        super(NAME, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND);
     }
 
     public CavalryUnit(String NAME, int health) {
-        super(NAME,health,20,12);
+        super(NAME,health,20,12, 2);
     }
 
     @Override
@@ -38,7 +39,8 @@ public class CavalryUnit extends Unit{
     }
     @Override
     protected Unit clone(){
-        return new CavalryUnit(this.getNAME(),this.getHealth(),this.getATTACK(),this.getARMOR());
+        return new CavalryUnit(this.getNAME(),this.getHealth(),
+                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND());
     }
 
     public void setCharging(Boolean charging) {

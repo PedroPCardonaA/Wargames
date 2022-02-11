@@ -1,11 +1,12 @@
 
 public class InfantryUnit extends Unit{
-    public InfantryUnit(String NAME, int health, int attack, int armor) throws IllegalArgumentException {
-        super(NAME, health, attack, armor);
+    public InfantryUnit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND)
+            throws IllegalArgumentException {
+        super(NAME, health, ATTACK, ARMOR,ATTACK_SPEED_PER_SECOND);
     }
 
     public InfantryUnit(String NAME, int health) {
-        super(NAME,health,15,10);
+        super(NAME,health,15,10,1);
     }
     @Override
     protected int getAttackBonus(Unit opponent){
@@ -19,6 +20,7 @@ public class InfantryUnit extends Unit{
     }
     @Override
     protected Unit clone(){
-        return new InfantryUnit(this.getNAME(),this.getHealth(),this.getATTACK(),this.getARMOR());
+        return new InfantryUnit(this.getNAME(),this.getHealth(),
+                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND());
     }
 }
