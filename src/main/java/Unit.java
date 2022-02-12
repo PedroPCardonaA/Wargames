@@ -113,8 +113,9 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        return String.format("%S20|%S20|%S20|%S20|"
-                ,this.getNAME(),this.getHealth(),this.getATTACK(),this.getARMOR());
+        return String.format("%20S|%20S|%20S|%20S|%20S|%20S|%20S|"
+                ,this.getNAME(),this.getHealth(),this.getATTACK_TYPE(),
+                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND(),this.getHIT_RATIO());
     }
 
 }
