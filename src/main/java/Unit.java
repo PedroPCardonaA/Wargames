@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  *
  * Abstract class unit that will be used as superclass to other classes.
@@ -17,6 +19,8 @@ public abstract class Unit {
     private final int ATTACK;
     private final int ARMOR;
     private final int ATTACK_SPEED_PER_SECOND;
+    private final String ATTACK_TYPE;
+    private final int HIT_RATIO;
 
     /**
      *Constructor for Class unit that has name, health, ATTACK and ARMOR as parameter.
@@ -28,7 +32,7 @@ public abstract class Unit {
      * @throws IllegalArgumentException Construct may throw illegal argument exception
      * if parameter name is empty or if the parameter health is negative.
      */
-    public Unit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND) throws IllegalArgumentException {
+    public Unit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND, String ATTACK_TYPE, int HIT_RATIO) throws IllegalArgumentException {
         if (NAME.isEmpty())throw new IllegalArgumentException
                 ("All unit must have a name. Define a name for the unit.");
         if(health<0)throw new IllegalArgumentException
@@ -39,11 +43,15 @@ public abstract class Unit {
                 ("The armor points of a unit cannot be lower than 0. Define the armor points above 0.");
         if(ATTACK_SPEED_PER_SECOND<0) throw new IllegalArgumentException
                 ("The attack speed of a unit cannot be lower than 0. Define the attack speed above 0.");
+        if(HIT_RATIO<0 || HIT_RATIO >100) throw new IllegalArgumentException
+                ("The hit ratio of a unit cannot be lower than 0 or higher than 100. Define the hit ratio between 0 to 100");
         this.NAME = NAME.trim();
         this.health = health;
         this.ATTACK = ATTACK;
         this.ARMOR = ARMOR;
         this.ATTACK_SPEED_PER_SECOND=ATTACK_SPEED_PER_SECOND;
+        this.ATTACK_TYPE = ATTACK_TYPE;
+        this.HIT_RATIO = HIT_RATIO;
     }
 
     public String getNAME() {
@@ -65,6 +73,10 @@ public abstract class Unit {
     public int getATTACK_SPEED_PER_SECOND() {
         return ATTACK_SPEED_PER_SECOND;
     }
+
+    public String getATTACK_TYPE(){return ATTACK_TYPE;}
+
+    public int getHIT_RATIO(){return HIT_RATIO;}
 
     public void setHealth(int health)throws IllegalArgumentException {
         if(health<0) throw new IllegalArgumentException("The health points of a unit cannot be lower than 0. Define the health points above 0.");
@@ -92,8 +104,11 @@ public abstract class Unit {
      * @param opponent
      */
     public void attack(Unit opponent){
-        opponent.setHealth(Math.max((opponent.getHealth() -(this.getATTACK()+this.getAttackBonus(opponent))+
-                (opponent.getARMOR()+opponent.getResistBonus(this.clone())))/this.getATTACK_SPEED_PER_SECOND(), 0));
+        Random random = new Random();
+        if(random.nextInt(101)<this.getHIT_RATIO()) {
+            opponent.setHealth(Math.max((opponent.getHealth() - ((this.getATTACK() + this.getAttackBonus(opponent)) +
+                    (opponent.getARMOR() + opponent.getResistBonus(this.clone())))) / this.getATTACK_SPEED_PER_SECOND(), 0));
+        }
     }
 
     @Override
