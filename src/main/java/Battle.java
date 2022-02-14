@@ -11,6 +11,7 @@ public class Battle {
         while (ARMY_1.hasUnit() && ARMY_2.hasUnit()){
             Unit unitFromArmy1 = ARMY_1.getRandom();
             Unit unitFromArmy2 = ARMY_2.getRandom();
+            this.setChargeToInfantryUnit(unitFromArmy1,unitFromArmy2);
             this.combatBetweenUnits(unitFromArmy1,unitFromArmy2);
         }
         return this.checkWinnerArmy();
@@ -63,6 +64,10 @@ public class Battle {
             this.sameAttackType(unitFromArmy1,unitFromArmy2);
         }
         this.removeDefeatedUnitFromArmy(this.getDefeatedUnit(unitFromArmy1,unitFromArmy2));
+    }
+    private void setChargeToInfantryUnit(Unit unitFromArmy1, Unit unitFromArmy2){
+        if(unitFromArmy1 instanceof CavalryUnit)((CavalryUnit) unitFromArmy1).setCharging(true);
+        if(unitFromArmy2 instanceof CavalryUnit)((CavalryUnit) unitFromArmy2).setCharging(true);
     }
 
 }

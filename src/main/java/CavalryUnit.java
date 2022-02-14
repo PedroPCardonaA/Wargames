@@ -3,13 +3,13 @@ public class CavalryUnit extends Unit{
 
     private Boolean isCharging = true;
 
-    public CavalryUnit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND, int HIT_RATIO)
+    public CavalryUnit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND, int HIT_RATE, int CRITIC_RATE, int CRITIC_DAMAGE)
             throws IllegalArgumentException {
-        super(NAME, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND,"melee",HIT_RATIO);
+        super(NAME, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND,"melee",HIT_RATE,CRITIC_RATE,CRITIC_DAMAGE);
     }
 
     public CavalryUnit(String NAME, int health) {
-        super(NAME,health,20,12, 2,"melee",70);
+        super(NAME,health,20,12, 2,"melee",70,25,145);
     }
 
     @Override
@@ -39,11 +39,14 @@ public class CavalryUnit extends Unit{
     }
     @Override
     protected Unit clone(){
-        return new CavalryUnit(this.getNAME(),this.getHealth(),
-                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND(),this.getHIT_RATIO());
+        return new RangedUnit(this.getNAME(),this.getHealth(),
+                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND(), this.getHIT_RATE(),
+                this.getCRITIC_RATE(),this.getCRITIC_DAMAGE());
     }
 
     public void setCharging(Boolean charging) {
         isCharging = charging;
     }
+
+
 }
