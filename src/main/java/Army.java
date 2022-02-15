@@ -44,8 +44,8 @@ public class Army {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%20S|%20S|%20S|%20S|%20S|%20S|%20S|"
-                ,"NAME","HEALTH","ATTACK TYPE","ATTACK","ARMOR","ATTACK SPEED","HIT RATIO")).append("\n");
+        sb.append(String.format("%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S"
+                ,"NAME","HEALTH","ATTACK TYPE","ATTACK","ARMOR","ATTACK SPEED (PER SECOND)","HIT RATE", "CRITIC RATE", "CRITIC DAMAGE (%)")).append("\n");
         for(Unit unit:UNITS){
             sb.append(unit.toString()).append("\n");
         }
