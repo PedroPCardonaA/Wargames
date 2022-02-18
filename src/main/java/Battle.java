@@ -50,8 +50,9 @@ public class Battle {
         else {ARMY_2.remove(defeatedUnit);}
     }
     private Army checkWinnerArmy(){
-        if(this.ARMY_1.hasUnit()){return ARMY_1;}
-        else {return ARMY_2;}
+        if(!this.ARMY_1.hasUnit()&&!this.ARMY_2.hasUnit()){return null;}
+        else if(this.ARMY_1.hasUnit()){return ARMY_1;}
+        else{return ARMY_2;}
     }
     private void combatBetweenUnits(Unit unitFromArmy1,Unit unitFromArmy2){
         if(unitFromArmy1.getATTACK_TYPE().equals("ranged")&& unitFromArmy2.getATTACK_TYPE().equals("melee")){
