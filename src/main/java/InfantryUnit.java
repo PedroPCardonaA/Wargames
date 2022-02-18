@@ -35,9 +35,9 @@ public class InfantryUnit extends Unit{
     /**
      * Default constructor for class InfantryUnit. The signature of this constructor only takes
      * Variable for the field NAME and health. This constructor will be used for default
-     * InfantryUnits.
-     * @param NAME
-     * @param health
+     * infantry unit.
+     * @param NAME String name of the unit
+     * @param health int health points of the unit
      */
     public InfantryUnit(String NAME, int health) {
         super(NAME,health,15,10,1,"melee",85,20,135);

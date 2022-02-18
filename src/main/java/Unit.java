@@ -149,7 +149,7 @@ public abstract class Unit {
      * to the opponent unit and reducing the current health of the opponent by the damage done.
      * This method will also check if the attack hit or miss and if the attack is a critical
      * or non-critical by using the random class.
-     * @param opponent
+     * @param opponent Unit opponent unit
      */
     public void attack(Unit opponent){
         Random random = new Random();
