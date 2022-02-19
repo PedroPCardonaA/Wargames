@@ -4,12 +4,13 @@ import java.util.Random;
  *
  * Abstract class unit that will be used as superclass to other unit classes.
  * Unit class represent the most basic object in the units' hierarchy.
+ * Object of this class (and its subclasses) will be shape the object for the class Army.
  * This class has NAME, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND,
  * HIT_RATE, CRITIC_RATE and CRITIC_DAMAGE as fields.
  *
  * @author Pedro Cardona
  * @version 1.0
- * @since 1.0
+ * @since 1.0-SNAPSHOT
  */
 
 public abstract class Unit {

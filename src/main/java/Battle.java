@@ -8,7 +8,7 @@ public class Battle {
     }
 
     public Army simulate(){
-        while (ARMY_1.hasUnit() && ARMY_2.hasUnit()){
+        while (this.bothArmiesHarUnits()){
             Unit unitFromArmy1 = ARMY_1.getRandom();
             Unit unitFromArmy2 = ARMY_2.getRandom();
             this.setChargeToInfantryUnit(unitFromArmy1,unitFromArmy2);
@@ -69,6 +69,10 @@ public class Battle {
     private void setChargeToInfantryUnit(Unit unitFromArmy1, Unit unitFromArmy2){
         if(unitFromArmy1 instanceof CavalryUnit)((CavalryUnit) unitFromArmy1).setCharging(true);
         if(unitFromArmy2 instanceof CavalryUnit)((CavalryUnit) unitFromArmy2).setCharging(true);
+    }
+
+    private boolean bothArmiesHarUnits(){
+        return (ARMY_1.hasUnit() && ARMY_2.hasUnit());
     }
 
 }

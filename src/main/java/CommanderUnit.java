@@ -6,7 +6,7 @@
  *
  * @author Pedro Cardona
  * @version 1.0
- * @since 1.0
+ * @since 1.0-SNAPSHOT
  */
 
 public class CommanderUnit extends CavalryUnit{
