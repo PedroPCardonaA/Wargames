@@ -77,9 +77,10 @@ public class CavalryUnit extends Unit{
     /**
      * Help method that overrides abstract method getResistBonus from the class unit.
      * This method helps method getDamageDone from the class Unit to get resist bonus.
-     * This method will return the resist bonus of infantry units. The value of the bonus may change
-     * depending on the opponent Unit. If the opponent is another infantry unit. Method returns 3. Else,
-     * the method returns 2.
+     * This method will return the resist bonus of cavalry units. The value of the bonus may change
+     * depending on the opponent Unit. If the opponent is a ranged unit, this method will return 7.
+     * If the opponent is an infantry unit, this method will return -2;
+     * And if the opponent is another cavalry unit, this method will return 4;
      * @param mainUnit Unit the main unit that called method getDamageDone.
      * @return int the attack bonus.
      */
