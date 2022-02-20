@@ -1,10 +1,12 @@
+package edu.ntnu.idatt2001.pedropca;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 /**
- * Army class that represents an army in the war games.
+ * edu.ntnu.idatt2001.pedropca.Army class that represents an army in the war games.
  * The armies are composed by a final field NAME that contains the name of the army
  * and by a final list with all the units tha the army has. Objects of this class
  * will be used to simulate a battle between armies in the war games.
@@ -18,7 +20,7 @@ public class Army {
     private final List<Unit> UNITS;
 
     /**
-     * Constructor of class Army that has a String variable and a list of object units as signature.
+     * Constructor of class edu.ntnu.idatt2001.pedropca.Army that has a String variable and a list of object units as signature.
      * This constructor will be used when the list of units is defined before the army object.
      * @param NAME name of the army
      * @param UNITS list of units
@@ -34,7 +36,7 @@ public class Army {
     }
 
     /**
-     * Constructor of class Army that has a String variable as signature.
+     * Constructor of class edu.ntnu.idatt2001.pedropca.Army that has a String variable as signature.
      * This constructor will be used when the list of units is not defined before the army object.
      * @param NAME name of the army
      * @throws IllegalArgumentException this constructor may throw illegal argument exception
@@ -53,8 +55,8 @@ public class Army {
 
     /**
      * Method that add a defined unit into list UNITS and ergo into the army.
-     * This method has on object of class Unit as signature.
-     * @param unit Unit to be added into the army.
+     * This method has on object of class edu.ntnu.idatt2001.pedropca.Unit as signature.
+     * @param unit edu.ntnu.idatt2001.pedropca.Unit to be added into the army.
      */
     public void add(Unit unit){
         this.UNITS.add(unit);
@@ -62,7 +64,7 @@ public class Army {
 
     /**
      * Method that add a defined list of units into list UNITS and ergo into the army.
-     * This method has a list of objects of class Unit as signature.
+     * This method has a list of objects of class edu.ntnu.idatt2001.pedropca.Unit as signature.
      * @param units List of units to be added into army
      */
     public void addAll(List<Unit> units){
@@ -71,7 +73,7 @@ public class Army {
 
     /**
      * Method that remove a defined unit from the list UNITS and ergo from the army.
-     * @param unit Unit to be removed from the army.
+     * @param unit edu.ntnu.idatt2001.pedropca.Unit to be removed from the army.
      */
     public void remove(Unit unit){
         this.UNITS.remove(unit);
@@ -97,7 +99,7 @@ public class Army {
      * Method that return a random unit from the list by using Random class.
      * Using av Random class is necessary to get a random integer that represents an index of the list,
      * and return the unit related to that index
-     * @return Unit related to the random index
+     * @return edu.ntnu.idatt2001.pedropca.Unit related to the random index
      */
     public Unit getRandom(){
         Random random = new Random();
@@ -107,6 +109,7 @@ public class Army {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%90S",this.getNAME())).append("\n");
         sb.append(String.format("%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S"
                 ,"NAME","HEALTH","ATTACK TYPE","ATTACK","ARMOR","ATTACK SPEED (PER SECOND)","HIT RATE", "CRITIC RATE", "CRITIC DAMAGE (%)")).append("\n");
         for(Unit unit:UNITS){
@@ -121,7 +124,7 @@ public class Army {
         if (!(o instanceof Army)) return false;
         Army army = (Army) o;
         return NAME.equals(army.NAME); // I defined string variable NAME as key value to differentiate
-                                       // to object of class Army. This way makes more sense that use of HashCode
+                                       // to object of class edu.ntnu.idatt2001.pedropca.Army. This way makes more sense that use of HashCode
                                        // to differentiate objects for me.
     }
 

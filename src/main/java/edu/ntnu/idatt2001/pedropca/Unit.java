@@ -1,10 +1,12 @@
+package edu.ntnu.idatt2001.pedropca;
+
 import java.util.Random;
 
 /**
  *
  * Abstract class unit that will be used as superclass to other unit classes.
- * Unit class represent the most basic object in the units' hierarchy.
- * Object of this class (and its subclasses) will be shape the object for the class Army.
+ * edu.ntnu.idatt2001.pedropca.Unit class represent the most basic object in the units' hierarchy.
+ * Object of this class (and its subclasses) will be shape the object for the class edu.ntnu.idatt2001.pedropca.Army.
  * This class has NAME, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND,
  * HIT_RATE, CRITIC_RATE and CRITIC_DAMAGE as fields.
  *
@@ -126,7 +128,7 @@ public abstract class Unit {
      *
      * I wanted to make a deeper gameplay. That is why I made a " Rock Paper Scissors" game style
      * where some units have an obvious advantage over other and vice versa.
-     * @param opponent Unit the opponent unit.
+     * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return
      */
     protected abstract int getAttackBonus(Unit opponent);
@@ -138,7 +140,7 @@ public abstract class Unit {
      *
      * I wanted to make a deeper gameplay. That is why I made a " Rock Paper Scissors" game style
      * where some units have an obvious advantage over other and vice versa.
-     * @param mainUnit Unit the opponent unit.
+     * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return
      */
     protected abstract int getResistBonus(Unit mainUnit);
@@ -150,7 +152,7 @@ public abstract class Unit {
      * to the opponent unit and reducing the current health of the opponent by the damage done.
      * This method will also check if the attack hit or miss and if the attack is a critical
      * or non-critical by using the random class.
-     * @param opponent Unit opponent unit
+     * @param opponent edu.ntnu.idatt2001.pedropca.Unit opponent unit
      */
     public void attack(Unit opponent){
         Random random = new Random();

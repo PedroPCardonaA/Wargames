@@ -1,9 +1,10 @@
+package edu.ntnu.idatt2001.pedropca;
 
 /**
  *
- * Class RangedUnit that represents the ranged units in the war games.
- * This class conforms the Unit hierarchy and has the abstract class Unit as superclass.
- * This class has the same fields that Unit class.
+ * Class edu.ntnu.idatt2001.pedropca.RangedUnit that represents the ranged units in the war games.
+ * This class conforms the edu.ntnu.idatt2001.pedropca.Unit hierarchy and has the abstract class edu.ntnu.idatt2001.pedropca.Unit as superclass.
+ * This class has the same fields that edu.ntnu.idatt2001.pedropca.Unit class.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -12,8 +13,8 @@
 
 public class RangedUnit extends Unit{
     /**
-     * Constructor of the class RangedUnit. The signature of this constructor
-     * takes all the fields of class the class Unit
+     * Constructor of the class edu.ntnu.idatt2001.pedropca.RangedUnit. The signature of this constructor
+     * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.Unit
      * except the field ATTACK_TYPE because it is pre-defined as "ranged".
      * @param NAME String name of the unit
      * @param health int health points of the unit
@@ -33,7 +34,7 @@ public class RangedUnit extends Unit{
     }
 
     /**
-     * Default constructor for class RangedUnit. The signature of this constructor only takes
+     * Default constructor for class edu.ntnu.idatt2001.pedropca.RangedUnit. The signature of this constructor only takes
      * Variable for the field NAME and health. This constructor will be used for default
      * ranged unit.
      * @param NAME String name of the unit
@@ -44,11 +45,11 @@ public class RangedUnit extends Unit{
     }
     /**
      * Help method that overrides abstract method getAttackBonus from the class unit.
-     * This method helps method getDamageDone from the class Unit to get attack bonus.
+     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get attack bonus.
      * This method will return the attack bonus of infantry units. The value of the bonus may change
-     * depending on the opponent Unit. If the opponent is an infantry unit. Method returns 7. Else,
+     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is an infantry unit. Method returns 7. Else,
      * the method returns 4.
-     * @param opponent Unit the opponent unit.
+     * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return int the attack bonus.
      */
 
@@ -60,12 +61,12 @@ public class RangedUnit extends Unit{
 
     /**
      * Help method that overrides abstract method getResistBonus from the class unit.
-     * This method helps method getDamageDone from the class Unit to get resist bonus.
+     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get resist bonus.
      * This method will return the resist bonus of ranged units. The value of the bonus may change
-     * depending on the opponent Unit. If the opponent is another ranged unit, this method will return 1.
+     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is another ranged unit, this method will return 1.
      * If the opponent is an infantry unit, this method will return 2;
      * And if the opponent is a cavalry unit, this method will return 0;
-     * @param mainUnit Unit the main unit that called method getDamageDone.
+     * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the main unit that called method getDamageDone.
      * @return int the attack bonus.
      */
 
@@ -79,8 +80,8 @@ public class RangedUnit extends Unit{
     /**
      * Help method that overrides abstract method clone from the class unit.
      * This method makes and return a deep copy of the unit that calls method.
-     * It will help method getDamageDone from class Unit and the abstract method getResistBonus()
-     * @return Unit Copy of th unit.
+     * It will help method getDamageDone from class edu.ntnu.idatt2001.pedropca.Unit and the abstract method getResistBonus()
+     * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
      */
     @Override
     protected Unit clone(){

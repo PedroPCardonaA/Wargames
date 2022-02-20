@@ -1,9 +1,10 @@
+package edu.ntnu.idatt2001.pedropca;
 
 /**
  *
- * Class CavalryUnit that represents the cavalry  units in the war games.
- * This class conforms the Unit hierarchy and has the abstract class Unit as superclass.
- * This class has the same fields that Unit class with exception to boolean isCharging.
+ * Class edu.ntnu.idatt2001.pedropca.CavalryUnit that represents the cavalry  units in the war games.
+ * This class conforms the edu.ntnu.idatt2001.pedropca.Unit hierarchy and has the abstract class edu.ntnu.idatt2001.pedropca.Unit as superclass.
+ * This class has the same fields that edu.ntnu.idatt2001.pedropca.Unit class with exception to boolean isCharging.
  * That field ,that is defined as true, is a unique feature of CalvaryUnit objects.
  *
  * @author Pedro Cardona
@@ -15,8 +16,8 @@ public class CavalryUnit extends Unit{
     private Boolean isCharging = true;
 
     /**
-     * Constructor of the class CavalryUnit. The signature of this constructor
-     * takes all the fields of class the class Unit
+     * Constructor of the class edu.ntnu.idatt2001.pedropca.CavalryUnit. The signature of this constructor
+     * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.Unit
      * except the field ATTACK_TYPE because it is pre-defined as "melee"
      * and field isCharging that is defined as true when the object is made.
      * @param NAME String name of the unit
@@ -49,14 +50,14 @@ public class CavalryUnit extends Unit{
     }
     /**
      * Help method that overrides abstract method getAttackBonus from the class unit.
-     * This method helps method getDamageDone from the class Unit to get attack bonus.
+     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get attack bonus.
      * This method will return the attack bonus of infantry units. The value of the bonus may change
-     * depending on the opponent Unit and if this unit is charging.
+     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit and if this unit is charging.
      * If the opponent is a ranged unit and this unit is charging, method returns 8.
      * If the opponent is a ranged unit and this unit is not charging, method returns 6.
      * if the opponent is not a ranged unit and this unit is charging, method returns 4.
      * Else, method returns 2.
-     * @param opponent Unit the opponent unit.
+     * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return int the attack bonus.
      */
 
@@ -76,12 +77,12 @@ public class CavalryUnit extends Unit{
 
     /**
      * Help method that overrides abstract method getResistBonus from the class unit.
-     * This method helps method getDamageDone from the class Unit to get resist bonus.
+     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get resist bonus.
      * This method will return the resist bonus of cavalry units. The value of the bonus may change
-     * depending on the opponent Unit. If the opponent is a ranged unit, this method will return 7.
+     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is a ranged unit, this method will return 7.
      * If the opponent is an infantry unit, this method will return -2;
      * And if the opponent is another cavalry unit, this method will return 4;
-     * @param mainUnit Unit the main unit that called method getDamageDone.
+     * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the main unit that called method getDamageDone.
      * @return int the attack bonus.
      */
 
@@ -94,8 +95,8 @@ public class CavalryUnit extends Unit{
     /**
      * Help method that overrides abstract method clone from the class unit.
      * This method makes and return a deep copy of the unit that calls method.
-     * It will help method getDamageDone from class Unit and the abstract method getResistBonus()
-     * @return Unit Copy of th unit.
+     * It will help method getDamageDone from class edu.ntnu.idatt2001.pedropca.Unit and the abstract method getResistBonus()
+     * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
      */
     @Override
     protected Unit clone(){

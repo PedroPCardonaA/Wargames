@@ -1,7 +1,9 @@
+package edu.ntnu.idatt2001.pedropca;
+
 /**
  *
- * Class CommanderUnit that represents the cavalry  units in the war games.
- * This class conforms the Unit hierarchy and has the abstract class cavalryUnit as superclass.
+ * Class edu.ntnu.idatt2001.pedropca.CommanderUnit that represents the cavalry  units in the war games.
+ * This class conforms the edu.ntnu.idatt2001.pedropca.Unit hierarchy and has the abstract class cavalryUnit as superclass.
  * This class has the same fields that CalvaryUnit.
  *
  * @author Pedro Cardona
@@ -11,8 +13,8 @@
 
 public class CommanderUnit extends CavalryUnit{
     /**
-     * Constructor of the class CommanderUnit. The signature of this constructor
-     * takes all the fields of class the class CavalryUnit
+     * Constructor of the class edu.ntnu.idatt2001.pedropca.CommanderUnit. The signature of this constructor
+     * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.CavalryUnit
      * except the field ATTACK_TYPE because it is pre-defined as "melee"
      * and field isCharging that is defined as true when the object is made.
      * @param NAME String name of the unit
@@ -32,7 +34,7 @@ public class CommanderUnit extends CavalryUnit{
         super(NAME, health, ATTACK, ARMOR,ATTACK_SPEED_PER_SECOND,HIT_RATE,CRITIC_RATE,CRITIC_DAMAGE);
     }
     /**
-     * Default constructor for class CommanderUnit. The signature of this constructor only takes
+     * Default constructor for class edu.ntnu.idatt2001.pedropca.CommanderUnit. The signature of this constructor only takes
      * Variable for the field NAME and health. This constructor will be used for default
      * cavalry units.
      * @param NAME String name of the unit
@@ -52,8 +54,8 @@ public class CommanderUnit extends CavalryUnit{
 
     /**
      * Override method that just add help method to healthPointRegeneration to the method in the
-     * abstract class Unit.
-     * @param opponent Unit opponent unit
+     * abstract class edu.ntnu.idatt2001.pedropca.Unit.
+     * @param opponent edu.ntnu.idatt2001.pedropca.Unit opponent unit
      */
     @Override
     public void attack(Unit opponent){
