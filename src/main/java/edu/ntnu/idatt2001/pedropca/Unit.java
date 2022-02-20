@@ -58,10 +58,14 @@ public abstract class Unit {
                 ("The armor points of a unit cannot be lower than 0. Define the armor points above 0.");
         if(ATTACK_SPEED_PER_SECOND<0) throw new IllegalArgumentException
                 ("The attack speed of a unit cannot be lower than 0. Define the attack speed above 0.");
-        if(HIT_RATE <0 || HIT_RATE >100) throw new IllegalArgumentException
-                ("The hit ratio of a unit cannot be lower than 0 or higher than 100. Define the hit ratio between 0 to 100.");
-        if(CRITIC_RATE<0||CRITIC_DAMAGE>100) throw new IllegalArgumentException
-                ("The critic ratio of a unit cannot be lower than o or higher than 100. Define the critic rate between 0 to 100.");
+        if(HIT_RATE <0 ) throw new IllegalArgumentException
+                ("The hit rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
+        if(HIT_RATE >100) throw new IllegalArgumentException
+                ("The hit rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
+        if(CRITIC_RATE<0) throw new IllegalArgumentException
+                ("The critic rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
+        if(CRITIC_RATE>100) throw new IllegalArgumentException
+                ("The critic rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
         if(CRITIC_DAMAGE < 100){ throw new IllegalArgumentException
                 ("The critic damage must be above 100 because it represent how much extra damage is made in comparison of a norma damage. Define the critic damage above 100.");
         }
@@ -198,7 +202,7 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        return String.format("%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S|"
+        return String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|"
                 ,this.getNAME(),this.getHealth(),this.getATTACK_TYPE(),
                 this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND(),this.getHIT_RATE(),this.getCRITIC_RATE(),this.getCRITIC_DAMAGE());
     }

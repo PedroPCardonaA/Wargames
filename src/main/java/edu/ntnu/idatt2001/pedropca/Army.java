@@ -110,7 +110,7 @@ public class Army {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%90S",this.getNAME())).append("\n");
-        sb.append(String.format("%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S|%20S"
+        sb.append(String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S"
                 ,"NAME","HEALTH","ATTACK TYPE","ATTACK","ARMOR","ATTACK SPEED (PER SECOND)","HIT RATE", "CRITIC RATE", "CRITIC DAMAGE (%)")).append("\n");
         for(Unit unit:UNITS){
             sb.append(unit.toString()).append("\n");
@@ -125,7 +125,7 @@ public class Army {
         Army army = (Army) o;
         return NAME.equals(army.NAME); // I defined string variable NAME as key value to differentiate
                                        // to object of class edu.ntnu.idatt2001.pedropca.Army. This way makes more sense that use of HashCode
-                                       // to differentiate objects for me.
+                                       // that use of HashCode to differentiate objects for me.
     }
 
     @Override
