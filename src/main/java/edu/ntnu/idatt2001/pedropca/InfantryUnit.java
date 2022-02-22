@@ -72,6 +72,7 @@ public class InfantryUnit extends Unit{
     @Override
     protected int getResistBonus(Unit mainUnit){
         if(mainUnit instanceof InfantryUnit)return 3;
+        if(mainUnit instanceof CavalryUnit)return 5;
         return 2;
     }
 

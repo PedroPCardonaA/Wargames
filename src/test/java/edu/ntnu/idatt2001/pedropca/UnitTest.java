@@ -9,7 +9,7 @@ class UnitTest {
     @Nested
     class PositiveTestingOfConstructorOfTheClassUnit {
         @Test
-        public void CreatingAUnitWithSupportedData(){
+        void CreatingAUnitWithSupportedData(){
             try {
                 new Unit(" Footman",100,15,10,2,
                         "Melee",75,20,150) {
@@ -33,7 +33,7 @@ class UnitTest {
             }
         }
         @Test
-        public void CreatingAUnitWithTheLowerBoundOfDefinedZone(){
+        void CreatingAUnitWithTheLowerBoundOfDefinedZone(){
             try {
                 new Unit(" Footman",0,0,0,0,"Melee",0
                         ,0,100) {
@@ -58,7 +58,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithTheHigherBoundOfDefinedZone(){
+        void CreatingAUnitWithTheHigherBoundOfDefinedZone(){
             try {
                 new Unit(" Footman",110,1110,11110,11110,"Melee",100,100,10000) {
                     @Override
@@ -85,7 +85,7 @@ class UnitTest {
     @Nested
     class NegativeTestingOfConstructorOfTheClassUnit {
         @Test
-        public void CreatingAUnitWithOutName() {
+        void CreatingAUnitWithOutName() {
             try {
                 new Unit("", 110, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                     @Override
@@ -110,7 +110,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithHealthLowerThanZero() {
+        void CreatingAUnitWithHealthLowerThanZero() {
             try {
                 new Unit("Footman", -10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                     @Override
@@ -135,7 +135,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithAttackLowerThanZero() {
+        void CreatingAUnitWithAttackLowerThanZero() {
             try {
                 new Unit("Footman", 10, -1110, 11110, 11110, "Melee", 100, 100, 10000) {
                     @Override
@@ -160,7 +160,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithArmorLowerThanZero() {
+        void CreatingAUnitWithArmorLowerThanZero() {
             try {
                 new Unit("Footman", 10, 1110, -11110, 11110, "Melee", 100, 100, 10000) {
                     @Override
@@ -185,7 +185,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithAttackSpeedLowerThanZero() {
+        void CreatingAUnitWithAttackSpeedLowerThanZero() {
             try {
                 new Unit("Footman", 10, 1110, 11110, -11110, "Melee", 100, 100, 10000) {
                     @Override
@@ -210,7 +210,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithHitRateLowerThanZero() {
+        void CreatingAUnitWithHitRateLowerThanZero() {
             try {
                 new Unit("Footman", 10, 1110, 11110, 11110, "Melee", -100, 100, 10000) {
                     @Override
@@ -235,7 +235,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithHitRateAboveHundred() {
+        void CreatingAUnitWithHitRateAboveHundred() {
             try {
                 new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 1100, 100, 10000) {
                     @Override
@@ -260,7 +260,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithCriticRateLowerThanZero() {
+        void CreatingAUnitWithCriticRateLowerThanZero() {
             try {
                 new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, -100, 10000) {
                     @Override
@@ -285,7 +285,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithCriticRateAboveHundred() {
+        void CreatingAUnitWithCriticRateAboveHundred() {
             try {
                 new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 1100, 10000) {
                     @Override
@@ -310,7 +310,7 @@ class UnitTest {
         }
 
         @Test
-        public void CreatingAUnitWithCriticDamageLowerThanHundred() {
+        void CreatingAUnitWithCriticDamageLowerThanHundred() {
             try {
                 new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, -10000) {
                     @Override
@@ -337,7 +337,7 @@ class UnitTest {
     @Nested
     class TestingOfMethodSetHealth {
         @Test
-        public void SetHealthOfAUnitToAboveZero(){
+        void SetHealthOfAUnitToAboveZero(){
             Unit testUnit = new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                 @Override
                 protected int getAttackBonus(Unit opponent) {
@@ -358,7 +358,7 @@ class UnitTest {
             assertEquals(100,testUnit.getHealth());
         }
         @Test
-        public void SetHealthOfAUnitToZero(){
+        void SetHealthOfAUnitToZero(){
             Unit testUnit = new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                 @Override
                 protected int getAttackBonus(Unit opponent) {
@@ -379,7 +379,7 @@ class UnitTest {
             assertEquals(0,testUnit.getHealth());
         }
         @Test
-        public void SetHealthOfAUnitUnderZero(){
+        void SetHealthOfAUnitUnderZero(){
             try {
                 Unit testUnit=  new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                     @Override
@@ -430,7 +430,7 @@ class UnitTest {
                     ,"Footman",100,"Melee",15, 10,2,75,20,150), footman.toString());
         }
         @Test
-        public void GetTheStringOfASpearman(){
+        void GetTheStringOfASpearman(){
             Unit footman = new Unit(" Spearman",80,25,5,3,
                     "Ranged",60,40,175) {
                 @Override
@@ -453,7 +453,7 @@ class UnitTest {
                     ,"Spearman",80,"ranged",25, 5,3,60,40,175), footman.toString());
         }
         @Test
-        public void GetTheStringOfMountainKing(){
+        void GetTheStringOfMountainKing(){
             Unit footman = new Unit(" Mountain king",180,30,20,2,
                     "Melee",90,30,175) {
                 @Override
@@ -476,4 +476,14 @@ class UnitTest {
                     ,"Mountain king",180,"Melee",30, 20,2,90,30,175), footman.toString());
         }
     }
+
+    /*@Test
+    void tryingPossiblities(){
+        Unit mainUnit = new RangedUnit("Rifleman",100,30,12,
+                4,75,50,200);
+        Unit opponent = new RangedUnit("Spearman",125,
+                15,12,1,70,25,150);
+        mainUnit.attack(opponent);
+        assertEquals(120,opponent.getHealth());
+    }*/
 }

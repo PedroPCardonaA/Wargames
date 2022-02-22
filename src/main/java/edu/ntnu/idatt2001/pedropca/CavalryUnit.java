@@ -109,5 +109,10 @@ public class CavalryUnit extends Unit{
         isCharging = charging;
     }
 
+    @Override
+    public void attack(Unit opponent){
+        super.attack(opponent);
+        this.setCharging(false);
+    }
 
 }
