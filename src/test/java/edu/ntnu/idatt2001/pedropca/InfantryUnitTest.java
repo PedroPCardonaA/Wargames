@@ -58,7 +58,6 @@ class InfantryUnitTest {
             Unit rouge = new InfantryUnit("Rouge",125,15,12,1,70,25,150);
             Unit rougeClone = rouge.clone();
             assertEquals(rouge.toString(),rougeClone.toString());
-
         }
     }
 

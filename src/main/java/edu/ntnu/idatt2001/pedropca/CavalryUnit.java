@@ -105,14 +105,17 @@ public class CavalryUnit extends Unit{
                 this.getCRITIC_RATE(),this.getCRITIC_DAMAGE());
     }
 
-    public void setCharging(Boolean charging) {
-        isCharging = charging;
-    }
 
     @Override
     public void attack(Unit opponent){
         super.attack(opponent);
         this.setCharging(false);
     }
+    public void setCharging(Boolean charging) {
+        isCharging = charging;
+    }
 
+    public Boolean getCharging() {
+        return isCharging;
+    }
 }
