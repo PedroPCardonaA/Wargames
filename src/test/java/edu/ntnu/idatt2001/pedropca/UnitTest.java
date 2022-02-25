@@ -400,7 +400,7 @@ class UnitTest {
                 testUnit.setHealth(-100);
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(),"The health points of a unit cannot be lower than 0. Define the health points above 0.");
+                assertEquals("The health points of a unit cannot be lower than 0. Define the health points above 0.",e.getMessage());
             }
         }
     }

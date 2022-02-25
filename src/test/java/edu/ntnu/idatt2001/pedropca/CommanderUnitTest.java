@@ -9,7 +9,7 @@ class CommanderUnitTest {
 
 
     @Nested
-    class TestingOverrideMethodAttackOfTheClassCommanderUnit{
+    class TestingOverrideMethodAttack{
         @Test
         void aCommanderWithAllLifePointsIsAttacking(){
             CommanderUnit commanderUnit = new CommanderUnit("Commander",100);

@@ -92,6 +92,9 @@ public class Battle {
      * @param rangedUnit the ranged unit in the combat.
      * @param meleeUnit the melee unit in the combat.
      */
+    // I think this is the way best to represent the advantage of a ranged unit against a melee unit.
+    // It is possible to represent this advantage with a buff, that is reducing, in the getResistMethod
+    // but that way is not realistic enough.
     private void rangedVSMelee(Unit rangedUnit, Unit meleeUnit){
         for(int i = 0; i<3; i++){
             rangedUnit.attack(meleeUnit);

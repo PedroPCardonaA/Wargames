@@ -102,8 +102,10 @@ public class Army {
      * @return edu.ntnu.idatt2001.pedropca.Unit related to the random index
      */
     public Unit getRandom(){
-        Random random = new Random();
-        return this.UNITS.get(random.nextInt(this.UNITS.size()));
+        // This method may throw a nullPointerException when list UNITS is empty
+        // , but the method that call this method checks it already. That is why I think
+        // to throw a NullPointerException is unnecessary.
+        return this.UNITS.get(new Random().nextInt(this.UNITS.size()));
     }
 
     @Override
