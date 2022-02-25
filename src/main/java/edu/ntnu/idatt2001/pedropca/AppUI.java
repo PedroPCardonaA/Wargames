@@ -1,5 +1,10 @@
 package edu.ntnu.idatt2001.pedropca;
 
+/**
+ * UI was an optional task.Therefore, I did not see the need to make a javaDoc or a test
+ * for this class. But I am sure that this class is functional :D.
+ */
+
 import java.util.Scanner;
 
 public class AppUI {

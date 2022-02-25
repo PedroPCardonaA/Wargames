@@ -295,8 +295,8 @@ class ArmyTest {
         void getTheToStringOfABlankArmy(){
             Army army = new Army("Horde");
             String sb = String.format("%90S", "Horde") + "\n" +
-                    String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S"
-                            , "NAME", "HEALTH", "ATTACK TYPE", "ATTACK", "ARMOR", "ATTACK SPEED (PER SECOND)", "HIT RATE", "CRITIC RATE", "CRITIC DAMAGE (%)") +
+                    String.format("%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|"
+                            , "NAME", "HEALTH", "ATTACK TYPE", "ATTACK", "ARMOR", "ATTACK SPEED /s", "HIT RATE", "CRITIC RATE", "CRITIC DAMAGE %") +
                     "\n";
             assertEquals(sb,army.toString());
         }
@@ -307,8 +307,8 @@ class ArmyTest {
             army.add(new RangedUnit("Ranged",100));
             army.add(new CavalryUnit("Cavalry",100));
             String sb = String.format("%90S", "Horde") + "\n" +
-                    String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S"
-                            , "NAME", "HEALTH", "ATTACK TYPE", "ATTACK", "ARMOR", "ATTACK SPEED (PER SECOND)", "HIT RATE", "CRITIC RATE", "CRITIC DAMAGE (%)") +
+                    String.format("%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|"
+                            , "NAME", "HEALTH", "ATTACK TYPE", "ATTACK", "ARMOR", "ATTACK SPEED /s", "HIT RATE", "CRITIC RATE", "CRITIC DAMAGE %") +
                     "\n" + new InfantryUnit("Infantry",100)+ "\n" + new RangedUnit("Ranged",100)
                     + "\n" + new CavalryUnit("Cavalry",100) + "\n";
             assertEquals(sb,army.toString());

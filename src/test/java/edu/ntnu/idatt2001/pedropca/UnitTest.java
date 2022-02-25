@@ -426,7 +426,7 @@ class UnitTest {
                 }
             };
 
-            assertEquals(String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|"
+            assertEquals(String.format("%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|"
                     ,"Footman",100,"Melee",15, 10,2,75,20,150), footman.toString());
         }
         @Test
@@ -449,7 +449,7 @@ class UnitTest {
                 }
             };
 
-            assertEquals(String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|"
+            assertEquals(String.format("%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|"
                     ,"Spearman",80,"ranged",25, 5,3,60,40,175), footman.toString());
         }
         @Test
@@ -472,18 +472,9 @@ class UnitTest {
                 }
             };
 
-            assertEquals(String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|"
+            assertEquals(String.format("%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|"
                     ,"Mountain king",180,"Melee",30, 20,2,90,30,175), footman.toString());
         }
     }
 
-    /*@Test
-    void tryingPossiblities(){
-        Unit mainUnit = new RangedUnit("Rifleman",100,30,12,
-                4,75,50,200);
-        Unit opponent = new RangedUnit("Spearman",125,
-                15,12,1,70,25,150);
-        mainUnit.attack(opponent);
-        assertEquals(120,opponent.getHealth());
-    }*/
 }

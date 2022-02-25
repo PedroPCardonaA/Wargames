@@ -17,6 +17,7 @@ class BattleTest {
                 horde.add(new CavalryUnit("Cavalry",100));
                 horde.add(new CavalryUnit("Cavalry",100));
                 horde.add(new RangedUnit("Ranged",100));
+                horde.add(new RangedUnit("Ranged",100));
                 alliance.add(new InfantryUnit("Infantry",100));
             }
             Battle battle = new Battle(horde,alliance);
