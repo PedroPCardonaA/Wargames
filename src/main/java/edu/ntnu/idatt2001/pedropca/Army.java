@@ -16,41 +16,41 @@ import java.util.Random;
  * @since 1.0-SNAPSHOT
  */
 public class Army {
-    private final String NAME;
-    private final List<Unit> UNITS;
+    private final String name;
+    private final List<Unit> units;
 
     /**
      * Constructor of class edu.ntnu.idatt2001.pedropca.Army that has a String variable and a list of object units as signature.
      * This constructor will be used when the list of units is defined before the army object.
-     * @param NAME name of the army
-     * @param UNITS list of units
+     * @param name name of the army
+     * @param units list of units
      * @throws IllegalArgumentException this constructor may throw illegal argument exception
      * if the string variable name is empty or if the units list is defined as null
      */
 
-    public Army(String NAME, List<Unit> UNITS) throws IllegalArgumentException{
-        if(NAME.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a name for the army.");
-        if(UNITS == null) throw new IllegalArgumentException("List of unit cannot be defined as null. Enter a correct unit list.");
-        this.NAME = NAME.trim();
-        this.UNITS = UNITS;
+    public Army(String name, List<Unit> units) throws IllegalArgumentException{
+        if(name.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a name for the army.");
+        if(units == null) throw new IllegalArgumentException("List of unit cannot be defined as null. Enter a correct unit list.");
+        this.name = name.trim();
+        this.units = units;
     }
 
     /**
      * Constructor of class edu.ntnu.idatt2001.pedropca.Army that has a String variable as signature.
      * This constructor will be used when the list of units is not defined before the army object.
-     * @param NAME name of the army
+     * @param name name of the army
      * @throws IllegalArgumentException this constructor may throw illegal argument exception
      * if the string variable name is empty
      */
 
-    public Army(String NAME){
-        if(NAME.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a name for the army.");
-        this.NAME=NAME;
-        UNITS = new ArrayList<>();
+    public Army(String name){
+        if(name.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a name for the army.");
+        this.name = name;
+        units = new ArrayList<>();
     }
 
-    public String getNAME() {
-        return NAME;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -59,7 +59,7 @@ public class Army {
      * @param unit edu.ntnu.idatt2001.pedropca.Unit to be added into the army.
      */
     public void add(Unit unit){
-        this.UNITS.add(unit);
+        this.units.add(unit);
     }
 
     /**
@@ -68,7 +68,7 @@ public class Army {
      * @param units List of units to be added into army
      */
     public void addAll(List<Unit> units){
-        this.UNITS.addAll(units);
+        this.units.addAll(units);
     }
 
     /**
@@ -76,7 +76,7 @@ public class Army {
      * @param unit edu.ntnu.idatt2001.pedropca.Unit to be removed from the army.
      */
     public void remove(Unit unit){
-        this.UNITS.remove(unit);
+        this.units.remove(unit);
     }
 
     /**
@@ -84,7 +84,7 @@ public class Army {
      * @return boolean true if army has unit or false if not.
      */
     public boolean hasUnit(){
-        return (!this.UNITS.isEmpty());
+        return (!this.units.isEmpty());
     }
 
     /**
@@ -92,7 +92,7 @@ public class Army {
      * @return current list of units
      */
     public List<Unit> getAllUnits() {
-        return this.UNITS;
+        return this.units;
     }
 
     /**
@@ -105,16 +105,16 @@ public class Army {
         // This method may throw a nullPointerException when list UNITS is empty
         // , but the method that call this method checks it already. That is why I think
         // to throw a NullPointerException is unnecessary.
-        return this.UNITS.get(new Random().nextInt(this.UNITS.size()));
+        return this.units.get(new Random().nextInt(this.units.size()));
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%90S",this.getNAME())).append("\n");
+        sb.append(String.format("%90S",this.getName())).append("\n");
         sb.append(String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S"
                 ,"NAME","HEALTH","ATTACK TYPE","ATTACK","ARMOR","ATTACK SPEED (PER SECOND)","HIT RATE", "CRITIC RATE", "CRITIC DAMAGE (%)")).append("\n");
-        for(Unit unit:UNITS){
+        for(Unit unit: units){
             sb.append(unit.toString()).append("\n");
         }
         return sb.toString();
@@ -125,13 +125,13 @@ public class Army {
         if (this == o) return true;
         if (!(o instanceof Army)) return false;
         Army army = (Army) o;
-        return NAME.equals(army.NAME); // I defined string variable NAME as key value to differentiate
+        return name.equals(army.name); // I defined string variable NAME as key value to differentiate
                                        // to object of class edu.ntnu.idatt2001.pedropca.Army. This way makes more sense that use of HashCode
                                        // that use of HashCode to differentiate objects for me.
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(NAME);
+        return Objects.hash(name);
     }
 }

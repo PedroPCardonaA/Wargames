@@ -17,100 +17,100 @@ import java.util.Random;
 
 public abstract class Unit {
 
-    private final String NAME;
+    private final String name;
     private int health;
-    private final int ATTACK;
-    private final int ARMOR;
-    private final int ATTACK_SPEED_PER_SECOND;
-    private final String ATTACK_TYPE;
-    private final int HIT_RATE;
-    private final int CRITIC_RATE;
-    private final int CRITIC_DAMAGE;
+    private final int attack;
+    private final int armor;
+    private final int attackSpeedPerSecond;
+    private final String attackType;
+    private final int hitRate;
+    private final int criticRate;
+    private final int criticDamage;
 
 
     /**
      * Constructor for the class, whit name, health, attack, armor, attack speed, attack type,
      * hit rate, critic rate, critic damage.
      *
-     * @param NAME String name of the unit
+     * @param name String name of the unit
      * @param health int health points of the unit
-     * @param ATTACK int attack points of the unit
-     * @param ARMOR int armor points of the unit
-     * @param ATTACK_SPEED_PER_SECOND int attack speed per second of the unit
-     * @param ATTACK_TYPE string attack type of the unit
-     * @param HIT_RATE int percent chance of not miss the attack
-     * @param CRITIC_RATE int percent chance of do a critical attack
-     * @param CRITIC_DAMAGE int percent that represent the damage from a critical attack in comparison
+     * @param attack int attack points of the unit
+     * @param armor int armor points of the unit
+     * @param attackSpeedPerSecond int attack speed per second of the unit
+     * @param attackType string attack type of the unit
+     * @param hitRate int percent chance of not miss the attack
+     * @param criticRate int percent chance of do a critical attack
+     * @param criticDamage int percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */
-    public Unit(String NAME, int health, int ATTACK, int ARMOR,
-                int ATTACK_SPEED_PER_SECOND, String ATTACK_TYPE, int HIT_RATE,
-                int CRITIC_RATE, int CRITIC_DAMAGE) throws IllegalArgumentException {
-        if (NAME.isEmpty())throw new IllegalArgumentException
+    public Unit(String name, int health, int attack, int armor,
+                int attackSpeedPerSecond, String attackType, int hitRate,
+                int criticRate, int criticDamage) throws IllegalArgumentException {
+        if (name.isEmpty())throw new IllegalArgumentException
                 ("All unit must have a name. Define a name for the unit.");
         if(health<0)throw new IllegalArgumentException
                 ("The health points of a unit cannot be lower than 0. Define the health points above 0.");
-        if(ATTACK<0) throw new IllegalArgumentException
+        if(attack <0) throw new IllegalArgumentException
                 ("The attack points of a unit cannot be lower than 0. Define the attack points above 0.");
-        if(ARMOR<0) throw new IllegalArgumentException
+        if(armor <0) throw new IllegalArgumentException
                 ("The armor points of a unit cannot be lower than 0. Define the armor points above 0.");
-        if(ATTACK_SPEED_PER_SECOND<0) throw new IllegalArgumentException
+        if(attackSpeedPerSecond <0) throw new IllegalArgumentException
                 ("The attack speed of a unit cannot be lower than 0. Define the attack speed above 0.");
-        if(HIT_RATE <0 ) throw new IllegalArgumentException
+        if(hitRate <0 ) throw new IllegalArgumentException
                 ("The hit rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
-        if(HIT_RATE >100) throw new IllegalArgumentException
+        if(hitRate >100) throw new IllegalArgumentException
                 ("The hit rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
-        if(CRITIC_RATE<0) throw new IllegalArgumentException
+        if(criticRate <0) throw new IllegalArgumentException
                 ("The critic rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
-        if(CRITIC_RATE>100) throw new IllegalArgumentException
+        if(criticRate >100) throw new IllegalArgumentException
                 ("The critic rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
-        if(CRITIC_DAMAGE < 100){ throw new IllegalArgumentException
+        if(criticDamage < 100){ throw new IllegalArgumentException
                 ("The critic damage must be above 100 because it represent how much extra damage is made in comparison of a norma damage. Define the critic damage above 100.");
         }
-        this.NAME = NAME.trim();
+        this.name = name.trim();
         this.health = health;
-        this.ATTACK = ATTACK;
-        this.ARMOR = ARMOR;
-        this.ATTACK_SPEED_PER_SECOND=ATTACK_SPEED_PER_SECOND;
-        this.ATTACK_TYPE = ATTACK_TYPE;
-        this.HIT_RATE = HIT_RATE;
-        this.CRITIC_RATE = CRITIC_RATE;
-        this.CRITIC_DAMAGE = CRITIC_DAMAGE;
+        this.attack = attack;
+        this.armor = armor;
+        this.attackSpeedPerSecond = attackSpeedPerSecond;
+        this.attackType = attackType;
+        this.hitRate = hitRate;
+        this.criticRate = criticRate;
+        this.criticDamage = criticDamage;
     }
 
 
-    public String getNAME() {
-        return NAME;
+    public String getName() {
+        return name;
     }
 
     public int getHealth() {
         return health;
     }
 
-    public int getATTACK() {
-        return ATTACK;
+    public int getAttack() {
+        return attack;
     }
 
-    public int getARMOR() {
-        return ARMOR;
+    public int getArmor() {
+        return armor;
     }
 
-    public int getATTACK_SPEED_PER_SECOND() {
-        return ATTACK_SPEED_PER_SECOND;
+    public int getAttackSpeedPerSecond() {
+        return attackSpeedPerSecond;
     }
 
-    public String getATTACK_TYPE(){return ATTACK_TYPE;}
+    public String getAttackType(){return attackType;}
 
-    public int getHIT_RATE(){return HIT_RATE;}
+    public int getHitRate(){return hitRate;}
 
-    public int getCRITIC_RATE() {
-        return CRITIC_RATE;
+    public int getCriticRate() {
+        return criticRate;
     }
 
-    public int getCRITIC_DAMAGE() {
-        return CRITIC_DAMAGE;
+    public int getCriticDamage() {
+        return criticDamage;
     }
 
     /**
@@ -160,9 +160,9 @@ public abstract class Unit {
      */
     public void attack(Unit opponent){
         Random random = new Random();
-        if(random.nextInt(101)<this.getHIT_RATE()) {
+        if(random.nextInt(101)<this.getHitRate()) {
             int damage = 0;
-            if(random.nextInt(101)<this.getCRITIC_RATE()){
+            if(random.nextInt(101)<this.getCriticRate()){
                 damage = this.criticAttack(opponent);
             } else {
                 damage = this.getDamageDone(opponent);
@@ -179,7 +179,7 @@ public abstract class Unit {
      */
 
     private int criticAttack(Unit opponent){
-        return (this.getDamageDone(opponent) * getCRITIC_DAMAGE() / 100 );
+        return (this.getDamageDone(opponent) * getCriticDamage() / 100 );
     }
 
     /**
@@ -195,16 +195,16 @@ public abstract class Unit {
      */
 
     private int getDamageDone(Unit opponent){
-        return ( ((this.getATTACK() + this.getAttackBonus(opponent)) -
-                (opponent.getARMOR() + opponent.getResistBonus(this.clone())))) / this.getATTACK_SPEED_PER_SECOND();
+        return ( ((this.getAttack() + this.getAttackBonus(opponent)) -
+                (opponent.getArmor() + opponent.getResistBonus(this.clone())))) / this.getAttackSpeedPerSecond();
     }
 
 
     @Override
     public String toString() {
         return String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|"
-                ,this.getNAME(),this.getHealth(),this.getATTACK_TYPE(),
-                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND(),this.getHIT_RATE(),this.getCRITIC_RATE(),this.getCRITIC_DAMAGE());
+                ,this.getName(),this.getHealth(),this.getAttackType(),
+                this.getAttack(),this.getArmor(),this.getAttackSpeedPerSecond(),this.getHitRate(),this.getCriticRate(),this.getCriticDamage());
     }
 
 }

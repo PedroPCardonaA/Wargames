@@ -100,10 +100,11 @@ class ArmyTest {
             Unit ranged = new RangedUnit("Ranged",100);
             Unit cavalry = new CavalryUnit("Cavalry", 100);
             army.add(infantry);
-            army.add(ranged);
-            army.add(cavalry);
-            army.remove(infantry);
-            assertFalse(army.getAllUnits().contains(infantry));
+            army.add(infantry);
+            army.add(infantry);
+            army.remove(army.getRandom());
+            assertEquals(2,army.getAllUnits().size());
+            assertTrue(army.getAllUnits().contains(infantry));
         }
         @Test
         void removeARangedUnitForArmy(){
@@ -168,10 +169,7 @@ class ArmyTest {
             assertEquals(150,army.getAllUnits().size());
         }
     }
-    @Test
-    void getAllUnits() {
 
-    }
 
     @Nested
     class TestingOfTheMethodGetRandom{

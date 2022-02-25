@@ -16,32 +16,32 @@ public class RangedUnit extends Unit{
      * Constructor of the class edu.ntnu.idatt2001.pedropca.RangedUnit. The signature of this constructor
      * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.Unit
      * except the field ATTACK_TYPE because it is pre-defined as "ranged".
-     * @param NAME String name of the unit
+     * @param name String name of the unit
      * @param health int health points of the unit
-     * @param ATTACK int attack points of the unit
-     * @param ARMOR int armor points of the unit
-     * @param ATTACK_SPEED_PER_SECOND int attack speed per second of the unit
-     * @param HIT_RATE int percent chance of not miss the attack
-     * @param CRITIC_RATE int percent chance of do a critical attack
-     * @param CRITIC_DAMAGE int percent that represent the damage from a critical attack in comparison
+     * @param attack int attack points of the unit
+     * @param armor int armor points of the unit
+     * @param attackSpeedPerSecond int attack speed per second of the unit
+     * @param hitRate int percent chance of not miss the attack
+     * @param criticRate int percent chance of do a critical attack
+     * @param criticDamage int percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */
-    public RangedUnit(String NAME, int health, int ATTACK, int ARMOR, int ATTACK_SPEED_PER_SECOND, int HIT_RATE, int CRITIC_RATE, int CRITIC_DAMAGE)
+    public RangedUnit(String name, int health, int attack, int armor, int attackSpeedPerSecond, int hitRate, int criticRate, int criticDamage)
             throws IllegalArgumentException {
-        super(NAME,health,ATTACK,ARMOR,ATTACK_SPEED_PER_SECOND,"Ranged",HIT_RATE,CRITIC_RATE,CRITIC_DAMAGE);
+        super(name,health,attack,armor,attackSpeedPerSecond,"Ranged",hitRate,criticRate,criticDamage);
     }
 
     /**
      * Default constructor for class edu.ntnu.idatt2001.pedropca.RangedUnit. The signature of this constructor only takes
-     * Variable for the field NAME and health. This constructor will be used for default
+     * Variable for the field name and health. This constructor will be used for default
      * ranged unit.
-     * @param NAME String name of the unit
+     * @param name String name of the unit
      * @param health int health points of the unit
      */
-    public RangedUnit(String NAME, int health){
-        super(NAME,health,15,8,3,"ranged", 65,15,150);
+    public RangedUnit(String name, int health){
+        super(name,health,15,8,3,"ranged", 65,15,150);
     }
     /**
      * Help method that overrides abstract method getAttackBonus from the class unit.
@@ -85,9 +85,9 @@ public class RangedUnit extends Unit{
      */
     @Override
     protected Unit clone(){
-        return new RangedUnit(this.getNAME(),this.getHealth(),
-                this.getATTACK(),this.getARMOR(),this.getATTACK_SPEED_PER_SECOND(), this.getHIT_RATE(),
-                this.getCRITIC_RATE(),this.getCRITIC_DAMAGE());
+        return new RangedUnit(this.getName(),this.getHealth(),
+                this.getAttack(),this.getArmor(),this.getAttackSpeedPerSecond(), this.getHitRate(),
+                this.getCriticRate(),this.getCriticDamage());
     }
 
 }

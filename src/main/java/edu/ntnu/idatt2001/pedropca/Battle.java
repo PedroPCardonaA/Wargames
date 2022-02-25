@@ -58,10 +58,10 @@ public class Battle {
      * @param unitFromArmy2 Unit from the second army that will fight.
      */
     private void combatBetweenUnits(Unit unitFromArmy1,Unit unitFromArmy2){
-        if(unitFromArmy1.getATTACK_TYPE().equals("ranged")&& unitFromArmy2.getATTACK_TYPE().equals("melee")){
+        if(unitFromArmy1.getAttackType().equals("ranged")&& unitFromArmy2.getAttackType().equals("melee")){
             this.rangedVSMelee(unitFromArmy1,unitFromArmy2);
         }
-        else if(unitFromArmy2.getATTACK_TYPE().equals("ranged")&&unitFromArmy1.getATTACK_TYPE().equals("melee")){
+        else if(unitFromArmy2.getAttackType().equals("ranged")&&unitFromArmy1.getAttackType().equals("melee")){
             this.rangedVSMelee(unitFromArmy2,unitFromArmy1);
         }
         else {
@@ -127,6 +127,7 @@ public class Battle {
         else {ARMY_2.remove(defeatedUnit);}
     }
 
+
     /**
      * Help method that compare the numbers of units in the both armies returning the winner army.
      * This method returns the winner army when the enemy army does nor have more units or
@@ -134,9 +135,13 @@ public class Battle {
      * @return The winner army or value null.
      */
     private Army checkWinnerArmy(){
-        if(!bothArmiesHaveUnits()){return null;}
-        else if(this.ARMY_1.hasUnit()){return ARMY_1;}
-        else{return ARMY_2;}
+        if(ARMY_1.hasUnit()&&!ARMY_2.hasUnit()){
+            return ARMY_1;
+        }
+        else if(!ARMY_1.hasUnit()&&ARMY_2.hasUnit()){
+            return ARMY_2;
+        }
+        else return null;
     }
 
     /**
@@ -149,7 +154,7 @@ public class Battle {
 
     @Override
     public String toString() {
-        return "Battle between " + ARMY_1.getNAME() + " and " + ARMY_2.getNAME() + ".";
+        return "Battle between " + ARMY_1.getName() + " and " + ARMY_2.getName() + ".";
     }
 
 }
