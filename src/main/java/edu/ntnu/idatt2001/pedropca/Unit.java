@@ -202,7 +202,7 @@ public abstract class Unit {
 
     @Override
     public String toString() {
-        return String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|"
+        return String.format("%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|"
                 ,this.getName(),this.getHealth(),this.getAttackType(),
                 this.getAttack(),this.getArmor(),this.getAttackSpeedPerSecond(),this.getHitRate(),this.getCriticRate(),this.getCriticDamage());
     }

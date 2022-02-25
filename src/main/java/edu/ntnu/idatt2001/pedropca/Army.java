@@ -112,8 +112,8 @@ public class Army {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%90S",this.getName())).append("\n");
-        sb.append(String.format("%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S|%10S"
-                ,"NAME","HEALTH","ATTACK TYPE","ATTACK","ARMOR","ATTACK SPEED (PER SECOND)","HIT RATE", "CRITIC RATE", "CRITIC DAMAGE (%)")).append("\n");
+        sb.append(String.format("%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|%15S|"
+                ,"NAME","HEALTH","ATTACK TYPE","ATTACK","ARMOR","ATTACK SPEED /s","HIT RATE", "CRITIC RATE", "CRITIC DAMAGE %")).append("\n");
         for(Unit unit: units){
             sb.append(unit.toString()).append("\n");
         }

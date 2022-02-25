@@ -3,12 +3,84 @@ package edu.ntnu.idatt2001.pedropca;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArmyTest {
+
+    @Nested
+    class TestingTheConstructor {
+        @Test
+        void makingAnArmyWithASupportedNameAndWithOutUnits() {
+            try {
+                Army army = new Army("Army");
+            } catch (Exception e) {
+                fail();
+            }
+
+        }
+
+        @Test
+        void makingAnArmyWithASupportedNameAndWithArmy() {
+            try {
+                List<Unit> unitMix = new ArrayList<>();
+                for (int i =0;i<50;i++){
+                    unitMix.add(new CavalryUnit("CAVALRY",100));
+                    unitMix.add(new RangedUnit("Ranged",100));
+                    unitMix.add(new InfantryUnit("Infantry",100));
+                }
+                Army army = new Army("Army",unitMix);
+            } catch (Exception e) {
+                fail();
+            }
+        }
+        @Test
+        void makingAnArmyWithOutNameAndWithOutUnits(){
+            try {
+                Army army = new Army("");
+                fail();
+            }catch (Exception e){
+                assertEquals("The name of the army cannot be empty. Enter a name for the army.",e.getMessage());
+
+            }
+        }
+        @Test
+        void makingAnArmyWithOutNameAndWithArmy(){
+            try {
+                List<Unit> unitMix = new ArrayList<>();
+                for (int i =0;i<50;i++){
+                    unitMix.add(new CavalryUnit("CAVALRY",100));
+                    unitMix.add(new RangedUnit("Ranged",100));
+                    unitMix.add(new InfantryUnit("Infantry",100));
+                }
+                Army army = new Army("",unitMix);
+                fail();
+            } catch (Exception e) {
+                assertEquals("The name of the army cannot be empty. Enter a name for the army.",e.getMessage());
+            }
+        }
+        @Test
+        void makingAnArmyWithNameAndWithArmyAsNull(){
+            try {
+                Army army = new Army("Army",null);
+                fail();
+            } catch (Exception e) {
+                assertEquals("List of unit cannot be defined as null. Enter a correct unit list.",e.getMessage());
+            }
+        }
+        @Test
+        void makingAnArmyWithOutNameAndWithArmyAsNull(){
+            try {
+                Army army = new Army("",null);
+                fail();
+            } catch (Exception e) {
+                assertEquals("The name of the army cannot be empty. Enter a name for the army.",e.getMessage());
+            }
+        }
+    }
 
     @Nested
     class TestingAddMethod{

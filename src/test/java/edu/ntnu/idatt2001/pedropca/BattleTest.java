@@ -60,9 +60,10 @@ class BattleTest {
                 aztecas.add(new InfantryUnit("Infantry",100));
                 maya.add(new InfantryUnit("Infantry",100));
                 aztecas.add(new CommanderUnit("Commander",100));
+                aztecas.add(new CommanderUnit("Commander",100));
             }
             Battle battle = new Battle(maya,aztecas);
-            assertEquals(maya,battle.simulate());
+            assertEquals(aztecas,battle.simulate());
         }
         @Test
         void simulatingABattleWithOutWinner(){
@@ -80,12 +81,14 @@ class BattleTest {
             assertEquals("Battle between " + "Alliance" + " and " + "Horde" + ".",battle.toString());
         }
         @Test
+        void GetToStringOfABattleBetweenTheHordeAndTheAlliance(){
+            Battle battle = new Battle(new Army("Horde"),new Army("Alliance"));
+            assertEquals("Battle between " + "Horde" + " and " + "Alliance" + ".",battle.toString());
+        }
+        @Test
         void GetToStringOfABattleBetweenUkraineAndRussia(){
             Battle battle = new Battle(new Army("Ukraine"),new Army("Russia"));
             assertEquals("Battle between " + "Ukraine" + " and " + "Russia" + ".",battle.toString());
         }
-    }
-    @Test
-    void testToString() {
     }
 }

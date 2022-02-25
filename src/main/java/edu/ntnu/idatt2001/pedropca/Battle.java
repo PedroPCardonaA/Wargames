@@ -80,7 +80,7 @@ public class Battle {
     private void sameAttackType(Unit unitFromArmy1, Unit unitFromArmy2) {
         while (unitFromArmy1.getHealth() > 0 && unitFromArmy2.getHealth() > 0) {
             unitFromArmy1.attack(unitFromArmy2);
-            unitFromArmy2.attack(unitFromArmy2);
+            unitFromArmy2.attack(unitFromArmy1);
         }
     }
 
