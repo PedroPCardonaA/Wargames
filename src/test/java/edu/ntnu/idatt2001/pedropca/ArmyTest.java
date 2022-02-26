@@ -118,10 +118,9 @@ class ArmyTest {
         @Test
         void AddAListOfInfantryUnits(){
             Army army = new Army( "Army");
-            InfantryUnit infantryUnit = new InfantryUnit("Infantry",100);
             List<Unit> infantryList = new ArrayList<>();
             for(int i =0;i<50;i++){
-                infantryList.add(infantryUnit);
+                infantryList.add(new InfantryUnit("Infantry",100));
             }
             army.addAll(infantryList);
             assertTrue(army.getAllUnits().containsAll(infantryList));
@@ -129,10 +128,9 @@ class ArmyTest {
         @Test
         void AddAListOfRangedUnits(){
             Army army = new Army( "Army");
-            RangedUnit rangedUnit = new RangedUnit("Ranged",100);
             List<Unit> rangedList = new ArrayList<>();
             for(int i =0;i<50;i++){
-                rangedList.add(rangedUnit);
+                rangedList.add(new RangedUnit("Ranged",100));
             }
             army.addAll(rangedList);
             assertTrue(army.getAllUnits().containsAll(rangedList));
@@ -140,10 +138,9 @@ class ArmyTest {
         @Test
         void AddAListOfCavalryUnits(){
             Army army = new Army( "Army");
-            CavalryUnit cavalryUnit = new CavalryUnit("CAVALRY",100);
             List<Unit> cavalryList = new ArrayList<>();
             for(int i =0;i<50;i++){
-                cavalryList.add(cavalryUnit);
+                cavalryList.add(new CavalryUnit("CAVALRY",100));
             }
             army.addAll(cavalryList);
             assertTrue(army.getAllUnits().containsAll(cavalryList));
@@ -169,11 +166,9 @@ class ArmyTest {
         void removeAInfantryUnitForArmy(){
             Army army = new Army( "Army");
             Unit infantry = new InfantryUnit("Infantry",100);
-            Unit ranged = new RangedUnit("Ranged",100);
-            Unit cavalry = new CavalryUnit("Cavalry", 100);
             army.add(infantry);
-            army.add(infantry);
-            army.add(infantry);
+            army.add(new InfantryUnit("Infantry",100));
+            army.add(new InfantryUnit("Infantry",100));
             army.remove(army.getRandom());
             assertEquals(2,army.getAllUnits().size());
             assertTrue(army.getAllUnits().contains(infantry));
@@ -181,23 +176,19 @@ class ArmyTest {
         @Test
         void removeARangedUnitForArmy(){
             Army army = new Army( "Army");
-            Unit infantry = new InfantryUnit("Infantry",100);
             Unit ranged = new RangedUnit("Ranged",100);
-            Unit cavalry = new CavalryUnit("Cavalry", 100);
-            army.add(infantry);
+            army.add(new InfantryUnit("Infantry",100));
             army.add(ranged);
-            army.add(cavalry);
+            army.add(new CavalryUnit("Cavalry", 100));
             army.remove(ranged);
             assertFalse(army.getAllUnits().contains(ranged));
         }
         @Test
         void removeACavalryUnitForArmy(){
             Army army = new Army( "Army");
-            Unit infantry = new InfantryUnit("Infantry",100);
-            Unit ranged = new RangedUnit("Ranged",100);
             Unit cavalry = new CavalryUnit("Cavalry", 100);
-            army.add(infantry);
-            army.add(ranged);
+            army.add(new InfantryUnit("Infantry",100));
+            army.add(new RangedUnit("Ranged",100));
             army.add(cavalry);
             army.remove(cavalry);
             assertFalse(army.getAllUnits().contains(cavalry));
@@ -266,6 +257,7 @@ class ArmyTest {
                 mixedList.add(new InfantryUnit("Infantry",100));
             }
             army.addAll(mixedList);
+            assertTrue(army.getAllUnits().contains(army.getRandom()));
             assertTrue(army.getRandom() instanceof InfantryUnit);
         }
         @Test
@@ -276,6 +268,7 @@ class ArmyTest {
                 mixedList.add(new RangedUnit("Ranged",100));
             }
             army.addAll(mixedList);
+            assertTrue(army.getAllUnits().contains(army.getRandom()));
             assertTrue(army.getRandom() instanceof RangedUnit);
         }
         @Test
@@ -286,6 +279,7 @@ class ArmyTest {
                 mixedList.add(new CavalryUnit("Cavalry",100));
             }
             army.addAll(mixedList);
+            assertTrue(army.getAllUnits().contains(army.getRandom()));
             assertTrue(army.getRandom() instanceof CavalryUnit);
         }
     }

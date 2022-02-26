@@ -105,7 +105,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(), "All unit must have a name. Define a name for the unit.");
+                assertEquals( "All unit must have a name. Define a name for the unit.",e.getMessage());
             }
         }
 
@@ -130,7 +130,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(), "The health points of a unit cannot be lower than 0. Define the health points above 0.");
+                assertEquals( "The health points of a unit cannot be lower than 0. Define the health points above 0.",e.getMessage());
             }
         }
 
@@ -155,7 +155,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(), "The attack points of a unit cannot be lower than 0. Define the attack points above 0.");
+                assertEquals( "The attack points of a unit cannot be lower than 0. Define the attack points above 0.",e.getMessage());
             }
         }
 
@@ -180,7 +180,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(), "The armor points of a unit cannot be lower than 0. Define the armor points above 0.");
+                assertEquals( "The armor points of a unit cannot be lower than 0. Define the armor points above 0.",e.getMessage());
             }
         }
 
@@ -205,7 +205,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(), "The attack speed of a unit cannot be lower than 0. Define the attack speed above 0.");
+                assertEquals( "The attack speed of a unit cannot be lower than 0. Define the attack speed above 0.",e.getMessage());
             }
         }
 
@@ -230,7 +230,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(),"The hit rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
+                assertEquals("The hit rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.",e.getMessage());
             }
         }
 
@@ -255,7 +255,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(),"The hit rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
+                assertEquals("The hit rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.",e.getMessage());
             }
         }
 
@@ -280,7 +280,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(),"The critic rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
+                assertEquals("The critic rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.",e.getMessage());
             }
         }
 
@@ -305,7 +305,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(),"The critic rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
+                assertEquals("The critic rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.",e.getMessage());
             }
         }
 
@@ -330,7 +330,7 @@ class UnitTest {
                 };
                 fail("Method did not throw IllegalArgumentException as expected");
             } catch (IllegalArgumentException e) {
-                assertEquals(e.getMessage(),"The critic damage must be above 100 because it represent how much extra damage is made in comparison of a norma damage. Define the critic damage above 100.");
+                assertEquals("The critic damage must be above 100 because it represent how much extra damage is made in comparison of a norma damage. Define the critic damage above 100.",e.getMessage());
             }
         }
     }
