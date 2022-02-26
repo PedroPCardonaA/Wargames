@@ -7,19 +7,19 @@ package edu.ntnu.idatt2001.pedropca;
  */
 
 public class Battle {
-    private final Army ARMY_1;
-    private final Army ARMY_2;
+    private final Army army1;
+    private final Army army2;
 
     /**
      * Constructor of the class edu.ntnu.idatt2001.pedropca.Battle. This constructor has two object from class edu.ntnu.idatt2001.pedropca.Army as
      * Signature. This constructor does not throw illegal argument exception when one of the armies is
      * equals to "null", because that case cannot happend.
-     * @param ARMY_1 First army of the battle
-     * @param ARMY_2 Second army of the battle
+     * @param army1 First army of the battle
+     * @param army2 Second army of the battle
      */
-    public Battle(Army ARMY_1, Army ARMY_2) {
-        this.ARMY_1 = ARMY_1;
-        this.ARMY_2 = ARMY_2;
+    public Battle(Army army1, Army army2) {
+        this.army1 = army1;
+        this.army2 = army2;
     }
 
     /**
@@ -30,8 +30,8 @@ public class Battle {
      */
     public Army simulate(){
         while (this.bothArmiesHaveUnits()){
-            Unit unitFromArmy1 = ARMY_1.getRandom();
-            Unit unitFromArmy2 = ARMY_2.getRandom();
+            Unit unitFromArmy1 = army1.getRandom();
+            Unit unitFromArmy2 = army2.getRandom();
             this.setChargeToInfantryUnit(unitFromArmy1,unitFromArmy2);
             this.combatBetweenUnits(unitFromArmy1,unitFromArmy2);
         }
@@ -123,8 +123,9 @@ public class Battle {
      * @param defeatedUnit the defeated unit from the method getDefeatedUnit.
      */
     private void removeDefeatedUnitFromArmy(Unit defeatedUnit){
-        if(ARMY_1.getAllUnits().contains(defeatedUnit)){ ARMY_1.remove(defeatedUnit);}
-        else {ARMY_2.remove(defeatedUnit);}
+        if(army1.getAllUnits().contains(defeatedUnit)){ army1.remove(defeatedUnit);}
+        else {
+            army2.remove(defeatedUnit);}
     }
 
 
@@ -135,11 +136,11 @@ public class Battle {
      * @return The winner army or value null.
      */
     private Army checkWinnerArmy(){
-        if(ARMY_1.hasUnit()&&!ARMY_2.hasUnit()){
-            return ARMY_1;
+        if(army1.hasUnit()&&!army2.hasUnit()){
+            return army1;
         }
-        else if(!ARMY_1.hasUnit()&&ARMY_2.hasUnit()){
-            return ARMY_2;
+        else if(!army1.hasUnit()&& army2.hasUnit()){
+            return army2;
         }
         else return null;
     }
@@ -149,12 +150,12 @@ public class Battle {
      * @return boolean. True if both armies have units, false else.
      */
     private boolean bothArmiesHaveUnits(){
-        return (ARMY_1.hasUnit() && ARMY_2.hasUnit());
+        return (army1.hasUnit() && army2.hasUnit());
     }
 
     @Override
     public String toString() {
-        return "Battle between " + ARMY_1.getName() + " and " + ARMY_2.getName() + ".";
+        return "Battle between " + army1.getName() + " and " + army2.getName() + ".";
     }
 
 }
