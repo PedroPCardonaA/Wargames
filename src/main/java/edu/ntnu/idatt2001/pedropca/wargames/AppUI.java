@@ -1,9 +1,14 @@
-package edu.ntnu.idatt2001.pedropca;
+package edu.ntnu.idatt2001.pedropca.wargames;
 
 /**
  * UI was an optional task.Therefore, I did not see the need to make a javaDoc or a test
  * for this class. But I am sure that this class is functional :D.
  */
+
+import edu.ntnu.idatt2001.pedropca.wargames.units.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.units.CommanderUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.units.InfantryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.units.RangedUnit;
 
 import java.util.Scanner;
 

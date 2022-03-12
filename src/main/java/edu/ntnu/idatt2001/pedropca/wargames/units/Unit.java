@@ -1,5 +1,6 @@
-package edu.ntnu.idatt2001.pedropca;
+package edu.ntnu.idatt2001.pedropca.wargames.units;
 
+import java.util.List;
 import java.util.Random;
 
 /**

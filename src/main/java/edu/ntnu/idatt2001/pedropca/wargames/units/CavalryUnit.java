@@ -1,21 +1,25 @@
-package edu.ntnu.idatt2001.pedropca;
+package edu.ntnu.idatt2001.pedropca.wargames.units;
 
 /**
  *
- * Class edu.ntnu.idatt2001.pedropca.RangedUnit that represents the ranged units in the war games.
+ * Class edu.ntnu.idatt2001.pedropca.CavalryUnit that represents the cavalry  units in the war games.
  * This class conforms the edu.ntnu.idatt2001.pedropca.Unit hierarchy and has the abstract class edu.ntnu.idatt2001.pedropca.Unit as superclass.
- * This class has the same fields that edu.ntnu.idatt2001.pedropca.Unit class.
+ * This class has the same fields that edu.ntnu.idatt2001.pedropca.Unit class with exception to boolean isCharging.
+ * That field ,that is defined as true, is a unique feature of CalvaryUnit objects.
  *
  * @author Pedro Cardona
  * @version 1.0
- * @since 1.0-SNAPSHOT
+ * @since 1.0
  */
+public class CavalryUnit extends Unit{
 
-public class RangedUnit extends Unit{
+    private Boolean isCharging = true;
+
     /**
-     * Constructor of the class edu.ntnu.idatt2001.pedropca.RangedUnit. The signature of this constructor
+     * Constructor of the class edu.ntnu.idatt2001.pedropca.CavalryUnit. The signature of this constructor
      * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.Unit
-     * except the field ATTACK_TYPE because it is pre-defined as "ranged".
+     * except the field ATTACK_TYPE because it is pre-defined as "melee"
+     * and field isCharging that is defined as true when the object is made.
      * @param name String name of the unit
      * @param health int health points of the unit
      * @param attack int attack points of the unit
@@ -28,55 +32,66 @@ public class RangedUnit extends Unit{
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */
-    public RangedUnit(String name, int health, int attack, int armor, int attackSpeedPerSecond, int hitRate, int criticRate, int criticDamage)
+    public CavalryUnit(String name, int health, int attack, int armor, int attackSpeedPerSecond, int hitRate, int criticRate, int criticDamage)
             throws IllegalArgumentException {
-        super(name,health,attack,armor,attackSpeedPerSecond,"Ranged",hitRate,criticRate,criticDamage);
+        super(name, health, attack, armor, attackSpeedPerSecond,"melee",hitRate,criticRate,criticDamage);
     }
 
     /**
-     * Default constructor for class edu.ntnu.idatt2001.pedropca.RangedUnit. The signature of this constructor only takes
+     * Default constructor for class CalvaryUnit. The signature of this constructor only takes
      * Variable for the field name and health. This constructor will be used for default
-     * ranged unit.
+     * cavalry units.
      * @param name String name of the unit
      * @param health int health points of the unit
      */
-    public RangedUnit(String name, int health){
-        super(name,health,15,8,3,"ranged", 65,15,150);
+
+    public CavalryUnit(String name, int health) {
+        super(name,health,20,12, 2,"melee",70,25,145);
     }
     /**
      * Help method that overrides abstract method getAttackBonus from the class unit.
      * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get attack bonus.
      * This method will return the attack bonus of infantry units. The value of the bonus may change
-     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is an infantry unit. Method returns 7. Else,
-     * the method returns 4.
+     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit and if this unit is charging.
+     * If the opponent is a ranged unit and this unit is charging, method returns 8.
+     * If the opponent is a ranged unit and this unit is not charging, method returns 6.
+     * if the opponent is not a ranged unit and this unit is charging, method returns 4.
+     * Else, method returns 2.
      * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return int the attack bonus.
      */
 
     @Override
     protected int getAttackBonus(Unit opponent) {
-        if(opponent instanceof InfantryUnit)return 7;
-        return 4;
+        if(isCharging && opponent instanceof RangedUnit){
+            this.setCharging(false);
+            return 8;}
+        else if(opponent instanceof RangedUnit){
+            return 6;}
+        else if( isCharging){
+            this.setCharging(false);
+            return 4;}
+        else{
+            return 2;}
     }
 
     /**
      * Help method that overrides abstract method getResistBonus from the class unit.
      * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get resist bonus.
-     * This method will return the resist bonus of ranged units. The value of the bonus may change
-     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is another ranged unit, this method will return 1.
-     * If the opponent is an infantry unit, this method will return 2;
-     * And if the opponent is a cavalry unit, this method will return 0;
+     * This method will return the resist bonus of cavalry units. The value of the bonus may change
+     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is a ranged unit, this method will return 7.
+     * If the opponent is an infantry unit, this method will return -2;
+     * And if the opponent is another cavalry unit, this method will return 4;
      * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the main unit that called method getDamageDone.
      * @return int the attack bonus.
      */
 
     @Override
     protected int getResistBonus(Unit mainUnit) {
-        if(mainUnit instanceof InfantryUnit)return 2;
-        if(mainUnit instanceof CavalryUnit) return 0;
-        return 1;
+        if(mainUnit instanceof RangedUnit)return 7;
+        if(mainUnit instanceof InfantryUnit) return -2;
+        return 4;
     }
-
     /**
      * Help method that overrides abstract method clone from the class unit.
      * This method makes and return a deep copy of the unit that calls method.
@@ -85,9 +100,22 @@ public class RangedUnit extends Unit{
      */
     @Override
     protected Unit clone(){
-        return new RangedUnit(this.getName(),this.getHealth(),
+        return new CavalryUnit(this.getName(),this.getHealth(),
                 this.getAttack(),this.getArmor(),this.getAttackSpeedPerSecond(), this.getHitRate(),
                 this.getCriticRate(),this.getCriticDamage());
     }
 
+
+    @Override
+    public void attack(Unit opponent){
+        super.attack(opponent);
+        this.setCharging(false);
+    }
+    public void setCharging(Boolean charging) {
+        isCharging = charging;
+    }
+
+    public Boolean getCharging() {
+        return isCharging;
+    }
 }

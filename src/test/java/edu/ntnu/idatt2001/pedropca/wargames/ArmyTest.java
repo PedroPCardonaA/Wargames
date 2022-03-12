@@ -1,9 +1,9 @@
-package edu.ntnu.idatt2001.pedropca;
+package edu.ntnu.idatt2001.pedropca.wargames;
 
+import edu.ntnu.idatt2001.pedropca.wargames.units.*;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,6 @@ class ArmyTest {
             } catch (Exception e) {
                 fail();
             }
-
         }
 
         @Test
@@ -283,6 +282,107 @@ class ArmyTest {
             assertTrue(army.getRandom() instanceof CavalryUnit);
         }
     }
+
+    @Nested
+    class TestingMethodGetInfantryUnits{
+        @Test
+        void getTheListOfInfantryUnitsFromAnArmyWithFiftyFootmen(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new CavalryUnit("Cavalry",100));
+                army.add(new RangedUnit("Ranged",100));
+                army.add(new InfantryUnit("Footman",100));
+            }
+            army.add(new CommanderUnit("King",100));
+            assertEquals(50,army.getInfantryUnits().size());
+        }
+        @Test
+        void getTheListOfInfantryUnitsFromAnArmyWithoutInfantry(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new CavalryUnit("Cavalry",100));
+                army.add(new RangedUnit("Ranged",100));
+            }
+            army.add(new CommanderUnit("King",100));
+            assertEquals(0,army.getInfantryUnits().size());
+        }
+    }
+
+    @Nested
+    class TestingMethodGetCavalryUnits{
+        @Test
+        void getTheListOfCavalryUnitsFromAnArmyWithFiftyRaiders(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new CavalryUnit("Raider",100));
+                army.add(new RangedUnit("Ranged",100));
+                army.add(new InfantryUnit("Footman",100));
+            }
+            army.add(new CommanderUnit("King",100));
+            assertEquals(50,army.getCavalryUnits().size());
+        }
+        @Test
+        void getTheListOfCavalryUnitsFromAnArmyWithoutCavalry(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new InfantryUnit("Footman",100));
+                army.add(new RangedUnit("Ranged",100));
+            }
+            army.add(new CommanderUnit("King",100));
+            assertEquals(0,army.getCavalryUnits().size());
+        }
+    }
+
+    @Nested
+    class TestingMethodGetRangedUnits{
+        @Test
+        void getTheListOfRangedUnitsFromAnArmyWithFiftyArchers(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new CavalryUnit("Raider",100));
+                army.add(new RangedUnit("Archer",100));
+                army.add(new InfantryUnit("Footman",100));
+            }
+            army.add(new CommanderUnit("King",100));
+            assertEquals(50,army.getRangedUnits().size());
+        }
+        @Test
+        void getTheListOfRangedUnitsFromAnArmyWithoutRanged(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new CavalryUnit("Cavalry",100));
+                army.add(new InfantryUnit("Footman",100));
+            }
+            army.add(new CommanderUnit("King",100));
+            assertEquals(0,army.getRangedUnits().size());
+        }
+    }
+
+    @Nested
+    class TestingMethodGetCommanderUnits{
+        @Test
+        void getTheListOfCommanderUnitsFromAnArmyWithOneKing(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new CavalryUnit("Cavalry",100));
+                army.add(new RangedUnit("Ranged",100));
+                army.add(new InfantryUnit("Footman",100));
+            }
+            army.add(new CommanderUnit("King",100));
+            assertEquals(1,army.getCommanderUnits().size());
+        }
+        @Test
+        void getTheListOfCommanderUnitsFromAnArmyWithoutCommander(){
+            Army army = new Army( "Army");
+            for(int i =0;i<50;i++){
+                army.add(new CavalryUnit("Cavalry",100));
+                army.add(new RangedUnit("Ranged",100));
+                army.add(new InfantryUnit("Footman",100));
+            }
+            assertEquals(0,army.getCommanderUnits().size());
+        }
+    }
+
     @Nested
     class TestingOfMethodToString{
         @Test

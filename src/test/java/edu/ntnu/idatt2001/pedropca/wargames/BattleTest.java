@@ -1,5 +1,9 @@
-package edu.ntnu.idatt2001.pedropca;
+package edu.ntnu.idatt2001.pedropca.wargames;
 
+import edu.ntnu.idatt2001.pedropca.wargames.units.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.units.CommanderUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.units.InfantryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.units.RangedUnit;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

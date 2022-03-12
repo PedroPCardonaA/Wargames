@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.pedropca;
+package edu.ntnu.idatt2001.pedropca.wargames.units;
 
 /**
  *

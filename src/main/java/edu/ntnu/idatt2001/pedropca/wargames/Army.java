@@ -1,9 +1,12 @@
-package edu.ntnu.idatt2001.pedropca;
+package edu.ntnu.idatt2001.pedropca.wargames;
+
+import edu.ntnu.idatt2001.pedropca.wargames.units.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * edu.ntnu.idatt2001.pedropca.Army class that represents an army in the war games.
@@ -106,6 +109,38 @@ public class Army {
         // , but the method that call this method checks it already. That is why I think
         // to throw a NullPointerException is unnecessary.
         return this.units.get(new Random().nextInt(this.units.size()));
+    }
+
+    /**
+     * Method getInfantryUnits that return a list of all infantry units in the army.
+     * @return List<Unit> List with all the infantry units in the army.
+     */
+    public List<Unit> getInfantryUnits(){
+        return units.stream().filter(unit -> unit instanceof InfantryUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * Method getCavalryUnits that return a list of all cavalry units in the army.
+     * @return List<Unit> List with all the cavalry units in the army.
+     */
+    public List<Unit> getCavalryUnits(){
+        return units.stream().filter(unit -> unit instanceof CavalryUnit&&!(unit instanceof CommanderUnit)).collect(Collectors.toList());
+    }
+
+    /**
+     * Method getRangedUnits that return a list of all ranged units in the army.
+     * @return List<Unit> List with all the ranged units in the army.
+     */
+    public List<Unit> getRangedUnits(){
+        return units.stream().filter(unit -> unit instanceof RangedUnit).collect(Collectors.toList());
+    }
+
+    /**
+     * Method getCommanderUnits that return a list of all ranged units in the army.
+     * @return List<Unit> List with all the commander units in the army.
+     */
+    public List<Unit> getCommanderUnits(){
+        return units.stream().filter(unit -> unit instanceof CommanderUnit).collect(Collectors.toList());
     }
 
     @Override
