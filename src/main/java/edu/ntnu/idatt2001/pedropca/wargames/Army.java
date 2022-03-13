@@ -1,7 +1,11 @@
 package edu.ntnu.idatt2001.pedropca.wargames;
 
+import com.opencsv.CSVWriter;
 import edu.ntnu.idatt2001.pedropca.wargames.units.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -141,6 +145,63 @@ public class Army {
      */
     public List<Unit> getCommanderUnits(){
         return units.stream().filter(unit -> unit instanceof CommanderUnit).collect(Collectors.toList());
+    }
+
+   /* public boolean createAFileArmy(String filename){
+        boolean success = false;
+        try {
+            FileWriter writer = new FileWriter(filename);
+            writer.write(this.getName());
+            units.forEach(unit -> {
+                try {
+                    writer.write(unit.toString());
+                } catch (IOException e) {
+                    System.err.println("There was a problem writing the units into the file.");
+                }
+            });
+            writer.close();
+            success = true;
+        } catch (IOException e) {
+            System.err.println("It was a problem making the new file " + filename);
+        }
+        return success;
+    }*/
+
+    /**
+     * Method that stores the name and all the units into a csv file in a defined
+     * location in the computer, to be opened, read and used later.
+     * @param pathOfFile String with the wanted path to be store the army.
+     * @param fileName String with the name of the new csv file.
+     * @throws IOException This method may throw a IOException if a
+     * problem happens while making,opening, writing or closing the file.
+     */
+    public void createAFileArmy(String pathOfFile, String fileName) throws IOException {
+        try {
+            File file = new File(pathOfFile+"\\"+fileName+".csv");
+            FileWriter armyFile = new FileWriter(file);
+            CSVWriter writer = new CSVWriter(armyFile, ',',
+                    CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
+            List<String[]> data = new ArrayList<>();
+            data.add(new String[]{this.getName()});
+            this.getInfantryUnits().forEach(unit -> data.add(new String[]{"InfantryUnit",unit.getName(),unit.getHealth()+"",
+                    unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
+                    unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
+            this.getRangedUnits().forEach(unit -> data.add(new String[]{"RangedUnit",unit.getName(),unit.getHealth()+"",
+                    unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
+                    unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
+            this.getCavalryUnits().forEach(unit -> data.add(new String[]{"CavalryUnit",unit.getName(),unit.getHealth()+"",
+                    unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
+                    unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
+            this.getCommanderUnits().forEach(unit -> data.add(new String[]{"CommanderUnit",unit.getName(),unit.getHealth()+"",
+                    unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
+                    unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
+            writer.writeAll(data);
+            writer.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

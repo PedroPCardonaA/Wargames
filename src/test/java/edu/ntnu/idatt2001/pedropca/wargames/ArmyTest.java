@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.units.*;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -441,6 +442,24 @@ class ArmyTest {
             Army horde = new Army("Horde");
             Army alliance = new Army("Alliance");
             assertNotEquals(horde.hashCode(),alliance.hashCode());
+        }
+    }
+
+    @Nested
+    class TestingMethodCreateAFileArmy{
+        @Nested
+        class positiveTesting{
+            @Test
+            void makingAFileOfAMixedArmy() throws IOException {
+                Army army = new Army( "Army");
+                for(int i =0;i<50;i++){
+                    army.add(new CavalryUnit("Raider",100));
+                    army.add(new RangedUnit("Ranged",100));
+                    army.add(new InfantryUnit("Footman",100));
+                }
+                army.add(new CommanderUnit("King",100));
+                army.createAFileArmy("C://Users//Pedro Cardona//Desktop//Prog 2","TestingArmy");
+            }
         }
     }
 
