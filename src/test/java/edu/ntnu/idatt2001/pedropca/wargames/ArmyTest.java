@@ -169,7 +169,7 @@ class ArmyTest {
             army.add(infantry);
             army.add(new InfantryUnit("Infantry",100));
             army.add(new InfantryUnit("Infantry",100));
-            army.remove(army.getRandom());
+            army.removeUnit(army.getRandom());
             assertEquals(2,army.getAllUnits().size());
             assertTrue(army.getAllUnits().contains(infantry));
         }
@@ -180,7 +180,7 @@ class ArmyTest {
             army.add(new InfantryUnit("Infantry",100));
             army.add(ranged);
             army.add(new CavalryUnit("Cavalry", 100));
-            army.remove(ranged);
+            army.removeUnit(ranged);
             assertFalse(army.getAllUnits().contains(ranged));
         }
         @Test
@@ -190,7 +190,7 @@ class ArmyTest {
             army.add(new InfantryUnit("Infantry",100));
             army.add(new RangedUnit("Ranged",100));
             army.add(cavalry);
-            army.remove(cavalry);
+            army.removeUnit(cavalry);
             assertFalse(army.getAllUnits().contains(cavalry));
         }
     }
@@ -461,6 +461,14 @@ class ArmyTest {
                 army.createAFileArmy("C://Users//Pedro Cardona//Desktop//Prog 2","TestingArmy");
             }
         }
+    }
+
+    @Test
+    void testingReaderFromAFile(){
+        Army army = new Army("ArmyTest");
+        army.readAFileArmy("C:\\Users\\Pedro Cardona\\Desktop\\Prog 2\\TestingArmy.csv");
+        assertEquals("Army",army.getName());
+        assertEquals(151,army.getAllUnits().size());
     }
 
 }

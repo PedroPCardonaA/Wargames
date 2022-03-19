@@ -126,9 +126,9 @@ public class Battle {
      * @param defeatedUnit the defeated unit from the method getDefeatedUnit.
      */
     private void removeDefeatedUnitFromArmy(Unit defeatedUnit){
-        if(army1.getAllUnits().contains(defeatedUnit)){ army1.remove(defeatedUnit);}
+        if(army1.getAllUnits().contains(defeatedUnit)){ army1.removeUnit(defeatedUnit);}
         else {
-            army2.remove(defeatedUnit);}
+            army2.removeUnit(defeatedUnit);}
     }
 
 

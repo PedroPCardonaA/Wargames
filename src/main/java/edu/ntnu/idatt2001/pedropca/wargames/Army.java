@@ -3,13 +3,8 @@ package edu.ntnu.idatt2001.pedropca.wargames;
 import com.opencsv.CSVWriter;
 import edu.ntnu.idatt2001.pedropca.wargames.units.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -23,7 +18,7 @@ import java.util.stream.Collectors;
  * @since 1.0-SNAPSHOT
  */
 public class Army {
-    private final String name;
+    private String name;
     private final List<Unit> units;
 
     /**
@@ -82,7 +77,7 @@ public class Army {
      * Method that remove a defined unit from the list UNITS and ergo from the army.
      * @param unit edu.ntnu.idatt2001.pedropca.Unit to be removed from the army.
      */
-    public void remove(Unit unit){
+    public void removeUnit(Unit unit){
         this.units.remove(unit);
     }
 
@@ -168,14 +163,15 @@ public class Army {
     }*/
 
     /**
-     * Method that stores the name and all the units into a csv file in a defined
+     * Provisional method that stores the name and all the units into a csv file in a defined
      * location in the computer, to be opened, read and used later.
+     * This method will be relocated into the controller class or GUI.
      * @param pathOfFile String with the wanted path to be store the army.
      * @param fileName String with the name of the new csv file.
      * @throws IOException This method may throw a IOException if a
      * problem happens while making,opening, writing or closing the file.
      */
-    public void createAFileArmy(String pathOfFile, String fileName) throws IOException {
+    public String createAFileArmy(String pathOfFile, String fileName) throws IOException {
         try {
             File file = new File(pathOfFile+"\\"+fileName+".csv");
             FileWriter armyFile = new FileWriter(file);
@@ -199,9 +195,53 @@ public class Army {
                     unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
             writer.writeAll(data);
             writer.close();
+            return "Successful saving.";
         }catch (IOException e){
-            e.printStackTrace();
+            return e.getMessage();
         }
+    }
+
+    /**
+     *Provisional method that read an army from a csv file and change the name and all the units
+     * base on the army in the file. This method will be relocated into the controller class ot GUI.
+     * @param pathOfFile String - Path og file to be open
+     * @return String - Returns solved or the message of the fail if a fail is thrown.
+     */
+    public String readAFileArmy(String pathOfFile){
+        try{
+            this.removeAllUnits();
+            List<List<String>> data = new ArrayList<>();
+            FileReader fr = new FileReader(pathOfFile);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            while (line !=null){
+                List<String> lineData = Arrays.asList(line.split(","));
+                data.add(lineData);
+                line = br.readLine();
+            }
+            for(int i=0;i<data.size();i++){
+                if(i==0){
+                    this.setName(data.get(i).get(0));
+                } else {
+                    this.add(new InfantryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                }
+            }
+            br.close();
+            return "true";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Void method that remove all units from the army.
+     */
+    public void removeAllUnits(){
+        units.forEach(this::removeUnit);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
