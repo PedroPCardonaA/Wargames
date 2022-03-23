@@ -171,6 +171,8 @@ public class Army {
      * @throws IOException This method may throw a IOException if a
      * problem happens while making,opening, writing or closing the file.
      */
+
+    //I will use fileChooser in the GUI but for now I just use a normal path
     public String createAFileArmy(String pathOfFile, String fileName) throws IOException {
         try {
             File file = new File(pathOfFile+"\\"+fileName+".csv");
@@ -207,7 +209,13 @@ public class Army {
      * @param pathOfFile String - Path og file to be open
      * @return String - Returns solved or the message of the fail if a fail is thrown.
      */
-    public String readAFileArmy(String pathOfFile){
+
+    //I will use fileChooser in the GUI but for now I just use a normal path
+    public String readAFileArmy(String pathOfFile) throws Exception{
+        if(!pathOfFile.toLowerCase().endsWith(".csv")){
+            throw new IOException("The defined file is not a .csv (Comma separated value). Define " +
+                    "A correct file.");
+        }
         try{
             this.removeAllUnits();
             List<List<String>> data = new ArrayList<>();
@@ -219,17 +227,37 @@ public class Army {
                 data.add(lineData);
                 line = br.readLine();
             }
-            for(int i=0;i<data.size();i++){
-                if(i==0){
-                    this.setName(data.get(i).get(0));
-                } else {
-                    this.add(new InfantryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+            try {
+                for(int i=0;i<data.size();i++){
+                    if(i==0){
+                        this.setName(data.get(i).get(0));
+                    } else {
+                        String unitType = data.get(i).get(0);
+                        switch (unitType){
+                            case "InfantryUnit":
+                                this.add(new InfantryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                break;
+                            case  "RangedUnit":
+                                this.add(new RangedUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                break;
+                            case "CavalryUnit":
+                                this.add(new CavalryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                break;
+                            case "CommanderUnit":
+                                this.add(new CommanderUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                break;
+                        }
+                    }
                 }
+                br.close();
+                return "Success";
+            }catch (Exception e){
+                throw new Exception("The data of the file was corrupted or is not compatible" +
+                        "with this program. " + e.getMessage());
             }
-            br.close();
-            return "true";
+
         }catch (Exception e){
-            return e.getMessage();
+            throw e;
         }
     }
 
@@ -239,6 +267,8 @@ public class Army {
     public void removeAllUnits(){
         units.forEach(this::removeUnit);
     }
+
+
 
     public void setName(String name) {
         this.name = name;

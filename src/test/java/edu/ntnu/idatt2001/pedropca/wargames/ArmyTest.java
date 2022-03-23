@@ -458,17 +458,20 @@ class ArmyTest {
                     army.add(new InfantryUnit("Footman",100));
                 }
                 army.add(new CommanderUnit("King",100));
-                army.createAFileArmy("C://Users//Pedro Cardona//Desktop//Prog 2","TestingArmy");
+                //This part format works on Windows not sure, if it will work on MAc or linux
+                army.createAFileArmy("src/main/resources/Armies","TestingArmy");
             }
         }
     }
 
     @Test
-    void testingReaderFromAFile(){
+    void testingReaderFromAFile() throws Exception {
         Army army = new Army("ArmyTest");
-        army.readAFileArmy("C:\\Users\\Pedro Cardona\\Desktop\\Prog 2\\TestingArmy.csv");
+        //This part format works on Windows not sure, if it will work on MAc or linux
+        army.readAFileArmy("src/main/resources/Armies/TestingArmy.csv");
         assertEquals("Army",army.getName());
         assertEquals(151,army.getAllUnits().size());
+        assertEquals(1,army.getCommanderUnits().size());
     }
 
 }
