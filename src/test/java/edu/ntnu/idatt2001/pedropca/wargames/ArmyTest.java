@@ -450,7 +450,7 @@ class ArmyTest {
         @Nested
         class positiveTesting{
             @Test
-            void makingAFileOfAMixedArmy() throws IOException {
+            void savingAFileOfAMixedArmy() throws IOException {
                 Army army = new Army( "Army");
                 for(int i =0;i<50;i++){
                     army.add(new CavalryUnit("Raider",100));
@@ -459,7 +459,89 @@ class ArmyTest {
                 }
                 army.add(new CommanderUnit("King",100));
                 //This part format works on Windows not sure, if it will work on MAc or linux
-                army.createAFileArmy("src/main/resources/Armies","TestingArmy");
+                army.createAFileArmy("src/main/resources/Armies","TestingArmyWithAMixedArmy");
+            }
+            @Test
+            void savingAFileOfAnArmyWithOutUnits() throws IOException{
+                Army blankArmy = new Army("Army");
+                blankArmy.createAFileArmy("src/main/resources/Armies","TestingArmyWithoutUnits");
+            }
+            @Test
+            void overWriteAPreviouslyFileWithANewArmy(){
+                try {
+                    Army firstArmy = new Army("First Army");
+                    firstArmy.createAFileArmy("src/main/resources/Armies","OverWrittenArmy");
+                    Army controlArmy = new Army("Control Army");
+                    controlArmy.readAFileArmy("src/main/resources/Armies/"+"OverWrittenArmy.csv");
+                    assertEquals("First Army",controlArmy.getName());
+                    Army secondArmy = new Army("Second Army");
+                    secondArmy.createAFileArmy("src/main/resources/Armies","OverWrittenArmy");
+                    controlArmy.readAFileArmy("src/main/resources/Armies/"+"OverWrittenArmy.csv");
+                    assertEquals("Second Army",controlArmy.getName());
+                }catch (Exception e){
+                    fail();
+                }
+            }
+            @Test
+            void savingArmyWithSpecialCharacterInTheName(){
+                try {
+                    Army armyWithAFunnyName = new Army("Funny@£$€/");
+                    armyWithAFunnyName.createAFileArmy("src/main/resources/Armies","Funny@£$€");
+                }catch (Exception e){
+                    fail();
+                }
+            }
+        }
+        @Nested
+        class Negative{
+            @Test
+            void savingAnArmyWithOutADefinedPath(){
+                try {
+                    Army armyWithAFunnyName = new Army("Funny@£$€/");
+                    armyWithAFunnyName.createAFileArmy("src/main/resources/Armies/","");
+                    fail();
+                } catch (IOException e) {
+                    assertEquals("The name of file cannot be empty. Define the name of the file.",e.getMessage());
+                }
+            }
+            void savingAnArmyWithOutADefinedFileName(){
+                try {
+                    Army armyWithAFunnyName = new Army("Funny@£$€/");
+                    armyWithAFunnyName.createAFileArmy("src/main/resources/Armies/","");
+                    fail();
+                } catch (IOException e) {
+                    assertEquals("The path of file cannot be empty. Define a path of the file.",e.getMessage());
+                }
+            }
+            @Test
+            void savingAnArmyWithADotInTheName(){
+                try {
+                    Army armyWithAFunnyName = new Army("Funny@£$€/");
+                    armyWithAFunnyName.createAFileArmy("src/main/resources/Armies/","Army.Test");
+                    fail();
+                } catch (IOException e) {
+                    assertEquals("The name of the file cannot contain a '.'. Define a correct name.",e.getMessage());
+                }
+            }
+            @Test
+            void savingAnArmyWithASlashInTheName(){
+                try {
+                    Army armyWithAFunnyName = new Army("Funny@£$€/");
+                    armyWithAFunnyName.createAFileArmy("src/main/resources/Armies/","Army/test");
+                    fail();
+                } catch (IOException e) {
+                    assertEquals("The name of the file cannot contain a '/'. Define a correct name.",e.getMessage());
+                }
+            }
+            @Test
+            void savingAnArmyWithABackSlashInTheName(){
+                try {
+                    Army armyWithAFunnyName = new Army("Funny@£$€/");
+                    armyWithAFunnyName.createAFileArmy("src/main/resources/Armies/","Army\\test");
+                    fail();
+                } catch (IOException e) {
+                    assertEquals("The name of the file cannot contain a '\\'. Define a correct name.",e.getMessage());
+                }
             }
         }
     }

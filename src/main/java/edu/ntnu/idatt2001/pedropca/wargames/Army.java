@@ -142,26 +142,6 @@ public class Army {
         return units.stream().filter(unit -> unit instanceof CommanderUnit).collect(Collectors.toList());
     }
 
-   /* public boolean createAFileArmy(String filename){
-        boolean success = false;
-        try {
-            FileWriter writer = new FileWriter(filename);
-            writer.write(this.getName());
-            units.forEach(unit -> {
-                try {
-                    writer.write(unit.toString());
-                } catch (IOException e) {
-                    System.err.println("There was a problem writing the units into the file.");
-                }
-            });
-            writer.close();
-            success = true;
-        } catch (IOException e) {
-            System.err.println("It was a problem making the new file " + filename);
-        }
-        return success;
-    }*/
-
     /**
      * Provisional method that stores the name and all the units into a csv file in a defined
      * location in the computer, to be opened, read and used later.
@@ -173,9 +153,26 @@ public class Army {
      */
 
     //I will use fileChooser in the GUI but for now I just use a normal path
+    //That is why it is not necessary to have an if sentence for empty pathFIle
     public String createAFileArmy(String pathOfFile, String fileName) throws IOException {
+        if(pathOfFile.isEmpty())
+            throw new IOException("The path of file cannot be empty. Define a path of the file.");
+
+        if(fileName.isEmpty())
+            throw new IOException("The name of file cannot be empty. Define the name of the file.");
+
+        if(fileName.contains("."))
+            throw new IOException("The name of the file cannot contain a '.'. Define a correct name.");
+
+        if(fileName.contains("/"))
+            throw new IOException("The name of the file cannot contain a '/'. Define a correct name.");
+
+        if(fileName.contains("\\"))
+            throw new IOException("The name of the file cannot contain a '\\'. Define a correct name.");
+
         try {
-            File file = new File(pathOfFile+"\\"+fileName+".csv");
+            if (!fileName.endsWith(".csv")) fileName+=".csv";
+            File file = new File(pathOfFile+"\\"+fileName);
             FileWriter armyFile = new FileWriter(file);
             CSVWriter writer = new CSVWriter(armyFile, ',',
                     CSVWriter.NO_QUOTE_CHARACTER,
@@ -212,6 +209,9 @@ public class Army {
 
     //I will use fileChooser in the GUI but for now I just use a normal path
     public String readAFileArmy(String pathOfFile) throws Exception{
+        if(pathOfFile.isEmpty()){
+            throw new IOException("The path of file cannot be empty. Define a path of the file");
+        }
         if(!pathOfFile.toLowerCase().endsWith(".csv")){
             throw new IOException("The defined file is not a .csv (Comma separated value). Define " +
                     "A correct file.");
@@ -235,16 +235,16 @@ public class Army {
                         String unitType = data.get(i).get(0);
                         switch (unitType){
                             case "InfantryUnit":
-                                this.add(new InfantryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                this.add(new InfantryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
                                 break;
                             case  "RangedUnit":
-                                this.add(new RangedUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                this.add(new RangedUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
                                 break;
                             case "CavalryUnit":
-                                this.add(new CavalryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                this.add(new CavalryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
                                 break;
                             case "CommanderUnit":
-                                this.add(new CommanderUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2))));
+                                this.add(new CommanderUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
                                 break;
                         }
                     }
@@ -253,7 +253,7 @@ public class Army {
                 return "Success";
             }catch (Exception e){
                 throw new Exception("The data of the file was corrupted or is not compatible" +
-                        "with this program. " + e.getMessage());
+                        "with this program. \n The error was: " + e.getMessage());
             }
 
         }catch (Exception e){
@@ -269,9 +269,14 @@ public class Army {
     }
 
 
-
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Set method tha defines a new for the army
+     * @param name String - New name of the army
+     * @throws IllegalArgumentException If the String army is empty
+     */
+    public void setName(String name) throws IllegalArgumentException{
+        if(name.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a defined name.");
+        this.name = name.trim();
     }
 
     @Override

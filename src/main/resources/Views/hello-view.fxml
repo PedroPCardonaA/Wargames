@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="621.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.HelloController">
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar>
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="152.0" prefWidth="797.0" text="WAR GAMES" textFill="#d70404">
+                    <font>
+                        <Font name="Papyrus" size="72.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="147.0" prefWidth="799.0" text="VS" textFill="#d70404">
+                    <font>
+                        <Font name="Papyrus" size="72.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" prefHeight="171.0" prefWidth="796.0">
+                    <graphic>
+                        <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="169.0" text="Simulate">
+                            <font>
+                                <Font name="Papyrus" size="24.0" />
+                            </font>
+                        </Button>
+                    </graphic>
+                </Label>
+                <Label alignment="CENTER" prefHeight="265.0" prefWidth="797.0">
+                    <graphic>
+                        <Button mnemonicParsing="false" text="Reset armies" />
+                    </graphic>
+                </Label>
+            </children>
+        </VBox>
+    </center>
+    <left>
+        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Label prefHeight="145.0" prefWidth="223.0" />
+                <Label id="labelArmy1" alignment="CENTER" prefHeight="66.0" prefWidth="275.0" text="Army #1" textFill="#047541">
+                    <font>
+                        <Font name="Papyrus" size="40.0" />
+                    </font>
+                </Label>
+                <HBox alignment="BASELINE_RIGHT">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total number of units:" wrappingWidth="206.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="totalNumberOfUnits1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="236.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of infantry units:" wrappingWidth="206.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="InfantryNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="275.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of ranged units:" wrappingWidth="206.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="rangedNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="314.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of cavalry units:" wrappingWidth="206.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="cavalryNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="353.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="commanderNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+            <Label />
+            <Button mnemonicParsing="false" text="Edit" />
+            <Label />
+            <MenuButton mnemonicParsing="false" text="Options">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#openListOfUnits" text="Display all units" />
+                <MenuItem mnemonicParsing="false" text="Load an army" />
+                  <MenuItem mnemonicParsing="false" text="Save the army" />
+              </items>
+            </MenuButton>
+            </children>
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Label prefHeight="149.0" prefWidth="199.0" />
+                <Label id="labelArmy2" alignment="CENTER" prefHeight="66.0" prefWidth="275.0" text="Army #2" textFill="#0b32a8">
+                    <font>
+                        <Font name="Papyrus" size="36.0" />
+                    </font>
+                </Label>
+                <HBox alignment="BASELINE_RIGHT">
+                    <children>
+                        <Text id="TotalUnits1" strokeType="OUTSIDE" strokeWidth="0.0" text="Total number of Units:" wrappingWidth="195.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="totalNumberOfUnits2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of infantry units:" wrappingWidth="206.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="InfantryNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT">
+                    <children>
+                        <Text id="rangedUnit2" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of ranged units:" wrappingWidth="206.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="rangedNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT">
+                    <children>
+                        <Text id="cavalryUnit2" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of cavalry units:" wrappingWidth="206.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="cavalryNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                            <font>
+                                <Font name="Papyrus" size="19.0" />
+                            </font>
+                        </Text>
+                        <TextField id="commanderNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                    </children>
+                </HBox>
+            <Label />
+            <Button mnemonicParsing="false" text="Edit" />
+            <Label />
+            <MenuButton mnemonicParsing="false" text="Options">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Display all units" />
+                  <MenuItem mnemonicParsing="false" text="Load an army" />
+                  <MenuItem mnemonicParsing="false" text="Save the army" />
+               </items>
+            </MenuButton>
+            </children>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+        </VBox>
+    </right>
+    <bottom>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Made by students for students" />
+            </menus>
+        </MenuBar>
+    </bottom>
+</BorderPane>
