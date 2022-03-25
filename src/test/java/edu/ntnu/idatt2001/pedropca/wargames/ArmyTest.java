@@ -458,7 +458,7 @@ class ArmyTest {
                     army.add(new InfantryUnit("Footman",100));
                 }
                 army.add(new CommanderUnit("King",100));
-                //This part format works on Windows not sure, if it will work on MAc or linux
+                //This part format works on Windows. Not sure, if it will work on MAC or Linux
                 army.createAFileArmy("src/main/resources/Armies","TestingArmyWithAMixedArmy");
             }
             @Test
@@ -546,14 +546,105 @@ class ArmyTest {
         }
     }
 
-    @Test
-    void testingReaderFromAFile() throws Exception {
-        Army army = new Army("ArmyTest");
-        //This part format works on Windows not sure, if it will work on MAc or linux
-        army.readAFileArmy("src/main/resources/Armies/TestingArmy.csv");
-        assertEquals("Army",army.getName());
-        assertEquals(151,army.getAllUnits().size());
-        assertEquals(1,army.getCommanderUnits().size());
+    @Nested
+    class TestingMethodReadAFileArmy{
+        @Nested
+        class Positive{
+            @Test
+            void readingAFileWithAMixedArmy() throws Exception {
+                Army army = new Army("ArmyTest");
+                army.readAFileArmy("src/main/resources/Armies/TestingArmy.csv");
+                assertEquals("Army",army.getName());
+                assertEquals(151,army.getAllUnits().size());
+                assertEquals(1,army.getCommanderUnits().size());
+            }
+            @Test
+            void readingAFIleWithAnUnitlessArmy() throws Exception {
+                Army army = new Army("ArmyTest");
+                army.readAFileArmy("src/main/resources/Armies/TestingArmyWithoutUnits.csv");
+                assertEquals("Army",army.getName());
+                assertEquals(0,army.getAllUnits().size());
+            }
+        }
+        @Nested
+        class Negative{
+            @Test
+            void tryReadAnNonExistentArmy(){
+                try {
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("src/main/resources/Armies/TestingArmyWithoutUnitsNonExistent.csv");
+                    fail();
+                }catch (Exception e) {}
+            }
+            @Test
+            void tryReadANotCSVArmyFile(){
+                try {
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("src/main/resources/Armies/Army.txt");
+                    fail();
+                }catch (Exception e) {
+                    assertEquals("The defined file is not a .csv (Comma separated value). Define " +
+                            "A correct file.",e.getMessage());
+                }
+            }
+            @Test
+            void tryReadAFileWIthOutPath(){
+                try {
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("");
+                    fail();
+                }catch (Exception e) {
+                    assertEquals("The path of file cannot be empty. Define a path of the file",e.getMessage());
+                }
+            }
+            @Test
+            void tryReadACorruptedArmyFileWithoutName(){
+                try {
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("src/main/resources/Armies/ArmyWithOutName.csv");
+                    fail();
+                } catch (Exception e){
+                    assertEquals("The data of the file was corrupted or is not compatible" +
+                                    "with this program. \n The error was: " + "The name of the army cannot be empty. Enter a name for the army."
+                            ,e.getMessage());
+                }
+            }
+
+            //This test try to read a corrupted army that misses some units. It does not throw any fail
+            @Test
+            void tryReadACorruptedArmyFileThatMissAUnit(){
+                try {
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("src/main/resources/Armies/ArmyThatMissesAUnit.csv");
+                    assertEquals("Army",army.getName());
+                    assertEquals(150,army.getAllUnits().size());
+                    assertEquals(1,army.getCommanderUnits().size());
+                } catch (Exception e){
+                    fail();
+                }
+            }
+            @Test
+            void tryReadACorruptedArmyFileThatDoesNotContainsStringAndNotInt(){
+                assertThrows(IllegalArgumentException.class,()->{
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("src/main/resources/Armies/ArmyWithCorruptedUnits.csv");
+                });
+            }
+            @Test
+            void tryReadACorruptedArmyFileThatDoesNotHaveUnitType(){
+                try {
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("src/main/resources/Armies/ArmyWithoutUnitType.csv");
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+                assertThrows(IllegalArgumentException.class,()->{
+                    Army army = new Army("ArmyTest");
+                    army.readAFileArmy("src/main/resources/Armies/ArmyWithoutUnitType.csv");
+                });
+            }
+        }
     }
+
 
 }
