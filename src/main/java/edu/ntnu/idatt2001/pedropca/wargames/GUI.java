@@ -18,8 +18,11 @@ public class GUI extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage = new Stage();
         primaryStage.setTitle("War Games");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Views/hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Views/GUI.fxml"));
         Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
+        primaryStage.setMaximized(true);
+        primaryStage.show();
     }
 }

@@ -72,6 +72,7 @@ class BattleTest {
             Battle battle = new Battle(maya,aztecas);
             assertEquals(aztecas,battle.simulate());
         }
+
         @Test
         void simulatingABattleWithOutWinner(){
             Army horde = new Army("Horde");

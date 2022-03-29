@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="621.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.HelloController">
+<BorderPane prefHeight="621.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.GUIController">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -39,7 +39,7 @@
                 </Label>
                 <Label alignment="CENTER" prefHeight="171.0" prefWidth="796.0">
                     <graphic>
-                        <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="169.0" text="Simulate">
+                        <Button fx:id="simulation" mnemonicParsing="false" onAction="#simulateBattle" prefHeight="52.0" prefWidth="169.0" text="Simulate">
                             <font>
                                 <Font name="Papyrus" size="24.0" />
                             </font>
@@ -70,7 +70,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="totalNumberOfUnits1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="totalNumberOfUnits1" fx:id="totalArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="236.0">
@@ -80,7 +80,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="InfantryNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="InfantryNumbers1" fx:id="infantryArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="275.0">
@@ -90,7 +90,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="rangedNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="rangedNumbers1" fx:id="rangedArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="314.0">
@@ -100,7 +100,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="cavalryNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="cavalryNumbers1" fx:id="cavalryArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="353.0">
@@ -110,7 +110,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="commanderNumbers1" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="commanderNumbers1" fx:id="commanderArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
             <Label />
@@ -118,7 +118,7 @@
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#openListOfUnits" text="Display all units" />
+                <MenuItem mnemonicParsing="false" text="Display all units" />
                 <MenuItem mnemonicParsing="false" text="Load an army" />
                   <MenuItem mnemonicParsing="false" text="Save the army" />
               </items>
@@ -130,7 +130,7 @@
         <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
             <children>
                 <Label prefHeight="149.0" prefWidth="199.0" />
-                <Label id="labelArmy2" alignment="CENTER" prefHeight="66.0" prefWidth="275.0" text="Army #2" textFill="#0b32a8">
+                <Label id="labelArmy2" fx:id="armyTwoName" alignment="CENTER" prefHeight="66.0" prefWidth="275.0" text="Army #2" textFill="#0b32a8">
                     <font>
                         <Font name="Papyrus" size="36.0" />
                     </font>
@@ -142,7 +142,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="totalNumberOfUnits2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="totalNumberOfUnits2" fx:id="totalArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
@@ -152,7 +152,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="InfantryNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="InfantryNumbers2" fx:id="infantryArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
@@ -162,7 +162,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="rangedNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="rangedNumbers2" fx:id="rangedArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
@@ -172,7 +172,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="cavalryNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="cavalryNumbers2" fx:id="cavalryArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
@@ -182,7 +182,7 @@
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="commanderNumbers2" editable="false" prefHeight="11.0" prefWidth="35.0" />
+                        <TextField id="commanderNumbers2" fx:id="commanderArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
             <Label />
