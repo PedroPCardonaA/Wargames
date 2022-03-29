@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.pedropca.wargames;
+package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 public class Application {
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
-package edu.ntnu.idatt2001.pedropca.wargames;
+package edu.ntnu.idatt2001.pedropca.wargames.models;
 
-import edu.ntnu.idatt2001.pedropca.wargames.units.CavalryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 
 /**
  * Class edu.ntnu.idatt2001.pedropca.Battle that represents a battle between two armies in the war games.

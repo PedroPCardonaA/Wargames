@@ -1,7 +1,7 @@
-package edu.ntnu.idatt2001.pedropca.wargames;
+package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 import com.opencsv.CSVWriter;
-import edu.ntnu.idatt2001.pedropca.wargames.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
 
 import java.io.*;
 import java.util.*;
@@ -215,7 +215,7 @@ public class Army {
         FileReader fr = new FileReader(pathOfFile);
         BufferedReader br = new BufferedReader(fr);
         String line = br.readLine();
-        int numberOfLine= 0;
+        int numberOfLine= 1;
         while (line !=null){
             List<String> lineData = Arrays.asList(line.split(","));
             data.add(lineData);
@@ -245,11 +245,12 @@ public class Army {
                     numberOfLine++;
                 }
             }
-            br.close();
         }catch (Exception e){
             throw new IllegalArgumentException("The data of the file was corrupted or is not compatible" +
                     "with this program. \nThe error was: " + e.getMessage() +" In the line " +numberOfLine +" of the file.");
         }
+        br.close();
+        fr.close();
     }
 
     /**

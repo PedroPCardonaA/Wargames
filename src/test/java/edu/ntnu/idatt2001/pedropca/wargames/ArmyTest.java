@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames;
 
-import edu.ntnu.idatt2001.pedropca.wargames.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -605,23 +606,17 @@ class ArmyTest {
                     fail();
                 } catch (Exception e){
                     assertEquals("The data of the file was corrupted or is not compatible" +
-                                    "with this program. \n The error was: " + "The name of the army cannot be empty. Enter a name for the army."
+                                    "with this program. \nThe error was: " + "The name of the army cannot be empty. Enter a name for the army. In the line 1 of the file."
                             ,e.getMessage());
                 }
             }
 
-            //This test try to read a corrupted army that misses some units. It does not throw any fail
             @Test
             void tryReadACorruptedArmyFileThatMissAUnit(){
-                try {
+                assertThrows(Exception.class, ()->{
                     Army army = new Army("ArmyTest");
                     army.readAFileArmy("src/main/resources/Armies/ArmyThatMissesAUnit.csv");
-                    assertEquals("Army",army.getName());
-                    assertEquals(150,army.getAllUnits().size());
-                    assertEquals(1,army.getCommanderUnits().size());
-                } catch (Exception e){
-                    fail();
-                }
+                });
             }
             @Test
             void tryReadACorruptedArmyFileThatDoesNotContainsStringAndNotInt(){
