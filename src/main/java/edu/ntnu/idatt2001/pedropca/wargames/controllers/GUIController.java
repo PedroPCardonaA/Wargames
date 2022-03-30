@@ -58,17 +58,7 @@ public class GUIController {
     private Label armyTwoName;
 
     @FXML
-    protected void simulateBattle() throws IOException {
-        for(int i =0;i<50;i++){
-            army1.add(new CavalryUnit("Raider",100));
-            army1.add(new RangedUnit("Ranged",100));
-            army1.add(new InfantryUnit("Footman",100));
-        }
-        for(int i =0;i<50;i++){
-            army2.add(new CavalryUnit("Raider",100));
-            army2.add(new RangedUnit("Ranged",100));
-            army2.add(new InfantryUnit("Footman",100));
-        }
+    protected void simulateBattle(){
         Battle battle = new Battle(army1,army2);
         Army winner = battle.simulate();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -111,5 +101,21 @@ public class GUIController {
         cavalryArmy2.setText(army2.getCavalryUnits().size()+"");
         commanderArmy2.setText(army2.getCommanderUnits().size()+"");
     }
-    //TODO: program button reset armies.
+    @FXML
+    private void resetArmies(){
+        armyOneBackUp.removeAllUnits();
+        armyTwoBackUP.removeAllUnits();
+        for(int i =0;i<50;i++){
+            armyOneBackUp.add(new CavalryUnit("Raider",100));
+            armyOneBackUp.add(new RangedUnit("Ranged",100));
+            armyOneBackUp.add(new InfantryUnit("Footman",100));
+            armyTwoBackUP.add(new CavalryUnit("Raider",100));
+            armyTwoBackUP.add(new RangedUnit("Ranged",100));
+            armyTwoBackUP.add(new InfantryUnit("Footman",100));
+        }
+        army1=armyOneBackUp;
+        army2=armyTwoBackUP;
+        this.updateView();
+    }
+
 }

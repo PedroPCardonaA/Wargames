@@ -48,7 +48,7 @@
                 </Label>
                 <Label alignment="CENTER" prefHeight="265.0" prefWidth="797.0">
                     <graphic>
-                        <Button mnemonicParsing="false" text="Reset armies" />
+                        <Button mnemonicParsing="false" onAction="#resetArmies" text="Reset armies" />
                     </graphic>
                 </Label>
             </children>
