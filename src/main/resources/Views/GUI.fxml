@@ -119,7 +119,7 @@
             <MenuButton mnemonicParsing="false" text="Options">
               <items>
                 <MenuItem mnemonicParsing="false" text="Display all units" />
-                <MenuItem mnemonicParsing="false" text="Load an army" />
+                <MenuItem mnemonicParsing="false" onAction="#readFromAFileArmyOne" text="Load an army" />
                   <MenuItem mnemonicParsing="false" text="Save the army" />
               </items>
             </MenuButton>
@@ -191,7 +191,7 @@
             <MenuButton mnemonicParsing="false" text="Options">
                <items>
                   <MenuItem mnemonicParsing="false" text="Display all units" />
-                  <MenuItem mnemonicParsing="false" text="Load an army" />
+                  <MenuItem mnemonicParsing="false" onAction="#readFromAFileArmyTwo" text="Load an army" />
                   <MenuItem mnemonicParsing="false" text="Save the army" />
                </items>
             </MenuButton>
