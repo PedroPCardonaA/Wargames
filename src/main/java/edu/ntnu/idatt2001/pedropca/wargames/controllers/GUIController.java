@@ -6,6 +6,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.InfantryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.RangedUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.util.FileHandler;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -90,6 +91,10 @@ public class GUIController {
         }
     }
 
+    /**
+     * Method that "Resets" the main armies by defined them as copies of the buck up armies.
+     * After the restarting of the armies method updates the GUI by calling help method updateView().
+     */
     @FXML
     private void resetArmies(){
         army1 = new Army(armyOneBackUp);
@@ -99,6 +104,9 @@ public class GUIController {
         System.out.println(armyTwoBackUP.getAllUnits().size());
     }
 
+    /**
+     * Help method that update the visible information from the army to the GUI.
+     */
     private void updateView(){
         armyOneName.setText(army1.getName());
         totalArmy1.setText(army1.getAllUnits().size()+"");
@@ -114,6 +122,10 @@ public class GUIController {
         commanderArmy2.setText(army2.getCommanderUnits().size()+"");
     }
 
+    /**
+     * Method that open a file form the local system, defines file's path,
+     * run method readAFileArmy from the army1 object and calls help method updateView.
+     */
     @FXML
     private void readFromAFileArmyOne(){
         try {
@@ -122,7 +134,7 @@ public class GUIController {
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
-            army1.readAFileArmy(selectedFile.getAbsolutePath());
+            army1 = FileHandler.readArmy(selectedFile.getAbsolutePath());
             armyOneBackUp = new Army(army1);
             this.updateView();
         }catch (Exception e){
@@ -135,6 +147,10 @@ public class GUIController {
         }
     }
 
+    /**
+     * Method that open a file form the local system, defines file's path,
+     * run method readAFileArmy from the army2 object and calls help method updateView.
+     */
     @FXML
     private void readFromAFileArmyTwo(){
         try {
@@ -143,9 +159,8 @@ public class GUIController {
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
-            army2.readAFileArmy(selectedFile.getAbsolutePath());
+            army2= FileHandler.readArmy(selectedFile.getAbsolutePath());
             armyTwoBackUP =new Army(army2);
-            //TODO: Delete this when bug with buckUpArmies gets fixed
             System.out.println(armyTwoBackUP.getAllUnits().size());
             this.updateView();
         }catch (Exception e){
@@ -157,6 +172,10 @@ public class GUIController {
             alert.showAndWait();
         }
     }
+
+    /**
+     * Method for a button in the menu bar that close the program.
+     */
     @FXML
     private void closeTheProgramButton(){
         Platform.exit();

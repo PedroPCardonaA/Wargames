@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.pedropca.wargames;
+package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;

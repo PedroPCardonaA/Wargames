@@ -58,7 +58,13 @@ public class Army {
      */
     public Army(Army army){
         this.name = army.getName();
-        this.units = army.getAllUnits();
+        this.units = new ArrayList<>();
+        army.getAllUnits().stream().forEach(unit ->{
+            if(unit instanceof InfantryUnit){units.add(new InfantryUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
+            if(unit instanceof RangedUnit){units.add(new RangedUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
+            if(unit instanceof CavalryUnit){units.add(new CavalryUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
+            if(unit instanceof CommanderUnit){units.add(new CommanderUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
+        });
     }
 
     public String getName() {
@@ -152,116 +158,6 @@ public class Army {
         return units.stream().filter(unit -> unit instanceof CommanderUnit).collect(Collectors.toList());
     }
 
-    /**
-     * Provisional method that stores the name and all the units into a csv file in a defined
-     * location in the computer, to be opened, read and used later.
-     * This method will be relocated into the controller class or GUI.
-     * @param pathOfFile String with the wanted path to be store the army.
-     * @param fileName String with the name of the new csv file.
-     * @throws IOException This method may throw a IOException if a
-     * problem happens while making,opening, writing or closing the file.
-     */
-
-    //I will use fileChooser in the GUI but for now I just use a normal path
-    //That is why it is not necessary to have an if sentence for empty pathFIle
-    public void createAFileArmy(String pathOfFile, String fileName) throws IOException {
-        if(pathOfFile.isEmpty())
-            throw new IOException("The path of file cannot be empty. Define a path of the file.");
-
-        if(fileName.isEmpty())
-            throw new IOException("The name of file cannot be empty. Define the name of the file.");
-
-        if(fileName.contains(".") && !fileName.toLowerCase().endsWith(".csv"))
-            throw new IOException("The name of the file cannot contain a '.'. Define a correct name.");
-
-        if(fileName.contains("/"))
-            throw new IOException("The name of the file cannot contain a '/'. Define a correct name.");
-
-        if(fileName.contains("\\"))
-            throw new IOException("The name of the file cannot contain a '\\'. Define a correct name.");
-
-        if (!fileName.toLowerCase().endsWith(".csv")) fileName+=".csv";
-        File file = new File(pathOfFile+"\\"+fileName);
-        FileWriter armyFile = new FileWriter(file);
-        CSVWriter writer = new CSVWriter(armyFile, ',',
-                CSVWriter.NO_QUOTE_CHARACTER,
-                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                CSVWriter.DEFAULT_LINE_END);
-        List<String[]> data = new ArrayList<>();
-        data.add(new String[]{this.getName()});
-        this.getInfantryUnits().forEach(unit -> data.add(new String[]{"InfantryUnit",unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
-        this.getRangedUnits().forEach(unit -> data.add(new String[]{"RangedUnit",unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
-        this.getCavalryUnits().forEach(unit -> data.add(new String[]{"CavalryUnit",unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
-        this.getCommanderUnits().forEach(unit -> data.add(new String[]{"CommanderUnit",unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
-        writer.writeAll(data);
-        writer.close();
-    }
-
-    /**
-     *Provisional method that read an army from a csv file and change the name and all the units
-     * base on the army in the file. This method will be relocated into the controller class ot GUI.
-     * @param pathOfFile String - Path og file to be open
-     */
-
-    //I will use fileChooser in the GUI but for now I just use a normal path
-    public void readAFileArmy(String pathOfFile) throws Exception{
-        if(pathOfFile.isEmpty()){
-            throw new IOException("The path of file cannot be empty. Define a path of the file");
-        }
-        if(!pathOfFile.toLowerCase().endsWith(".csv")){
-            throw new IOException("The defined file is not a .csv (Comma separated value). Define " +
-                    "A correct file.");
-        }
-        this.removeAllUnits();
-        List<List<String>> data = new ArrayList<>();
-        FileReader fr = new FileReader(pathOfFile);
-        BufferedReader br = new BufferedReader(fr);
-        String line = br.readLine();
-        int numberOfLine= 1;
-        while (line !=null){
-            List<String> lineData = Arrays.asList(line.split(","));
-            data.add(lineData);
-            line = br.readLine();
-        }
-        try {
-            for(int i=0;i<data.size();i++){
-                if(i==0){
-                    this.setName(data.get(i).get(0));
-                } else {
-                    String unitType = data.get(i).get(0);
-                    switch (unitType){
-                        case "InfantryUnit":
-                            this.add(new InfantryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        case  "RangedUnit":
-                            this.add(new RangedUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        case "CavalryUnit":
-                            this.add(new CavalryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        case "CommanderUnit":
-                            this.add(new CommanderUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        default: throw new IllegalArgumentException("One of the units does not have a unit type.");
-                    }
-                    numberOfLine++;
-                }
-            }
-        }catch (Exception e){
-            throw new IllegalArgumentException("The data of the file was corrupted or is not compatible" +
-                    "with this program. \nThe error was: " + e.getMessage() +" In the line " +numberOfLine +" of the file.");
-        }
-        br.close();
-        fr.close();
-    }
 
     /**
      * Void method that remove all units from the army.
