@@ -6,11 +6,9 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.InfantryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.RangedUnit;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -23,8 +21,8 @@ import java.io.IOException;
 public class GUIController {
     Army army1 = new Army("Army#1");
     Army army2 = new Army("Army#2");
-    Army armyOneBackUp = army1;
-    Army armyTwoBackUP = army2;
+    Army armyOneBackUp = new Army("Army#1");
+    Army armyTwoBackUP = new Army("Army#2");
 
     @FXML
     private TextField totalArmy1;
@@ -77,20 +75,28 @@ public class GUIController {
         alert.showAndWait();
     }
 
-
     private void updateArmies(Army lastArmy){
         if(lastArmy!=null){
             if(lastArmy.getName().equals(army1.getName())){
-                army1 = lastArmy;
+                army1 = new Army(lastArmy);
                 army2 = new Army(army2.getName());
             } else{
-                army2 = lastArmy;
+                army2 = new Army(lastArmy);
                 army1 = new Army(army1.getName());
             }
         } else {
             army1 = new Army(army1.getName());
             army2 = new Army(army2.getName());
         }
+    }
+
+    @FXML
+    private void resetArmies(){
+        army1 = new Army(armyOneBackUp);
+        army2 = new Army(armyTwoBackUP);
+        this.updateView();
+        //TODO: Delete this when bug with buckUpArmies gets fixed
+        System.out.println(armyTwoBackUP.getAllUnits().size());
     }
 
     private void updateView(){
@@ -109,23 +115,6 @@ public class GUIController {
     }
 
     @FXML
-    private void resetArmies(){
-        armyOneBackUp.removeAllUnits();
-        armyTwoBackUP.removeAllUnits();
-        for(int i =0;i<50;i++){
-            armyOneBackUp.add(new CavalryUnit("Raider",100));
-            armyOneBackUp.add(new RangedUnit("Ranged",100));
-            armyOneBackUp.add(new InfantryUnit("Footman",100));
-            armyTwoBackUP.add(new CavalryUnit("Raider",100));
-            armyTwoBackUP.add(new RangedUnit("Ranged",100));
-            armyTwoBackUP.add(new InfantryUnit("Footman",100));
-        }
-        army1=armyOneBackUp;
-        army2=armyTwoBackUP;
-        this.updateView();
-    }
-
-    @FXML
     private void readFromAFileArmyOne(){
         try {
             Stage newStage = new Stage();
@@ -134,7 +123,7 @@ public class GUIController {
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
             army1.readAFileArmy(selectedFile.getAbsolutePath());
-            armyOneBackUp = army1;
+            armyOneBackUp = new Army(army1);
             this.updateView();
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -155,7 +144,9 @@ public class GUIController {
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
             army2.readAFileArmy(selectedFile.getAbsolutePath());
-            armyTwoBackUP =army2;
+            armyTwoBackUP =new Army(army2);
+            //TODO: Delete this when bug with buckUpArmies gets fixed
+            System.out.println(armyTwoBackUP.getAllUnits().size());
             this.updateView();
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -166,4 +157,10 @@ public class GUIController {
             alert.showAndWait();
         }
     }
+    @FXML
+    private void closeTheProgramButton(){
+        Platform.exit();
+    }
+
+    //TODO: Fix BackUp Armies bug.
 }

@@ -51,6 +51,16 @@ public class Army {
         units = new ArrayList<>();
     }
 
+    /**
+     * COpy constructor that makes a new instance of this class
+     * based on other army object.
+     * @param army Army - army to be copied.
+     */
+    public Army(Army army){
+        this.name = army.getName();
+        this.units = army.getAllUnits();
+    }
+
     public String getName() {
         return name;
     }
