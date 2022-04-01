@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileHandler {
+public class FileArmyHandler {
 
     /**
      * Static method that read an army from a csv file and change the name and all the units
@@ -34,6 +34,7 @@ public class FileHandler {
         FileReader fr = new FileReader(pathOfFile);
         BufferedReader br = new BufferedReader(fr);
         String line = br.readLine();
+        UnitFactory factory = new UnitFactory();
         int numberOfLine= 1;
         while (line !=null){
             List<String> lineData = Arrays.asList(line.split(","));
@@ -45,22 +46,7 @@ public class FileHandler {
                 if(i==0){
                     readArmy.setName(data.get(i).get(0));
                 } else {
-                    String unitType = data.get(i).get(0);
-                    switch (unitType){
-                        case "InfantryUnit":
-                            readArmy.add(new InfantryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        case  "RangedUnit":
-                            readArmy.add(new RangedUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        case "CavalryUnit":
-                            readArmy.add(new CavalryUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        case "CommanderUnit":
-                            readArmy.add(new CommanderUnit(data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                            break;
-                        default: throw new IllegalArgumentException("One of the units does not have a unit type.");
-                    }
+                    readArmy.add(factory.createUnit(data.get(i).get(0),data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
                     numberOfLine++;
                 }
             }

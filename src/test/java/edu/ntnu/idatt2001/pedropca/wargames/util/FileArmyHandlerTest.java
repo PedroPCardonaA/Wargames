@@ -12,21 +12,21 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileHandlerTest {
+class FileArmyHandlerTest {
     @Nested
     class TestingMethodReadAFileArmy{
         @Nested
         class Positive{
             @Test
             void readingAFileWithAMixedArmy() throws Exception {
-                Army army = FileHandler.readArmy("src/main/resources/Armies/TestingArmy.csv");
+                Army army = FileArmyHandler.readArmy("src/main/resources/Armies/TestingArmy.csv");
                 assertEquals("Army",army.getName());
                 assertEquals(151,army.getAllUnits().size());
                 assertEquals(1,army.getCommanderUnits().size());
             }
             @Test
             void readingAFIleWithAnUnitlessArmy() throws Exception {
-                Army army = FileHandler.readArmy("src/main/resources/Armies/TestingArmyWithoutUnits.csv");
+                Army army = FileArmyHandler.readArmy("src/main/resources/Armies/TestingArmyWithoutUnits.csv");
                 assertEquals("Army",army.getName());
                 assertEquals(0,army.getAllUnits().size());
             }
@@ -36,14 +36,14 @@ class FileHandlerTest {
             @Test
             void tryReadAnNonExistentArmy(){
                 try {
-                    Army army = FileHandler.readArmy("src/main/resources/Armies/TestingArmyWithoutUnitsNonExistent.csv");
+                    Army army = FileArmyHandler.readArmy("src/main/resources/Armies/TestingArmyWithoutUnitsNonExistent.csv");
                     fail();
                 }catch (Exception e) {}
             }
             @Test
             void tryReadANotCSVArmyFile(){
                 try {
-                    Army army = FileHandler.readArmy("src/main/resources/Armies/Army.txt");
+                    Army army = FileArmyHandler.readArmy("src/main/resources/Armies/Army.txt");
                     fail();
                 }catch (Exception e) {
                     assertEquals("The defined file is not a .csv (Comma separated value). Define " +
@@ -53,7 +53,7 @@ class FileHandlerTest {
             @Test
             void tryReadAFileWIthOutPath(){
                 try {
-                    Army army = FileHandler.readArmy("");
+                    Army army = FileArmyHandler.readArmy("");
                     fail();
                 }catch (Exception e) {
                     assertEquals("The path of file cannot be empty. Define a path of the file",e.getMessage());
@@ -62,7 +62,7 @@ class FileHandlerTest {
             @Test
             void tryReadACorruptedArmyFileWithoutName(){
                 try {
-                    Army army = FileHandler.readArmy("src/main/resources/Armies/ArmyWithOutName.csv");
+                    Army army = FileArmyHandler.readArmy("src/main/resources/Armies/ArmyWithOutName.csv");
                     fail();
                 } catch (Exception e){
                     assertEquals("The data of the file was corrupted or is not compatible" +
@@ -74,24 +74,24 @@ class FileHandlerTest {
             @Test
             void tryReadACorruptedArmyFileThatMissAUnit(){
                 assertThrows(Exception.class, ()->{
-                    Army army = FileHandler.readArmy("src/main/resources/Armies/ArmyThatMissesAUnit.csv");
+                    Army army = FileArmyHandler.readArmy("src/main/resources/Armies/ArmyThatMissesAUnit.csv");
                 });
             }
             @Test
             void tryReadACorruptedArmyFileThatDoesNotContainsStringAndNotInt(){
                 assertThrows(IllegalArgumentException.class,()->{
-                    Army army = FileHandler.readArmy("src/main/resources/Armies/ArmyWithCorruptedUnits.csv");
+                    Army army = FileArmyHandler.readArmy("src/main/resources/Armies/ArmyWithCorruptedUnits.csv");
                 });
             }
             @Test
             void tryReadACorruptedArmyFileThatDoesNotHaveUnitType(){
                 try {
-                    Army army = FileHandler.readArmy("src/main/resources/Armies/ArmyWithoutUnitType.csv");
+                    Army army = FileArmyHandler.readArmy("src/main/resources/Armies/ArmyWithoutUnitType.csv");
                 }catch (Exception e){
                     System.out.println(e.getMessage());
                 }
                 assertThrows(IllegalArgumentException.class,()->{
-                    Army army = FileHandler.readArmy("src/main/resources/Armies/ArmyWithoutUnitType.csv");
+                    Army army = FileArmyHandler.readArmy("src/main/resources/Armies/ArmyWithoutUnitType.csv");
                 });
             }
         }
@@ -111,23 +111,23 @@ class FileHandlerTest {
                 }
                 army.add(new CommanderUnit("King",100));
                 //This part format works on Windows. Not sure, if it will work on MAC or Linux
-                FileHandler.WriteAFile(army,"src/main/resources/Armies","TestingArmyWithAMixedArmy");
+                FileArmyHandler.WriteAFile(army,"src/main/resources/Armies","TestingArmyWithAMixedArmy");
             }
             @Test
             void savingAFileOfAnArmyWithOutUnits() throws IOException{
                 Army blankArmy = new Army("Army");
-                FileHandler.WriteAFile(blankArmy,"src/main/resources/Armies","TestingArmyWithoutUnits");
+                FileArmyHandler.WriteAFile(blankArmy,"src/main/resources/Armies","TestingArmyWithoutUnits");
             }
             @Test
             void overWriteAPreviouslyFileWithANewArmy(){
                 try {
                     Army firstArmy = new Army("First Army");
-                    FileHandler.WriteAFile(firstArmy,"src/main/resources/Armies","OverWrittenArmy");
-                    Army controlArmy = FileHandler.readArmy("src/main/resources/Armies/"+"OverWrittenArmy.csv");
+                    FileArmyHandler.WriteAFile(firstArmy,"src/main/resources/Armies","OverWrittenArmy");
+                    Army controlArmy = FileArmyHandler.readArmy("src/main/resources/Armies/"+"OverWrittenArmy.csv");
                     assertEquals("First Army",controlArmy.getName());
                     Army secondArmy = new Army("Second Army");
-                    FileHandler.WriteAFile(secondArmy,"src/main/resources/Armies","OverWrittenArmy");
-                    controlArmy = FileHandler.readArmy("src/main/resources/Armies/"+"OverWrittenArmy.csv");
+                    FileArmyHandler.WriteAFile(secondArmy,"src/main/resources/Armies","OverWrittenArmy");
+                    controlArmy = FileArmyHandler.readArmy("src/main/resources/Armies/"+"OverWrittenArmy.csv");
                     assertEquals("Second Army",controlArmy.getName());
                 }catch (Exception e){
                     fail();
@@ -137,7 +137,7 @@ class FileHandlerTest {
             void savingArmyWithSpecialCharacterInTheName(){
                 try {
                     Army armyWithAFunnyName = new Army("Funny@£$€/");
-                    FileHandler.WriteAFile(armyWithAFunnyName,"src/main/resources/Armies","Funny@£$€");
+                    FileArmyHandler.WriteAFile(armyWithAFunnyName,"src/main/resources/Armies","Funny@£$€");
                 }catch (Exception e){
                     fail();
                 }
@@ -149,7 +149,7 @@ class FileHandlerTest {
             void savingAnArmyWithOutADefinedPath(){
                 try {
                     Army armyWithoutDefinedPath = new Army("Funny@£$€/");
-                    FileHandler.WriteAFile(armyWithoutDefinedPath,"","Funny@£$€");
+                    FileArmyHandler.WriteAFile(armyWithoutDefinedPath,"","Funny@£$€");
                     fail();
                 } catch (IOException e) {
                     assertEquals("The path of file cannot be empty. Define a path of the file.",e.getMessage());
@@ -158,7 +158,7 @@ class FileHandlerTest {
             void savingAnArmyWithOutADefinedFileName(){
                 try {
                     Army armyWithoutADefinedName = new Army("Funny@£$€/");
-                    FileHandler.WriteAFile(armyWithoutADefinedName,"src/main/resources/Armies/","");
+                    FileArmyHandler.WriteAFile(armyWithoutADefinedName,"src/main/resources/Armies/","");
                     fail();
                 } catch (IOException e) {
                     assertEquals("The name of file cannot be empty. Define the name of the file.",e.getMessage());
@@ -168,7 +168,7 @@ class FileHandlerTest {
             void savingAnArmyWithADotInTheName(){
                 try {
                     Army armyWithADotInTheName = new Army("Funny@£$€/");
-                    FileHandler.WriteAFile(armyWithADotInTheName,"src/main/resources/Armies/","Army.Test");
+                    FileArmyHandler.WriteAFile(armyWithADotInTheName,"src/main/resources/Armies/","Army.Test");
                     fail();
                 } catch (IOException e) {
                     assertEquals("The name of the file cannot contain a '.'. Define a correct name.",e.getMessage());
@@ -178,7 +178,7 @@ class FileHandlerTest {
             void savingAnArmyWithASlashInTheName(){
                 try {
                     Army armyWithASlashInTheName = new Army("Funny@£$€/");
-                    FileHandler.WriteAFile(armyWithASlashInTheName,"src/main/resources/Armies/","Army/test");
+                    FileArmyHandler.WriteAFile(armyWithASlashInTheName,"src/main/resources/Armies/","Army/test");
                     fail();
                 } catch (IOException e) {
                     assertEquals("The name of the file cannot contain a '/'. Define a correct name.",e.getMessage());
@@ -188,7 +188,7 @@ class FileHandlerTest {
             void savingAnArmyWithABackSlashInTheName(){
                 try {
                     Army armyWithABackSlashInTheName = new Army("Funny@£$€/");
-                    FileHandler.WriteAFile(armyWithABackSlashInTheName,"src/main/resources/Armies/","Army\\test");
+                    FileArmyHandler.WriteAFile(armyWithABackSlashInTheName,"src/main/resources/Armies/","Army\\test");
                     fail();
                 } catch (IOException e) {
                     assertEquals("The name of the file cannot contain a '\\'. Define a correct name.",e.getMessage());

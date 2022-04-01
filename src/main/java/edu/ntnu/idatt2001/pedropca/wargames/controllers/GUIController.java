@@ -1,23 +1,15 @@
 package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
-import com.sun.glass.ui.CommonDialogs;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.InfantryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.RangedUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.util.FileHandler;
+import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import org.w3c.dom.Text;
-import org.w3c.dom.events.Event;
 
 import java.io.File;
-import java.io.IOException;
 
 public class GUIController {
     Army army1 = new Army("Army#1");
@@ -134,7 +126,7 @@ public class GUIController {
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
-            army1 = FileHandler.readArmy(selectedFile.getAbsolutePath());
+            army1 = FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
             armyOneBackUp = new Army(army1);
             this.updateView();
         }catch (Exception e){
@@ -159,7 +151,7 @@ public class GUIController {
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
-            army2= FileHandler.readArmy(selectedFile.getAbsolutePath());
+            army2= FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
             armyTwoBackUP =new Army(army2);
             System.out.println(armyTwoBackUP.getAllUnits().size());
             this.updateView();
