@@ -93,18 +93,12 @@ public class FileArmyHandler {
                 CSVWriter.DEFAULT_LINE_END);
         List<String[]> data = new ArrayList<>();
         data.add(new String[]{armyToWrite.getName()});
-        armyToWrite.getInfantryUnits().forEach(unit -> data.add(new String[]{"InfantryUnit",unit.getName(),unit.getHealth()+"",
+        armyToWrite.getAllUnits().forEach(unit ->{
+            String[] names= unit.getClass().toString().split("\\.");
+            data.add(new String[]{names[names.length-1],unit.getName(),unit.getHealth()+"",
                 unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
-        armyToWrite.getRangedUnits().forEach(unit -> data.add(new String[]{"RangedUnit",unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
-        armyToWrite.getCavalryUnits().forEach(unit -> data.add(new String[]{"CavalryUnit",unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
-        armyToWrite.getCommanderUnits().forEach(unit -> data.add(new String[]{"CommanderUnit",unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""}));
+                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""});
+        });
         writer.writeAll(data);
         writer.close();
     }

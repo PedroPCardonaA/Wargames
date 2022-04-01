@@ -43,6 +43,8 @@ public class UnitFactory {
                 return new CavalryUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
             case "CommanderUnit":
                 return new CommanderUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
+            case "MagicianUnit":
+                return new MagicianUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
             default:
                 throw new IllegalArgumentException("Unknown unit type. Defined a correct unit type");
         }

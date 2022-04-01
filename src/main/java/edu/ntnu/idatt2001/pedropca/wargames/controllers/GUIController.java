@@ -56,7 +56,7 @@ public class GUIController {
 
     @FXML
     protected void simulateBattle(){
-        Battle battle = new Battle(army1,army2);
+        Battle battle = new Battle(army1,army2,"FOREST");
         Army winner = battle.simulate();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Result of the battle.");

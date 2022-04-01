@@ -26,7 +26,7 @@ class BattleTest {
                 horde.add(new RangedUnit("Ranged",100));
                 alliance.add(new InfantryUnit("Infantry",100));
             }
-            Battle battle = new Battle(horde,alliance);
+            Battle battle = new Battle(horde,alliance,"FOREST");
             assertEquals(horde,battle.simulate());
         }
         @Test
@@ -39,7 +39,7 @@ class BattleTest {
                 horde.add(new RangedUnit("Ranged",100));
                 alliance.add(new InfantryUnit("Infantry",100));
             }
-            Battle battle = new Battle(horde,alliance);
+            Battle battle = new Battle(horde,alliance,"PLAINS");
             assertEquals(alliance,battle.simulate());
         }
         @Test
@@ -53,7 +53,7 @@ class BattleTest {
                 aztecas.add(new InfantryUnit("Infantry",100));
                 maya.add(new InfantryUnit("Infantry",100));
             }
-            Battle battle = new Battle(maya,aztecas);
+            Battle battle = new Battle(maya,aztecas,"HILL");
             assertEquals(maya,battle.simulate());
         }
         @Test
@@ -69,7 +69,7 @@ class BattleTest {
                 aztecas.add(new CommanderUnit("Commander",100));
                 aztecas.add(new CommanderUnit("Commander",100));
             }
-            Battle battle = new Battle(maya,aztecas);
+            Battle battle = new Battle(maya,aztecas,"VOLCANO");
             assertEquals(aztecas,battle.simulate());
         }
 
@@ -77,7 +77,7 @@ class BattleTest {
         void simulatingABattleWithOutWinner(){
             Army horde = new Army("Horde");
             Army alliance = new Army("Alliance");
-            Battle battle = new Battle(horde,alliance);
+            Battle battle = new Battle(horde,alliance,"HILL");
             assertNull(battle.simulate());
         }
     }
@@ -85,17 +85,17 @@ class BattleTest {
     class TestingMethodToString{
         @Test
         void GetToStringOfABattleBetweenTheAllianceAndTheHorde(){
-            Battle battle = new Battle(new Army("Alliance"),new Army("Horde"));
+            Battle battle = new Battle(new Army("Alliance"),new Army("Horde"),"VOLCANO");
             assertEquals("Battle between " + "Alliance" + " and " + "Horde" + ".",battle.toString());
         }
         @Test
         void GetToStringOfABattleBetweenTheHordeAndTheAlliance(){
-            Battle battle = new Battle(new Army("Horde"),new Army("Alliance"));
+            Battle battle = new Battle(new Army("Horde"),new Army("Alliance"),"HILL");
             assertEquals("Battle between " + "Horde" + " and " + "Alliance" + ".",battle.toString());
         }
         @Test
         void GetToStringOfABattleBetweenUkraineAndRussia(){
-            Battle battle = new Battle(new Army("Ukraine"),new Army("Russia"));
+            Battle battle = new Battle(new Army("Ukraine"),new Army("Russia"),"PLAINS");
             assertEquals("Battle between " + "Ukraine" + " and " + "Russia" + ".",battle.toString());
         }
     }

@@ -189,7 +189,7 @@ public class AppUI {
         }
         army1.add(new CommanderUnit("Mountain King",180));
         army2.add(new CommanderUnit("Gul'dan",180));
-        Battle battle = new Battle(army2,army1);
+        Battle battle = new Battle(army2,army1, "FOREST");
         Army winner = battle.simulate();
         System.out.println(battle);
         if(winner == null){
@@ -198,7 +198,7 @@ public class AppUI {
     }
     private void battleWithDefinedUnit(){
         if(!(army1==null)&&!(army2==null)){
-            Battle battle = new Battle(army1,army2);
+            Battle battle = new Battle(army1,army2, "HILL");
             Army winner = battle.simulate();
             System.out.println(battle);
             if(winner == null){
