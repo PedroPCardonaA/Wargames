@@ -96,8 +96,8 @@ public class FileArmyHandler {
         armyToWrite.getAllUnits().forEach(unit ->{
             String[] names= unit.getClass().toString().split("\\.");
             data.add(new String[]{names[names.length-1],unit.getName(),unit.getHealth()+"",
-                unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""});
+                    unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
+                    unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""});
         });
         writer.writeAll(data);
         writer.close();

@@ -37,7 +37,7 @@ public class GUI extends Application {
     private void closeProgram(){
         Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
         closeAlert.setTitle("Close window");
-        closeAlert.setHeaderText("Exit UI?");
+        closeAlert.setHeaderText("Exit GUI?");
         closeAlert.setContentText("Are you sure you want to exit this application?");
         Optional<ButtonType> result = closeAlert.showAndWait();
         if(result.get()==ButtonType.OK) Platform.exit();

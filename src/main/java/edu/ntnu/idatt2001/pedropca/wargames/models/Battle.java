@@ -22,8 +22,8 @@ public class Battle {
      * @param army2 Second army of the battle
      */
     public Battle(Army army1, Army army2, String terrain) {
-        this.army1 = army1;
-        this.army2 = army2;
+        this.army1 = new Army(army1);
+        this.army2 = new Army(army2);
         this.terrain = terrain;
     }
 
@@ -101,7 +101,7 @@ public class Battle {
     // It is possible to represent this advantage with a buff, that is reducing, in the getResistMethod
     // but that way is not realistic enough.
     private void rangedVSMelee(Unit rangedUnit, Unit meleeUnit){
-        for(int i = 0; i<3; i++){
+        for(int i = 0; i<2; i++){
             rangedUnit.attack(meleeUnit);
         }
         while (rangedUnit.getHealth() > 0 && meleeUnit.getHealth() > 0){
@@ -118,9 +118,9 @@ public class Battle {
      * @return The defeated unit
      */
     private Unit getDefeatedUnit(Unit unitFromArmy1,Unit unitFromArmy2){
-        if(unitFromArmy1.getHealth()==0){
-            return unitFromArmy1;
-        } else {return unitFromArmy2;}
+        if(unitFromArmy1.getHealth()==0) return unitFromArmy1;
+        if(unitFromArmy2.getHealth()==0) return unitFromArmy2;
+        return null;
     }
 
     /**
@@ -128,9 +128,8 @@ public class Battle {
      * @param defeatedUnit the defeated unit from the method getDefeatedUnit.
      */
     private void removeDefeatedUnitFromArmy(Unit defeatedUnit){
-        if(army1.getAllUnits().contains(defeatedUnit)){ army1.removeUnit(defeatedUnit);}
-        else {
-            army2.removeUnit(defeatedUnit);}
+        if(army1.getAllUnits().contains(defeatedUnit)) army1.removeUnit(defeatedUnit);
+        if(army2.getAllUnits().contains(defeatedUnit)) army2.removeUnit(defeatedUnit);
     }
 
 

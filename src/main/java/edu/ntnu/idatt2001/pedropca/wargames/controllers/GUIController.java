@@ -70,7 +70,7 @@ public class GUIController {
 
     private void updateArmies(Army lastArmy){
         if(lastArmy!=null){
-            if(lastArmy.getName().equals(army1.getName())){
+            if(army1.equals(lastArmy)){
                 army1 = new Army(lastArmy);
                 army2 = new Army(army2.getName());
             } else{
@@ -92,8 +92,6 @@ public class GUIController {
         army1 = new Army(armyOneBackUp);
         army2 = new Army(armyTwoBackUP);
         this.updateView();
-        //TODO: Delete this when bug with buckUpArmies gets fixed
-        System.out.println(armyTwoBackUP.getAllUnits().size());
     }
 
     /**
@@ -126,7 +124,11 @@ public class GUIController {
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
-            army1 = FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
+            //This if sentence avoids a possible bug tha happens when the both armies have the same name
+            if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army2.getName())){
+                army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                army1.setName(army2.getName()+"-2");
+            }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
             armyOneBackUp = new Army(army1);
             this.updateView();
         }catch (Exception e){
@@ -151,7 +153,11 @@ public class GUIController {
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File selectedFile = fileChooser.showOpenDialog(newStage);
-            army2= FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
+            //This if sentence avoids a possible bug tha happens when the both armies have the same name
+            if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
+                army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                army2.setName(army2.getName()+"-2");
+            }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
             armyTwoBackUP =new Army(army2);
             System.out.println(armyTwoBackUP.getAllUnits().size());
             this.updateView();
@@ -173,5 +179,4 @@ public class GUIController {
         Platform.exit();
     }
 
-    //TODO: Fix BackUp Armies bug.
 }

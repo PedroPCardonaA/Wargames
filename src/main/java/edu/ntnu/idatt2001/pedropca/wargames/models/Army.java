@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 import com.opencsv.CSVWriter;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
 import java.io.*;
 import java.util.*;
@@ -59,11 +60,12 @@ public class Army {
     public Army(Army army){
         this.name = army.getName();
         this.units = new ArrayList<>();
-        army.getAllUnits().stream().forEach(unit ->{
-            if(unit instanceof InfantryUnit){units.add(new InfantryUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
-            if(unit instanceof RangedUnit){units.add(new RangedUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
-            if(unit instanceof CavalryUnit){units.add(new CavalryUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
-            if(unit instanceof CommanderUnit){units.add(new CommanderUnit(unit.getName(),unit.getHealth(), unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(), unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));}
+        UnitFactory factory = new UnitFactory();
+        army.getAllUnits().forEach(unit ->{
+            String[] names= unit.getClass().toString().split("\\.");
+            units.add(factory.createUnit(names[names.length-1],unit.getName(),unit.getHealth(),
+                    unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(),
+                    unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));
         });
     }
 
@@ -195,8 +197,9 @@ public class Army {
         if (!(o instanceof Army)) return false;
         Army army = (Army) o;
         return name.equals(army.name); // I defined string variable NAME as key value to differentiate
-                                       // to object of class edu.ntnu.idatt2001.pedropca.Army. This way makes more sense that use of HashCode
+                                       // to object of class edu.ntnu.idatt2001.pedropca.Army. This way makes more sense
                                        // that use of HashCode to differentiate objects for me.
+                                       // This equal method may generate bug when to armies battle each other
     }
 
     @Override

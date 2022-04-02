@@ -190,13 +190,13 @@ public abstract class Unit {
      * and the result is divided by tha attack speed of the main unit (This was included to have
      * a standard damage-done between units)
      *
-     * @param opponent
-     * @return
+     * @param opponent Unit - Enemy unit to be attacked
+     * @return int- Total damage done.
      */
 
     private int getDamageDone(Unit opponent){
-        return ( ((this.getAttack() + this.getAttackBonus(opponent)) -
-                (opponent.getArmor() + opponent.getResistBonus(this.clone())))) / this.getAttackSpeedPerSecond();
+        return Math.max(((this.getAttack() + this.getAttackBonus(opponent)) -
+                (opponent.getArmor() + opponent.getResistBonus(this.clone())) / this.getAttackSpeedPerSecond()),0);
     }
 
 
