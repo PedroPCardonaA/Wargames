@@ -1,10 +1,8 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models;
 
-import com.opencsv.CSVWriter;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
-import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,6 +16,8 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
+
+//TODO: implement serializable to read army.
 public class Army {
     private String name;
     private final List<Unit> units;

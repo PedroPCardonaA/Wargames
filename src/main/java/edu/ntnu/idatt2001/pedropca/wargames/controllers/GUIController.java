@@ -1,15 +1,18 @@
 package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
+import com.sun.glass.ui.CommonDialogs;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 
 public class GUIController {
     Army army1 = new Army("Army#1");
@@ -46,7 +49,6 @@ public class GUIController {
 
     @FXML
     private TextField commanderArmy2;
-
 
     @FXML
     private Label armyOneName;
@@ -117,20 +119,20 @@ public class GUIController {
      * run method readAFileArmy from the army1 object and calls help method updateView.
      */
     @FXML
-    private void readFromAFileArmyOne(){
+    private void loadFromAFileArmyOne(){
         try {
-            Stage newStage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
-            File selectedFile = fileChooser.showOpenDialog(newStage);
-            //This if sentence avoids a possible bug tha happens when the both armies have the same name
-            if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army2.getName())){
-                army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                army1.setName(army2.getName()+"-2");
-            }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-            armyOneBackUp = new Army(army1);
-            this.updateView();
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if (selectedFile !=null){
+                //This if sentence avoids a possible bug tha happens when the both armies have the same name
+                if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army2.getName())){
+                    army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                    army1.setName(army2.getName()+"-2");
+                }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                armyOneBackUp = new Army(army1);
+                this.updateView();}
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error by loading the file!");
@@ -146,25 +148,65 @@ public class GUIController {
      * run method readAFileArmy from the army2 object and calls help method updateView.
      */
     @FXML
-    private void readFromAFileArmyTwo(){
+    private void loadFromAFileArmyTwo(){
         try {
-            Stage newStage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open a army file");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
-            File selectedFile = fileChooser.showOpenDialog(newStage);
-            //This if sentence avoids a possible bug tha happens when the both armies have the same name
-            if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
-                army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                army2.setName(army2.getName()+"-2");
-            }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-            armyTwoBackUP =new Army(army2);
-            System.out.println(armyTwoBackUP.getAllUnits().size());
-            this.updateView();
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if(selectedFile!=null){
+                if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
+                    army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                    army2.setName(army2.getName()+"-2");
+                }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                armyTwoBackUP =new Army(army2);
+                System.out.println(armyTwoBackUP.getAllUnits().size());
+                this.updateView();
+            }
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error by loading the file!");
             alert.setHeaderText("It was a error by reading the file.");
+            alert.setContentText(e.getMessage());
+            alert.setResizable(true);
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void saveArmyOneAsAFile(){
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save army as a file.");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+            File file = fileChooser.showSaveDialog(null);
+            if(file !=null){
+                FileArmyHandler.WriteAFile(army1,file.getParent(),file.getName());
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error by loading the file!");
+            alert.setHeaderText("It was a error by saving the file.");
+            alert.setContentText(e.getMessage());
+            alert.setResizable(true);
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void saveArmyTwoAsAFile(){
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save army as a file.");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+            File file = fileChooser.showSaveDialog(null);
+            if(file !=null){
+                FileArmyHandler.WriteAFile(army2,file.getParent(),file.getName());
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error by loading the file!");
+            alert.setHeaderText("It was a error by saving the file.");
             alert.setContentText(e.getMessage());
             alert.setResizable(true);
             alert.showAndWait();
@@ -178,5 +220,7 @@ public class GUIController {
     private void closeTheProgramButton(){
         Platform.exit();
     }
+
+    //TODO: Code button to display all the units in an army.
 
 }
