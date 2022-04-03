@@ -226,35 +226,25 @@ public class GUIController {
         }
     }
 
+    //I really have problem with this method. This is connected to the button
+    // display all units from the first army but is not working at all
+    //I will appreciate if you can give me possible solutions :D
     @FXML
-    private void displayWindow(){
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Views/displayArmy.fxml"));
+    private void displayAllUnitsFromArmyOne(){
+        armyNameDisplayUnits.setText(army1.getName());
+        this.createTable();
+        army1.getAllUnits().forEach(unit ->
+                tableView.getItems().add(unit));
         try {
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+            this.displayUnitsStage();
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("It was a error by saving the file.");
+            alert.setTitle("Error by loading the file!");
+            alert.setHeaderText("It was a error by loading the displayArmy.fxml file.");
             alert.setContentText(e.getMessage());
             alert.setResizable(true);
             alert.showAndWait();
         }
-    }
-
-    @FXML
-    private void displayAllUnitsFromArmyOne() throws IOException {
-        armyNameDisplayUnits.setText(army1.getName());
-        this.createTable();
-        UnitFactory unitFactory = new UnitFactory();
-        army1.getAllUnits().forEach(unit ->{
-            String[] names= unit.getClass().toString().split("\\.");
-            tableView.getItems().add(unitFactory.createUnit(names[names.length-1],unit.getName(),unit.getHealth(),
-                    unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(),
-                    unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));});
-        this.displayUnitsStage();
     }
 
     private void createTable(){
@@ -283,7 +273,7 @@ public class GUIController {
         loader.setLocation(getClass().getResource("/Views/displayArmy.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.showAndWait();
     }
 
     /**
