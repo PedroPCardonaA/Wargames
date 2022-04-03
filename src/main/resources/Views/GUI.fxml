@@ -118,7 +118,7 @@
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
               <items>
-                <MenuItem mnemonicParsing="false" text="Display all units" />
+                <MenuItem fx:id="displayAllUnitsFromArmyOne" mnemonicParsing="false" text="Display all units" />
                 <MenuItem mnemonicParsing="false" onAction="#loadFromAFileArmyOne" text="Load an army" />
                   <MenuItem mnemonicParsing="false" onAction="#saveArmyOneAsAFile" text="Save the army" />
               </items>
@@ -190,7 +190,7 @@
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Display all units" />
+                  <MenuItem fx:id="displayWindow" mnemonicParsing="false" text="Display all units" />
                   <MenuItem mnemonicParsing="false" onAction="#loadFromAFileArmyTwo" text="Load an army" />
                   <MenuItem mnemonicParsing="false" onAction="#saveArmyTwoAsAFile" text="Save the army" />
                </items>

@@ -3,13 +3,20 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 import com.sun.glass.ui.CommonDialogs;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
+import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.commons.collections.Factory;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +62,12 @@ public class GUIController {
 
     @FXML
     private Label armyTwoName;
+
+    @FXML
+    private Label armyNameDisplayUnits;
+
+    @FXML
+    private TableView<Unit> tableView;
 
     @FXML
     protected void simulateBattle(){
@@ -213,6 +226,66 @@ public class GUIController {
         }
     }
 
+    @FXML
+    private void displayWindow(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Views/displayArmy.fxml"));
+        try {
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("It was a error by saving the file.");
+            alert.setContentText(e.getMessage());
+            alert.setResizable(true);
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void displayAllUnitsFromArmyOne() throws IOException {
+        armyNameDisplayUnits.setText(army1.getName());
+        this.createTable();
+        UnitFactory unitFactory = new UnitFactory();
+        army1.getAllUnits().forEach(unit ->{
+            String[] names= unit.getClass().toString().split("\\.");
+            tableView.getItems().add(unitFactory.createUnit(names[names.length-1],unit.getName(),unit.getHealth(),
+                    unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(),
+                    unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));});
+        this.displayUnitsStage();
+    }
+
+    private void createTable(){
+        TableColumn<Unit,String> column1 = new TableColumn<>("Unit type");
+        column1.setCellValueFactory(new PropertyValueFactory<>("Unit type"));
+
+        TableColumn<Unit,String> column2 = new TableColumn<>("Name");
+        column1.setCellValueFactory(new PropertyValueFactory<>("Name"));
+
+        TableColumn<Unit,String> column3 = new TableColumn<>("Attack");
+        column1.setCellValueFactory(new PropertyValueFactory<>("Attack"));
+
+        TableColumn<Unit,String> column4 = new TableColumn<>("Health");
+        column1.setCellValueFactory(new PropertyValueFactory<>("Health"));
+
+        tableView.getColumns().add(column1);
+        tableView.getColumns().add(column2);
+        tableView.getColumns().add(column3);
+        tableView.getColumns().add(column4);
+    }
+
+    private void displayUnitsStage() throws IOException {
+        Stage stage = new Stage();
+        stage.setTitle("All units from the army");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Views/displayArmy.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     /**
      * Method for a button in the menu bar that close the program.
      */
@@ -221,6 +294,5 @@ public class GUIController {
         Platform.exit();
     }
 
-    //TODO: Code button to display all the units in an army.
 
 }
