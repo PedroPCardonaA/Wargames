@@ -21,7 +21,10 @@ public class Battle {
      * @param army1 First army of the battle
      * @param army2 Second army of the battle
      */
-    public Battle(Army army1, Army army2, String terrain) {
+    public Battle(Army army1, Army army2, String terrain) throws NullPointerException{
+        if(army1==null||army2==null){
+            throw new NullPointerException("One of the armies is not defined. Enter a correct army");
+        }
         this.army1 = new Army(army1);
         this.army2 = new Army(army2);
         this.terrain = terrain;
