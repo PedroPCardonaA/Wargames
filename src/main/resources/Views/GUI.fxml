@@ -190,7 +190,7 @@
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#openANewWindow" text="Display all units" />
+                  <MenuItem mnemonicParsing="false" text="Display all units" />
                   <MenuItem mnemonicParsing="false" onAction="#loadFromAFileArmyTwo" text="Load an army" />
                   <MenuItem mnemonicParsing="false" onAction="#saveArmyTwoAsAFile" text="Save the army" />
                </items>
