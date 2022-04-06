@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Random;
  * @since 1.0-SNAPSHOT
  */
 
-public abstract class Unit {
+public abstract class Unit implements Serializable {
 
     private final String name;
     private int health;

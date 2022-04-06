@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.pedropca.wargames.models;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
  */
 
 //TODO: implement serializable to read army.
-public class Army {
+public class Army implements Serializable{
     private String name;
     private final List<Unit> units;
 

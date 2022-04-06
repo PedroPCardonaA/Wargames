@@ -15,20 +15,25 @@ import java.util.List;
 
 public class FileArmyHandler {
 
-    /**
-     * Static method that read an army from a csv file and change the name and all the units
-     * base on the army in the file.
-     * This method will be called from the GUI and combine with class FolderChooser of javaFx.
-     * @param pathOfFile String - Path og file to be open
-     */
-    public static Army readArmy(String pathOfFile) throws IOException {
+    public static Army readArmy(String pathOfFile) throws IOException, ClassNotFoundException {
         if(pathOfFile.isEmpty()){
             throw new IOException("The path of file cannot be empty. Define a path of the file");
         }
-        if(!pathOfFile.toLowerCase().endsWith(".csv")){
-            throw new IOException("The defined file is not a .csv (Comma separated value). Define " +
-                    "A correct file.");
+        if(!pathOfFile.toLowerCase().endsWith(".csv") && !pathOfFile.toLowerCase().endsWith(".txt")){
+            throw new IOException("The defined file is not a .csv (Comma separated value) or .txt (Serializable.)" +
+                    " Define " + "A correct file.");
         }
+        if(pathOfFile.toLowerCase().endsWith(".csv")) return readArmyFromCsv(pathOfFile);
+        else return readArmyFromSerializable(pathOfFile);
+    }
+
+    private static Army readArmyFromSerializable(String pathOfFile) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(pathOfFile);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        return (Army) ois.readObject();
+    }
+
+    private static Army readArmyFromCsv(String pathOfFile) throws IOException, IllegalArgumentException{
         Army readArmy = new Army("readArmy");
         List<List<String>> data = new ArrayList<>();
         FileReader fr = new FileReader(pathOfFile);
@@ -59,6 +64,33 @@ public class FileArmyHandler {
         return readArmy;
     }
 
+    public static void writeAFile(Army army ,String pathOfFile, String fileName) throws IOException {
+        boolean b = !fileName.toLowerCase().endsWith(".csv") && !fileName.toLowerCase().endsWith(".txt");
+        if (pathOfFile.isEmpty())
+            throw new IOException("The path of file cannot be empty. Define a path of the file.");
+
+        if (fileName.isEmpty())
+            throw new IOException("The name of file cannot be empty. Define the name of the file.");
+
+
+        if (fileName.contains(".") && b)
+            throw new IOException("The name of the file cannot contain a '.'. Define a correct name.");
+
+        if (fileName.contains("/"))
+            throw new IOException("The name of the file cannot contain a '/'. Define a correct name.");
+
+        if (fileName.contains("\\"))
+            throw new IOException("The name of the file cannot contain a '\\'. Define a correct name.");
+
+        if (b) fileName += ".csv";
+
+        if (fileName.toLowerCase().endsWith(".csv")) {
+            WriteAFileAsCsv(army, pathOfFile, fileName);
+        } else {
+            writeAFileWithSerializable(army, pathOfFile, fileName);
+        }
+    }
+
     /**
      * Static method that stores the name and all the units into a csv file in a defined
      * location in the computer, to be opened, read and used later.
@@ -68,23 +100,7 @@ public class FileArmyHandler {
      * @throws IOException This method may throw a IOException if a
      * problem happens while making,opening, writing or closing the file.
      */
-    public static void WriteAFile(Army armyToWrite, String pathOfFile, String fileName) throws IOException {
-        if(pathOfFile.isEmpty())
-            throw new IOException("The path of file cannot be empty. Define a path of the file.");
-
-        if(fileName.isEmpty())
-            throw new IOException("The name of file cannot be empty. Define the name of the file.");
-
-        if(fileName.contains(".") && !fileName.toLowerCase().endsWith(".csv"))
-            throw new IOException("The name of the file cannot contain a '.'. Define a correct name.");
-
-        if(fileName.contains("/"))
-            throw new IOException("The name of the file cannot contain a '/'. Define a correct name.");
-
-        if(fileName.contains("\\"))
-            throw new IOException("The name of the file cannot contain a '\\'. Define a correct name.");
-
-        if (!fileName.toLowerCase().endsWith(".csv")) fileName+=".csv";
+    private static void WriteAFileAsCsv(Army armyToWrite, String pathOfFile, String fileName) throws IOException {
         File file = new File(pathOfFile+"\\"+fileName);
         FileWriter armyFile = new FileWriter(file);
         CSVWriter writer = new CSVWriter(armyFile, ',',
@@ -101,5 +117,13 @@ public class FileArmyHandler {
         });
         writer.writeAll(data);
         writer.close();
+    }
+
+    private static void writeAFileWithSerializable(Army army, String pathOfFile, String fileName) throws IOException {
+        FileOutputStream fos = new FileOutputStream(pathOfFile+"\\"+fileName);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(army);
+        fos.close();
+        oos.close();
     }
 }

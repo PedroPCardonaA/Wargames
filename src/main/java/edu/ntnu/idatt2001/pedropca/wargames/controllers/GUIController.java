@@ -6,15 +6,11 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -138,7 +134,8 @@ public class GUIController {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open a army file");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
+                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
             File selectedFile = fileChooser.showOpenDialog(null);
             if (selectedFile !=null){
                 //This if sentence avoids a possible bug tha happens when the both armies have the same name
@@ -170,7 +167,8 @@ public class GUIController {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open a army file");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
+                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
             File selectedFile = fileChooser.showOpenDialog(null);
             if(selectedFile!=null){
                 if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
@@ -198,10 +196,11 @@ public class GUIController {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save army as a file.");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
+                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
             File file = fileChooser.showSaveDialog(null);
             if(file !=null){
-                FileArmyHandler.WriteAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
+                FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
             }
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -218,10 +217,11 @@ public class GUIController {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save army as a file.");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
+                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
             File file = fileChooser.showSaveDialog(null);
             if(file !=null){
-                FileArmyHandler.WriteAFile(new Army(singletonArmies.getArmy(1)),file.getParent(),file.getName());
+                FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
             }
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
