@@ -17,12 +17,7 @@
                   <Font name="Papyrus" size="40.0" />
                </font>
             </Label>
-            <TableView fx:id="tableView">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
+            <TableView fx:id="tableView" />
             <MenuBar>
                <menus>
                   <Menu mnemonicParsing="false" text="Return">

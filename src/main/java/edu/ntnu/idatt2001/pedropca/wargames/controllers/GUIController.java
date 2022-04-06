@@ -10,11 +10,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -199,7 +201,7 @@ public class GUIController {
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File file = fileChooser.showSaveDialog(null);
             if(file !=null){
-                FileArmyHandler.WriteAFile(army1,file.getParent(),file.getName());
+                FileArmyHandler.WriteAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
             }
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -219,7 +221,7 @@ public class GUIController {
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
             File file = fileChooser.showSaveDialog(null);
             if(file !=null){
-                FileArmyHandler.WriteAFile(army2,file.getParent(),file.getName());
+                FileArmyHandler.WriteAFile(new Army(singletonArmies.getArmy(1)),file.getParent(),file.getName());
             }
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -238,10 +240,14 @@ public class GUIController {
     private void displayAllUnitsFromArmyOne() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Views/displayArmy.fxml")));
         Stage stage = new Stage();
+        stage.setAlwaysOnTop(true);
+        stage.setTitle("Display Units");
         stage.setScene(new Scene(root));
+        stage.initOwner((Stage) armyOneName.getScene().getWindow());
+        stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
     }
-
+/*
     private void createTable(){
         if(tableView.getColumns().size()<4) {
             TableColumn<Unit, String> column1 = new TableColumn<>("Unit type");
@@ -280,7 +286,7 @@ public class GUIController {
         tableView.setItems(this.getAllUnitsFromArmy1());
         this.createTable();
     }
-
+*/
     /**
      * Method for a button in the menu bar that close the program.
      */
@@ -288,11 +294,11 @@ public class GUIController {
     private void closeTheProgramButton(){
         Platform.exit();
     }
-
+/*
     private ObservableList<Unit> getAllUnitsFromArmy1(){
         ObservableList<Unit> units = FXCollections.observableArrayList();
         units.addAll(army1.getAllUnits());
         return units;
     }
-
+*/
 }

@@ -37,22 +37,35 @@ public class displayArmyController extends GUIController{
 
     private void createTable(){
         if(tableView.getColumns().size()<4) {
-            TableColumn<Unit, String> column1 = new TableColumn<>("Unit type");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Unit type"));
 
-            TableColumn<Unit, String> column2 = new TableColumn<>("Name");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Name"));
+            TableColumn<Unit, String> column1 = new TableColumn<>("Name");
+            column1.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+            TableColumn<Unit, String> column2 = new TableColumn<>("Health");
+            column2.setCellValueFactory(new PropertyValueFactory<>("health"));
 
             TableColumn<Unit, String> column3 = new TableColumn<>("Attack");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Attack"));
+            column3.setCellValueFactory(new PropertyValueFactory<>("attack"));
 
-            TableColumn<Unit, String> column4 = new TableColumn<>("Health");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Health"));
+            TableColumn<Unit, String> column4 = new TableColumn<>("Armor");
+            column4.setCellValueFactory(new PropertyValueFactory<>("armor"));
 
-            tableView.getColumns().add(column1);
-            tableView.getColumns().add(column2);
-            tableView.getColumns().add(column3);
-            tableView.getColumns().add(column4);
+            TableColumn<Unit, String> column5 = new TableColumn<>("Attack speed");
+            column5.setCellValueFactory(new PropertyValueFactory<>("attackSpeedPerSecond"));
+
+            TableColumn<Unit, String> column6 = new TableColumn<>("Attack type");
+            column6.setCellValueFactory(new PropertyValueFactory<>("attackType"));
+
+            TableColumn<Unit, String> column7 = new TableColumn<>("Hit rate");
+            column7.setCellValueFactory(new PropertyValueFactory<>("hitRate"));
+
+            TableColumn<Unit, String> column8 = new TableColumn<>("Critic rate");
+            column8.setCellValueFactory(new PropertyValueFactory<>("criticRate"));
+
+            TableColumn<Unit, String> column9 = new TableColumn<>("Critic damage");
+            column9.setCellValueFactory(new PropertyValueFactory<>("criticDamage"));
+
+            tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9);
         }
     }
 
@@ -62,6 +75,7 @@ public class displayArmyController extends GUIController{
         tableView.setItems(this.getAllUnitsFromArmy1());
         this.createTable();
     }
+
     private ObservableList<Unit> getAllUnitsFromArmy1(){
         ObservableList<Unit> units = FXCollections.observableArrayList();
         units.addAll(army1.getAllUnits());
