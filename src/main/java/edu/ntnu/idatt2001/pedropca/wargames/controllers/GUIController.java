@@ -7,6 +7,8 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +22,7 @@ import org.apache.commons.collections.Factory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class GUIController {
     Army army1 = new Army("Army#1");
@@ -230,40 +233,32 @@ public class GUIController {
     // display all units from the first army but is not working at all
     //I will appreciate if you can give me possible solutions :D
     @FXML
-    private void displayAllUnitsFromArmyOne(){
-        armyNameDisplayUnits.setText(army1.getName());
-        this.createTable();
-        army1.getAllUnits().forEach(unit ->
-                tableView.getItems().add(unit));
-        try {
-            this.displayUnitsStage();
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error by loading the file!");
-            alert.setHeaderText("It was a error by loading the displayArmy.fxml file.");
-            alert.setContentText(e.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
-        }
+    private void displayAllUnitsFromArmyOne() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Views/displayArmy.fxml")));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 
     private void createTable(){
-        TableColumn<Unit,String> column1 = new TableColumn<>("Unit type");
-        column1.setCellValueFactory(new PropertyValueFactory<>("Unit type"));
+        if(tableView.getColumns().size()<4) {
+            TableColumn<Unit, String> column1 = new TableColumn<>("Unit type");
+            column1.setCellValueFactory(new PropertyValueFactory<>("Unit type"));
 
-        TableColumn<Unit,String> column2 = new TableColumn<>("Name");
-        column1.setCellValueFactory(new PropertyValueFactory<>("Name"));
+            TableColumn<Unit, String> column2 = new TableColumn<>("Name");
+            column1.setCellValueFactory(new PropertyValueFactory<>("Name"));
 
-        TableColumn<Unit,String> column3 = new TableColumn<>("Attack");
-        column1.setCellValueFactory(new PropertyValueFactory<>("Attack"));
+            TableColumn<Unit, String> column3 = new TableColumn<>("Attack");
+            column1.setCellValueFactory(new PropertyValueFactory<>("Attack"));
 
-        TableColumn<Unit,String> column4 = new TableColumn<>("Health");
-        column1.setCellValueFactory(new PropertyValueFactory<>("Health"));
+            TableColumn<Unit, String> column4 = new TableColumn<>("Health");
+            column1.setCellValueFactory(new PropertyValueFactory<>("Health"));
 
-        tableView.getColumns().add(column1);
-        tableView.getColumns().add(column2);
-        tableView.getColumns().add(column3);
-        tableView.getColumns().add(column4);
+            tableView.getColumns().add(column1);
+            tableView.getColumns().add(column2);
+            tableView.getColumns().add(column3);
+            tableView.getColumns().add(column4);
+        }
     }
 
     private void displayUnitsStage() throws IOException {
@@ -274,6 +269,14 @@ public class GUIController {
         Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.showAndWait();
+
+    }
+
+    @FXML
+    private void setXd(){
+        armyNameDisplayUnits.setText(army1.getName());
+        tableView.setItems(this.getAllUnitsFromArmy1());
+        this.createTable();
     }
 
     /**
@@ -284,5 +287,10 @@ public class GUIController {
         Platform.exit();
     }
 
+    private ObservableList<Unit> getAllUnitsFromArmy1(){
+        ObservableList<Unit> units = FXCollections.observableArrayList();
+        units.addAll(army1.getAllUnits());
+        return units;
+    }
 
 }
