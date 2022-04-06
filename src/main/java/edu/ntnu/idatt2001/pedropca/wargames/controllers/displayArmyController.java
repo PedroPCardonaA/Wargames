@@ -5,6 +5,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -30,8 +31,9 @@ public class displayArmyController extends GUIController{
     @FXML
     private TableView<Unit> tableView;
 
-    Army army1 = new Army("Army#1");
-    Army army2 = new Army("Army#2");
+    SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+    Army army1 = singletonArmies.getArmy(0);
+    Army army2 = singletonArmies.getArmy(1);
 
     private void createTable(){
         if(tableView.getColumns().size()<4) {

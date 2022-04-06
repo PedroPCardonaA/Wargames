@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames;
 
+import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,9 @@ import java.util.Optional;
 public class GUI extends Application {
 
     public static void main(String[] args) {
+        SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+        singletonArmies.putArmy(new Army("Army#1"));
+        singletonArmies.putArmy(new Army("Army#2"));
         launch(args);
     }
 

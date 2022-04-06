@@ -1,11 +1,10 @@
 package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
-import com.sun.glass.ui.CommonDialogs;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
-import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,20 +14,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.commons.collections.Factory;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
 public class GUIController {
-    Army army1 = new Army("Army#1");
-    Army army2 = new Army("Army#2");
-    Army armyOneBackUp = new Army("Army#1");
-    Army armyTwoBackUP = new Army("Army#2");
+    SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+    Army army1 = new Army(singletonArmies.getArmy(0));
+    Army army2 = new Army(singletonArmies.getArmy(1));
+
 
     @FXML
     private TextField totalArmy1;
@@ -107,8 +104,8 @@ public class GUIController {
      */
     @FXML
     private void resetArmies(){
-        army1 = new Army(armyOneBackUp);
-        army2 = new Army(armyTwoBackUP);
+        army1 = new Army(singletonArmies.getArmy(0));
+        army2 = new Army(singletonArmies.getArmy(1));
         this.updateView();
     }
 
@@ -147,7 +144,10 @@ public class GUIController {
                     army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                     army1.setName(army2.getName()+"-2");
                 }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                armyOneBackUp = new Army(army1);
+                Army backUp = singletonArmies.getArmy(1);
+                singletonArmies.setEmptySingleton();
+                singletonArmies.putArmy(new Army(army1));
+                singletonArmies.putArmy(new Army(backUp));
                 this.updateView();}
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -175,8 +175,10 @@ public class GUIController {
                     army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                     army2.setName(army2.getName()+"-2");
                 }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                armyTwoBackUP =new Army(army2);
-                System.out.println(armyTwoBackUP.getAllUnits().size());
+                Army backUp = singletonArmies.getArmy(0);
+                singletonArmies.setEmptySingleton();
+                singletonArmies.putArmy(new Army(backUp));
+                singletonArmies.putArmy(new Army(army2));
                 this.updateView();
             }
         }catch (Exception e){

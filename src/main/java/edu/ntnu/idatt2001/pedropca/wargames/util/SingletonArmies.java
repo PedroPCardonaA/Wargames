@@ -2,13 +2,16 @@ package edu.ntnu.idatt2001.pedropca.wargames.util;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SingletonArmies {
     private static SingletonArmies singletonArmies = new SingletonArmies();
-    private List<Army> listOfArmies;
+    private final List<Army> listOfArmies;
 
-    private SingletonArmies(){}
+    private SingletonArmies(){
+        listOfArmies = new ArrayList<>();
+    }
 
     public static SingletonArmies getSingletonArmies(){
         if(singletonArmies== null) singletonArmies = new SingletonArmies();
@@ -27,7 +30,7 @@ public class SingletonArmies {
         this.listOfArmies.remove(army);
     }
 
-    public void emptyGlobe(){
+    public void setEmptySingleton(){
         this.listOfArmies.clear();
     }
 }
