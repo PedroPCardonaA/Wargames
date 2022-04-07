@@ -23,7 +23,7 @@ import org.apache.commons.collections.Factory;
 
 import java.io.File;
 import java.io.IOException;
-public class displayArmyController extends GUIController{
+public class DisplayArmyController extends GUIController{
 
     @FXML
     private Label armyNameDisplayUnits;
