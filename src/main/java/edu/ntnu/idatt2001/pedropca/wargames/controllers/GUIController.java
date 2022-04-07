@@ -19,6 +19,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+//TODO: comment new fileArmyHandler, Singleton, make private methods in GUIController, test fileArmyHandler
+//TODO: Fix displayArmy.fxml and singleton there.
+
 public class GUIController {
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     Army army1 = new Army(singletonArmies.getArmy(0));
