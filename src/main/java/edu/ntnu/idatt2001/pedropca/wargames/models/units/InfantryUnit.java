@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
+
 /**
  *
  * Class edu.ntnu.idatt2001.pedropca.InfantryUnit that represents the infantry units in the war games.
@@ -55,8 +57,10 @@ public class InfantryUnit extends Unit{
      */
     @Override
     protected int getAttackBonus(Unit opponent){
-        if(opponent instanceof CavalryUnit)return 4;
-        return 2;
+        int attackBonus = 0;
+        if(opponent instanceof CavalryUnit)attackBonus += 4;
+        if (SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) attackBonus+=3;
+        return attackBonus;
     }
 
     /**
@@ -71,9 +75,11 @@ public class InfantryUnit extends Unit{
 
     @Override
     protected int getResistBonus(Unit mainUnit){
-        if(mainUnit instanceof InfantryUnit)return 3;
-        if(mainUnit instanceof CavalryUnit)return 5;
-        return 2;
+        int resistBonus = 0;
+        if(mainUnit instanceof InfantryUnit)resistBonus += 3;
+        if(mainUnit instanceof CavalryUnit)resistBonus += 5;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) resistBonus+=3;
+        return resistBonus;
     }
 
     /**

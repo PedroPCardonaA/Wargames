@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
+
 /**
  *
  * Class edu.ntnu.idatt2001.pedropca.CavalryUnit that represents the cavalry  units in the war games.
@@ -63,16 +65,19 @@ public class CavalryUnit extends Unit{
 
     @Override
     protected int getAttackBonus(Unit opponent) {
+        int attackBonus = 0;
         if(isCharging && opponent instanceof RangedUnit){
             this.setCharging(false);
-            return 8;}
+            attackBonus+=8;}
         else if(opponent instanceof RangedUnit){
-            return 6;}
+            attackBonus+=6;}
         else if( isCharging){
             this.setCharging(false);
-            return 4;}
+            attackBonus+=4;}
         else{
-            return 2;}
+            attackBonus+=2;}
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Plains")) attackBonus+=3;
+        return attackBonus;
     }
 
     /**
@@ -88,9 +93,12 @@ public class CavalryUnit extends Unit{
 
     @Override
     protected int getResistBonus(Unit mainUnit) {
-        if(mainUnit instanceof RangedUnit)return 7;
-        if(mainUnit instanceof InfantryUnit) return -2;
-        return 4;
+        int resistBonus = 0;
+        if(mainUnit instanceof RangedUnit)resistBonus +=7;
+        else if(mainUnit instanceof InfantryUnit) resistBonus += 2;
+        else resistBonus +=4;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) resistBonus =0;
+        return resistBonus;
     }
     /**
      * Help method that overrides abstract method clone from the class unit.

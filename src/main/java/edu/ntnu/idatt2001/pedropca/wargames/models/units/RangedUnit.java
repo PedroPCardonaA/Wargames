@@ -1,5 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
+
 /**
  *
  * Class edu.ntnu.idatt2001.pedropca.RangedUnit that represents the ranged units in the war games.
@@ -55,8 +57,12 @@ public class RangedUnit extends Unit{
 
     @Override
     protected int getAttackBonus(Unit opponent) {
-        if(opponent instanceof InfantryUnit)return 7;
-        return 4;
+        int attackBonus = 0;
+        if(opponent instanceof InfantryUnit)attackBonus +=7;
+        else attackBonus +=4;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Hill")) attackBonus+=3;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) attackBonus-=2;
+        return attackBonus;
     }
 
     /**
@@ -72,9 +78,11 @@ public class RangedUnit extends Unit{
 
     @Override
     protected int getResistBonus(Unit mainUnit) {
-        if(mainUnit instanceof InfantryUnit)return 2;
-        if(mainUnit instanceof CavalryUnit) return 0;
-        return 1;
+        int resistBonus = 0;
+        if(mainUnit instanceof InfantryUnit)resistBonus+= 2;
+        else if(mainUnit instanceof CavalryUnit) resistBonus +=0;
+        else resistBonus +=1;
+        return resistBonus;
     }
 
     /**
