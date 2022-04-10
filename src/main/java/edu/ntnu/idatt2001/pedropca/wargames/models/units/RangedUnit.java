@@ -82,6 +82,7 @@ public class RangedUnit extends Unit{
         if(mainUnit instanceof InfantryUnit)resistBonus+= 2;
         else if(mainUnit instanceof CavalryUnit) resistBonus +=0;
         else resistBonus +=1;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Volcano")) resistBonus+=5;
         return resistBonus;
     }
 
