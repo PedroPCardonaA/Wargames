@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Singleton class that wil help the communication between controller classes.
  * This class will share a list of Armies that will be used in the different scenes of the gui,
- * and it has two fields a list fo armies and an instance of itself.
+ * and it has two fields a list of armies and an instance of itself.
  * @author Pedro Cardona
  * @version 1.0
  * @since 1.0-SNAPSHOT
