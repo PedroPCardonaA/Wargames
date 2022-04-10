@@ -3,11 +3,14 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,12 +20,14 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-//TODO: comment new fileArmyHandler, Singleton, make private methods in GUIController, test fileArmyHandler
+//TODO: comment new fileArmyHandler, Singleton, make private methods in MainPageController, test fileArmyHandler
 //TODO: Fix displayArmy.fxml and singleton there.
 
-public class GUIController {
+public class MainPageController implements Initializable {
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     Army army1 = new Army(singletonArmies.getArmy(0));
     Army army2 = new Army(singletonArmies.getArmy(1));
@@ -65,13 +70,16 @@ public class GUIController {
     private Label armyTwoName;
 
     @FXML
-    private Label armyNameDisplayUnits;
+    private ComboBox<String> terrainComboBox;
 
-    @FXML
-    private TableView<Unit> tableView;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        terrainComboBox.getItems().addAll("Forest","Hills","Plains","Volcano");
+    }
 
     @FXML
     protected void simulateBattle(){
+        this.updateSingletonTerrain();
         Battle battle = new Battle(army1,army2,"FOREST");
         Army winner = battle.simulate();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -82,6 +90,34 @@ public class GUIController {
         this.updateArmies(winner);
         this.updateView();
         alert.showAndWait();
+    }
+
+    private void updateSingletonTerrain(){
+        SingletonTerrain singletonTerrain = SingletonTerrain.getSingletonTerrain();
+        if(!(terrainComboBox.getValue() ==null)) {
+            switch (terrainComboBox.getValue()) {
+                case "Forest":
+                    singletonTerrain.setForestAsTerrain();
+                    break;
+                case "Hills":
+                    singletonTerrain.setHillsAsTerrain();
+                    break;
+                case "Plains":
+                    singletonTerrain.setPlainsAsTerrain();
+                    break;
+                case "Volcano":
+                    singletonTerrain.setVolcanoAsTerrain();
+                    break;
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Terrain was not defined.");
+            alert.setHeaderText("Terrain was not defined!");
+            alert.setContentText("Forest will be defined instead.");
+            alert.setResizable(true);
+            alert.showAndWait();
+            singletonTerrain.setForestAsTerrain();
+        }
     }
 
     private void updateArmies(Army lastArmy){
@@ -101,7 +137,7 @@ public class GUIController {
 
     /**
      * Method that "Resets" the main armies by defined them as copies of the buck up armies.
-     * After the restarting of the armies method updates the GUI by calling help method updateView().
+     * After the restarting of the armies' method updates the GUI by calling help method updateView().
      */
     @FXML
     private void resetArmies(){
@@ -152,7 +188,7 @@ public class GUIController {
                 singletonArmies.putArmy(new Army(backUp));
                 this.updateView();}
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error by loading the file!");
             alert.setHeaderText("It was a error by reading the file.");
             alert.setContentText(e.getMessage());
@@ -185,7 +221,7 @@ public class GUIController {
                 this.updateView();
             }
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error by loading the file!");
             alert.setHeaderText("It was a error by reading the file.");
             alert.setContentText(e.getMessage());
@@ -206,7 +242,7 @@ public class GUIController {
                 FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
             }
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error by loading the file!");
             alert.setHeaderText("It was a error by saving the file.");
             alert.setContentText(e.getMessage());
@@ -227,7 +263,7 @@ public class GUIController {
                 FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
             }
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error by loading the file!");
             alert.setHeaderText("It was a error by saving the file.");
             alert.setContentText(e.getMessage());

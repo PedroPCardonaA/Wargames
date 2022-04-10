@@ -1,29 +1,19 @@
 package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
-import com.sun.glass.ui.CommonDialogs;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
-import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
-import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
-import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import org.apache.commons.collections.Factory;
 
-import java.io.File;
-import java.io.IOException;
-public class DisplayArmyController extends GUIController{
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class DisplayArmyController extends MainPageController implements Initializable {
 
     @FXML
     private Label armyNameDisplayUnits;
@@ -34,6 +24,8 @@ public class DisplayArmyController extends GUIController{
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     Army army1 = singletonArmies.getArmy(0);
     Army army2 = singletonArmies.getArmy(1);
+
+
 
     private void createTable(){
         if(tableView.getColumns().size()<4) {
@@ -80,5 +72,12 @@ public class DisplayArmyController extends GUIController{
         ObservableList<Unit> units = FXCollections.observableArrayList();
         units.addAll(army1.getAllUnits());
         return units;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        armyNameDisplayUnits.setText(army1.getName());
+        tableView.setItems(this.getAllUnitsFromArmy1());
+        this.createTable();
     }
 }

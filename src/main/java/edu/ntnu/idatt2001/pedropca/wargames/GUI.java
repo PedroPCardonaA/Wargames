@@ -32,7 +32,7 @@ public class GUI extends Application {
             this.closeProgram();
         });
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Views/GUI.fxml"));
+        loader.setLocation(getClass().getResource("/Views/MainPage.fxml"));
         Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
         primaryStage.setMaximized(true);

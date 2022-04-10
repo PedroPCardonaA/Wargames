@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="621.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.GUIController">
+<BorderPane prefHeight="621.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.MainPageController">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -45,7 +45,15 @@
                             </font>
                         </Button>
                     </graphic>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
                 </Label>
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="493.0">
+               <graphic>
+                  <ComboBox fx:id="terrainComboBox" promptText="Terrain" />
+               </graphic>
+            </Label>
                 <Label alignment="CENTER" prefHeight="265.0" prefWidth="797.0">
                     <graphic>
                         <Button mnemonicParsing="false" onAction="#resetArmies" text="Reset armies" />
