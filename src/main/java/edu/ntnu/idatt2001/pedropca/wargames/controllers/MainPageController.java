@@ -2,8 +2,6 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
-import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
@@ -23,9 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-//TODO: comment new fileArmyHandler, Singleton, make private methods in MainPageController, test fileArmyHandler
-//TODO: Fix displayArmy.fxml and singleton there.
 
 public class MainPageController implements Initializable {
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
@@ -80,7 +75,7 @@ public class MainPageController implements Initializable {
     @FXML
     protected void simulateBattle(){
         this.updateSingletonTerrain();
-        Battle battle = new Battle(army1,army2,"FOREST");
+        Battle battle = new Battle(army1,army2);
         Army winner = battle.simulate();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Result of the battle.");
@@ -141,8 +136,8 @@ public class MainPageController implements Initializable {
      */
     @FXML
     private void resetArmies(){
-        army1 = new Army(singletonArmies.getArmy(0));
-        army2 = new Army(singletonArmies.getArmy(1));
+        army1 = new Army(singletonArmies.getArmyFromBackUp(0));
+        army2 = new Army(singletonArmies.getArmyFromBackUp(1));
         this.updateView();
     }
 
@@ -183,9 +178,12 @@ public class MainPageController implements Initializable {
                     army1.setName(army2.getName()+"-2");
                 }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                 Army backUp = singletonArmies.getArmy(1);
-                singletonArmies.setEmptySingleton();
+                singletonArmies.setEmptySingletonArmy();
+                singletonArmies.SetEmptyArmyBackUp();
                 singletonArmies.putArmy(new Army(army1));
                 singletonArmies.putArmy(new Army(backUp));
+                singletonArmies.putArmyInBackUp(new Army(army1));
+                singletonArmies.putArmyInBackUp(new Army(backUp));
                 this.updateView();}
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -215,7 +213,9 @@ public class MainPageController implements Initializable {
                     army2.setName(army2.getName()+"-2");
                 }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                 Army backUp = singletonArmies.getArmy(0);
-                singletonArmies.setEmptySingleton();
+                singletonArmies.setEmptySingletonArmy();
+                singletonArmies.putArmy(new Army(backUp));
+                singletonArmies.putArmy(new Army(army2));
                 singletonArmies.putArmy(new Army(backUp));
                 singletonArmies.putArmy(new Army(army2));
                 this.updateView();
@@ -230,17 +230,14 @@ public class MainPageController implements Initializable {
         }
     }
 
+    private void loadFromAFileArmy(){
+
+    }
+
     @FXML
     private void saveArmyOneAsAFile(){
         try {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save army as a file.");
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-            File file = fileChooser.showSaveDialog(null);
-            if(file !=null){
-                FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
-            }
+            this.saveArmyAsAFile(0);
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error by loading the file!");
@@ -254,14 +251,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void saveArmyTwoAsAFile(){
         try {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save army as a file.");
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-            File file = fileChooser.showSaveDialog(null);
-            if(file !=null){
-                FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(0)),file.getParent(),file.getName());
-            }
+            this.saveArmyAsAFile(1);
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error by loading the file!");
@@ -272,11 +262,48 @@ public class MainPageController implements Initializable {
         }
     }
 
-    //I really have problem with this method. This is connected to the button
-    // display all units from the first army but is not working at all
-    //I will appreciate if you can give me possible solutions :D
+    private void saveArmyAsAFile(int index) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save army as a file.");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
+                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
+        File file = fileChooser.showSaveDialog(null);
+        if(file !=null){
+            FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(index)),file.getParent(),file.getName());
+        }
+    }
+
     @FXML
-    private void displayAllUnitsFromArmyOne() throws IOException {
+    private void displayAllUnitsFromArmyOne(){
+        try {
+            SingletonArmies.getSingletonArmies().setArmyNumber(0);
+            this.displayAllUnits();
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error by loading the file!");
+            alert.setHeaderText("It was a error by saving the file.");
+            alert.setContentText(e.getMessage());
+            alert.setResizable(true);
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void displayAllUnitsFromArmyTwo(){
+        try {
+            SingletonArmies.getSingletonArmies().setArmyNumber(1);
+            this.displayAllUnits();
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error by loading the file!");
+            alert.setHeaderText("It was a error by saving the file.");
+            alert.setContentText(e.getMessage());
+            alert.setResizable(true);
+            alert.showAndWait();
+        }
+    }
+
+    private void displayAllUnits() throws IOException{
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Views/displayArmy.fxml")));
         Stage stage = new Stage();
         stage.setAlwaysOnTop(true);
@@ -286,46 +313,7 @@ public class MainPageController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
     }
-/*
-    private void createTable(){
-        if(tableView.getColumns().size()<4) {
-            TableColumn<Unit, String> column1 = new TableColumn<>("Unit type");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Unit type"));
 
-            TableColumn<Unit, String> column2 = new TableColumn<>("Name");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Name"));
-
-            TableColumn<Unit, String> column3 = new TableColumn<>("Attack");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Attack"));
-
-            TableColumn<Unit, String> column4 = new TableColumn<>("Health");
-            column1.setCellValueFactory(new PropertyValueFactory<>("Health"));
-
-            tableView.getColumns().add(column1);
-            tableView.getColumns().add(column2);
-            tableView.getColumns().add(column3);
-            tableView.getColumns().add(column4);
-        }
-    }
-
-    private void displayUnitsStage() throws IOException {
-        Stage stage = new Stage();
-        stage.setTitle("All units from the army");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Views/displayArmy.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-
-    }
-
-    @FXML
-    private void setXd(){
-        armyNameDisplayUnits.setText(army1.getName());
-        tableView.setItems(this.getAllUnitsFromArmy1());
-        this.createTable();
-    }
-*/
     /**
      * Method for a button in the menu bar that close the program.
      */
@@ -333,11 +321,5 @@ public class MainPageController implements Initializable {
     private void closeTheProgramButton(){
         Platform.exit();
     }
-/*
-    private ObservableList<Unit> getAllUnitsFromArmy1(){
-        ObservableList<Unit> units = FXCollections.observableArrayList();
-        units.addAll(army1.getAllUnits());
-        return units;
-    }
-*/
+
 }

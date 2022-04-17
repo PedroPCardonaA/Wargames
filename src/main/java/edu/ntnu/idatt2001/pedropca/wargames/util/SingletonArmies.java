@@ -16,6 +16,8 @@ import java.util.List;
 public class SingletonArmies {
     private static SingletonArmies singletonArmies = new SingletonArmies();
     private final List<Army> listOfArmies;
+    private final List<Army> listOfArmiesBackUp;
+    private int armyNumber;
 
     /**
      * Private constructor of this class that only can be called by the method
@@ -23,6 +25,7 @@ public class SingletonArmies {
      */
     private SingletonArmies(){
         listOfArmies = new ArrayList<>();
+        listOfArmiesBackUp = new ArrayList<>();
     }
 
     /**
@@ -46,12 +49,20 @@ public class SingletonArmies {
         return listOfArmies.get(index);
     }
 
+    public Army getArmyFromBackUp(int index){
+        return listOfArmiesBackUp.get(index);
+    }
+
     /**
      * Method that add a new army into the list of armies.
      * @param army Army - army to be added into the list of armies.
      */
     public void putArmy(Army army){
         this.listOfArmies.add(army);
+    }
+
+    public void putArmyInBackUp(Army army){
+        this.listOfArmiesBackUp.add(army);
     }
 
     /**
@@ -61,11 +72,25 @@ public class SingletonArmies {
     public void removeArmy(Army army){
         this.listOfArmies.remove(army);
     }
+    public void removeArmyBackUp(Army army){
+        this.listOfArmiesBackUp.remove(army);
+    }
 
     /**
      * Method that remove all the armies from the list of armies.
      */
-    public void setEmptySingleton(){
+    public void setEmptySingletonArmy(){
         this.listOfArmies.clear();
+    }
+    public void SetEmptyArmyBackUp(){
+        this.listOfArmiesBackUp.clear();
+    }
+
+    public void setArmyNumber(int armyNumber) {
+        this.armyNumber = armyNumber;
+    }
+
+    public int getArmyNumber(){
+        return armyNumber;
     }
 }

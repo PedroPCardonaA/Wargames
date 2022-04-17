@@ -20,6 +20,8 @@ public class GUI extends Application {
         SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
         singletonArmies.putArmy(new Army("Army#1"));
         singletonArmies.putArmy(new Army("Army#2"));
+        singletonArmies.putArmyInBackUp(new Army("Army#1"));
+        singletonArmies.putArmyInBackUp(new Army("Army#2"));
         launch(args);
     }
 

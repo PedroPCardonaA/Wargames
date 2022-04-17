@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DisplayArmyController extends MainPageController implements Initializable {
+public class DisplayArmyController implements Initializable{
 
     @FXML
     private Label armyNameDisplayUnits;
@@ -21,11 +21,7 @@ public class DisplayArmyController extends MainPageController implements Initial
     @FXML
     private TableView<Unit> tableView;
 
-    SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-    Army army1 = singletonArmies.getArmy(0);
-    Army army2 = singletonArmies.getArmy(1);
-
-
+    Army army = SingletonArmies.getSingletonArmies().getArmy(SingletonArmies.getSingletonArmies().getArmyNumber());
 
     private void createTable(){
         if(tableView.getColumns().size()<4) {
@@ -62,21 +58,21 @@ public class DisplayArmyController extends MainPageController implements Initial
     }
 
     @FXML
-    private void setXd(){
-        armyNameDisplayUnits.setText(army1.getName());
+    private void setName(){
+        armyNameDisplayUnits.setText(army.getName());
         tableView.setItems(this.getAllUnitsFromArmy1());
         this.createTable();
     }
 
     private ObservableList<Unit> getAllUnitsFromArmy1(){
         ObservableList<Unit> units = FXCollections.observableArrayList();
-        units.addAll(army1.getAllUnits());
+        units.addAll(army.getAllUnits());
         return units;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        armyNameDisplayUnits.setText(army1.getName());
+        armyNameDisplayUnits.setText(army.getName());
         tableView.setItems(this.getAllUnitsFromArmy1());
         this.createTable();
     }

@@ -12,7 +12,6 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 public class Battle {
     private final Army army1;
     private final Army army2;
-    private final String terrain;
 
     /**
      * Constructor of the class edu.ntnu.idatt2001.pedropca.Battle. This constructor has two object from class edu.ntnu.idatt2001.pedropca.Army as
@@ -21,13 +20,12 @@ public class Battle {
      * @param army1 First army of the battle
      * @param army2 Second army of the battle
      */
-    public Battle(Army army1, Army army2, String terrain) throws NullPointerException{
+    public Battle(Army army1, Army army2) throws NullPointerException{
         if(army1==null||army2==null){
             throw new NullPointerException("One of the armies is not defined. Enter a correct army");
         }
         this.army1 = new Army(army1);
         this.army2 = new Army(army2);
-        this.terrain = terrain;
     }
 
     /**
