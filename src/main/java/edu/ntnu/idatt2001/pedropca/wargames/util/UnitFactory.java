@@ -51,6 +51,34 @@ public class UnitFactory {
     }
 
     /**
+     * Method that returns an instances of one of the classes' in the unit hierarchy based
+     * on the unitType parameter. That parameter defined the class of the new unit from unit hierarchy.
+     * But this constructor use pre-defined values for attack ,armor, attackSpeedPerSecond, hitRate,
+     * criticRate and criticDamage.
+     * @param name String name of the unit
+     * @param health int health points of the unit
+     * @return Unit - the new unit made by the factory.
+     * @throws IllegalArgumentException this constructor may trow illegal argument exception
+     * if the given parameters are not inside the defined areas.
+     */
+    public Unit createUnit(String unitType,String name, int health) throws IllegalArgumentException{
+        switch (unitType){
+            case "InfantryUnit":
+                return new InfantryUnit(name,health);
+            case "RangedUnit":
+                return new RangedUnit(name,health);
+            case "CavalryUnit":
+                return new CavalryUnit(name,health);
+            case "CommanderUnit":
+                return new CommanderUnit(name,health);
+            case "MagicianUnit":
+                return new MagicianUnit(name,health);
+            default:
+                throw new IllegalArgumentException("Unknown unit type. Defined a correct unit type");
+        }
+    }
+
+    /**
      * Method that returns a list of instances of one of the classes' in the unit hierarchy based
      * on the unitType parameter. That parameter defined the class of the new units from unit hierarchy.
      * @param name String name of the unit
@@ -62,6 +90,7 @@ public class UnitFactory {
      * @param criticRate int percent chance of do a critical attack
      * @param criticDamage int percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
+     * @param numberOfUnits int number of new units
      * @return List<Unit> - the list of the new units made by the factory.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
@@ -73,6 +102,27 @@ public class UnitFactory {
         List<Unit> units = new ArrayList<>();
         for(int i =0; i<numberOfUnits;i++){
             units.add(this.createUnit(unitType,name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage));
+        }
+        return units;
+    }
+
+    /**
+     * Method that returns a list of instances of one of the classes' in the unit hierarchy based
+     * on the unitType parameter. That parameter defined the class of the new units from unit hierarchy.
+     * But this constructor use pre-defined values for attack ,armor, attackSpeedPerSecond, hitRate,
+     * criticRate and criticDamage.
+     * @param name String name of the unit
+     * @param health int health points of the unit
+     * @param numberOfUnits int number of new units
+     * @return List<Unit> - the list of the new units made by the factory.
+     * @throws IllegalArgumentException this constructor may trow illegal argument exception
+     * if the given parameters are not inside the defined areas.
+     */
+    public List<Unit> createAListOfUnits(String unitType,String name, int health,int numberOfUnits) throws IllegalArgumentException{
+        if(numberOfUnits<0) throw new IllegalArgumentException("The number of units to add cannot be lower than 0");
+        List<Unit> units = new ArrayList<>();
+        for(int i =0; i<numberOfUnits;i++){
+            units.add(this.createUnit(unitType,name,health));
         }
         return units;
     }
