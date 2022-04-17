@@ -32,7 +32,7 @@ class BattleTest {
                     alliance.add(new InfantryUnit("Infantry",100));
                     alliance.add(new InfantryUnit("Infantry",100));
                 }
-                Battle battle = new Battle(horde,alliance,"FOREST");
+                Battle battle = new Battle(horde,alliance);
                 assertEquals(horde,battle.simulate());
             }
             @Test
@@ -52,7 +52,7 @@ class BattleTest {
                     alliance.add(new RangedUnit("Ranged",100));
                     alliance.add(new RangedUnit("Ranged",100));
                 }
-                Battle battle = new Battle(alliance,horde,"PLAINS");
+                Battle battle = new Battle(alliance,horde);
                 assertEquals(alliance,battle.simulate());
             }
             @Test
@@ -66,7 +66,7 @@ class BattleTest {
                     aztecas.add(new InfantryUnit("Infantry",100));
                     maya.add(new InfantryUnit("Infantry",100));
                 }
-                Battle battle = new Battle(maya,aztecas,"HILL");
+                Battle battle = new Battle(maya,aztecas);
                 assertEquals(maya,battle.simulate());
             }
             @Test
@@ -82,7 +82,7 @@ class BattleTest {
                     aztecas.add(new CommanderUnit("Commander",100));
                     aztecas.add(new CommanderUnit("Commander",100));
                 }
-                Battle battle = new Battle(maya,aztecas,"VOLCANO");
+                Battle battle = new Battle(maya,aztecas);
                 assertEquals(aztecas,battle.simulate());
             }
 
@@ -90,7 +90,7 @@ class BattleTest {
             void simulatingABattleWithOutWinner(){
                 Army horde = new Army("Horde");
                 Army alliance = new Army("Alliance");
-                Battle battle = new Battle(horde,alliance,"HILL");
+                Battle battle = new Battle(horde,alliance);
                 assertNull(battle.simulate());
             }
             @Test
@@ -110,7 +110,7 @@ class BattleTest {
                 int allianceWinner =0;
                 int hordeWinner=0;
                 for(int i=0; i<1000;i++){
-                    Battle battle = new Battle(alliance,horde,"FOREST");
+                    Battle battle = new Battle(alliance,horde);
                     Army winner = battle.simulate();
                     if(winner.equals(alliance)) allianceWinner++;
                     if(winner.equals(horde)) hordeWinner++;
@@ -126,17 +126,17 @@ class BattleTest {
         class Positive{
             @Test
             void GetToStringOfABattleBetweenTheAllianceAndTheHorde(){
-                Battle battle = new Battle(new Army("Alliance"),new Army("Horde"),"VOLCANO");
+                Battle battle = new Battle(new Army("Alliance"),new Army("Horde"));
                 assertEquals("Battle between " + "Alliance" + " and " + "Horde" + ".",battle.toString());
             }
             @Test
             void GetToStringOfABattleBetweenTheHordeAndTheAlliance(){
-                Battle battle = new Battle(new Army("Horde"),new Army("Alliance"),"HILL");
+                Battle battle = new Battle(new Army("Horde"),new Army("Alliance"));
                 assertEquals("Battle between " + "Horde" + " and " + "Alliance" + ".",battle.toString());
             }
             @Test
             void GetToStringOfABattleBetweenUkraineAndRussia(){
-                Battle battle = new Battle(new Army("Ukraine"),new Army("Russia"),"PLAINS");
+                Battle battle = new Battle(new Army("Ukraine"),new Army("Russia"));
                 assertEquals("Battle between " + "Ukraine" + " and " + "Russia" + ".",battle.toString());
             }
         }

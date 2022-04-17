@@ -231,7 +231,7 @@ public class MainPageController implements Initializable {
     }
     private void updateBothArmies(Army army1,Army army2){
         singletonArmies.setEmptySingletonArmy();
-        singletonArmies.SetEmptyArmyBackUp();
+        singletonArmies.setEmptyArmyBackUp();
         singletonArmies.putArmy(new Army(army1));
         singletonArmies.putArmy(new Army(army2));
         singletonArmies.putArmyInBackUp(new Army(army1));

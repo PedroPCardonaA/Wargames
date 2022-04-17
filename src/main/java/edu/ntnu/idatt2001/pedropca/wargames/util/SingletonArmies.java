@@ -45,6 +45,9 @@ public class SingletonArmies {
      * @param index int - index of the army.
      * @return Army - an army from the list of the army.
      */
+
+    // I may define bounds for this and the next methods for the int index,
+    // but they will only call with defined indexes.
     public Army getArmy(int index){
         return listOfArmies.get(index);
     }
@@ -82,7 +85,7 @@ public class SingletonArmies {
     public void setEmptySingletonArmy(){
         this.listOfArmies.clear();
     }
-    public void SetEmptyArmyBackUp(){
+    public void setEmptyArmyBackUp(){
         this.listOfArmiesBackUp.clear();
     }
 
