@@ -120,14 +120,23 @@ public class MainPageController implements Initializable {
             if(army1.equals(lastArmy)){
                 army1 = new Army(lastArmy);
                 army2 = new Army(army2.getName());
+                this.updateArmiesInSingleton(lastArmy,army2);
             } else{
                 army2 = new Army(lastArmy);
                 army1 = new Army(army1.getName());
+                this.updateArmiesInSingleton(army1,lastArmy);
             }
         } else {
             army1 = new Army(army1.getName());
             army2 = new Army(army2.getName());
+            this.updateArmiesInSingleton(army1,army2);
         }
+    }
+
+    private void updateArmiesInSingleton(Army army1, Army army2){
+        singletonArmies.setEmptySingletonArmy();
+        singletonArmies.putArmy(new Army(army1));
+        singletonArmies.putArmy(new Army(army2));
     }
 
     /**
@@ -178,12 +187,7 @@ public class MainPageController implements Initializable {
                     army1.setName(army2.getName()+"-2");
                 }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                 Army backUp = singletonArmies.getArmy(1);
-                singletonArmies.setEmptySingletonArmy();
-                singletonArmies.SetEmptyArmyBackUp();
-                singletonArmies.putArmy(new Army(army1));
-                singletonArmies.putArmy(new Army(backUp));
-                singletonArmies.putArmyInBackUp(new Army(army1));
-                singletonArmies.putArmyInBackUp(new Army(backUp));
+                this.updateBothArmies(army1,backUp);
                 this.updateView();}
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -213,11 +217,7 @@ public class MainPageController implements Initializable {
                     army2.setName(army2.getName()+"-2");
                 }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                 Army backUp = singletonArmies.getArmy(0);
-                singletonArmies.setEmptySingletonArmy();
-                singletonArmies.putArmy(new Army(backUp));
-                singletonArmies.putArmy(new Army(army2));
-                singletonArmies.putArmy(new Army(backUp));
-                singletonArmies.putArmy(new Army(army2));
+                this.updateBothArmies(backUp,army2);
                 this.updateView();
             }
         }catch (Exception e){
@@ -228,6 +228,14 @@ public class MainPageController implements Initializable {
             alert.setResizable(true);
             alert.showAndWait();
         }
+    }
+    private void updateBothArmies(Army army1,Army army2){
+        singletonArmies.setEmptySingletonArmy();
+        singletonArmies.SetEmptyArmyBackUp();
+        singletonArmies.putArmy(new Army(army1));
+        singletonArmies.putArmy(new Army(army2));
+        singletonArmies.putArmyInBackUp(new Army(army1));
+        singletonArmies.putArmyInBackUp(new Army(army2));
     }
 
     private void loadFromAFileArmy(){
