@@ -106,12 +106,7 @@ public class MainPageController implements Initializable {
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Terrain was not defined.");
-            alert.setHeaderText("Terrain was not defined!");
-            alert.setContentText("Forest will be defined instead.");
-            alert.setResizable(true);
-            alert.showAndWait();
-            singletonTerrain.setForestAsTerrain();
+            this.showAlert("Terrain was not defined.","Terrain was not defined!","Forest will be defined instead.");
         }
     }
 
@@ -175,11 +170,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void loadFromAFileArmyOne(){
         try {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open a army file");
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-            File selectedFile = fileChooser.showOpenDialog(null);
+            File selectedFile = this.openFileChooser();
             if (selectedFile !=null){
                 //This if sentence avoids a possible bug tha happens when the both armies have the same name
                 if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army2.getName())){
@@ -190,12 +181,8 @@ public class MainPageController implements Initializable {
                 this.updateBothArmies(army1,backUp);
                 this.updateView();}
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error by loading the file!");
-            alert.setHeaderText("It was a error by reading the file.");
-            alert.setContentText(e.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            this.showError("Error by loading the file!","It was a error by reading the file."
+                    , e.getMessage());
         }
     }
 
@@ -206,11 +193,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void loadFromAFileArmyTwo(){
         try {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open a army file");
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                    new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-            File selectedFile = fileChooser.showOpenDialog(null);
+            File selectedFile = this.openFileChooser();
             if(selectedFile!=null){
                 if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
                     army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
@@ -221,12 +204,8 @@ public class MainPageController implements Initializable {
                 this.updateView();
             }
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error by loading the file!");
-            alert.setHeaderText("It was a error by reading the file.");
-            alert.setContentText(e.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            this.showError("Error by loading the file!","It was a error by reading the file."
+                    , e.getMessage());
         }
     }
     private void updateBothArmies(Army army1,Army army2){
@@ -238,8 +217,12 @@ public class MainPageController implements Initializable {
         singletonArmies.putArmyInBackUp(new Army(army2));
     }
 
-    private void loadFromAFileArmy(){
-
+    private File openFileChooser(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open a army file");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
+                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
+        return fileChooser.showOpenDialog(null);
     }
 
     @FXML
@@ -247,12 +230,8 @@ public class MainPageController implements Initializable {
         try {
             this.saveArmyAsAFile(0);
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error by loading the file!");
-            alert.setHeaderText("It was a error by saving the file.");
-            alert.setContentText(e.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            this.showError("Error by saving the Army!","It was a error by saving the army as a file."
+                    , e.getMessage());
         }
     }
 
@@ -261,12 +240,8 @@ public class MainPageController implements Initializable {
         try {
             this.saveArmyAsAFile(1);
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error by loading the file!");
-            alert.setHeaderText("It was a error by saving the file.");
-            alert.setContentText(e.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            this.showError("Error by saving the Army!","It was a error by saving the army as a file."
+                    , e.getMessage());
         }
     }
 
@@ -287,12 +262,8 @@ public class MainPageController implements Initializable {
             SingletonArmies.getSingletonArmies().setArmyNumber(0);
             this.displayAllUnits();
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error by loading the file!");
-            alert.setHeaderText("It was a error by saving the file.");
-            alert.setContentText(e.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            this.showError("Error by loading the file!","It was a fail by loading the fxml file from the next scene."
+                    , e.getMessage());
         }
     }
 
@@ -302,12 +273,8 @@ public class MainPageController implements Initializable {
             SingletonArmies.getSingletonArmies().setArmyNumber(1);
             this.displayAllUnits();
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error by loading the file!");
-            alert.setHeaderText("It was a error by saving the file.");
-            alert.setContentText(e.getMessage());
-            alert.setResizable(true);
-            alert.showAndWait();
+            this.showError("Error by loading the file!","It was a fail by loading the fxml file from the next scene."
+                    , e.getMessage());
         }
     }
 
@@ -321,6 +288,24 @@ public class MainPageController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
     }
+
+    private void showError(String tittle,String message,String text){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(tittle);
+        alert.setHeaderText(message);
+        alert.setContentText(text);
+        alert.setResizable(true);
+        alert.showAndWait();
+    }
+    private void showAlert(String tittle,String message,String text){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(tittle);
+        alert.setHeaderText(message);
+        alert.setContentText(text);
+        alert.setResizable(true);
+        alert.showAndWait();
+    }
+
 
     /**
      * Method for a button in the menu bar that close the program.
