@@ -96,6 +96,7 @@ public class CavalryUnit extends Unit{
         int resistBonus = 0;
         if(mainUnit instanceof RangedUnit)resistBonus +=7;
         else if(mainUnit instanceof InfantryUnit) resistBonus += 2;
+        else if(mainUnit instanceof MagicianUnit) resistBonus += 1;
         else resistBonus +=4;
         if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) resistBonus =0;
         if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Volcano")) resistBonus-=5;
