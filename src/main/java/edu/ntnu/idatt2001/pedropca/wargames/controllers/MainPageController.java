@@ -25,6 +25,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -38,7 +40,6 @@ public class MainPageController implements Initializable {
     Army army2 = new Army(singletonArmies.getArmy(1));
 
     //TODO: Add JavaDoc for this class
-    //TODO: Add buttons to generate a predefined army.
 
     @FXML
     private TextField totalArmy1;
@@ -91,6 +92,12 @@ public class MainPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         terrainComboBox.getItems().addAll("Forest","Hills","Plains","Volcano");
+        try {
+            this.updateImageView("src/main/resources/Images/Start.jpg");
+        } catch (Exception e) {
+            this.showError("Error by initialization","It was an error by initialization the GUI.",e.getMessage());
+            Platform.exit();
+        }
     }
 
     @FXML
@@ -108,7 +115,8 @@ public class MainPageController implements Initializable {
         alert.showAndWait();
     }
 
-    private void updateSingletonTerrain(){
+    private void updateSingletonTerrain()
+    {
         SingletonTerrain singletonTerrain = SingletonTerrain.getSingletonTerrain();
         if(!(terrainComboBox.getValue() ==null)) {
             switch (terrainComboBox.getValue()) {
@@ -400,6 +408,34 @@ public class MainPageController implements Initializable {
     @FXML
     private void closeTheProgramButton(){
         Platform.exit();
+    }
+
+    @FXML
+    private void changeImage(){
+        try {
+            switch (terrainComboBox.getValue()) {
+                case "Forest":
+                    this.updateImageView("src/main/resources/Images/forest.jpg");
+                    break;
+                case "Hills":
+                    this.updateImageView("src/main/resources/Images/hills.jpg");
+                    break;
+                case "Plains":
+                    this.updateImageView("src/main/resources/Images/plain.jpg");
+                    break;
+                case "Volcano":
+                    this.updateImageView("src/main/resources/Images/Volcano.jpg");
+                    break;
+                default:
+                    break;
+            }
+        }catch (Exception e){
+            this.showError("Error by updating the image!", "It was an error by reading and updating the image view!" ,e.getMessage());
+        }
+    }
+
+    private void updateImageView(String imagePath) throws FileNotFoundException {
+        terrainImageView.setImage(new Image(new FileInputStream(imagePath)));
     }
 
 }

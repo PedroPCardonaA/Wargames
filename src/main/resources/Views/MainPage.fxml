@@ -52,7 +52,7 @@
                 </Label>
             <Label alignment="CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="493.0">
                <graphic>
-                  <ComboBox fx:id="terrainComboBox" promptText="Terrain" />
+                  <ComboBox fx:id="terrainComboBox" onAction="#changeImage" promptText="Terrain" />
                </graphic>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
