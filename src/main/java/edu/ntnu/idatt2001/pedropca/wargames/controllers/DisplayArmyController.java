@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class DisplayArmyController implements Initializable{
 
+    //TODO: Add JavaDoc for this class
     @FXML
     private Label armyNameDisplayUnits;
 

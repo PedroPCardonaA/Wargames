@@ -161,6 +161,14 @@ public class Army implements Serializable{
         return units.stream().filter(unit -> unit instanceof CommanderUnit).collect(Collectors.toList());
     }
 
+    /**
+     * Method getMagicianUnits that return a list of all ranged units in the army.
+     * @return List<Unit> List with all the magician units in the army.
+     */
+    public List<Unit> getMagicianUnits(){
+        return units.stream().filter(unit -> unit instanceof MagicianUnit).collect(Collectors.toList());
+    }
+
 
     /**
      * Void method that remove all units from the army.

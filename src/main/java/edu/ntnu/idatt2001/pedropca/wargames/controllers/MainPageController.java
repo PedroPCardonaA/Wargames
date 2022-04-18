@@ -28,6 +28,10 @@ public class MainPageController implements Initializable {
     Army army2 = new Army(singletonArmies.getArmy(1));
 
 
+    //TODO: Add a fields to magician units.
+
+    //TODO: Add JavaDoc for this class
+
     @FXML
     private TextField totalArmy1;
 
