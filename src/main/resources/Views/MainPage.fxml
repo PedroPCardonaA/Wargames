@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -54,6 +55,11 @@
                   <ComboBox fx:id="terrainComboBox" promptText="Terrain" />
                </graphic>
             </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="terrainImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
                 <Label alignment="CENTER" prefHeight="265.0" prefWidth="797.0">
                     <graphic>
                         <Button mnemonicParsing="false" onAction="#resetArmies" text="Reset armies" />
@@ -136,6 +142,7 @@
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#generateArmy1" text="Generate army" />
                 <MenuItem mnemonicParsing="false" onAction="#displayAllUnitsFromArmyOne" text="Display all units" />
                 <MenuItem mnemonicParsing="false" onAction="#loadFromAFileArmyOne" text="Load an army" />
                   <MenuItem mnemonicParsing="false" onAction="#saveArmyOneAsAFile" text="Save the army" />
@@ -218,6 +225,7 @@
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
                <items>
+                  <MenuItem mnemonicParsing="false" onAction="#generateArmy2" text="Generate army" />
                   <MenuItem mnemonicParsing="false" onAction="#displayAllUnitsFromArmyTwo" text="Display all units" />
                   <MenuItem mnemonicParsing="false" onAction="#loadFromAFileArmyTwo" text="Load an army" />
                   <MenuItem mnemonicParsing="false" onAction="#saveArmyTwoAsAFile" text="Save the army" />

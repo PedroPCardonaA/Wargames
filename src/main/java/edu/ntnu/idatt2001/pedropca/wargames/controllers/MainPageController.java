@@ -2,16 +2,24 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,6 +27,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -74,6 +84,9 @@ public class MainPageController implements Initializable {
 
     @FXML
     private ComboBox<String> terrainComboBox;
+
+    @FXML
+    private ImageView terrainImageView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -293,7 +306,7 @@ public class MainPageController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Display Units");
         stage.setScene(new Scene(root));
-        stage.initOwner((Stage) armyOneName.getScene().getWindow());
+        stage.initOwner(armyOneName.getScene().getWindow());
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
     }
@@ -313,6 +326,71 @@ public class MainPageController implements Initializable {
         alert.setContentText(text);
         alert.setResizable(true);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void generateArmy1(){
+        try {
+            army1 = new Army(this.generateArmy(stringInputWindow()));
+            this.updateView();
+            this.updateArmiesInSingleton(army1,army2);
+        }catch (Exception e){
+            this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
+        }
+    }
+
+    @FXML
+    private void generateArmy2(){
+        try {
+            army2 = new Army(this.generateArmy(stringInputWindow()));
+            this.updateView();
+            this.updateArmiesInSingleton(army1,army2);
+        }catch (Exception e){
+            this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
+        }
+    }
+
+
+    private String stringInputWindow(){
+        Stage stringInputWindow = new Stage();
+        stringInputWindow.initOwner(armyOneName.getScene().getWindow());
+        stringInputWindow.initModality(Modality.WINDOW_MODAL);
+        VBox box = new VBox(20);
+        box.setAlignment(Pos.CENTER);
+        TextField commentBox = new TextField();
+        commentBox.setPromptText("Enter the name of the army.");
+        commentBox.setFocusTraversable(false);
+        commentBox.setAlignment(Pos.CENTER);
+        commentBox.setMinHeight(Control.USE_COMPUTED_SIZE);
+        commentBox.setMinWidth(Control.USE_COMPUTED_SIZE);
+        Label commentLabel = new Label("Enter the name of the Army: ");
+        commentLabel.setFont(Font.font("Papyrus", FontWeight.BOLD,24));
+        commentLabel.setMinHeight(Control.USE_COMPUTED_SIZE);
+        commentLabel.setMinWidth(Control.USE_COMPUTED_SIZE);
+        Button button = new Button("Enter name.");
+        button.setOnAction(actionEvent -> {
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.close();
+            actionEvent.consume();
+        });
+        box.getChildren().addAll(commentLabel,commentBox,button);
+        stringInputWindow.setScene(new Scene(box,375,150));
+        stringInputWindow.showAndWait();
+        return commentBox.getText();
+    }
+
+    private Army generateArmy(String name) throws IllegalArgumentException{
+        Army army = new Army( name);
+        List<Unit> mixedList = new ArrayList<>();
+        for(int i =0;i<50;i++){
+            mixedList.add(new CavalryUnit("CAVALRY",100));
+            mixedList.add(new RangedUnit("Ranged",100));
+            mixedList.add(new InfantryUnit("Infantry",100));
+            mixedList.add(new MagicianUnit("Magician",100));
+        }
+        mixedList.add(new CommanderUnit("Commander",250));
+        army.addAll(mixedList);
+        return army;
     }
 
 
