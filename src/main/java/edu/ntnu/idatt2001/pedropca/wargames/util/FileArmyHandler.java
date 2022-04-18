@@ -116,7 +116,6 @@ public class FileArmyHandler {
         if (fileName.isEmpty())
             throw new IOException("The name of file cannot be empty. Define the name of the file.");
 
-
         if (fileName.contains(".") && b)
             throw new IOException("The name of the file cannot contain a '.'. Define a correct name.");
 
