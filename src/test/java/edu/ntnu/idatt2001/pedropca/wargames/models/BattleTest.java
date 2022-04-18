@@ -4,6 +4,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.CommanderUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.InfantryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.RangedUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +33,7 @@ class BattleTest {
                     alliance.add(new InfantryUnit("Infantry",100));
                     alliance.add(new InfantryUnit("Infantry",100));
                 }
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(horde,alliance);
                 assertEquals(horde,battle.simulate());
             }
@@ -52,6 +54,7 @@ class BattleTest {
                     alliance.add(new RangedUnit("Ranged",100));
                     alliance.add(new RangedUnit("Ranged",100));
                 }
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(alliance,horde);
                 assertEquals(alliance,battle.simulate());
             }
@@ -66,6 +69,7 @@ class BattleTest {
                     aztecas.add(new InfantryUnit("Infantry",100));
                     maya.add(new InfantryUnit("Infantry",100));
                 }
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(maya,aztecas);
                 assertEquals(maya,battle.simulate());
             }
@@ -82,6 +86,7 @@ class BattleTest {
                     aztecas.add(new CommanderUnit("Commander",100));
                     aztecas.add(new CommanderUnit("Commander",100));
                 }
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(maya,aztecas);
                 assertEquals(aztecas,battle.simulate());
             }
@@ -90,6 +95,7 @@ class BattleTest {
             void simulatingABattleWithOutWinner(){
                 Army horde = new Army("Horde");
                 Army alliance = new Army("Alliance");
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(horde,alliance);
                 assertNull(battle.simulate());
             }
@@ -109,6 +115,7 @@ class BattleTest {
                 horde.add(new CommanderUnit("CommanderA",300));
                 int allianceWinner =0;
                 int hordeWinner=0;
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 for(int i=0; i<1000;i++){
                     Battle battle = new Battle(alliance,horde);
                     Army winner = battle.simulate();
@@ -126,16 +133,19 @@ class BattleTest {
         class Positive{
             @Test
             void GetToStringOfABattleBetweenTheAllianceAndTheHorde(){
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(new Army("Alliance"),new Army("Horde"));
                 assertEquals("Battle between " + "Alliance" + " and " + "Horde" + ".",battle.toString());
             }
             @Test
             void GetToStringOfABattleBetweenTheHordeAndTheAlliance(){
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(new Army("Horde"),new Army("Alliance"));
                 assertEquals("Battle between " + "Horde" + " and " + "Alliance" + ".",battle.toString());
             }
             @Test
             void GetToStringOfABattleBetweenUkraineAndRussia(){
+                SingletonTerrain.getSingletonTerrain().setPlainsAsTerrain();
                 Battle battle = new Battle(new Army("Ukraine"),new Army("Russia"));
                 assertEquals("Battle between " + "Ukraine" + " and " + "Russia" + ".",battle.toString());
             }

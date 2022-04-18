@@ -1,27 +1,56 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InfantryUnitTest {
-
+    SingletonTerrain singletonTerrain = SingletonTerrain.getSingletonTerrain();
     @Nested
     class TestingOfMethodGetAttackBonus {
         @Nested
         class Positive{
             @Test
-            void getAttackBonusAgainstInfantry() {
-                assertEquals(2, new InfantryUnit("Infantry",100).getAttackBonus(new InfantryUnit(" Infantry",100)));
+            void getAttackBonusAgainstInfantryWhenTheTerrainIsNotForest() {
+                singletonTerrain.setHillsAsTerrain();
+                assertEquals(0, new InfantryUnit("Infantry",100).getAttackBonus(new InfantryUnit(" Infantry",100)));
             }
             @Test
-            void getAttackBonusAgainstRanged(){
-                assertEquals(2, new InfantryUnit("Infantry",100).getAttackBonus(new RangedUnit("Ranged",100)));
+            void getAttackBonusAgainstRangedWhenTheTerrainIsNotForest(){
+                singletonTerrain.setHillsAsTerrain();
+                assertEquals(0, new InfantryUnit("Infantry",100).getAttackBonus(new RangedUnit("Ranged",100)));
             }
             @Test
-            void getAttackBonusAgainstCavalry(){
+            void getAttackBonusAgainstCavalryWhenTheTerrainIsNotForest(){
+                singletonTerrain.setHillsAsTerrain();
                 assertEquals(4, new InfantryUnit("Infantry",100).getAttackBonus(new CavalryUnit("Cavalry",100)));
+            }
+            @Test
+            void getAttackBonusAgainstMagicianWhenTheTerrainIsNotForest(){
+                singletonTerrain.setHillsAsTerrain();
+                assertEquals(0, new InfantryUnit("Infantry",100).getAttackBonus(new MagicianUnit("Cavalry",100)));
+            }
+            @Test
+            void getAttackBonusAgainstCavalryWhenIsForest(){
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(9, new InfantryUnit("Infantry",100).getAttackBonus(new CavalryUnit("Cavalry",100)));
+            }
+            @Test
+            void getAttackBonusAgainstMagicianWhenTheTerrainIsForest(){
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(5, new InfantryUnit("Infantry",100).getAttackBonus(new MagicianUnit("Cavalry",100)));
+            }
+            @Test
+            void getAttackBonusAgainstInfantryWhenTheTerrainIsForest() {
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(5, new InfantryUnit("Infantry",100).getAttackBonus(new InfantryUnit(" Infantry",100)));
+            }
+            @Test
+            void getAttackBonusAgainstRangedWhenTheTerrainIsForest(){
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(5, new InfantryUnit("Infantry",100).getAttackBonus(new RangedUnit("Ranged",100)));
             }
         }
     }
@@ -31,16 +60,64 @@ class InfantryUnitTest {
         @Nested
         class Positive{
             @Test
-            void getResistBonusAgainstInfantry() {
+            void getResistBonusAgainstInfantryWhenIsForest() {
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(6, new InfantryUnit("Infantry",100).getResistBonus(new InfantryUnit(" Infantry",100)));
+            }
+            @Test
+            void getResistBonusAgainstRangedWhenIsForest(){
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(3, new InfantryUnit("Infantry",100).getResistBonus(new RangedUnit("Ranged",100)));
+            }
+            @Test
+            void getResistBonusAgainstCavalryWhenIsForest(){
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(8, new InfantryUnit("Infantry",100).getResistBonus(new CavalryUnit("Cavalry",100)));
+            }
+            @Test
+            void getResistBonusAgainstMagicianWhenIsForest(){
+                singletonTerrain.setForestAsTerrain();
+                assertEquals(3, new InfantryUnit("Infantry",100).getResistBonus(new MagicianUnit("Cavalry",100)));
+            }
+            @Test
+            void getResistBonusAgainstInfantryWhenIsVolcano() {
+                singletonTerrain.setVolcanoAsTerrain();
+                assertEquals(-2, new InfantryUnit("Infantry",100).getResistBonus(new InfantryUnit(" Infantry",100)));
+            }
+            @Test
+            void getResistBonusAgainstRangedWhenIsVolcano(){
+                singletonTerrain.setVolcanoAsTerrain();
+                assertEquals(-5, new InfantryUnit("Infantry",100).getResistBonus(new RangedUnit("Ranged",100)));
+            }
+            @Test
+            void getResistBonusAgainstCavalryWhenIsVolcano(){
+                singletonTerrain.setVolcanoAsTerrain();
+                assertEquals(0, new InfantryUnit("Infantry",100).getResistBonus(new CavalryUnit("Cavalry",100)));
+            }
+            @Test
+            void getResistBonusAgainstMagicianWhenIsVolcano(){
+                singletonTerrain.setVolcanoAsTerrain();
+                assertEquals(-5, new InfantryUnit("Infantry",100).getResistBonus(new MagicianUnit("Cavalry",100)));
+            }
+            @Test
+            void getResistBonusAgainstInfantryWhenIsHillOrPlains() {
+                singletonTerrain.setPlainsAsTerrain();
                 assertEquals(3, new InfantryUnit("Infantry",100).getResistBonus(new InfantryUnit(" Infantry",100)));
             }
             @Test
-            void getResistBonusAgainstRanged(){
-                assertEquals(2, new InfantryUnit("Infantry",100).getResistBonus(new RangedUnit("Ranged",100)));
+            void getResistBonusAgainstRangedWhenIsHillOrPlains(){
+                singletonTerrain.setPlainsAsTerrain();
+                assertEquals(0, new InfantryUnit("Infantry",100).getResistBonus(new RangedUnit("Ranged",100)));
             }
             @Test
-            void getResistBonusAgainstCavalry(){
+            void getResistBonusAgainstCavalryWhenIsHillOrPlains(){
+                singletonTerrain.setPlainsAsTerrain();
                 assertEquals(5, new InfantryUnit("Infantry",100).getResistBonus(new CavalryUnit("Cavalry",100)));
+            }
+            @Test
+            void getResistBonusAgainstMagicianWhenIsHillOrPlains(){
+                singletonTerrain.setPlainsAsTerrain();
+                assertEquals(0, new InfantryUnit("Infantry",100).getResistBonus(new MagicianUnit("Cavalry",100)));
             }
         }
     }

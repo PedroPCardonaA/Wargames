@@ -18,21 +18,18 @@
       <TableView fx:id="tableView" />
       <MenuBar>
          <menus>
-            <Menu mnemonicParsing="false" text="Return">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Close" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Load">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Save">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-            </Menu>
+            <Menu mnemonicParsing="false" onAction="#close">
+               <graphic>
+                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="#close" text="Return" />
+               </graphic></Menu>
+            <Menu mnemonicParsing="false" onAction="#saveArmyAsFile">
+               <graphic>
+                  <Button mnemonicParsing="false" onAction="#saveArmyAsFile" text="Save" />
+               </graphic></Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" text="Load" />
+               </graphic></Menu>
          </menus>
       </MenuBar>
    </children>

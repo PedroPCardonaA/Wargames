@@ -8,7 +8,7 @@ package edu.ntnu.idatt2001.pedropca.wargames.util;
  * @since 1.0-SNAPSHOT
  */
 
-// This class is bite of overkill but I wanted to implement enum in my project.
+// This class is bite of overkill, but I wanted to implement enum in my project.
 public class EnumTerrain {
     enum Terrain{
         FOREST,

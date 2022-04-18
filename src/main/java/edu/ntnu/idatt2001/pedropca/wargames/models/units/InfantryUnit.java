@@ -59,7 +59,7 @@ public class InfantryUnit extends Unit{
     protected int getAttackBonus(Unit opponent){
         int attackBonus = 0;
         if(opponent instanceof CavalryUnit)attackBonus += 4;
-        if (SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) attackBonus+=3;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) attackBonus+=5;
         return attackBonus;
     }
 
@@ -79,7 +79,7 @@ public class InfantryUnit extends Unit{
         if(mainUnit instanceof InfantryUnit)resistBonus += 3;
         if(mainUnit instanceof CavalryUnit)resistBonus += 5;
         if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) resistBonus+=3;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Volcano")) resistBonus+=5;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Volcano")) resistBonus-=5;
         return resistBonus;
     }
 

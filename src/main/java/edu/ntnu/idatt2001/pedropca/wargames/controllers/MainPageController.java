@@ -281,7 +281,6 @@ public class MainPageController implements Initializable {
     private void displayAllUnits() throws IOException{
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Views/displayArmy.fxml")));
         Stage stage = new Stage();
-        stage.setAlwaysOnTop(true);
         stage.setTitle("Display Units");
         stage.setScene(new Scene(root));
         stage.initOwner((Stage) armyOneName.getScene().getWindow());
