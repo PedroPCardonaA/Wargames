@@ -59,6 +59,7 @@ public class CavalryUnit extends Unit{
      * If the opponent is a ranged unit and this unit is not charging, method returns 6.
      * if the opponent is not a ranged unit and this unit is charging, method returns 4.
      * Else, method returns 2.
+     * The plain terrain buffs the attack bonus.
      * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return int the attack bonus.
      */
@@ -87,6 +88,7 @@ public class CavalryUnit extends Unit{
      * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is a ranged unit, this method will return 7.
      * If the opponent is an infantry unit, this method will return -2;
      * And if the opponent is another cavalry unit, this method will return 4;
+     * The volcano forest de-buffs the resist bonus and the volcano terrain de-buffs the resist bonus.
      * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the main unit that called method getDamageDone.
      * @return int the attack bonus.
      */

@@ -52,6 +52,7 @@ public class InfantryUnit extends Unit{
      * This method will return the attack bonus of infantry units. The value of the bonus may change
      * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is a calvary unit. Method returns 4. Else,
      * the method returns 2.
+     * The forest terrain buffs the attack bonus.
      * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return int the attack bonus.
      */
@@ -69,6 +70,7 @@ public class InfantryUnit extends Unit{
      * This method will return the resist bonus of infantry units. The value of the bonus may change
      * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is another infantry unit. Method returns 3. Else,
      * the method returns 2.
+     * The forest terrain buffs the resist bonus and the volcano terrain de-buffs the resist bonus.
      * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the main unit that called method getDamageDone.
      * @return int the attack bonus.
      */
