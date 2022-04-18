@@ -27,9 +27,6 @@ public class MainPageController implements Initializable {
     Army army1 = new Army(singletonArmies.getArmy(0));
     Army army2 = new Army(singletonArmies.getArmy(1));
 
-
-    //TODO: Add a fields to magician units.
-
     //TODO: Add JavaDoc for this class
 
     @FXML
@@ -61,6 +58,12 @@ public class MainPageController implements Initializable {
 
     @FXML
     private TextField commanderArmy2;
+
+    @FXML
+    private TextField magicianArmy1;
+
+    @FXML
+    private TextField magicianArmy2;
 
     @FXML
     private Label armyOneName;
@@ -109,8 +112,8 @@ public class MainPageController implements Initializable {
                     break;
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             this.showAlert("Terrain was not defined.","Terrain was not defined!","Forest will be defined instead.");
+            singletonTerrain.setForestAsTerrain();
         }
     }
 
@@ -158,12 +161,14 @@ public class MainPageController implements Initializable {
         infantryArmy1.setText(army1.getInfantryUnits().size()+"");
         rangedArmy1.setText(army1.getRangedUnits().size()+"");
         cavalryArmy1.setText(army1.getCavalryUnits().size()+"");
+        magicianArmy1.setText(army1.getMagicianUnits().size()+"");
         commanderArmy1.setText(army1.getCommanderUnits().size()+"");
         armyTwoName.setText(army2.getName());
         totalArmy2.setText(army2.getAllUnits().size()+"");
         infantryArmy2.setText(army2.getInfantryUnits().size()+"");
         rangedArmy2.setText(army2.getRangedUnits().size()+"");
         cavalryArmy2.setText(army2.getCavalryUnits().size()+"");
+        magicianArmy2.setText(army2.getMagicianUnits().size()+"");
         commanderArmy2.setText(army2.getCommanderUnits().size()+"");
     }
 

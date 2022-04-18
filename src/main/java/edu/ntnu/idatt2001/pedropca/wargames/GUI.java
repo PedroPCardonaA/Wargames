@@ -16,9 +16,6 @@ import java.util.Optional;
 
 public class GUI extends Application {
 
-    //TODO: Fix all tests for units.
-
-
     public static void main(String[] args) {
         SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
         singletonArmies.putArmy(new Army("Army#1"));

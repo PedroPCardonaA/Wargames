@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @since 1.0-SNAPSHOT
  */
 
-//TODO: implement serializable to read army.
+
 public class Army implements Serializable{
     private String name;
     private final List<Unit> units;

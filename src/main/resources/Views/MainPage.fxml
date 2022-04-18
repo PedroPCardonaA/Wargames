@@ -113,14 +113,24 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="353.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of magician units:" wrappingWidth="230.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="commanderNumbers1" fx:id="commanderArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
+                        <TextField id="commanderNumbers1" fx:id="magicianArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
+            <HBox alignment="BASELINE_RIGHT">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                     <font>
+                        <Font name="Papyrus" size="19.0" />
+                     </font>
+                  </Text>
+                  <TextField id="commanderNumbers1" fx:id="commanderArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
+               </children>
+            </HBox>
             <Label />
             <Button mnemonicParsing="false" text="Edit" />
             <Label />
@@ -185,14 +195,24 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of magician units:" wrappingWidth="230.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
                         </Text>
-                        <TextField id="commanderNumbers2" fx:id="commanderArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
+                        <TextField id="commanderNumbers2" fx:id="magicianArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
+            <HBox alignment="BASELINE_RIGHT">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                     <font>
+                        <Font name="Papyrus" size="19.0" />
+                     </font>
+                  </Text>
+                  <TextField id="commanderNumbers2" fx:id="commanderArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
+               </children>
+            </HBox>
             <Label />
             <Button mnemonicParsing="false" text="Edit" />
             <Label />

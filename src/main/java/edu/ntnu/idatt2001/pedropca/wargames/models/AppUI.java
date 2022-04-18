@@ -54,7 +54,6 @@ public class AppUI {
                 case BATTLE_WITH_DEFAULT_ARMIES: // Print out the average result
                     this.battleWithDefaultArmies();
                     break;
-                //todo: have more options
                 case EXIT:
                     finished = true; // finish the program
                     System.out.println("Thanks for war games app :D");
@@ -74,7 +73,6 @@ public class AppUI {
         System.out.println("4. Display army 2");
         System.out.println("5. Battle between armies");
         System.out.println("6. Battle between default armies");
-//TODO: Add more option to the menu
         System.out.println("9. Quit");
         System.out.println("\nPlease enter a number between 1 and 9.\n");
         Scanner sc = new Scanner(System.in);
