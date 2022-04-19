@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -42,46 +43,46 @@ public class MainPageController implements Initializable {
     //TODO: Add JavaDoc for this class
 
     @FXML
-    private TextField totalArmy1;
+    protected TextField totalArmy1;
 
     @FXML
-    private TextField totalArmy2;
+    protected TextField totalArmy2;
 
     @FXML
-    private TextField infantryArmy1;
+    protected TextField infantryArmy1;
 
     @FXML
-    private TextField infantryArmy2;
+    protected TextField infantryArmy2;
 
     @FXML
-    private TextField rangedArmy1;
+    protected TextField rangedArmy1;
 
     @FXML
-    private TextField rangedArmy2;
+    protected TextField rangedArmy2;
 
     @FXML
-    private TextField cavalryArmy1;
+    protected TextField cavalryArmy1;
 
     @FXML
-    private TextField cavalryArmy2;
+    protected TextField cavalryArmy2;
 
     @FXML
-    private TextField commanderArmy1;
+    protected TextField commanderArmy1;
 
     @FXML
-    private TextField commanderArmy2;
+    protected TextField commanderArmy2;
 
     @FXML
-    private TextField magicianArmy1;
+    protected TextField magicianArmy1;
 
     @FXML
-    private TextField magicianArmy2;
+    protected TextField magicianArmy2;
 
     @FXML
-    private Label armyOneName;
+    protected Label armyOneName;
 
     @FXML
-    private Label armyTwoName;
+    protected Label armyTwoName;
 
     @FXML
     private ComboBox<String> terrainComboBox;
@@ -92,6 +93,8 @@ public class MainPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         terrainComboBox.getItems().addAll("Forest","Hills","Plains","Volcano");
+        terrainImageView.setFitWidth(550);
+        terrainImageView.setFitHeight(150);
         try {
             this.updateImageView("src/main/resources/Images/Start.jpg");
         } catch (Exception e) {
@@ -177,7 +180,8 @@ public class MainPageController implements Initializable {
     /**
      * Help method that update the visible information from the army to the GUI.
      */
-    private void updateView(){
+    @FXML
+    protected void updateView(){
         armyOneName.setText(army1.getName());
         totalArmy1.setText(army1.getAllUnits().size()+"");
         infantryArmy1.setText(army1.getInfantryUnits().size()+"");
@@ -239,7 +243,7 @@ public class MainPageController implements Initializable {
                     , e.getMessage());
         }
     }
-    private void updateBothArmies(Army army1,Army army2){
+    protected void updateBothArmies(Army army1, Army army2){
         singletonArmies.setEmptySingletonArmy();
         singletonArmies.setEmptyArmyBackUp();
         singletonArmies.putArmy(new Army(army1));
@@ -248,7 +252,7 @@ public class MainPageController implements Initializable {
         singletonArmies.putArmyInBackUp(new Army(army2));
     }
 
-    private File openFileChooser(){
+    protected File openFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a army file");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
@@ -292,6 +296,7 @@ public class MainPageController implements Initializable {
         try {
             SingletonArmies.getSingletonArmies().setArmyNumber(0);
             this.displayAllUnits();
+            this.updateView();
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a fail by loading the fxml file from the next scene."
                     , e.getMessage());
@@ -303,6 +308,7 @@ public class MainPageController implements Initializable {
         try {
             SingletonArmies.getSingletonArmies().setArmyNumber(1);
             this.displayAllUnits();
+            this.updateView();
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a fail by loading the fxml file from the next scene."
                     , e.getMessage());
@@ -317,22 +323,23 @@ public class MainPageController implements Initializable {
         stage.initOwner(armyOneName.getScene().getWindow());
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
+        Platform.runLater(this::updateView);
     }
 
     private void showError(String tittle,String message,String text){
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.setTitle(tittle);
         alert.setHeaderText(message);
         alert.setContentText(text);
-        alert.setResizable(true);
         alert.showAndWait();
     }
     private void showAlert(String tittle,String message,String text){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.setTitle(tittle);
         alert.setHeaderText(message);
         alert.setContentText(text);
-        alert.setResizable(true);
         alert.showAndWait();
     }
 
@@ -340,8 +347,11 @@ public class MainPageController implements Initializable {
     private void generateArmy1(){
         try {
             army1 = new Army(this.generateArmy(stringInputWindow()));
+            if(army1.getName().equals(army2.getName())){
+                army1.setName(army1.getName() +"-2");
+            }
             this.updateView();
-            this.updateArmiesInSingleton(army1,army2);
+            this.updateBothArmies(army1,army2);
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
@@ -351,8 +361,11 @@ public class MainPageController implements Initializable {
     private void generateArmy2(){
         try {
             army2 = new Army(this.generateArmy(stringInputWindow()));
+            if(army2.getName().equals(army1.getName())){
+                army2.setName(army1.getName() +"-2");
+            }
             this.updateView();
-            this.updateArmiesInSingleton(army1,army2);
+            this.updateBothArmies(army1,army2);
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }

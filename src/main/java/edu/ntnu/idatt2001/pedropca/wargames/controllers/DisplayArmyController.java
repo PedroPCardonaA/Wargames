@@ -4,7 +4,6 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,16 +12,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DisplayArmyController implements Initializable{
+public class DisplayArmyController extends MainPageController implements Initializable{
 
     //TODO: Add JavaDoc for this class
+    // TODO: Update view of MainPageController after loadFromAFile
     @FXML
     private Label armyNameDisplayUnits;
 
@@ -34,7 +33,7 @@ public class DisplayArmyController implements Initializable{
 
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
 
-    Army army = singletonArmies.getArmy(SingletonArmies.getSingletonArmies().getArmyNumber());
+    Army army = singletonArmies.getArmy(singletonArmies.getArmyNumber());
 
     private void createTable(){
         if(tableView.getColumns().size()<4) {
@@ -70,7 +69,7 @@ public class DisplayArmyController implements Initializable{
         }
     }
 
-    private ObservableList<Unit> getAllUnitsFromArmy1(){
+    private ObservableList<Unit> getAllUnitsFromArmy(){
         ObservableList<Unit> units = FXCollections.observableArrayList();
         units.addAll(army.getAllUnits());
         return units;
@@ -78,9 +77,7 @@ public class DisplayArmyController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        armyNameDisplayUnits.setText(army.getName());
-        tableView.setItems(this.getAllUnitsFromArmy1());
-        this.createTable();
+        this.updateTable();
     }
 
 
@@ -109,46 +106,36 @@ public class DisplayArmyController implements Initializable{
         alert.showAndWait();
     }
 
-    // TODO: Apply method loadFromAFile in DisplayArmyController.
+    // TODO: First: Apply method loadFromAFile in DisplayArmyController.
 
     @FXML
-  /*  private void loadFromAFile(){
+    private void loadFromAFile(){
         try {
             File selectedFile = this.openFileChooser();
             if(selectedFile!=null){
-                if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
-                    army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                    army2.setName(army2.getName()+"-2");
-                }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                Army backUp = singletonArmies.getArmy(0);
-                this.updateBothArmies(backUp,army2);
-                this.updateView();
+
+                army = FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
+                if(singletonArmies.getArmyNumber()==0){
+                    if (army.getName().equals(singletonArmies.getArmy(1).getName())){
+                        army.setName(army.getName()+"-2");
+                    }
+                    Army backUp = singletonArmies.getArmy(1);
+                    this.updateBothArmies(army,backUp);
+                    this.updateTable();
+                }
+                if(singletonArmies.getArmyNumber()==1){
+                    if (army.getName().equals(singletonArmies.getArmy(0).getName())){
+                        army.setName(army.getName()+"-2");
+                    }
+                    Army backUp = singletonArmies.getArmy(0);
+                    this.updateBothArmies(backUp,army);
+                    this.updateTable();
+                }
             }
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
                     , e.getMessage());
         }
-    }*/
-
-    private void checkName(){
-
-    }
-
-    private void updateBothArmies(Army army1,Army army2){
-        singletonArmies.setEmptySingletonArmy();
-        singletonArmies.setEmptyArmyBackUp();
-        singletonArmies.putArmy(new Army(army1));
-        singletonArmies.putArmy(new Army(army2));
-        singletonArmies.putArmyInBackUp(new Army(army1));
-        singletonArmies.putArmyInBackUp(new Army(army2));
-    }
-
-    private File openFileChooser(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open a army file");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-        return fileChooser.showOpenDialog(null);
     }
 
 
@@ -156,5 +143,11 @@ public class DisplayArmyController implements Initializable{
     private void close(){
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+    
+    private void updateTable(){
+        armyNameDisplayUnits.setText(army.getName());
+        tableView.setItems(this.getAllUnitsFromArmy());
+        this.createTable();
     }
 }

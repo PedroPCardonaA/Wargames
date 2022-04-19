@@ -28,7 +28,7 @@
                </graphic></Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Button mnemonicParsing="false" text="Load" />
+                  <Button mnemonicParsing="false" onAction="#loadFromAFile" text="Load" />
                </graphic></Menu>
          </menus>
       </MenuBar>
