@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,19 +27,28 @@ public class GUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        primaryStage = new Stage();
-        primaryStage.setTitle("War Games");
-        primaryStage.setOnCloseRequest(windowEvent -> {
-            windowEvent.consume();
-            this.closeProgram();
-        });
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Views/MainPage.fxml"));
-        Parent root = loader.load();
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+    public void start(Stage primaryStage){
+        try {
+            primaryStage = new Stage();
+            primaryStage.setTitle("War Games");
+            primaryStage.setOnCloseRequest(windowEvent -> {
+                windowEvent.consume();
+                this.closeProgram();
+            });
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/Views/MainPage.fxml"));
+            Parent root = loader.load();
+            primaryStage.setScene(new Scene(root));
+            primaryStage.setMaximized(true);
+            primaryStage.show();
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.setTitle("Error by starting!");
+            alert.setHeaderText("It was an error by starting the program!");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     private void closeProgram(){

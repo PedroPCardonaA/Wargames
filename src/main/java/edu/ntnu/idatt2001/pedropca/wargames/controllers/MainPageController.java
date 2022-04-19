@@ -30,10 +30,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainPageController implements Initializable {
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
@@ -43,46 +40,46 @@ public class MainPageController implements Initializable {
     //TODO: Add JavaDoc for this class
 
     @FXML
-    protected TextField totalArmy1;
+    private TextField totalArmy1;
 
     @FXML
-    protected TextField totalArmy2;
+    private TextField totalArmy2;
 
     @FXML
-    protected TextField infantryArmy1;
+    private TextField infantryArmy1;
 
     @FXML
-    protected TextField infantryArmy2;
+    private TextField infantryArmy2;
 
     @FXML
-    protected TextField rangedArmy1;
+    private TextField rangedArmy1;
 
     @FXML
-    protected TextField rangedArmy2;
+    private TextField rangedArmy2;
 
     @FXML
-    protected TextField cavalryArmy1;
+    private TextField cavalryArmy1;
 
     @FXML
-    protected TextField cavalryArmy2;
+    private TextField cavalryArmy2;
 
     @FXML
-    protected TextField commanderArmy1;
+    private TextField commanderArmy1;
 
     @FXML
-    protected TextField commanderArmy2;
+    private TextField commanderArmy2;
 
     @FXML
-    protected TextField magicianArmy1;
+    private TextField magicianArmy1;
 
     @FXML
-    protected TextField magicianArmy2;
+    private TextField magicianArmy2;
 
     @FXML
-    protected Label armyOneName;
+    private Label armyOneName;
 
     @FXML
-    protected Label armyTwoName;
+    private Label armyTwoName;
 
     @FXML
     private ComboBox<String> terrainComboBox;
@@ -160,7 +157,7 @@ public class MainPageController implements Initializable {
         }
     }
 
-    private void updateArmiesInSingleton(Army army1, Army army2){
+    protected void updateArmiesInSingleton(Army army1, Army army2){
         singletonArmies.setEmptySingletonArmy();
         singletonArmies.putArmy(new Army(army1));
         singletonArmies.putArmy(new Army(army2));
@@ -212,8 +209,7 @@ public class MainPageController implements Initializable {
                     army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                     army1.setName(army2.getName()+"-2");
                 }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                Army backUp = singletonArmies.getArmy(1);
-                this.updateBothArmies(army1,backUp);
+                this.updateArmyOneInBothListInTheSingleton(army1,0);
                 this.updateView();}
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
@@ -234,8 +230,7 @@ public class MainPageController implements Initializable {
                     army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                     army2.setName(army2.getName()+"-2");
                 }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                Army backUp = singletonArmies.getArmy(0);
-                this.updateBothArmies(backUp,army2);
+                this.updateArmyOneInBothListInTheSingleton(army2,1);
                 this.updateView();
             }
         }catch (Exception e){
@@ -243,6 +238,7 @@ public class MainPageController implements Initializable {
                     , e.getMessage());
         }
     }
+    //TODO: Change this method to not save information from the other army when one is changed.
     protected void updateBothArmies(Army army1, Army army2){
         singletonArmies.setEmptySingletonArmy();
         singletonArmies.setEmptyArmyBackUp();
@@ -250,6 +246,29 @@ public class MainPageController implements Initializable {
         singletonArmies.putArmy(new Army(army2));
         singletonArmies.putArmyInBackUp(new Army(army1));
         singletonArmies.putArmyInBackUp(new Army(army2));
+    }
+
+    protected void updateArmyOneInBothListInTheSingleton(Army army,int index){
+        if(index == 0){
+            Army save = singletonArmies.getArmy(1);
+            Army saveBackUp = singletonArmies.getArmyFromBackUp(1);
+            singletonArmies.setEmptySingletonArmy();
+            singletonArmies.setEmptyArmyBackUp();
+            singletonArmies.putArmy(new Army(army));
+            singletonArmies.putArmy(new Army(save));
+            singletonArmies.putArmyInBackUp(new Army(army));
+            singletonArmies.putArmyInBackUp(new Army(saveBackUp));
+        }
+        else{
+            Army save = singletonArmies.getArmy(0);
+            Army saveBackUp = singletonArmies.getArmyFromBackUp(0);
+            singletonArmies.setEmptySingletonArmy();
+            singletonArmies.setEmptyArmyBackUp();
+            singletonArmies.putArmy(new Army(save));
+            singletonArmies.putArmy(new Army(army));
+            singletonArmies.putArmyInBackUp(new Army(saveBackUp));
+            singletonArmies.putArmyInBackUp(new Army(army));
+        }
     }
 
     protected File openFileChooser(){
@@ -323,6 +342,9 @@ public class MainPageController implements Initializable {
         stage.initOwner(armyOneName.getScene().getWindow());
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
+        army1 = new Army(singletonArmies.getArmy(0));
+        army2 = new Army(singletonArmies.getArmy(1));
+        this.updateView();
         Platform.runLater(this::updateView);
     }
 
@@ -350,8 +372,8 @@ public class MainPageController implements Initializable {
             if(army1.getName().equals(army2.getName())){
                 army1.setName(army1.getName() +"-2");
             }
+            this.updateArmyOneInBothListInTheSingleton(army1,0);
             this.updateView();
-            this.updateBothArmies(army1,army2);
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
@@ -364,8 +386,8 @@ public class MainPageController implements Initializable {
             if(army2.getName().equals(army1.getName())){
                 army2.setName(army1.getName() +"-2");
             }
+            this.updateArmyOneInBothListInTheSingleton(army2,1);
             this.updateView();
-            this.updateBothArmies(army1,army2);
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
@@ -450,5 +472,4 @@ public class MainPageController implements Initializable {
     private void updateImageView(String imagePath) throws FileNotFoundException {
         terrainImageView.setImage(new Image(new FileInputStream(imagePath)));
     }
-
 }

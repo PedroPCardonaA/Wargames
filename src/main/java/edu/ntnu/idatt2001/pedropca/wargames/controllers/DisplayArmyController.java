@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 public class DisplayArmyController extends MainPageController implements Initializable{
 
     //TODO: Add JavaDoc for this class
-    // TODO: Update view of MainPageController after loadFromAFile
     @FXML
     private Label armyNameDisplayUnits;
 
@@ -32,7 +31,6 @@ public class DisplayArmyController extends MainPageController implements Initial
     private Button closeButton;
 
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-
     Army army = singletonArmies.getArmy(singletonArmies.getArmyNumber());
 
     private void createTable(){
@@ -105,9 +103,6 @@ public class DisplayArmyController extends MainPageController implements Initial
         alert.setResizable(true);
         alert.showAndWait();
     }
-
-    // TODO: First: Apply method loadFromAFile in DisplayArmyController.
-
     @FXML
     private void loadFromAFile(){
         try {
@@ -137,7 +132,6 @@ public class DisplayArmyController extends MainPageController implements Initial
                     , e.getMessage());
         }
     }
-
 
     @FXML
     private void close(){
