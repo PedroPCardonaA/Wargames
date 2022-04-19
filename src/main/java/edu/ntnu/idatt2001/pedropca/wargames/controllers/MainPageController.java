@@ -238,15 +238,6 @@ public class MainPageController implements Initializable {
                     , e.getMessage());
         }
     }
-    //TODO: Change this method to not save information from the other army when one is changed.
-    protected void updateBothArmies(Army army1, Army army2){
-        singletonArmies.setEmptySingletonArmy();
-        singletonArmies.setEmptyArmyBackUp();
-        singletonArmies.putArmy(new Army(army1));
-        singletonArmies.putArmy(new Army(army2));
-        singletonArmies.putArmyInBackUp(new Army(army1));
-        singletonArmies.putArmyInBackUp(new Army(army2));
-    }
 
     protected void updateArmyOneInBothListInTheSingleton(Army army,int index){
         if(index == 0){

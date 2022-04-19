@@ -114,16 +114,14 @@ public class DisplayArmyController extends MainPageController implements Initial
                     if (army.getName().equals(singletonArmies.getArmy(1).getName())){
                         army.setName(army.getName()+"-2");
                     }
-                    Army backUp = singletonArmies.getArmy(1);
-                    this.updateBothArmies(army,backUp);
+                    this.updateArmyOneInBothListInTheSingleton(army,0);
                     this.updateTable();
                 }
                 if(singletonArmies.getArmyNumber()==1){
                     if (army.getName().equals(singletonArmies.getArmy(0).getName())){
                         army.setName(army.getName()+"-2");
                     }
-                    Army backUp = singletonArmies.getArmy(0);
-                    this.updateBothArmies(backUp,army);
+                    this.updateArmyOneInBothListInTheSingleton(army,1);
                     this.updateTable();
                 }
             }
