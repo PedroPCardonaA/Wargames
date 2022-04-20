@@ -9,6 +9,17 @@ package edu.ntnu.idatt2001.pedropca.wargames.util;
  * @since 1.0-SNAPSHOT
  */
 public class SingletonTerrain {
+
+    //I know that this enum is very overkill, but I really want to implement
+    // an enum object in my project. I know that the best solution is only define the terrain
+    // directly in methods setTerrain by using strings but using enum is pretty cool.
+    enum Terrain{
+        FOREST,
+        HILL,
+        PLAINS,
+        VOLCANO;
+    }
+
     private static SingletonTerrain singletonTerrain = new SingletonTerrain();
     private String terrain;
 
@@ -30,17 +41,32 @@ public class SingletonTerrain {
         return singletonTerrain;
     }
 
+    /**
+     * Method that define forest as terrain of the battle.
+     */
     public void setForestAsTerrain(){
-        terrain = EnumTerrain.Terrain.FOREST.name();
+        terrain = Terrain.FOREST.name();
     }
+
+    /**
+     * Method that define hill as terrain of the battle.
+     */
     public void setHillsAsTerrain(){
-        terrain = EnumTerrain.Terrain.HILL.name();
+        terrain = Terrain.HILL.name();
     }
+
+    /**
+     * Method that define plains as terrain of the battle.
+     */
     public void setPlainsAsTerrain(){
-        terrain = EnumTerrain.Terrain.PLAINS.name();
+        terrain = Terrain.PLAINS.name();
     }
+
+    /**
+     * Method that define volcano as terrain of the battle.
+     */
     public void setVolcanoAsTerrain(){
-        terrain = EnumTerrain.Terrain.VOLCANO.name();
+        terrain = Terrain.VOLCANO.name();
     }
 
     public String getTerrain(){
