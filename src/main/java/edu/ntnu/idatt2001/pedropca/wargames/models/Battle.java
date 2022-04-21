@@ -38,7 +38,7 @@ public class Battle {
         while (this.bothArmiesHaveUnits()){
             Unit unitFromArmy1 = army1.getRandom();
             Unit unitFromArmy2 = army2.getRandom();
-            this.setChargeToInfantryUnit(unitFromArmy1,unitFromArmy2);
+            this.setChargeToCavalryUnit(unitFromArmy1,unitFromArmy2);
             this.combatBetweenUnits(unitFromArmy1,unitFromArmy2);
         }
         return this.checkWinnerArmy();
@@ -51,7 +51,7 @@ public class Battle {
      * @param unitFromArmy1 edu.ntnu.idatt2001.pedropca.Unit from the army number one that will be checked
      * @param unitFromArmy2 edu.ntnu.idatt2001.pedropca.Unit from the army number two that will be checked
      */
-    private void setChargeToInfantryUnit(Unit unitFromArmy1, Unit unitFromArmy2){
+    private void setChargeToCavalryUnit(Unit unitFromArmy1, Unit unitFromArmy2){
         if(unitFromArmy1 instanceof CavalryUnit)((CavalryUnit) unitFromArmy1).setCharging(true);
         if(unitFromArmy2 instanceof CavalryUnit)((CavalryUnit) unitFromArmy2).setCharging(true);
     }

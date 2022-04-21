@@ -58,7 +58,7 @@ public class MagicianUnit extends Unit{
     @Override
     protected int getAttackBonus(Unit opponent) {
         int attackBonus = new Random().nextInt(26);
-        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Volcano")) attackBonus+=5;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain()== SingletonTerrain.Terrain.VOLCANO) attackBonus+=5;
         return attackBonus;
 
     }
@@ -73,7 +73,7 @@ public class MagicianUnit extends Unit{
     @Override
     protected int getResistBonus(Unit mainUnit) {
         int resistBonus = new Random().nextInt(6);
-        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Volcano")) resistBonus+=5;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.VOLCANO) resistBonus+=5;
         return resistBonus;
 
     }

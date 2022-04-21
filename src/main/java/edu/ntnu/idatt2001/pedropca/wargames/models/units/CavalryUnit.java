@@ -77,7 +77,7 @@ public class CavalryUnit extends Unit{
             attackBonus+=4;}
         else{
             attackBonus+=2;}
-        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Plains")) attackBonus+=3;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain()== SingletonTerrain.Terrain.PLAINS) attackBonus+=3;
         return attackBonus;
     }
 
@@ -100,8 +100,8 @@ public class CavalryUnit extends Unit{
         else if(mainUnit instanceof InfantryUnit) resistBonus += 2;
         else if(mainUnit instanceof MagicianUnit) resistBonus += 1;
         else resistBonus +=4;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Forest")) resistBonus =0;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain().equalsIgnoreCase("Volcano")) resistBonus-=5;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.FOREST) resistBonus =0;
+        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.VOLCANO) resistBonus-=5;
         return resistBonus;
     }
     /**

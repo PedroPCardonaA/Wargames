@@ -29,9 +29,9 @@ class SingletonTerrainTest {
                 void checkIfSingletonArmiesIsUnique(){
                     SingletonTerrain singletonTerrain1 = SingletonTerrain.getSingletonTerrain();
                     singletonTerrain1.setVolcanoAsTerrain();
-                    assertEquals("VOLCANO",singletonTerrain1.getTerrain());
+                    assertEquals(SingletonTerrain.Terrain.VOLCANO,singletonTerrain1.getTerrain());
                     SingletonTerrain singletonTerrain2 = SingletonTerrain.getSingletonTerrain();
-                    assertEquals("VOLCANO",singletonTerrain2.getTerrain());
+                    assertEquals(SingletonTerrain.Terrain.VOLCANO,singletonTerrain2.getTerrain());
                 }
             }
         }
@@ -45,7 +45,7 @@ class SingletonTerrainTest {
             void setForestAsTerrain(){
                 SingletonTerrain singletonTerrain1 = SingletonTerrain.getSingletonTerrain();
                 singletonTerrain1.setForestAsTerrain();
-                assertEquals("FOREST",singletonTerrain1.getTerrain());
+                assertEquals(SingletonTerrain.Terrain.FOREST,singletonTerrain1.getTerrain());
             }
         }
     }
@@ -57,7 +57,7 @@ class SingletonTerrainTest {
             void setHillsAsTerrain(){
                 SingletonTerrain singletonTerrain1 = SingletonTerrain.getSingletonTerrain();
                 singletonTerrain1.setHillsAsTerrain();
-                assertEquals("HILL",singletonTerrain1.getTerrain());
+                assertEquals(SingletonTerrain.Terrain.HILL,singletonTerrain1.getTerrain());
             }
         }
     }
@@ -69,7 +69,7 @@ class SingletonTerrainTest {
             void setPlainsAsTerrain(){
                 SingletonTerrain singletonTerrain1 = SingletonTerrain.getSingletonTerrain();
                 singletonTerrain1.setPlainsAsTerrain();
-                assertEquals("PLAINS",singletonTerrain1.getTerrain());
+                assertEquals(SingletonTerrain.Terrain.PLAINS,singletonTerrain1.getTerrain());
             }
         }
     }
@@ -81,7 +81,7 @@ class SingletonTerrainTest {
             void setVolcanoAsTerrain(){
                 SingletonTerrain singletonTerrain1 = SingletonTerrain.getSingletonTerrain();
                 singletonTerrain1.setVolcanoAsTerrain();
-                assertEquals("VOLCANO",singletonTerrain1.getTerrain());
+                assertEquals(SingletonTerrain.Terrain.VOLCANO,singletonTerrain1.getTerrain());
             }
         }
     }

@@ -13,7 +13,7 @@ public class SingletonTerrain {
     //I know that this enum is very overkill, but I really want to implement
     // an enum object in my project. I know that the best solution is only define the terrain
     // directly in methods setTerrain by using strings but using enum is pretty cool.
-    enum Terrain{
+    public enum Terrain{
         FOREST,
         HILL,
         PLAINS,
@@ -21,7 +21,7 @@ public class SingletonTerrain {
     }
 
     private static SingletonTerrain singletonTerrain = new SingletonTerrain();
-    private String terrain;
+    private Terrain terrain;
 
     /**
      * Private constructor of this class that only can be called by the method
@@ -45,31 +45,31 @@ public class SingletonTerrain {
      * Method that define forest as terrain of the battle.
      */
     public void setForestAsTerrain(){
-        terrain = Terrain.FOREST.name();
+        terrain = Terrain.FOREST;
     }
 
     /**
      * Method that define hill as terrain of the battle.
      */
     public void setHillsAsTerrain(){
-        terrain = Terrain.HILL.name();
+        terrain = Terrain.HILL;
     }
 
     /**
      * Method that define plains as terrain of the battle.
      */
     public void setPlainsAsTerrain(){
-        terrain = Terrain.PLAINS.name();
+        terrain = Terrain.PLAINS;
     }
 
     /**
      * Method that define volcano as terrain of the battle.
      */
     public void setVolcanoAsTerrain(){
-        terrain = Terrain.VOLCANO.name();
+        terrain = Terrain.VOLCANO;
     }
 
-    public String getTerrain(){
+    public Terrain getTerrain(){
         return terrain;
     }
 }

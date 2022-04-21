@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class DisplayArmyController extends MainPageController implements Initializable{
 
-    //TODO: Add JavaDoc for this class
+    //TODO: Add JavaDoc for this class.
     @FXML
     private Label armyNameDisplayUnits;
 
