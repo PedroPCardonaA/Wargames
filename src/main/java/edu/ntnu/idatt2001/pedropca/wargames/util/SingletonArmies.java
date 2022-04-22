@@ -53,7 +53,14 @@ public class SingletonArmies {
         return listOfArmies.get(index);
     }
 
-    public Army getArmyFromBackUp(int index){
+    /**
+     * Method that returns an army of the backup list by using the method get
+     * from list and a defined index that defines the position of the army in the list.
+     * @param index int - index of the army.
+     * @return Army - an army from the backup list of the army.
+     * @throws IllegalArgumentException if the defined index is negative.
+     */
+    public Army getArmyFromBackUp(int index) throws IllegalArgumentException{
         if(index<0) throw new IllegalArgumentException("The index of the armies cannot be negative. Define a correct index.");
         return listOfArmiesBackUp.get(index);
     }
@@ -66,6 +73,10 @@ public class SingletonArmies {
         this.listOfArmies.add(army);
     }
 
+    /**
+     * Method that add a new army into the backup list of armies.
+     * @param army Army - army to be added into the backup list of armies.
+     */
     public void putArmyInBackUp(Army army){
         this.listOfArmiesBackUp.add(army);
     }
@@ -77,6 +88,11 @@ public class SingletonArmies {
     public void removeArmy(Army army){
         this.listOfArmies.remove(army);
     }
+
+    /**
+     * Method that remove a defined army from the backup list of armies.
+     * @param army Army - army to be removed from the backup list of armies.
+     */
     public void removeArmyBackUp(Army army){
         this.listOfArmiesBackUp.remove(army);
     }
@@ -87,6 +103,10 @@ public class SingletonArmies {
     public void setEmptySingletonArmy(){
         this.listOfArmies.clear();
     }
+
+    /**
+     * Method that remove all the armies from the backup list of armies.
+     */
     public void setEmptyArmyBackUp(){
         this.listOfArmiesBackUp.clear();
     }

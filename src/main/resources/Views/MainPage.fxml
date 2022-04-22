@@ -52,7 +52,7 @@
                 </Label>
             <Label alignment="CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="493.0">
                <graphic>
-                  <ComboBox fx:id="terrainComboBox" onAction="#changeImage" promptText="Terrain" />
+                  <ComboBox fx:id="terrainComboBox" onAction="#updateTerrain" promptText="Terrain" />
                </graphic>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -138,7 +138,7 @@
                </children>
             </HBox>
             <Label />
-            <Button mnemonicParsing="false" text="Edit" />
+            <Button mnemonicParsing="false" onAction="#editArmyOne" text="Edit" />
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
               <items>
@@ -221,7 +221,7 @@
                </children>
             </HBox>
             <Label />
-            <Button mnemonicParsing="false" text="Edit" />
+            <Button mnemonicParsing="false" onAction="#editArmyTwo" text="Edit" />
             <Label />
             <MenuButton mnemonicParsing="false" text="Options">
                <items>

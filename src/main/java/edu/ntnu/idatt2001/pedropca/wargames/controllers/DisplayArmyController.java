@@ -30,8 +30,8 @@ public class DisplayArmyController extends MainPageController implements Initial
     @FXML
     private Button closeButton;
 
-    SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-    Army army = singletonArmies.getArmy(singletonArmies.getArmyNumber());
+    final private SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+    private Army army = singletonArmies.getArmy(singletonArmies.getArmyNumber());
 
     private void createTable(){
         if(tableView.getColumns().size()<4) {
@@ -80,19 +80,12 @@ public class DisplayArmyController extends MainPageController implements Initial
 
 
     @FXML
-    private void saveArmyAsFile(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save army as a file.");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-        File file = fileChooser.showSaveDialog(null);
-        if(file !=null){
-            try {
-                FileArmyHandler.writeAFile(new Army(army),file.getParent(),file.getName());
-            } catch (IOException e) {
-                this.showError("Error by saving the Army!","It was a error by saving the army as a file."
-                        , e.getMessage());
-            }
+    private void saveArmyAsFileFromDisplayArmyController(){
+        try {
+            this.saveArmyAsAFile(singletonArmies.getArmyNumber());
+        } catch (IOException e) {
+            this.showError("Error by saving the Army!","It was a error by saving the army as a file."
+                    , e.getMessage());
         }
     }
     private void showError(String tittle,String message,String text){
@@ -114,14 +107,14 @@ public class DisplayArmyController extends MainPageController implements Initial
                     if (army.getName().equals(singletonArmies.getArmy(1).getName())){
                         army.setName(army.getName()+"-2");
                     }
-                    this.updateArmyOneInBothListInTheSingleton(army,0);
+                    this.updateArmyInBothListInTheSingleton(army,0);
                     this.updateTable();
                 }
                 if(singletonArmies.getArmyNumber()==1){
                     if (army.getName().equals(singletonArmies.getArmy(0).getName())){
                         army.setName(army.getName()+"-2");
                     }
-                    this.updateArmyOneInBothListInTheSingleton(army,1);
+                    this.updateArmyInBothListInTheSingleton(army,1);
                     this.updateTable();
                 }
             }

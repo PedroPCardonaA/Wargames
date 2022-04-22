@@ -22,9 +22,9 @@
                <graphic>
                   <Button fx:id="closeButton" mnemonicParsing="false" onAction="#close" text="Return" />
                </graphic></Menu>
-            <Menu mnemonicParsing="false" onAction="#saveArmyAsFile">
+            <Menu mnemonicParsing="false" onAction="#saveArmyAsFileFromDisplayArmyController">
                <graphic>
-                  <Button mnemonicParsing="false" onAction="#saveArmyAsFile" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#saveArmyAsFileFromDisplayArmyController" text="Save" />
                </graphic></Menu>
             <Menu mnemonicParsing="false">
                <graphic>
