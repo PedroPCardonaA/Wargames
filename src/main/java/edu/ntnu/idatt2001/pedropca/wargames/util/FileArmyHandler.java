@@ -88,13 +88,13 @@ public class FileArmyHandler {
                     numberOfLine++;
                 }
             }
+            fr.close();
+            br.close();
+            return readArmy;
         }catch (Exception e){
             throw new IllegalArgumentException("The data of the file was corrupted or is not compatible" +
                     "with this program. \nThe error was: " + e.getMessage() +" In the line " +numberOfLine +" of the file.");
         }
-        br.close();
-        fr.close();
-        return readArmy;
     }
 
     /**

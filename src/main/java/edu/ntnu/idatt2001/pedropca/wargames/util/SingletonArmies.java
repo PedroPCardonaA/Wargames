@@ -45,15 +45,16 @@ public class SingletonArmies {
      * from list and a defined index that defines the position of the army in the list.
      * @param index int - index of the army.
      * @return Army - an army from the list of the army.
+     * @throws IllegalArgumentException if the defined index is negative.
      */
 
-    // I may define bounds for this and the next methods for the int index,
-    // but they will only call with defined indexes.
-    public Army getArmy(int index){
+    public Army getArmy(int index) throws IllegalArgumentException{
+        if(index<0) throw new IllegalArgumentException("The index of the armies cannot be negative. Define a correct index.");
         return listOfArmies.get(index);
     }
 
     public Army getArmyFromBackUp(int index){
+        if(index<0) throw new IllegalArgumentException("The index of the armies cannot be negative. Define a correct index.");
         return listOfArmiesBackUp.get(index);
     }
 

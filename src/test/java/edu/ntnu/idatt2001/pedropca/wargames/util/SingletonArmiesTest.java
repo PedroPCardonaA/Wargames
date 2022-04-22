@@ -64,7 +64,12 @@ class SingletonArmiesTest {
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
                 Army army = new Army("army");
                 singletonArmies.putArmy(army);
-                assertThrows(Exception.class,()->singletonArmies.getArmy(-10));
+                try {
+                    singletonArmies.getArmy(-10);
+                    fail();
+                }catch (IllegalArgumentException e){
+                    assertEquals("The index of the armies cannot be negative. Define a correct index.", e.getMessage());
+                }
             }
         }
     }
@@ -92,7 +97,12 @@ class SingletonArmiesTest {
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
                 Army army = new Army("army");
                 singletonArmies.putArmyInBackUp(army);
-                assertThrows(Exception.class,()->singletonArmies.getArmyFromBackUp(-10));
+                try {
+                    singletonArmies.getArmyFromBackUp(-10);
+                    fail();
+                }catch (IllegalArgumentException e){
+                    assertEquals("The index of the armies cannot be negative. Define a correct index.", e.getMessage());
+                }
             }
         }
     }
