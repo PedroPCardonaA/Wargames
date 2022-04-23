@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -99,28 +98,37 @@ public class DisplayArmyController extends MainPageController implements Initial
     @FXML
     private void loadFromAFile(){
         try {
-            File selectedFile = this.openFileChooser();
+            File selectedFile = this.openFileChooser("Open a army file").showOpenDialog(null);
             if(selectedFile!=null){
-
                 army = FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
-                if(singletonArmies.getArmyNumber()==0){
-                    if (army.getName().equals(singletonArmies.getArmy(1).getName())){
-                        army.setName(army.getName()+"-2");
-                    }
-                    this.updateArmyInBothListInTheSingleton(army,0);
-                    this.updateTable();
-                }
-                if(singletonArmies.getArmyNumber()==1){
-                    if (army.getName().equals(singletonArmies.getArmy(0).getName())){
-                        army.setName(army.getName()+"-2");
-                    }
-                    this.updateArmyInBothListInTheSingleton(army,1);
-                    this.updateTable();
-                }
+                this.checkName();
             }
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
                     , e.getMessage());
+        }
+    }
+
+    @FXML
+    private void generatedArmyDisplayArmyController(){
+        army = this.generateArmy(this.stringInputWindow(armyNameDisplayUnits.getScene().getWindow()));
+        this.checkName();
+    }
+
+    private void checkName() {
+        if(singletonArmies.getArmyNumber()==0){
+            if (army.getName().equals(singletonArmies.getArmy(1).getName())){
+                army.setName(army.getName()+"-2");
+            }
+            this.updateArmyInBothListInTheSingleton(army,0);
+            this.updateTable();
+        }
+        if(singletonArmies.getArmyNumber()==1){
+            if (army.getName().equals(singletonArmies.getArmy(0).getName())){
+                army.setName(army.getName()+"-2");
+            }
+            this.updateArmyInBothListInTheSingleton(army,1);
+            this.updateTable();
         }
     }
 

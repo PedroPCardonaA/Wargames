@@ -23,6 +23,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -229,7 +231,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void loadFromAFileArmyOne(){
         try {
-            File selectedFile = this.openFileChooser();
+            File selectedFile = this.openFileChooser("Open a army file").showOpenDialog(null);
             if (selectedFile !=null){
                 //This if sentence avoids a possible bug tha happens when the both armies have the same name
                 if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army2.getName())){
@@ -255,7 +257,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void loadFromAFileArmyTwo(){
         try {
-            File selectedFile = this.openFileChooser();
+            File selectedFile = this.openFileChooser("Open a army file").showOpenDialog(null);
             if(selectedFile!=null){
                 if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
                     army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
@@ -268,20 +270,6 @@ public class MainPageController implements Initializable {
             this.showError("Error by loading the file!","It was a error by reading the file."
                     , e.getMessage());
         }
-    }
-
-    /**
-     * Help method that returns an instance of class File by calling
-     * the method showOpenDialog of an instance of class fileChooser that
-     * allows the user to select a file from their local system.
-     * @return File - The selected file.
-     */
-    protected File openFileChooser(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open a army file");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-        return fileChooser.showOpenDialog(null);
     }
 
     /**
@@ -343,23 +331,36 @@ public class MainPageController implements Initializable {
         }
     }
 
-    //TODO: FINISH JAVADOC FROM HERE!!!!
     /**
-     * Help method that
-     * @param index
-     * @throws IOException
+     * Help method that save a defined army in with the help of help method
+     * openFileChooser that allow this method to define a folder to store the ary.
+     * @param index int - Index of the army to be stored.
+     * @throws IOException Static method writeAFile mat throw an IOException
      */
     protected void saveArmyAsAFile(int index) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save army as a file.");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-        File file = fileChooser.showSaveDialog(null);
+        File file = this.openFileChooser("Save army as a file.").showSaveDialog(null);
         if(file !=null){
             FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(index)),file.getParent(),file.getName());
         }
     }
 
+    /**
+     * Help method that returns an instance of the Class FIleChooser from javaFX.
+     * @param title String - Tittle of the FileChooser instance.
+     * @return FileChooser instance.
+     */
+    protected FileChooser openFileChooser(String title){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
+                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
+        return fileChooser;
+    }
+
+    /**
+     * Method that open a new window with all units of army 1 by calling the help method displayAllUnits.
+     * It can be called by the javaFx object of the FXML file MainPage.
+     */
     @FXML
     private void displayAllUnitsFromArmyOne(){
         try {
@@ -371,6 +372,10 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Method that open a new window with all units of army 2 by calling the help method displayAllUnits.
+     * It can be called by the javaFx object of the FXML file MainPage.
+     */
     @FXML
     private void displayAllUnitsFromArmyTwo(){
         try {
@@ -382,34 +387,26 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Help method that load the FXML file DisplayArmy and open it as a new window
+     * by calling the help method openNewScene.
+     * @throws IOException the help method openNewScene may throw IOExceptions
+     */
     private void displayAllUnits() throws IOException{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Views/displayArmy.fxml")));
-        Stage stage = new Stage();
-        stage.setTitle("Display Units");
-        editSceneData(root, stage);
+        this.openNewScene("/Views/DisplayArmy.fxml", "Display Units");
     }
 
-    private void showError(String tittle,String message,String text){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.setTitle(tittle);
-        alert.setHeaderText(message);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
-    private void showAlert(String tittle,String message,String text){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.setTitle(tittle);
-        alert.setHeaderText(message);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
-
+    /**
+     * Method that defined army stored in the field army1 as a pre-defined army.
+     * The user has the possibility to change the name of the pre-define army.
+     * This method gets help from methods generateArmy, stringInputWindow, updateArmyInBothListInTheSingleton
+     * and update view.
+     * It can be called by the javaFx object of the FXML file MainPage.
+     */
     @FXML
     private void generateArmy1(){
         try {
-            army1 = new Army(this.generateArmy(stringInputWindow()));
+            army1 = new Army(this.generateArmy(stringInputWindow(armyOneName.getScene().getWindow())));
             if(army1.getName().equals(army2.getName())){
                 army1.setName(army1.getName() +"-2");
             }
@@ -420,10 +417,17 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Method that defined army stored in the field army2 as a pre-defined army.
+     * The user has the possibility to change the name of the pre-define army.
+     * This method gets help from methods generateArmy, stringInputWindow, updateArmyInBothListInTheSingleton
+     * and update view.
+     * It can be called by the javaFx object of the FXML file MainPage.
+     */
     @FXML
     private void generateArmy2(){
         try {
-            army2 = new Army(this.generateArmy(stringInputWindow()));
+            army2 = new Army(this.generateArmy(stringInputWindow(armyOneName.getScene().getWindow())));
             if(army2.getName().equals(army1.getName())){
                 army2.setName(army1.getName() +"-2");
             }
@@ -434,10 +438,36 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Method that returns an army that gets name from the signature
+     * adn with some pre-define units.
+     * @param name String - Name of the army.
+     * @return Army - The new generated army.
+     * @throws IllegalArgumentException The constructor of class Army may throw an IllegalArgumentException
+     */
+    protected @NotNull Army generateArmy(String name) throws IllegalArgumentException{
+        Army army = new Army( name);
+        List<Unit> mixedList = new ArrayList<>();
+        for(int i =0;i<50;i++){
+            mixedList.add(new CavalryUnit("CAVALRY",100));
+            mixedList.add(new RangedUnit("Ranged",100));
+            mixedList.add(new InfantryUnit("Infantry",100));
+            mixedList.add(new MagicianUnit("Magician",100));
+        }
+        mixedList.add(new CommanderUnit("Commander",250));
+        army.addAll(mixedList);
+        return army;
+    }
 
-    private String stringInputWindow(){
+    /**
+     * Method that return a direct input string from the user by opening a new window
+     * field a text field where the user can introduce the name of the new army.
+     * @param parentWindow Window - Window where this method was called from.
+     * @return String - Name of the army
+     */
+    protected String stringInputWindow(Window parentWindow){
         Stage stringInputWindow = new Stage();
-        stringInputWindow.initOwner(armyOneName.getScene().getWindow());
+        stringInputWindow.initOwner(parentWindow);
         stringInputWindow.initModality(Modality.WINDOW_MODAL);
         VBox box = new VBox(20);
         box.setAlignment(Pos.CENTER);
@@ -463,20 +493,11 @@ public class MainPageController implements Initializable {
         return commentBox.getText();
     }
 
-    private Army generateArmy(String name) throws IllegalArgumentException{
-        Army army = new Army( name);
-        List<Unit> mixedList = new ArrayList<>();
-        for(int i =0;i<50;i++){
-            mixedList.add(new CavalryUnit("CAVALRY",100));
-            mixedList.add(new RangedUnit("Ranged",100));
-            mixedList.add(new InfantryUnit("Infantry",100));
-            mixedList.add(new MagicianUnit("Magician",100));
-        }
-        mixedList.add(new CommanderUnit("Commander",250));
-        army.addAll(mixedList);
-        return army;
-    }
-
+    /**
+     * Method that open a new window where is possible editing the army contained in the field army1
+     * by calling the help method openEditArmyWindow.
+     * It can be called by the javaFx object of the FXML file MainPage.
+     */
     @FXML
     private void editArmyOne(){
         try {
@@ -488,6 +509,11 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Method that open a new window where is possible editing the army contained in the field army2
+     * by calling the help method openEditArmyWindow.
+     * It can be called by the javaFx object of the FXML file MainPage.
+     */
     @FXML
     private void editArmyTwo(){
         try {
@@ -499,14 +525,24 @@ public class MainPageController implements Initializable {
         }
     }
 
+    /**
+     * Help method that load the FXML file EditingArmy and open it as a new window
+     * by calling the help method openNewScene.
+     * @throws IOException the help method openNewScene may throw IOExceptions
+     */
     private void openEditArmyWindow() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Views/editingArmy.fxml")));
-        Stage stage = new Stage();
-        stage.setTitle("Editing army");
-        this.editSceneData(root, stage);
+        this.openNewScene("/Views/EditingArmy.fxml", "Editing army");
     }
 
-    private void editSceneData(Parent root, Stage stage) {
+    /**
+     * Help method that open a new scene with a defined path and tittle.
+     * @param path String - Path of the field to load.
+     * @param title String - Tittle of the new window.
+     */
+    private void openNewScene(String path,String title) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
+        Stage stage = new Stage();
+        stage.setTitle(title);
         stage.setScene(new Scene(root));
         stage.initOwner(armyOneName.getScene().getWindow());
         stage.initModality(Modality.WINDOW_MODAL);
@@ -517,13 +553,10 @@ public class MainPageController implements Initializable {
     }
 
     /**
-     * Method for a button in the menu bar that close the program.
+     * Method that update data in the unique instance of SingletonTerrain class and
+     * change the images contained in the terrain image view according to new terrain.
+     * It can be called by the javaFx object of the FXML file MainPage.
      */
-    @FXML
-    private void closeTheProgramButton(){
-        Platform.exit();
-    }
-
     @FXML
     private void updateTerrain(){
         try {
@@ -555,4 +588,42 @@ public class MainPageController implements Initializable {
     private void updateImageView(String imagePath) throws FileNotFoundException {
         terrainImageView.setImage(new Image(new FileInputStream(imagePath)));
     }
+
+    /**
+     * Method that generates and shows an error alert with a title, message and text defined in the signature.
+     * @param title String - Title of the alert.
+     * @param message String - message of the alert.
+     * @param text String - text of the alert.
+     */
+    private void showError(String title,String message,String text){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.setTitle(title);
+        alert.setHeaderText(message);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
+
+    /**
+     * Method that generates and shows an information alert with a title, message and text defined in the signature.
+     * @param title String - Title of the alert.
+     * @param message String - message of the alert.
+     * @param text String - text of the alert.
+     */
+    private void showAlert(String title,String message,String text){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.setTitle(title);
+        alert.setHeaderText(message);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
+    /**
+     * Method for a button in the menu bar that close the program.
+     */
+    @FXML
+    private void closeTheProgramButton(){
+        Platform.exit();
+    }
+
 }

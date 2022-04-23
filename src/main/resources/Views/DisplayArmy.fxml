@@ -30,6 +30,11 @@
                <graphic>
                   <Button mnemonicParsing="false" onAction="#loadFromAFile" text="Load" />
                </graphic></Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" onAction="#generatedArmyDisplayArmyController" text="Generate" />
+               </graphic>
+            </Menu>
          </menus>
       </MenuBar>
    </children>
