@@ -19,7 +19,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * DisplayArmyController class that controls over the FXML file DisplayArmy.fxml
+ * DisplayArmyController class that is a part of the Controller hierarchy, extends
+ * the class Controller and controls over the FXML file DisplayArmy.fxml
  * by defining all relevant JavaFx object in the FXML and all methods
  * that user can call them by interacting with the JavaFX objects.
  * This class has two fields, one SingletonArmies instance and one Army instance,
@@ -116,8 +117,8 @@ public class DisplayArmyController extends Controller implements Initializable{
     }
 
     /**
-     * Method that save the current army by calling the protected method from the super class
-     *
+     * Method that save the current army by calling the help method saveArmyAsAFile.
+     * It can be called by the javaFx object of the FXML file DisplayArmy.
      */
     @FXML
     private void saveArmyAsFileFromDisplayArmyController(){
@@ -129,13 +130,22 @@ public class DisplayArmyController extends Controller implements Initializable{
         }
     }
 
+    /**
+     * Method that open a file from the local system by calling the method openFileChooser, defines file's path,
+     * runs method readAFileArmy from FileArmyHandler class and define army as the result of it,
+     * and calls help checkName.
+     * This method calls help method updateArmyOneInBothListInTheSingleton to update
+     * the both list of armies in SingletonArmies class correctly.
+     * It can be called by the javaFx object of the FXML file DisplayArmy.
+     */
     @FXML
     private void loadFromAFile(){
         try {
             File selectedFile = this.openFileChooser("Open a army file").showOpenDialog(null);
             if(selectedFile!=null){
                 army = FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
-                this.checkName();
+                this.checkNameAndUpdateSingleton(army);
+                this.updateTable();
             }
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
@@ -143,29 +153,29 @@ public class DisplayArmyController extends Controller implements Initializable{
         }
     }
 
+    /**
+     * Method that defined army stored in the field army as a pre-defined army.
+     * The user has the possibility to change the name of the pre-define army.
+     * This method gets help from methods generateArmy, stringInputWindow, updateArmyInBothListInTheSingleton
+     * and update view.
+     * It can be called by the javaFx object of the FXML file DisplayArmy.
+     */
     @FXML
     private void generatedArmyDisplayArmyController(){
-        army = this.generateArmy(this.stringInputWindow(armyNameDisplayUnits.getScene().getWindow()));
-        this.checkName();
+        try {
+            army = this.generateArmy(this.stringInputWindow(armyNameDisplayUnits.getScene().getWindow()));
+            this.checkNameAndUpdateSingleton(army);
+            this.updateTable();
+        }catch (Exception e){
+            this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
+        }
+
     }
 
-    private void checkName() {
-        if(singletonArmies.getArmyNumber()==0){
-            if (army.getName().equals(singletonArmies.getArmy(1).getName())){
-                army.setName(army.getName()+"-2");
-            }
-            this.updateArmyInBothListInTheSingleton(army,0);
-            this.updateTable();
-        }
-        if(singletonArmies.getArmyNumber()==1){
-            if (army.getName().equals(singletonArmies.getArmy(0).getName())){
-                army.setName(army.getName()+"-2");
-            }
-            this.updateArmyInBothListInTheSingleton(army,1);
-            this.updateTable();
-        }
-    }
-
+    /**
+     * Method for close the current stage.
+     * It can be called by the javaFx object of the FXML file DisplayArmy.
+     */
     @FXML
     private void close(){
         Stage stage = (Stage) closeButton.getScene().getWindow();

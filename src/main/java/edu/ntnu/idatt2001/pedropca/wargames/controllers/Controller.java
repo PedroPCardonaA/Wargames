@@ -166,4 +166,19 @@ public abstract class Controller {
         alert.setContentText(text);
         alert.showAndWait();
     }
+
+    protected void checkNameAndUpdateSingleton(Army army) {
+        if(singletonArmies.getArmyNumber()==0){
+            if (army.getName().equals(singletonArmies.getArmy(1).getName())){
+                army.setName(army.getName()+"-2");
+            }
+            this.updateArmyInBothListInTheSingleton(army,0);
+        }
+        if(singletonArmies.getArmyNumber()==1){
+            if (army.getName().equals(singletonArmies.getArmy(0).getName())){
+                army.setName(army.getName()+"-2");
+            }
+            this.updateArmyInBothListInTheSingleton(army,1);
+        }
+    }
 }

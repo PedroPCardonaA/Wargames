@@ -34,7 +34,8 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * MainPageController class that controls over the FXML file MainPage.fxml
+ * MainPageController class that is a part of the Controller hierarchy, extends
+ * the class Controller and that controls over the FXML file MainPage.fxml
  * by defining all relevant JavaFx object in the FXML and all methods
  * that user can call them by interacting with the JavaFX objects.
  * This class has four normal java fields, one SingletonArmies instance, one singletonTerrain instance
@@ -210,10 +211,10 @@ public class MainPageController extends Controller implements Initializable {
 
     /**
      * Method that open a file from the local system by calling the method openFileChooser, defines file's path,
-     * run method readAFileArmy from the army1 object and calls help method updateView.
+     * runs method readAFileArmy from FileArmyHandler class and define army1 as the result of it,
+     * and calls help method updateView.
      * This method calls help method updateArmyOneInBothListInTheSingleton to update
      * the both list of armies in SingletonArmies class correctly.
-     * The list are the main list of armies and a backUp list of armies.
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
@@ -236,10 +237,10 @@ public class MainPageController extends Controller implements Initializable {
 
     /**
      * Method that open a file from the local system by calling the method openFileChooser, defines file's path,
-     * run method readAFileArmy from the army2 object and calls help method updateView.
+     * runs method readAFileArmy from FileArmyHandler class and define army2 as the result of it,
+     * and calls help method updateView.
      * This method calls help method updateArmyOneInBothListInTheSingleton to update
      * the both list of armies in SingletonArmies class correctly.
-     * The list are the main list of armies and a backUp list of armies.
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
