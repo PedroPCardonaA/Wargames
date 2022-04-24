@@ -36,15 +36,15 @@ import java.util.*;
 /**
  * MainPageController class that controls over the FXML file MainPage.fxml
  * by defining all relevant JavaFx object in the FXML and all methods
- * that user can call from the FXML file.
- * This class has four fields, one SingletonArmies instance, one singletonTerrain instance
- * and two armies instances.
+ * that user can call them by interacting with the JavaFX objects.
+ * This class has four normal java fields, one SingletonArmies instance, one singletonTerrain instance
+ * and two armies instances and several JavaFX fields.
  *
  * @author Pedro Cardona
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-public class MainPageController implements Initializable {
+public class MainPageController extends Controller implements Initializable {
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private final SingletonTerrain singletonTerrain =SingletonTerrain.getSingletonTerrain();
     private Army army1 = new Army(singletonArmies.getArmy(0));
@@ -125,7 +125,7 @@ public class MainPageController implements Initializable {
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
-    protected void simulateBattle(){
+    private void simulateBattle(){
         this.checkContainOfSingletonTerrain();
         Battle battle = new Battle(army1,army2);
         Army winner = battle.simulate();
@@ -171,18 +171,6 @@ public class MainPageController implements Initializable {
     }
 
     /**
-     * Method that update the current field armies into the unique instance of
-     * SingletonArmies class.
-     * @param armyOne Army - Army saved on the field army1 of this class
-     * @param armyTwo Army - Army saved on the field army2 of this class
-     */
-    protected void updateArmiesInSingleton(Army armyOne, Army armyTwo){
-        singletonArmies.setEmptySingletonArmy();
-        singletonArmies.putArmy(new Army(armyOne));
-        singletonArmies.putArmy(new Army(armyTwo));
-    }
-
-    /**
      * Method that "Resets" the main armies by defined them as copies of the back-up armies.
      * After the restarting of the armies' method updates the GUI by calling help method updateView().
      */
@@ -200,10 +188,10 @@ public class MainPageController implements Initializable {
      */
     @SuppressWarnings("DuplicatedCode")
     // I had to suppress the warnings of DuplicateCode because IntelliJ cannot
-    // differentiate the JavaFx objects and understand that I repeat the same
+    // differentiate the JavaFx objects, and it understands that I repeat the same
     // lines of commands twice.
     @FXML
-    protected void updateView(){
+    private void updateView(){
         armyOneName.setText(army1.getName());
         totalArmy1.setText(army1.getAllUnits().size()+"");
         infantryArmy1.setText(army1.getInfantryUnits().size()+"");
@@ -273,35 +261,6 @@ public class MainPageController implements Initializable {
     }
 
     /**
-     * Help method that update one of the armies in both list in the unique instance of
-     * SingletonArmies class without changing the other army saved on the lists.
-     * @param army Army - the army to be updated.
-     * @param index int - the index of the armies on the list.
-     */
-    protected void updateArmyInBothListInTheSingleton(Army army, int index){
-        if(index == 0){
-            Army save = singletonArmies.getArmy(1);
-            Army saveBackUp = singletonArmies.getArmyFromBackUp(1);
-            singletonArmies.setEmptySingletonArmy();
-            singletonArmies.setEmptyArmyBackUp();
-            singletonArmies.putArmy(new Army(army));
-            singletonArmies.putArmy(new Army(save));
-            singletonArmies.putArmyInBackUp(new Army(army));
-            singletonArmies.putArmyInBackUp(new Army(saveBackUp));
-        }
-        else{
-            Army save = singletonArmies.getArmy(0);
-            Army saveBackUp = singletonArmies.getArmyFromBackUp(0);
-            singletonArmies.setEmptySingletonArmy();
-            singletonArmies.setEmptyArmyBackUp();
-            singletonArmies.putArmy(new Army(save));
-            singletonArmies.putArmy(new Army(army));
-            singletonArmies.putArmyInBackUp(new Army(saveBackUp));
-            singletonArmies.putArmyInBackUp(new Army(army));
-        }
-    }
-
-    /**
      * Method that save the army stored in the field army1 of this class as a file
      * by calling the help method saveArmyAsAFile().
      * It can be called by the javaFx object of the FXML file MainPage.
@@ -331,31 +290,7 @@ public class MainPageController implements Initializable {
         }
     }
 
-    /**
-     * Help method that save a defined army in with the help of help method
-     * openFileChooser that allow this method to define a folder to store the ary.
-     * @param index int - Index of the army to be stored.
-     * @throws IOException Static method writeAFile mat throw an IOException
-     */
-    protected void saveArmyAsAFile(int index) throws IOException {
-        File file = this.openFileChooser("Save army as a file.").showSaveDialog(null);
-        if(file !=null){
-            FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(index)),file.getParent(),file.getName());
-        }
-    }
 
-    /**
-     * Help method that returns an instance of the Class FIleChooser from javaFX.
-     * @param title String - Tittle of the FileChooser instance.
-     * @return FileChooser instance.
-     */
-    protected FileChooser openFileChooser(String title){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(title);
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV","*.csv"),
-                new FileChooser.ExtensionFilter("TXT - serializable","*.txt"));
-        return fileChooser;
-    }
 
     /**
      * Method that open a new window with all units of army 1 by calling the help method displayAllUnits.
@@ -438,60 +373,7 @@ public class MainPageController implements Initializable {
         }
     }
 
-    /**
-     * Method that returns an army that gets name from the signature
-     * adn with some pre-define units.
-     * @param name String - Name of the army.
-     * @return Army - The new generated army.
-     * @throws IllegalArgumentException The constructor of class Army may throw an IllegalArgumentException
-     */
-    protected @NotNull Army generateArmy(String name) throws IllegalArgumentException{
-        Army army = new Army( name);
-        List<Unit> mixedList = new ArrayList<>();
-        for(int i =0;i<50;i++){
-            mixedList.add(new CavalryUnit("CAVALRY",100));
-            mixedList.add(new RangedUnit("Ranged",100));
-            mixedList.add(new InfantryUnit("Infantry",100));
-            mixedList.add(new MagicianUnit("Magician",100));
-        }
-        mixedList.add(new CommanderUnit("Commander",250));
-        army.addAll(mixedList);
-        return army;
-    }
 
-    /**
-     * Method that return a direct input string from the user by opening a new window
-     * field a text field where the user can introduce the name of the new army.
-     * @param parentWindow Window - Window where this method was called from.
-     * @return String - Name of the army
-     */
-    protected String stringInputWindow(Window parentWindow){
-        Stage stringInputWindow = new Stage();
-        stringInputWindow.initOwner(parentWindow);
-        stringInputWindow.initModality(Modality.WINDOW_MODAL);
-        VBox box = new VBox(20);
-        box.setAlignment(Pos.CENTER);
-        TextField commentBox = new TextField();
-        commentBox.setPromptText("Enter the name of the army.");
-        commentBox.setFocusTraversable(false);
-        commentBox.setAlignment(Pos.CENTER);
-        commentBox.setMinHeight(Control.USE_COMPUTED_SIZE);
-        commentBox.setMinWidth(Control.USE_COMPUTED_SIZE);
-        Label commentLabel = new Label("Enter the name of the Army: ");
-        commentLabel.setFont(Font.font("Papyrus", FontWeight.BOLD,24));
-        commentLabel.setMinHeight(Control.USE_COMPUTED_SIZE);
-        commentLabel.setMinWidth(Control.USE_COMPUTED_SIZE);
-        Button button = new Button("Enter name.");
-        button.setOnAction(actionEvent -> {
-            Stage stage = (Stage) button.getScene().getWindow();
-            stage.close();
-            actionEvent.consume();
-        });
-        box.getChildren().addAll(commentLabel,commentBox,button);
-        stringInputWindow.setScene(new Scene(box,375,150));
-        stringInputWindow.showAndWait();
-        return commentBox.getText();
-    }
 
     /**
      * Method that open a new window where is possible editing the army contained in the field army1
@@ -589,20 +471,6 @@ public class MainPageController implements Initializable {
         terrainImageView.setImage(new Image(new FileInputStream(imagePath)));
     }
 
-    /**
-     * Method that generates and shows an error alert with a title, message and text defined in the signature.
-     * @param title String - Title of the alert.
-     * @param message String - message of the alert.
-     * @param text String - text of the alert.
-     */
-    private void showError(String title,String message,String text){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.setTitle(title);
-        alert.setHeaderText(message);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
 
     /**
      * Method that generates and shows an information alert with a title, message and text defined in the signature.

@@ -15,7 +15,7 @@
             <Font name="Papyrus" size="40.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" />
+      <TableView fx:id="armyTableView" />
       <MenuBar>
          <menus>
             <Menu mnemonicParsing="false" onAction="#close">

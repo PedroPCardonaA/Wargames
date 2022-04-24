@@ -11,20 +11,31 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DisplayArmyController extends MainPageController implements Initializable{
+/**
+ * DisplayArmyController class that controls over the FXML file DisplayArmy.fxml
+ * by defining all relevant JavaFx object in the FXML and all methods
+ * that user can call them by interacting with the JavaFX objects.
+ * This class has two fields, one SingletonArmies instance and one Army instance,
+ * and several JavaFx fields.
+ *
+ * @author Pedro Cardona
+ * @version 1.0
+ * @since 1.0-SNAPSHOT
+ */
+public class DisplayArmyController extends Controller implements Initializable{
 
-    //TODO: Add JavaDoc for this class.
     @FXML
     private Label armyNameDisplayUnits;
 
     @FXML
-    private TableView<Unit> tableView;
+    private TableView<Unit> armyTableView;
 
     @FXML
     private Button closeButton;
@@ -32,8 +43,27 @@ public class DisplayArmyController extends MainPageController implements Initial
     final private SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army = singletonArmies.getArmy(singletonArmies.getArmyNumber());
 
+
+    /**
+     * Initialize method that is called after its root element is loaded.
+     * Method that add all the needed columns to the TableView armyTableView and
+     * add all the units of army to the table by calling the help method createTable and UpdateTable;
+     *
+     * @param url url - The location of the fxml file.
+     * @param resourceBundle ResourceBundle - The resource used to localize the root object.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.createTable();
+        this.updateTable();
+    }
+
+    /**
+     * Help method that adds the columns that represents the fields of the class unit
+     * into the TableView armyTableView.
+     */
     private void createTable(){
-        if(tableView.getColumns().size()<4) {
+        if(armyTableView.getColumns().size()<4) {
 
             TableColumn<Unit, String> column1 = new TableColumn<>("Name");
             column1.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -62,22 +92,33 @@ public class DisplayArmyController extends MainPageController implements Initial
             TableColumn<Unit, String> column9 = new TableColumn<>("Critic damage");
             column9.setCellValueFactory(new PropertyValueFactory<>("criticDamage"));
 
-            tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9);
+            armyTableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9);
         }
     }
 
-    private ObservableList<Unit> getAllUnitsFromArmy(){
-        ObservableList<Unit> units = FXCollections.observableArrayList();
-        units.addAll(army.getAllUnits());
-        return units;
+    /**
+     * Help method that change the text in the label armyNameDisplayUnits to
+     * the current name of the army and update the units into the TableView armyTableView
+     * by calling the help method getAllUnitsFromArmy.
+     */
+    private void updateTable(){
+        armyNameDisplayUnits.setText(army.getName());
+        armyTableView.setItems(this.getAllUnitsFromArmy());
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.updateTable();
+    /**
+     * Help method that converts the list of units from army into
+     * en ObservableList of units. It is necessary to show the units in a TableView.
+     * @return ObservableArrayList - ObservableArrayList with Units.
+     */
+    private @NotNull ObservableList<Unit> getAllUnitsFromArmy(){
+        return FXCollections.observableList(army.getAllUnits());
     }
 
-
+    /**
+     * Method that save the current army by calling the protected method from the super class
+     *
+     */
     @FXML
     private void saveArmyAsFileFromDisplayArmyController(){
         try {
@@ -87,14 +128,7 @@ public class DisplayArmyController extends MainPageController implements Initial
                     , e.getMessage());
         }
     }
-    private void showError(String tittle,String message,String text){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(tittle);
-        alert.setHeaderText(message);
-        alert.setContentText(text);
-        alert.setResizable(true);
-        alert.showAndWait();
-    }
+
     @FXML
     private void loadFromAFile(){
         try {
@@ -137,10 +171,5 @@ public class DisplayArmyController extends MainPageController implements Initial
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
-    
-    private void updateTable(){
-        armyNameDisplayUnits.setText(army.getName());
-        tableView.setItems(this.getAllUnitsFromArmy());
-        this.createTable();
-    }
+
 }
