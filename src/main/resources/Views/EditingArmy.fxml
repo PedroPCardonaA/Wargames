@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.EditingArmyController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.EditingArmyController">
    <top>
       <Label text="Editing army" textFill="#ff1919" BorderPane.alignment="CENTER">
          <font>
@@ -25,15 +25,18 @@
                </font>
             </Label>
             <ListView />
-            <HBox>
+            <HBox spacing="6.0">
                <children>
-                  <Label text="Number of units to delete:">
+                  <Label text="Number of unit to delete:">
                      <font>
-                        <Font name="Papyrus" size="18.0" />
+                        <Font name="Papyrus" size="20.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="39.0" prefWidth="51.0" promptText="15" />
+                  <TextField fx:id="numberToDelete" prefHeight="39.0" prefWidth="51.0" promptText="15" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </VBox.margin>
             </HBox>
             <Button mnemonicParsing="false" text="Delete Unit" />
          </children>
@@ -43,19 +46,147 @@
       </VBox>
    </left>
    <center>
-      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="TOP_CENTER" spacing="6.0">
                <children>
                   <Label text="Name of the army: ">
                      <font>
-                        <Font name="Papyrus" size="18.0" />
+                        <Font name="Papyrus" size="20.0" />
                      </font>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="nameOfTheArmy" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </VBox.margin>
+            </HBox>
+            <Label prefHeight="9.0" prefWidth="144.0" />
+            <Label text="Add Unit" textFill="#ff1919">
+               <font>
+                  <Font name="Papyrus" size="28.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="unitType" prefWidth="150.0" promptText="Unit type" />
+            <HBox alignment="TOP_CENTER" spacing="6.0">
+               <VBox.margin>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </VBox.margin>
+               <children>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" spacing="6.0">
+                           <children>
+                              <Label text="Name:">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="name" prefHeight="39.0" prefWidth="73.0" promptText="Name" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="6.0">
+                           <children>
+                              <Label text="Attack:">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="attack" prefHeight="39.0" prefWidth="73.0" promptText="25" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" spacing="6.0">
+                           <children>
+                              <Label text="Attack Speed:">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="attackSpeed" prefHeight="39.0" prefWidth="73.0" promptText="2" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="88.0" spacing="6.0">
+                           <children>
+                              <Label text="Critical rate:">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="criticalRate" prefHeight="39.0" prefWidth="73.0" promptText="25" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <HBox alignment="TOP_RIGHT" spacing="6.0">
+                           <children>
+                              <Label text="Health">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="health" prefHeight="39.0" prefWidth="73.0" promptText="100" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" spacing="6.0">
+                           <children>
+                              <Label text="Armor:">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="armor" prefHeight="39.0" prefWidth="73.0" promptText="12" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="49.0" spacing="6.0">
+                           <children>
+                              <Label text="Accuracy: ">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="accuracy" prefHeight="39.0" prefWidth="73.0" promptText="70" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="88.0" spacing="6.0">
+                           <children>
+                              <Label text="Critical damage:">
+                                 <font>
+                                    <Font name="Papyrus" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="criticalDamage" prefHeight="39.0" prefWidth="73.0" promptText="145" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
+            <HBox alignment="TOP_CENTER" spacing="6.0">
+               <children>
+                  <Label text="Number of unit to add:">
+                     <font>
+                        <Font name="Papyrus" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="numberToAdd" prefHeight="39.0" prefWidth="46.0" promptText="25" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" text="Add unit" />
+            <Label prefHeight="9.0" prefWidth="144.0" />
+            <MenuButton mnemonicParsing="false" text="Options">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Generate Army" />
+                <MenuItem mnemonicParsing="false" text="Load an army" />
+                  <MenuItem mnemonicParsing="false" text="Save the army" />
+                  <MenuItem mnemonicParsing="false" text="Return" />
+              </items>
+            </MenuButton>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </BorderPane.margin>
       </VBox>
    </center>
 </BorderPane>
