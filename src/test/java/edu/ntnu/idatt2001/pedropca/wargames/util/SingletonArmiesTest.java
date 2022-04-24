@@ -68,7 +68,19 @@ class SingletonArmiesTest {
                     singletonArmies.getArmy(-10);
                     fail();
                 }catch (IllegalArgumentException e){
-                    assertEquals("The index of the armies cannot be negative. Define a correct index.", e.getMessage());
+                    assertEquals("The index of the armies has to be 0 or 1. Define a correct index.", e.getMessage());
+                }
+            }
+            @Test
+            void getAnArmyFromSingletonWithATwoAsIndex(){
+                SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+                Army army = new Army("army");
+                singletonArmies.putArmy(army);
+                try {
+                    singletonArmies.getArmy(2);
+                    fail();
+                }catch (IllegalArgumentException e){
+                    assertEquals("The index of the armies has to be 0 or 1. Define a correct index.", e.getMessage());
                 }
             }
         }
@@ -101,7 +113,19 @@ class SingletonArmiesTest {
                     singletonArmies.getArmyFromBackUp(-10);
                     fail();
                 }catch (IllegalArgumentException e){
-                    assertEquals("The index of the armies cannot be negative. Define a correct index.", e.getMessage());
+                    assertEquals("The index of the armies has to be 0 or 1. Define a correct index.", e.getMessage());
+                }
+            }
+            @Test
+            void getAnArmyFromSingletonWithATwoAsIndex(){
+                SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+                Army army = new Army("army");
+                singletonArmies.putArmy(army);
+                try {
+                    singletonArmies.getArmyFromBackUp(2);
+                    fail();
+                }catch (IllegalArgumentException e){
+                    assertEquals("The index of the armies has to be 0 or 1. Define a correct index.", e.getMessage());
                 }
             }
         }

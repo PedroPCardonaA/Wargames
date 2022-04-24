@@ -49,7 +49,7 @@ public class SingletonArmies {
      */
 
     public Army getArmy(int index) throws IllegalArgumentException{
-        if(index<0) throw new IllegalArgumentException("The index of the armies cannot be negative. Define a correct index.");
+        if(!(index==0)&&!(index==1)) throw new IllegalArgumentException("The index of the armies has to be 0 or 1. Define a correct index.");
         return listOfArmies.get(index);
     }
 
@@ -61,7 +61,9 @@ public class SingletonArmies {
      * @throws IllegalArgumentException if the defined index is negative.
      */
     public Army getArmyFromBackUp(int index) throws IllegalArgumentException{
-        if(index<0) throw new IllegalArgumentException("The index of the armies cannot be negative. Define a correct index.");
+        //Bounding od index is not necessary because it will be nky called internally.
+        // But I want to have it likewise.
+        if(!(index==0)&&!(index==1)) throw new IllegalArgumentException("The index of the armies has to be 0 or 1. Define a correct index.");
         return listOfArmiesBackUp.get(index);
     }
 
