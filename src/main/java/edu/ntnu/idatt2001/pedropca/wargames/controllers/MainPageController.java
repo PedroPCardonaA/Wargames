@@ -213,8 +213,7 @@ public class MainPageController extends Controller implements Initializable {
      * Method that open a file from the local system by calling the method openFileChooser, defines file's path,
      * runs method readAFileArmy from FileArmyHandler class and define army1 as the result of it,
      * and calls help method updateView.
-     * This method calls help method updateArmyOneInBothListInTheSingleton to update
-     * the both list of armies in SingletonArmies class correctly.
+     * This method calls help method checkNameAndUpdateSingleton.
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
@@ -222,13 +221,11 @@ public class MainPageController extends Controller implements Initializable {
         try {
             File selectedFile = this.openFileChooser("Open a army file").showOpenDialog(null);
             if (selectedFile !=null){
-                //This if sentence avoids a possible bug tha happens when the both armies have the same name
-                if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army2.getName())){
-                    army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                    army1.setName(army2.getName()+"-2");
-                }else army1 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                this.updateArmyInBothListInTheSingleton(army1,0);
-                this.updateView();}
+                singletonArmies.setArmyNumber(0);
+                this.checkNameAndUpdateSingleton(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                army1 = singletonArmies.getArmy(0);
+                this.updateView();
+            }
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
                     , e.getMessage());
@@ -239,8 +236,7 @@ public class MainPageController extends Controller implements Initializable {
      * Method that open a file from the local system by calling the method openFileChooser, defines file's path,
      * runs method readAFileArmy from FileArmyHandler class and define army2 as the result of it,
      * and calls help method updateView.
-     * This method calls help method updateArmyOneInBothListInTheSingleton to update
-     * the both list of armies in SingletonArmies class correctly.
+     * This method calls help method checkNameAndUpdateSingleton.
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
@@ -248,11 +244,9 @@ public class MainPageController extends Controller implements Initializable {
         try {
             File selectedFile = this.openFileChooser("Open a army file").showOpenDialog(null);
             if(selectedFile!=null){
-                if(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()).getName().equals(army1.getName())){
-                    army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                    army2.setName(army2.getName()+"-2");
-                }else army2 = new Army(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
-                this.updateArmyInBothListInTheSingleton(army2,1);
+                singletonArmies.setArmyNumber(1);
+                this.checkNameAndUpdateSingleton(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
+                army2 = singletonArmies.getArmy(1);
                 this.updateView();
             }
         }catch (Exception e){

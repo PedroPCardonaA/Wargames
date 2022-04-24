@@ -167,6 +167,12 @@ public abstract class Controller {
         alert.showAndWait();
     }
 
+    /**
+     * Help method that check the new name of a possible army and change it if the
+     * other army has the name already, avoiding possible errors between the army
+     * and saving the change into the unique instance of Singleton army.
+     * @param army Army - The army that want to be checked.
+     */
     protected void checkNameAndUpdateSingleton(Army army) {
         if(singletonArmies.getArmyNumber()==0){
             if (army.getName().equals(singletonArmies.getArmy(1).getName())){
