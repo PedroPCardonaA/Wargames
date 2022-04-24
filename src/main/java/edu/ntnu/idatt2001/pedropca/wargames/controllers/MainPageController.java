@@ -417,13 +417,7 @@ public class MainPageController extends Controller implements Initializable {
      * @param title String - Tittle of the new window.
      */
     private void openNewScene(String path,String title) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
-        Stage stage = new Stage();
-        stage.setTitle(title);
-        stage.setScene(new Scene(root));
-        stage.initOwner(armyOneName.getScene().getWindow());
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.showAndWait();
+        this.openANewScene(path,title,armyOneName);
         army1 = new Army(singletonArmies.getArmy(0));
         army2 = new Army(singletonArmies.getArmy(1));
         this.updateView();

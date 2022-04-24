@@ -4,7 +4,9 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
@@ -21,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Super class of the Controller hierarchy that contains all the help methods that
@@ -186,5 +189,15 @@ public abstract class Controller {
             }
             this.updateArmyInBothListInTheSingleton(army,1);
         }
+    }
+
+    protected void openANewScene(String path,String title, Label label) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        stage.initOwner(label.getScene().getWindow());
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.showAndWait();
     }
 }

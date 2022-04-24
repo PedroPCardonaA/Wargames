@@ -24,7 +24,7 @@
                   <Font name="Papyrus" size="28.0" />
                </font>
             </Label>
-            <ListView />
+            <ListView fx:id="unitListView" />
             <HBox spacing="6.0">
                <children>
                   <Label text="Number of unit to delete:">
@@ -177,10 +177,11 @@
             <Label prefHeight="9.0" prefWidth="144.0" />
             <MenuButton mnemonicParsing="false" text="Options">
               <items>
-                <MenuItem mnemonicParsing="false" text="Generate Army" />
-                <MenuItem mnemonicParsing="false" text="Load an army" />
-                  <MenuItem mnemonicParsing="false" text="Save the army" />
-                  <MenuItem mnemonicParsing="false" text="Return" />
+                <MenuItem mnemonicParsing="false" onAction="#generatedArmyEditingArmyController" text="Generate Army" />
+                <MenuItem mnemonicParsing="false" onAction="#loadFromAFileEditingArmyController" text="Load an army" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveArmyAsFileFromEditingArmyController" text="Save the army" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayAllUnitsEditingArmyController" text="Display all units" />
+                  <MenuItem mnemonicParsing="false" onAction="#close" text="Return" />
               </items>
             </MenuButton>
          </children>

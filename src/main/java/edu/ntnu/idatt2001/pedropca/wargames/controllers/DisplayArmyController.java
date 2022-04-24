@@ -139,7 +139,7 @@ public class DisplayArmyController extends Controller implements Initializable{
      * It can be called by the javaFx object of the FXML file DisplayArmy.
      */
     @FXML
-    private void loadFromAFile(){
+    private void loadFromAFileFromDisplayArmyController(){
         try {
             File selectedFile = this.openFileChooser("Open a army file").showOpenDialog(null);
             if(selectedFile!=null){
@@ -169,7 +169,18 @@ public class DisplayArmyController extends Controller implements Initializable{
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
+    }
 
+    @FXML
+    private void displayEditingDisplayArmyController(){
+        try {
+            this.openANewScene("/Views/EditingArmy.fxml","Editing army",armyNameDisplayUnits);
+            army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
+            this.updateTable();
+        } catch (IOException e) {
+            this.showError("Error by loading the file!","It was a fail by loading the fxml file from the next scene."
+                    , e.getMessage());
+        }
     }
 
     /**
