@@ -2,29 +2,16 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
-import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,7 +34,6 @@ import java.util.*;
  */
 public class MainPageController extends Controller implements Initializable {
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-    private final SingletonTerrain singletonTerrain =SingletonTerrain.getSingletonTerrain();
     private Army army1 = new Army(singletonArmies.getArmy(0));
     private Army army2 = new Army(singletonArmies.getArmy(1));
 
@@ -143,8 +129,7 @@ public class MainPageController extends Controller implements Initializable {
      */
     private void checkContainOfSingletonTerrain() {
         if((terrainComboBox.getValue() ==null)) {
-            this.showAlert("Terrain was not defined.","Terrain was not defined!","Forest will be defined instead.");
-            singletonTerrain.setForestAsTerrain();
+            this.showAlert("Terrain was not defined.","Terrain was not defined!","This battle will not have special bonus from terrain.");
         }
     }
 
@@ -433,19 +418,19 @@ public class MainPageController extends Controller implements Initializable {
         try {
             switch (terrainComboBox.getValue()) {
                 case "Forest":
-                    singletonTerrain.setForestAsTerrain();
+                    EnumTerrain.setForest();
                     this.updateImageView("src/main/resources/Images/forest.jpg");
                     break;
                 case "Hills":
-                    singletonTerrain.setForestAsTerrain();
+                    EnumTerrain.setHILL();
                     this.updateImageView("src/main/resources/Images/hills.jpg");
                     break;
                 case "Plains":
-                    singletonTerrain.setForestAsTerrain();
+                    EnumTerrain.setPLAINS();
                     this.updateImageView("src/main/resources/Images/plain.jpg");
                     break;
                 case "Volcano":
-                    singletonTerrain.setForestAsTerrain();
+                    EnumTerrain.setVolcano();
                     this.updateImageView("src/main/resources/Images/Volcano.jpg");
                     break;
                 default:

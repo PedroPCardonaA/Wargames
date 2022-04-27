@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
-import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 /**
  *
@@ -77,7 +77,7 @@ public class CavalryUnit extends Unit{
             attackBonus+=4;}
         else{
             attackBonus+=2;}
-        if(SingletonTerrain.getSingletonTerrain().getTerrain()== SingletonTerrain.Terrain.PLAINS) attackBonus+=3;
+        if(EnumTerrain.getTerrain()==EnumTerrain.PLAINS) attackBonus+=3;
         return attackBonus;
     }
 
@@ -100,8 +100,8 @@ public class CavalryUnit extends Unit{
         else if(mainUnit instanceof InfantryUnit) resistBonus += 2;
         else if(mainUnit instanceof MagicianUnit) resistBonus += 1;
         else resistBonus +=4;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.FOREST) resistBonus =0;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.VOLCANO) resistBonus-=5;
+        if(EnumTerrain.getTerrain()==EnumTerrain.FOREST) resistBonus=0;
+        if(EnumTerrain.getTerrain()==EnumTerrain.VOLCANO) resistBonus -=5;
         return resistBonus;
     }
     /**

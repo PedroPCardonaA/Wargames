@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
-import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 /**
  *
@@ -60,7 +60,7 @@ public class InfantryUnit extends Unit{
     protected int getAttackBonus(Unit opponent){
         int attackBonus = 0;
         if(opponent instanceof CavalryUnit)attackBonus += 4;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain()== SingletonTerrain.Terrain.FOREST) attackBonus+=5;
+        if(EnumTerrain.getTerrain()==EnumTerrain.FOREST) attackBonus+=5;
         return attackBonus;
     }
 
@@ -80,8 +80,8 @@ public class InfantryUnit extends Unit{
         int resistBonus = 0;
         if(mainUnit instanceof InfantryUnit)resistBonus += 3;
         if(mainUnit instanceof CavalryUnit)resistBonus += 5;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain()== SingletonTerrain.Terrain.FOREST) resistBonus+=3;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain()== SingletonTerrain.Terrain.VOLCANO) resistBonus-=5;
+        if(EnumTerrain.getTerrain()==EnumTerrain.FOREST)resistBonus+=3;
+        if(EnumTerrain.getTerrain()==EnumTerrain.VOLCANO)resistBonus-=5;
         return resistBonus;
     }
 

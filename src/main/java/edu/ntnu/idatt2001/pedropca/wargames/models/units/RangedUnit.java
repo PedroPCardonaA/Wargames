@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
-import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 /**
  *
@@ -61,8 +61,8 @@ public class RangedUnit extends Unit{
         int attackBonus = 0;
         if(opponent instanceof InfantryUnit)attackBonus +=7;
         else attackBonus +=4;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.HILL) attackBonus+=3;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.FOREST) attackBonus-=2;
+        if(EnumTerrain.getTerrain()==EnumTerrain.HILL) attackBonus+=3;
+        if(EnumTerrain.getTerrain()==EnumTerrain.FOREST) attackBonus -=2;
         return attackBonus;
     }
 
@@ -83,7 +83,7 @@ public class RangedUnit extends Unit{
         int resistBonus = 0;
         if(mainUnit instanceof InfantryUnit)resistBonus+= 2;
         if(mainUnit instanceof RangedUnit || mainUnit instanceof MagicianUnit)resistBonus+=1;
-        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.VOLCANO) resistBonus-=5;
+        if(EnumTerrain.getTerrain()==EnumTerrain.VOLCANO) resistBonus -=5;
         return resistBonus;
     }
 

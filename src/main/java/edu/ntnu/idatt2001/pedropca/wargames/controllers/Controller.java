@@ -28,8 +28,15 @@ import java.util.Objects;
 /**
  * Super class of the Controller hierarchy that contains all the help methods that
  * the other controller use. This class as a SingletonArmies instance as a field.
+ *
+ * @author Pedro Cardona
+ * @version 1.0
+ * @since 1.0-SNAPSHOT
  */
 public abstract class Controller {
+
+    //TODO: Try to implement a system to save the windows open in the system to
+    // avoid a infinite loop of windows.
 
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
 

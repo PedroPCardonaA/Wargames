@@ -15,8 +15,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Main class that has as goal to generate a unique instance of the SingletonArmies class
+ * and open a JavaFX's window based on the FXML file MainPage.
+ *
+ * @author Pedro Cardona
+ * @version 1.0
+ * @since 1.0-SNAPSHOT
+ */
 public class GUI extends Application {
 
+    /**
+     * Main method that starts the program, generate a unique instance of the SingletonArmies class
+     * and calls the JavaFX's method launch.
+     * @param args String Array - Arguments of the program.
+     */
     public static void main(String[] args) {
         SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
         singletonArmies.putArmy(new Army("Army#1"));
@@ -26,6 +39,11 @@ public class GUI extends Application {
         launch(args);
     }
 
+    /**
+     * JavaFX's method that generate a primary stage to display by loading
+     * the FXML file MainPage.
+     * @param primaryStage Stage - Main stage to display.
+     */
     @Override
     public void start(Stage primaryStage){
         try {
@@ -51,6 +69,9 @@ public class GUI extends Application {
         }
     }
 
+    /**
+     * Help method that check if the user want to close the application.
+     */
     private void closeProgram(){
         Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
         closeAlert.setTitle("Close window");

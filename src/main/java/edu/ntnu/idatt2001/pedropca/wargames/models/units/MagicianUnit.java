@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
-import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonTerrain;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 import java.util.Random;
 
@@ -58,7 +58,7 @@ public class MagicianUnit extends Unit{
     @Override
     protected int getAttackBonus(Unit opponent) {
         int attackBonus = new Random().nextInt(26);
-        if(SingletonTerrain.getSingletonTerrain().getTerrain()== SingletonTerrain.Terrain.VOLCANO) attackBonus+=5;
+        if(EnumTerrain.getTerrain() == EnumTerrain.VOLCANO) attackBonus+=5;
         return attackBonus;
 
     }
@@ -73,7 +73,7 @@ public class MagicianUnit extends Unit{
     @Override
     protected int getResistBonus(Unit mainUnit) {
         int resistBonus = new Random().nextInt(6);
-        if(SingletonTerrain.getSingletonTerrain().getTerrain() == SingletonTerrain.Terrain.VOLCANO) resistBonus+=5;
+        if(EnumTerrain.getTerrain() == EnumTerrain.VOLCANO) resistBonus+=5;
         return resistBonus;
 
     }

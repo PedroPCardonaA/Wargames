@@ -37,7 +37,7 @@
             </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Button mnemonicParsing="false" onAction="#displayEditingDisplayArmyController" text="Edit" />
+                  <Button fx:id="openEditingArmy" mnemonicParsing="false" onAction="#displayEditingDisplayArmyController" text="Edit" />
                </graphic>
             </Menu>
          </menus>

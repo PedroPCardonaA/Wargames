@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.EditingArmyController">
    <top>
-      <Label text="Editing army" textFill="#ff1919" BorderPane.alignment="CENTER">
+      <Label fx:id="title" text="Editing army" textFill="#ff1919" BorderPane.alignment="CENTER">
          <font>
             <Font name="Papyrus" size="32.0" />
          </font>
@@ -180,7 +180,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#generatedArmyEditingArmyController" text="Generate Army" />
                 <MenuItem mnemonicParsing="false" onAction="#loadFromAFileEditingArmyController" text="Load an army" />
                   <MenuItem mnemonicParsing="false" onAction="#saveArmyAsFileFromEditingArmyController" text="Save the army" />
-                  <MenuItem mnemonicParsing="false" onAction="#displayAllUnitsEditingArmyController" text="Display all units" />
+                  <MenuItem fx:id="openDisplayArmy" mnemonicParsing="false" onAction="#displayAllUnitsEditingArmyController" text="Display all units" />
                   <MenuItem mnemonicParsing="false" onAction="#close" text="Return" />
               </items>
             </MenuButton>
