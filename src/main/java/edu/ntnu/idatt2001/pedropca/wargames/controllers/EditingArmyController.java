@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
+import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -131,4 +132,61 @@ public class EditingArmyController extends Controller implements Initializable {
         Stage stage = (Stage) nameOfTheArmy.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    private void addUnit(){
+        if(unitType.getValue() == null){
+            this.showAlert("Not unit type selected!", "Unit type has not been selected!", "To add a unit it is necessary to define a unit type");
+        }
+        else{
+            try {
+                army.addAll(new UnitFactory().createAListOfUnits(unitType.getValue()+"Unit",this.checkName(),this.checkHealth(),this.checkAttack(),this.checkArmor(),this.checkAttackSpeed(),this.checkAccuracy(),this.checkCriticalRate(),this.checkCriticalDamage(),this.checkNumberOfUnits()));
+                this.showAlert("Success by adding units","The units was successfully added to the army", "");
+                this.checkNameAndUpdateSingleton(army);
+
+            }catch (Exception e){
+                this.showError("Error by adding a Units","It was an error by adding the units", e.getMessage());
+            }
+        }
+    }
+
+    private String checkName(){
+        if(name.getText().isEmpty()) return "Name";
+        else return name.getText();
+    }
+
+    private int checkHealth(){
+        if(health.getText().isEmpty()) return 100;
+        else return Integer.parseInt(health.getText());
+    }
+
+    private int checkAttack(){
+        if(attack.getText().isEmpty()) return 25;
+        else return Integer.parseInt(attack.getText());
+    }
+    private int checkArmor(){
+        if(armor.getText().isEmpty()) return 12;
+        else return Integer.parseInt(armor.getText());
+    }
+    private int checkAttackSpeed(){
+        if(attackSpeed.getText().isEmpty()) return 2;
+        else return Integer.parseInt(attackSpeed.getText());
+    }
+    private int checkAccuracy(){
+        if(accuracy.getText().isEmpty()) return 70;
+        else return Integer.parseInt(accuracy.getText());
+    }
+    private int checkCriticalRate(){
+        if(criticalRate.getText().isEmpty()) return 25;
+        else return Integer.parseInt(criticalRate.getText());
+    }
+    private int checkCriticalDamage(){
+        if(criticalDamage.getText().isEmpty()) return 145;
+        else return Integer.parseInt(criticalDamage.getText());
+    }
+    private int checkNumberOfUnits(){
+        if(numberToAdd.getText().isEmpty()) return 25;
+        else return Integer.parseInt(numberToAdd.getText());
+    }
+
 }

@@ -447,20 +447,6 @@ public class MainPageController extends Controller implements Initializable {
 
 
     /**
-     * Method that generates and shows an information alert with a title, message and text defined in the signature.
-     * @param title String - Title of the alert.
-     * @param message String - message of the alert.
-     * @param text String - text of the alert.
-     */
-    private void showAlert(String title,String message,String text){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.setTitle(title);
-        alert.setHeaderText(message);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
-    /**
      * Method for a button in the menu bar that close the program.
      */
     @FXML

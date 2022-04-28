@@ -173,7 +173,7 @@
                   <TextField fx:id="numberToAdd" prefHeight="39.0" prefWidth="46.0" promptText="25" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" text="Add unit" />
+            <Button mnemonicParsing="false" onAction="#addUnit" text="Add unit" />
             <Label prefHeight="9.0" prefWidth="144.0" />
             <MenuButton mnemonicParsing="false" text="Options">
               <items>
