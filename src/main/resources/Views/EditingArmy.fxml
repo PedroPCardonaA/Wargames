@@ -55,7 +55,8 @@
                         <Font name="Papyrus" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nameOfTheArmy" />
+                  <TextField fx:id="nameOfTheArmy" prefHeight="39.0" prefWidth="161.0" />
+                  <Button mnemonicParsing="false" onAction="#editName" text="Edit name" />
                </children>
                <VBox.margin>
                   <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />

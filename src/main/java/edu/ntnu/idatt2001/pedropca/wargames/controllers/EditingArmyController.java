@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class EditingArmyController extends Controller implements Initializable {
 
+    //TODO: ADD JavaDoc
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     Army army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
     @FXML
@@ -137,8 +138,7 @@ public class EditingArmyController extends Controller implements Initializable {
     private void addUnit(){
         if(unitType.getValue() == null){
             this.showAlert("Not unit type selected!", "Unit type has not been selected!", "To add a unit it is necessary to define a unit type");
-        }
-        else{
+        }  else{
             try {
                 army.addAll(new UnitFactory().createAListOfUnits(unitType.getValue()+"Unit",this.checkName(),this.checkHealth(),this.checkAttack(),this.checkArmor(),this.checkAttackSpeed(),this.checkAccuracy(),this.checkCriticalRate(),this.checkCriticalDamage(),this.checkNumberOfUnits()));
                 this.showAlert("Success by adding units","The units was successfully added to the army", "");
@@ -155,38 +155,85 @@ public class EditingArmyController extends Controller implements Initializable {
         else return name.getText();
     }
 
-    private int checkHealth(){
-        if(health.getText().isEmpty()) return 100;
-        else return Integer.parseInt(health.getText());
+    private int checkHealth() throws IllegalArgumentException{
+        try {
+            if(health.getText().isEmpty()) return 100;
+            else return Integer.parseInt(health.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException
+                    ("The health of the unit must be a integer number. Define it as integer number");
+        }
     }
-
     private int checkAttack(){
-        if(attack.getText().isEmpty()) return 25;
-        else return Integer.parseInt(attack.getText());
+        try {
+            if(attack.getText().isEmpty()) return 25;
+            else return Integer.parseInt(attack.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException
+                    ("The attack of the unit must be a integer number. Define it as integer number");
+        }
     }
     private int checkArmor(){
-        if(armor.getText().isEmpty()) return 12;
-        else return Integer.parseInt(armor.getText());
+        try {
+            if(armor.getText().isEmpty()) return 12;
+            else return Integer.parseInt(armor.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException
+                    ("The armor of the unit must be a integer number. Define it as integer number");
+        }
     }
     private int checkAttackSpeed(){
-        if(attackSpeed.getText().isEmpty()) return 2;
-        else return Integer.parseInt(attackSpeed.getText());
+        try {
+            if(attackSpeed.getText().isEmpty()) return 2;
+            else return Integer.parseInt(attackSpeed.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException
+                    ("The attack speed of the unit must be a integer number. Define it as integer number");
+        }
     }
     private int checkAccuracy(){
-        if(accuracy.getText().isEmpty()) return 70;
-        else return Integer.parseInt(accuracy.getText());
+        try {
+            if(accuracy.getText().isEmpty()) return 70;
+            else return Integer.parseInt(accuracy.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException
+                    ("The accuracy of the unit must be a integer number. Define it as integer number");
+        }
     }
     private int checkCriticalRate(){
-        if(criticalRate.getText().isEmpty()) return 25;
-        else return Integer.parseInt(criticalRate.getText());
+        try {
+            if(criticalRate.getText().isEmpty()) return 25;
+            else return Integer.parseInt(criticalRate.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException
+                    ("The critical of the unit rate must be a integer number. Define it as integer number");
+        }
     }
     private int checkCriticalDamage(){
-        if(criticalDamage.getText().isEmpty()) return 145;
-        else return Integer.parseInt(criticalDamage.getText());
+        try {
+            if(criticalDamage.getText().isEmpty()) return 145;
+            else return Integer.parseInt(criticalDamage.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException("The critical damage of the unit must be a integer number. Define it as integer number");
+        }
     }
     private int checkNumberOfUnits(){
-        if(numberToAdd.getText().isEmpty()) return 25;
-        else return Integer.parseInt(numberToAdd.getText());
+        try {
+            if(numberToAdd.getText().isEmpty()) return 25;
+            else return Integer.parseInt(numberToAdd.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException("The number of units to add must be a integer number. Define it as integer number");
+        }
+    }
+
+    @FXML
+    private void editName(){
+        if(nameOfTheArmy.getText().isEmpty()) this.showAlert("Editing name of the army", "You have not changed the name of the army yet!","");
+        else{
+            army.setName(nameOfTheArmy.getText());
+            this.checkNameAndUpdateSingleton(army);
+            this.showAlert("Editing name of the army","The name of the army has been correctly edited!", "The name of the army has been changed to " + army.getName()+"!");
+        }
     }
 
 }

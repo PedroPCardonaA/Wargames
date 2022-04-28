@@ -64,9 +64,9 @@ public abstract class Unit implements Serializable {
         if(hitRate >100) throw new IllegalArgumentException
                 ("The hit rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
         if(criticRate <0) throw new IllegalArgumentException
-                ("The critic rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
+                ("The critic rate of a unit cannot be lower than 0. Define the critical rate between 0 to 100.");
         if(criticRate >100) throw new IllegalArgumentException
-                ("The critic rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
+                ("The critic rate of a unit cannot be above than 100. Define the critical rate between 0 to 100.");
         if(criticDamage < 100){ throw new IllegalArgumentException
                 ("The critic damage must be above 100 because it represent how much extra damage is made in comparison of a norma damage. Define the critic damage above 100.");
         }

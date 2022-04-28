@@ -171,6 +171,11 @@ public class DisplayArmyController extends Controller implements Initializable{
         }
     }
 
+    /**
+     * JavaFX's method that open a new window where is possible editing
+     * the army contained in the field army by calling the help method openEditArmyWindow.
+     * It can be called by the javaFx object of the FXML file DisplayArmy.
+     */
     @FXML
     private void displayEditingDisplayArmyController(){
         try {
