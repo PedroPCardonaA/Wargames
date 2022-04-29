@@ -113,13 +113,27 @@ public class MainPageController extends Controller implements Initializable {
      */
     @FXML
     private void simulateBattle(){
-        this.checkContainOfSingletonTerrain();
-        Battle battle = new Battle(army1,army2);
-        Army winner = battle.simulate();
-        this.updateArmies(winner);
-        this.updateView();
-        if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
-        else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
+        if(this.checkIfArmiesHaveUnits()){
+            this.checkContainOfSingletonTerrain();
+            Battle battle = new Battle(army1,army2);
+            Army winner = battle.simulate();
+            this.updateArmies(winner);
+            this.updateView();
+            if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
+            else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
+        }
+    }
+
+    private boolean checkIfArmiesHaveUnits(){
+        if(!army1.hasUnit()){
+            this.showAlert("No simulation","The first army does not have unit!", "The first army does not have any unit. Add units, generate a new army or load a old army with units to simulate a battle!");
+            return false;
+        }
+        if(!army2.hasUnit()){
+            this.showAlert("No simulation","The second army does not have unit!", "The second army does not have any unit. Add units, generate a new army or load a old army with units to simulate a battle!");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -321,12 +335,12 @@ public class MainPageController extends Controller implements Initializable {
     @FXML
     private void generateArmy1(){
         try {
-            army1 = new Army(this.generateArmy(stringInputWindow(armyOneName.getScene().getWindow())));
-            if(army1.getName().equals(army2.getName())){
-                army1.setName(army1.getName() +"-2");
-            }
-            this.updateArmyInBothListInTheSingleton(army1,0);
-            this.updateView();
+            singletonArmies.setArmyNumber(0);
+            String name = stringInputWindow(armyOneName.getScene().getWindow());
+            if (!name.isEmpty()){
+                army1 = this.generateArmy(name);
+                this.checkNameAndUpdateSingleton(army1);
+                this.updateView();}
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
@@ -342,12 +356,12 @@ public class MainPageController extends Controller implements Initializable {
     @FXML
     private void generateArmy2(){
         try {
-            army2 = new Army(this.generateArmy(stringInputWindow(armyOneName.getScene().getWindow())));
-            if(army2.getName().equals(army1.getName())){
-                army2.setName(army1.getName() +"-2");
-            }
-            this.updateArmyInBothListInTheSingleton(army2,1);
-            this.updateView();
+            singletonArmies.setArmyNumber(1);
+            String name = stringInputWindow(armyOneName.getScene().getWindow());
+            if (!name.isEmpty()){
+                army2 = this.generateArmy(name);
+                this.checkNameAndUpdateSingleton(army2);
+                this.updateView();}
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }

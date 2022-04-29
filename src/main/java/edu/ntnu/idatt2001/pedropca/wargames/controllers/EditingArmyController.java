@@ -19,12 +19,15 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class EditingArmyController extends Controller implements Initializable {
 
     //TODO: ADD JavaDoc
+    //TODO: ADD a search field to list of the units;
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     Army army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
     @FXML
@@ -77,15 +80,32 @@ public class EditingArmyController extends Controller implements Initializable {
 
     private void updateView(){
         nameOfTheArmy.setPromptText(army.getName());
+        this.updateListView();
+    }
+
+    private void updateListView() {
+        unitListView.getItems().clear();
+        ArrayList<String> names= new ArrayList<>();
+        army.getAllUnits().forEach(unit -> {
+            if(!names.contains(unit.getName())) names.add(unit.getName());
+        });
+        names.forEach(name->{
+            int sum = (int) army.getAllUnits().stream().filter(unit -> unit.getName().equals(name)).count();
+            //names.add(String.valueOf(sum));
+        });
+        unitListView.getItems().addAll(names);
+
     }
 
 
     @FXML
     private void generatedArmyEditingArmyController(){
         try {
-            army = this.generateArmy(this.stringInputWindow(nameOfTheArmy.getScene().getWindow()));
-            this.checkNameAndUpdateSingleton(army);
-            this.updateView();
+            String name = this.stringInputWindow(nameOfTheArmy.getScene().getWindow());
+            if(!name.isEmpty()){
+                army = this.generateArmy(name);
+                this.checkNameAndUpdateSingleton(army);
+                this.updateView();}
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
@@ -143,7 +163,7 @@ public class EditingArmyController extends Controller implements Initializable {
                 army.addAll(new UnitFactory().createAListOfUnits(unitType.getValue()+"Unit",this.checkName(),this.checkHealth(),this.checkAttack(),this.checkArmor(),this.checkAttackSpeed(),this.checkAccuracy(),this.checkCriticalRate(),this.checkCriticalDamage(),this.checkNumberOfUnits()));
                 this.showAlert("Success by adding units","The units was successfully added to the army", "");
                 this.checkNameAndUpdateSingleton(army);
-
+                this.updateListView();
             }catch (Exception e){
                 this.showError("Error by adding a Units","It was an error by adding the units", e.getMessage());
             }
@@ -232,8 +252,31 @@ public class EditingArmyController extends Controller implements Initializable {
         else{
             army.setName(nameOfTheArmy.getText());
             this.checkNameAndUpdateSingleton(army);
+            this.resetNameField();
             this.showAlert("Editing name of the army","The name of the army has been correctly edited!", "The name of the army has been changed to " + army.getName()+"!");
         }
     }
 
+    private void resetNameField(){
+        nameOfTheArmy.clear();
+        nameOfTheArmy.setPromptText(army.getName());
+    }
+
+    @FXML
+    private void deleteUnit(){
+        try {
+            System.out.println(unitListView.getSelectionModel().getSelectedItems());
+        }catch (Exception e){
+            this.showError("Error by deleting units", "It was an error by adding the units",e.getMessage());
+        }
+    }
+
+    private int checkNumberToDelete(){
+        try {
+            if(numberToAdd.getText().isEmpty()) return 15;
+            else return Integer.parseInt(numberToDelete.getText());
+        }catch (Exception e){
+            throw new IllegalArgumentException("The number of units to delete must be a integer number. Define it as integer number");
+        }
+    }
 }

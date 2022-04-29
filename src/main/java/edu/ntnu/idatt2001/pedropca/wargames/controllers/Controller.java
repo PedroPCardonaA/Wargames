@@ -118,7 +118,7 @@ public abstract class Controller {
         Army army = new Army( name);
         List<Unit> mixedList = new ArrayList<>();
         for(int i =0;i<50;i++){
-            mixedList.add(new CavalryUnit("CAVALRY",100));
+            mixedList.add(new CavalryUnit("Cavalry",100));
             mixedList.add(new RangedUnit("Ranged",100));
             mixedList.add(new InfantryUnit("Infantry",100));
             mixedList.add(new MagicianUnit("Magician",100));

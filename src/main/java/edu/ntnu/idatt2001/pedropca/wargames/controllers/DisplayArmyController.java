@@ -32,6 +32,8 @@ import java.util.ResourceBundle;
  */
 public class DisplayArmyController extends Controller implements Initializable{
 
+    //TODO: Add a search list.
+
     @FXML
     private Label armyNameDisplayUnits;
 
@@ -163,9 +165,12 @@ public class DisplayArmyController extends Controller implements Initializable{
     @FXML
     private void generatedArmyDisplayArmyController(){
         try {
-            army = this.generateArmy(this.stringInputWindow(armyNameDisplayUnits.getScene().getWindow()));
-            this.checkNameAndUpdateSingleton(army);
-            this.updateTable();
+            String name = this.stringInputWindow(armyNameDisplayUnits.getScene().getWindow());
+            if(!name.isEmpty()){
+                army = this.generateArmy(name);
+                this.checkNameAndUpdateSingleton(army);
+                this.updateTable();
+            }
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
