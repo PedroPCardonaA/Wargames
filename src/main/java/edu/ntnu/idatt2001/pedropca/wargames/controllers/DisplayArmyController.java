@@ -16,7 +16,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * DisplayArmyController class that is a part of the Controller hierarchy, extends
@@ -42,6 +45,9 @@ public class DisplayArmyController extends Controller implements Initializable{
 
     @FXML
     private Button closeButton;
+
+    @FXML
+    private TextField searchingField;
 
     final private SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army = singletonArmies.getArmy(singletonArmies.getArmyNumber());
@@ -106,17 +112,11 @@ public class DisplayArmyController extends Controller implements Initializable{
      */
     private void updateTable(){
         armyNameDisplayUnits.setText(army.getName());
-        armyTableView.setItems(this.getAllUnitsFromArmy());
+        armyTableView.setItems(FXCollections.observableList(army.getAllUnits()));
+        searchingField.clear();
+        searchingField.setPromptText("Search field");
     }
 
-    /**
-     * Help method that converts the list of units from army into
-     * en ObservableList of units. It is necessary to show the units in a TableView.
-     * @return ObservableArrayList - ObservableArrayList with Units.
-     */
-    private @NotNull ObservableList<Unit> getAllUnitsFromArmy(){
-        return FXCollections.observableList(army.getAllUnits());
-    }
 
     /**
      * Method that save the current army by calling the help method saveArmyAsAFile.
@@ -203,4 +203,14 @@ public class DisplayArmyController extends Controller implements Initializable{
         stage.close();
     }
 
+    /**
+     * JavaFx's method that searches units and displays them in the table view of units
+     * by reading the input written in the text field searchingField.
+     * It can be called by the javaFx object of the FXML file DisplayArmy.
+     */
+    @FXML
+    private void searchTable(){
+        // I am very proud of this method/Line :D
+        armyTableView.setItems(FXCollections.observableList(army.getAllUnits().stream().filter(unit -> unit.getName().contains(searchingField.getText())).collect(Collectors.toList())));
+    }
 }

@@ -32,6 +32,8 @@ import java.util.*;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
+
+//TODO: ADD SPEED SELECTOR FOR THE SIMULATION
 public class MainPageController extends Controller implements Initializable {
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army1 = new Army(singletonArmies.getArmy(0));
@@ -325,6 +327,7 @@ public class MainPageController extends Controller implements Initializable {
         this.openNewScene("/Views/DisplayArmy.fxml", "Display Units");
     }
 
+    //TODO: EDIT GENERATE SYSTEM
     /**
      * Method that defined army stored in the field army1 as a pre-defined army.
      * The user has the possibility to change the name of the pre-define army.

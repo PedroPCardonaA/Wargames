@@ -8,13 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.DisplayArmyController">
+<VBox alignment="CENTER" spacing="6.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.DisplayArmyController">
    <children>
       <Label fx:id="armyNameDisplayUnits" text="ArmyName" textFill="#1d27e1">
          <font>
             <Font name="Papyrus" size="40.0" />
          </font>
       </Label>
+      <TextField fx:id="searchingField" onKeyTyped="#searchTable" promptText="Search field" />
       <TableView fx:id="armyTableView" />
       <MenuBar>
          <menus>

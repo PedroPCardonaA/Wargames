@@ -24,6 +24,7 @@
                   <Font name="Papyrus" size="28.0" />
                </font>
             </Label>
+            <TextField fx:id="searchField" onKeyTyped="#searchInTableView" prefHeight="39.0" prefWidth="161.0" promptText="Search field" />
             <ListView fx:id="unitListView" />
             <HBox spacing="6.0">
                <children>

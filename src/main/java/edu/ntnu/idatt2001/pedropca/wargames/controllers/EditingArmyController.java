@@ -72,6 +72,9 @@ public class EditingArmyController extends Controller implements Initializable {
     @FXML
     private Label title;
 
+    @FXML
+    private TextField searchField;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         unitType.getItems().addAll("Infantry","Cavalry","Ranged","Magician","Commander");
@@ -94,7 +97,8 @@ public class EditingArmyController extends Controller implements Initializable {
             //names.add(String.valueOf(sum));
         });
         unitListView.getItems().addAll(names);
-
+        searchField.clear();
+        searchField.setPromptText("Search field");
     }
 
 
@@ -278,5 +282,14 @@ public class EditingArmyController extends Controller implements Initializable {
         }catch (Exception e){
             throw new IllegalArgumentException("The number of units to delete must be a integer number. Define it as integer number");
         }
+    }
+
+    @FXML
+    private void searchInTableView(){
+        unitListView.getItems().clear();
+        ArrayList<String> names= new ArrayList<>();
+        army.getAllUnits().forEach(unit->{if(!names.contains(unit.getName()) && unit.getName().contains(searchField.getText()) )names.add(unit.getName());
+        });
+        unitListView.getItems().addAll(names);
     }
 }
