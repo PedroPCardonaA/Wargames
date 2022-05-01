@@ -188,6 +188,13 @@ public class Army implements Serializable{
         this.name = name.trim();
     }
 
+    public Unit returnAUnitByName(String nameOfUnit){
+        for (Unit unit:units){
+            if(unit.getName().equals(nameOfUnit)) return unit;
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

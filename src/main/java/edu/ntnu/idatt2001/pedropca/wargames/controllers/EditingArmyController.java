@@ -1,27 +1,22 @@
 package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EditingArmyController extends Controller implements Initializable {
@@ -88,17 +83,26 @@ public class EditingArmyController extends Controller implements Initializable {
 
     private void updateListView() {
         unitListView.getItems().clear();
-        ArrayList<String> names= new ArrayList<>();
-        army.getAllUnits().forEach(unit -> {
-            if(!names.contains(unit.getName())) names.add(unit.getName());
-        });
-        names.forEach(name->{
-            int sum = (int) army.getAllUnits().stream().filter(unit -> unit.getName().equals(name)).count();
-            //names.add(String.valueOf(sum));
-        });
-        unitListView.getItems().addAll(names);
-        searchField.clear();
-        searchField.setPromptText("Search field");
+        unitListView.getItems().addAll(this.getUnitsName(""));
+        this.resetTextFields(searchField,"Search field");
+        this.resetTextFields(nameOfTheArmy,army.getName());
+        this.resetTextFields(name,"Name");
+        this.resetTextFields(health,"100");
+        this.resetTextFields(attack,"25");
+        this.resetTextFields(armor,"12");
+        this.resetTextFields(attackSpeed,"2");
+        this.resetTextFields(accuracy,"70");
+        this.resetTextFields(criticalDamage,"145");
+        this.resetTextFields(criticalRate,"25");
+        this.resetTextFields(numberToAdd,"25");
+        this.resetTextFields(numberToDelete,"15");
+        unitType.getSelectionModel().clearSelection();
+
+    }
+
+    private void resetTextFields(TextField field,String newText){
+        field.clear();
+        field.setPromptText(newText);
     }
 
 
@@ -166,7 +170,7 @@ public class EditingArmyController extends Controller implements Initializable {
             try {
                 army.addAll(new UnitFactory().createAListOfUnits(unitType.getValue()+"Unit",this.checkName(),this.checkHealth(),this.checkAttack(),this.checkArmor(),this.checkAttackSpeed(),this.checkAccuracy(),this.checkCriticalRate(),this.checkCriticalDamage(),this.checkNumberOfUnits()));
                 this.showAlert("Success by adding units","The units was successfully added to the army", "");
-                this.checkNameAndUpdateSingleton(army);
+                this.updateArmyInBothListInTheSingleton(army,singletonArmies.getArmyNumber());
                 this.updateListView();
             }catch (Exception e){
                 this.showError("Error by adding a Units","It was an error by adding the units", e.getMessage());
@@ -256,40 +260,73 @@ public class EditingArmyController extends Controller implements Initializable {
         else{
             army.setName(nameOfTheArmy.getText());
             this.checkNameAndUpdateSingleton(army);
-            this.resetNameField();
+            this.resetTextFields(nameOfTheArmy,army.getName());
             this.showAlert("Editing name of the army","The name of the army has been correctly edited!", "The name of the army has been changed to " + army.getName()+"!");
         }
-    }
-
-    private void resetNameField(){
-        nameOfTheArmy.clear();
-        nameOfTheArmy.setPromptText(army.getName());
     }
 
     @FXML
     private void deleteUnit(){
         try {
-            System.out.println(unitListView.getSelectionModel().getSelectedItems());
+            if(!unitListView.getFocusModel().getFocusedItem().isEmpty()){
+                int sum = 0;
+                String name = this.getRealNameOfTheUnit();
+                System.out.println(name);
+                for(int i = 0; i<this.checkNumberToDelete();i++){
+                    if(army.getAllUnits().contains(army.returnAUnitByName(name))) sum++;
+                    army.removeUnit(army.returnAUnitByName(name));
+                }
+                this.updateArmyInBothListInTheSingleton(army,singletonArmies.getArmyNumber());
+                this.updateView();
+                this.showAlert("Success by deleting units","You have delete the selected unit correctly","You have deleted " + sum + " of unit: " + name + " correctly!!" + "\nThey are " + this.getNumberOfTheSameUnitIntTheArmy(name) + " of them in the army now.");
+
+            }
+            else this.showAlert("Unit was not selected", "You must select a unit to delete them","");
         }catch (Exception e){
-            this.showError("Error by deleting units", "It was an error by adding the units",e.getMessage());
+            this.showError("Error by deleting units", "It was an error by deleting the units",e.getMessage());
         }
+    }
+
+    private String getRealNameOfTheUnit(){
+        String selectedUnitName = unitListView.getSelectionModel().getSelectedItem();
+        List<Integer> indexes = new ArrayList<>();
+        for (int i=0;i<selectedUnitName.length()-1;i++){
+            if(selectedUnitName.charAt(i)== ' ') indexes.add(i);
+        }
+        return selectedUnitName.substring(0,indexes.get(indexes.size()-1));
     }
 
     private int checkNumberToDelete(){
         try {
-            if(numberToAdd.getText().isEmpty()) return 15;
+            if(numberToDelete.getText().isEmpty()) return 15;
             else return Integer.parseInt(numberToDelete.getText());
         }catch (Exception e){
             throw new IllegalArgumentException("The number of units to delete must be a integer number. Define it as integer number");
         }
     }
 
+
     @FXML
     private void searchInTableView(){
         unitListView.getItems().clear();
-        ArrayList<String> names= new ArrayList<>();
-        army.getAllUnits().forEach(unit->{if(!names.contains(unit.getName()) && unit.getName().contains(searchField.getText()) )names.add(unit.getName());
-        });
-        unitListView.getItems().addAll(names);
+        unitListView.getItems().addAll(this.getUnitsName(searchField.getText()));
     }
+
+    private List<String> getUnitsName(String input){
+        List<String> names= new ArrayList<>();
+        army.getAllUnits().forEach(unit->{
+            if(!names.contains(unit.getName() + " X" + this.getNumberOfTheSameUnitIntTheArmy(unit.getName()))
+                    && unit.getName().contains(input)) {
+                names.add(unit.getName() +  " X" + this.getNumberOfTheSameUnitIntTheArmy(unit.getName()));
+            }
+        });
+        return names;
+    }
+
+    private int getNumberOfTheSameUnitIntTheArmy(String name){
+        return  Collections.frequency(army.getAllUnits()
+                .stream().map(Unit::getName).collect(Collectors.toList()), name);
+    }
+
+
 }

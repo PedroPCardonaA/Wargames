@@ -211,6 +211,8 @@ public class DisplayArmyController extends Controller implements Initializable{
     @FXML
     private void searchTable(){
         // I am very proud of this method/Line :D
-        armyTableView.setItems(FXCollections.observableList(army.getAllUnits().stream().filter(unit -> unit.getName().contains(searchingField.getText())).collect(Collectors.toList())));
+        armyTableView.setItems(FXCollections.observableList(army.getAllUnits().stream()
+                .filter(unit -> unit.getName().contains(searchingField.getText()))
+                .collect(Collectors.toList())));
     }
 }
