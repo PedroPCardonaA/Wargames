@@ -26,6 +26,7 @@ import java.util.Optional;
 public class GUI extends Application {
 
     //TODO: ADD HEALER UNIT
+    //TODO: ADD CUSTOMS EXCEPTIONS
     /**
      * Main method that starts the program, generate a unique instance of the SingletonArmies class
      * and calls the JavaFX's method launch.

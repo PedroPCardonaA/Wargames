@@ -5,13 +5,19 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Region;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -121,6 +127,28 @@ public class MainPageController extends Controller implements Initializable {
             Army winner = battle.simulate();
             this.updateArmies(winner);
             this.updateView();
+            if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
+            else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
+        }
+    }
+
+    //Method that show the progress of a battle in realtime. Not finished yet!.
+    @FXML
+    private void simulateBattleNormal(){
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(10000));
+        pauseTransition.setOnFinished(actionEvent -> this.updateView());
+        if(this.checkIfArmiesHaveUnits()){
+            Battle battle = new Battle(army1,army2);
+            while (battle.bothArmiesHaveUnits()){
+                battle.singularBattle();
+                army1=battle.getArmy1();
+                army2=battle.getArmy2();
+                this.updateView();
+                pauseTransition.play();
+            }
+            Army winner = battle.checkWinnerArmy();
+            this.updateView();
+            this.updateArmies(winner);
             if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
             else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
         }

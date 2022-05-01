@@ -1,5 +1,9 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.NegativeNumberException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.OverOneHundredPercentException;
+
 import java.io.Serializable;
 import java.util.Random;
 
@@ -49,23 +53,23 @@ public abstract class Unit implements Serializable {
     public Unit(String name, int health, int attack, int armor,
                 int attackSpeedPerSecond, String attackType, int hitRate,
                 int criticRate, int criticDamage) throws IllegalArgumentException {
-        if (name.isEmpty())throw new IllegalArgumentException
+        if (name.isEmpty())throw new EmptyInputException
                 ("All unit must have a name. Define a name for the unit.");
-        if(health<0)throw new IllegalArgumentException
+        if(health<0)throw new NegativeNumberException
                 ("The health points of a unit cannot be lower than 0. Define the health points above 0.");
-        if(attack <0) throw new IllegalArgumentException
+        if(attack <0) throw new NegativeNumberException
                 ("The attack points of a unit cannot be lower than 0. Define the attack points above 0.");
-        if(armor <0) throw new IllegalArgumentException
+        if(armor <0) throw new NegativeNumberException
                 ("The armor points of a unit cannot be lower than 0. Define the armor points above 0.");
-        if(attackSpeedPerSecond <0) throw new IllegalArgumentException
+        if(attackSpeedPerSecond <0) throw new NegativeNumberException
                 ("The attack speed of a unit cannot be lower than 0. Define the attack speed above 0.");
-        if(hitRate <0 ) throw new IllegalArgumentException
+        if(hitRate <0 ) throw new NegativeNumberException
                 ("The hit rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.");
-        if(hitRate >100) throw new IllegalArgumentException
+        if(hitRate >100) throw new OverOneHundredPercentException
                 ("The hit rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.");
-        if(criticRate <0) throw new IllegalArgumentException
+        if(criticRate <0) throw new NegativeNumberException
                 ("The critic rate of a unit cannot be lower than 0. Define the critical rate between 0 to 100.");
-        if(criticRate >100) throw new IllegalArgumentException
+        if(criticRate >100) throw new OverOneHundredPercentException
                 ("The critic rate of a unit cannot be above than 100. Define the critical rate between 0 to 100.");
         if(criticDamage < 100){ throw new IllegalArgumentException
                 ("The critic damage must be above 100 because it represent how much extra damage is made in comparison of a norma damage. Define the critic damage above 100.");

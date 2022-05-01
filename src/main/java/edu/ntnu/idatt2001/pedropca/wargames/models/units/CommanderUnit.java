@@ -42,7 +42,7 @@ public class CommanderUnit extends CavalryUnit{
      * @param name String name of the unit
      * @param health int health points of the unit
      */
-    public CommanderUnit(String name, int health) {
+    public CommanderUnit(String name, int health) throws IllegalArgumentException {
         super(name, health,25,15,1,90,25,175);
         this.MAX_HEALTH=health;
     }

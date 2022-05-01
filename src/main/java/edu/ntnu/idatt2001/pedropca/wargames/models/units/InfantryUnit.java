@@ -42,7 +42,7 @@ public class InfantryUnit extends Unit{
      * @param name String name of the unit
      * @param health int health points of the unit
      */
-    public InfantryUnit(String name, int health) {
+    public InfantryUnit(String name, int health)throws IllegalArgumentException {
         super(name,health,15,10,1,"melee",85,20,135);
     }
 

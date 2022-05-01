@@ -44,7 +44,7 @@ public class MagicianUnit extends Unit{
      * @param name String name of the unit
      * @param health int health points of the unit
      */
-    public MagicianUnit(String name, int health) {
+    public MagicianUnit(String name, int health)throws IllegalArgumentException {
         super(name, health, 15, 8, 3, "ranged", 65, 15, 150);
         }
 

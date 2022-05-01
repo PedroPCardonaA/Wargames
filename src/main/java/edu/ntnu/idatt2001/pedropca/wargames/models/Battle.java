@@ -36,12 +36,16 @@ public class Battle {
      */
     public Army simulate(){
         while (this.bothArmiesHaveUnits()){
-            Unit unitFromArmy1 = army1.getRandom();
-            Unit unitFromArmy2 = army2.getRandom();
-            this.setChargeToCavalryUnit(unitFromArmy1,unitFromArmy2);
-            this.combatBetweenUnits(unitFromArmy1,unitFromArmy2);
+            this.singularBattle();
         }
         return this.checkWinnerArmy();
+    }
+
+    public void singularBattle(){
+        Unit unitFromArmy1 = army1.getRandom();
+        Unit unitFromArmy2 = army2.getRandom();
+        this.setChargeToCavalryUnit(unitFromArmy1,unitFromArmy2);
+        this.combatBetweenUnits(unitFromArmy1,unitFromArmy2);
     }
 
     /**
@@ -140,7 +144,7 @@ public class Battle {
      * null when both armies get empty of units at the same time.
      * @return The winner army or value null.
      */
-    private Army checkWinnerArmy(){
+    public Army checkWinnerArmy(){
         if(army1.hasUnit()&&!army2.hasUnit()){
             return army1;
         }
@@ -154,7 +158,7 @@ public class Battle {
      * Help method that check if the both armies have unit.
      * @return boolean. True if both armies have units, false else.
      */
-    private boolean bothArmiesHaveUnits(){
+    public boolean bothArmiesHaveUnits(){
         return (army1.hasUnit() && army2.hasUnit());
     }
 
@@ -163,4 +167,11 @@ public class Battle {
         return "Battle between " + army1.getName() + " and " + army2.getName() + ".";
     }
 
+    public Army getArmy1() {
+        return army1;
+    }
+
+    public Army getArmy2() {
+        return army2;
+    }
 }

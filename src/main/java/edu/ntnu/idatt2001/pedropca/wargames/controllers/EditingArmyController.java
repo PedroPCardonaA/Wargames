@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
@@ -183,74 +184,74 @@ public class EditingArmyController extends Controller implements Initializable {
         else return name.getText();
     }
 
-    private int checkHealth() throws IllegalArgumentException{
+    private int checkHealth() throws EmptyInputException {
         try {
             if(health.getText().isEmpty()) return 100;
             else return Integer.parseInt(health.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException
+            throw new EmptyInputException
                     ("The health of the unit must be a integer number. Define it as integer number");
         }
     }
-    private int checkAttack(){
+    private int checkAttack() throws EmptyInputException{
         try {
             if(attack.getText().isEmpty()) return 25;
             else return Integer.parseInt(attack.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException
+            throw new EmptyInputException
                     ("The attack of the unit must be a integer number. Define it as integer number");
         }
     }
-    private int checkArmor(){
+    private int checkArmor() throws EmptyInputException{
         try {
             if(armor.getText().isEmpty()) return 12;
             else return Integer.parseInt(armor.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException
+            throw new EmptyInputException
                     ("The armor of the unit must be a integer number. Define it as integer number");
         }
     }
-    private int checkAttackSpeed(){
+    private int checkAttackSpeed() throws EmptyInputException{
         try {
             if(attackSpeed.getText().isEmpty()) return 2;
             else return Integer.parseInt(attackSpeed.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException
+            throw new EmptyInputException
                     ("The attack speed of the unit must be a integer number. Define it as integer number");
         }
     }
-    private int checkAccuracy(){
+    private int checkAccuracy() throws EmptyInputException{
         try {
             if(accuracy.getText().isEmpty()) return 70;
             else return Integer.parseInt(accuracy.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException
+            throw new EmptyInputException
                     ("The accuracy of the unit must be a integer number. Define it as integer number");
         }
     }
-    private int checkCriticalRate(){
+    private int checkCriticalRate() throws EmptyInputException{
         try {
             if(criticalRate.getText().isEmpty()) return 25;
             else return Integer.parseInt(criticalRate.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException
+            throw new EmptyInputException
                     ("The critical of the unit rate must be a integer number. Define it as integer number");
         }
     }
-    private int checkCriticalDamage(){
+    private int checkCriticalDamage() throws EmptyInputException{
         try {
             if(criticalDamage.getText().isEmpty()) return 145;
             else return Integer.parseInt(criticalDamage.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException("The critical damage of the unit must be a integer number. Define it as integer number");
+            throw new EmptyInputException("The critical damage of the unit must be a integer number. Define it as integer number");
         }
     }
-    private int checkNumberOfUnits(){
+    private int checkNumberOfUnits() throws EmptyInputException{
         try {
             if(numberToAdd.getText().isEmpty()) return 25;
             else return Integer.parseInt(numberToAdd.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException("The number of units to add must be a integer number. Define it as integer number");
+            throw new EmptyInputException("The number of units to add must be a integer number. Define it as integer number");
         }
     }
 
@@ -296,12 +297,12 @@ public class EditingArmyController extends Controller implements Initializable {
         return selectedUnitName.substring(0,indexes.get(indexes.size()-1));
     }
 
-    private int checkNumberToDelete(){
+    private int checkNumberToDelete() throws EmptyInputException{
         try {
             if(numberToDelete.getText().isEmpty()) return 15;
             else return Integer.parseInt(numberToDelete.getText());
         }catch (Exception e){
-            throw new IllegalArgumentException("The number of units to delete must be a integer number. Define it as integer number");
+            throw new EmptyInputException("The number of units to delete must be a integer number. Define it as integer number");
         }
     }
 

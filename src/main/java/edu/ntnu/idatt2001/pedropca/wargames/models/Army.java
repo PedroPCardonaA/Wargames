@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
 import java.io.Serializable;
@@ -32,9 +33,9 @@ public class Army implements Serializable{
      * if the string variable name is empty or if the units list is defined as null
      */
 
-    public Army(String name, List<Unit> units) throws IllegalArgumentException{
-        if(name.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a name for the army.");
-        if(units == null) throw new IllegalArgumentException("List of unit cannot be defined as null. Enter a correct unit list.");
+    public Army(String name, List<Unit> units) throws EmptyInputException{
+        if(name.isEmpty()) throw new EmptyInputException("The name of the army cannot be empty. Enter a name for the army.");
+        if(units == null) throw new EmptyInputException("List of unit cannot be defined as null. Enter a correct unit list.");
         this.name = name.trim();
         this.units = units;
     }
@@ -47,8 +48,8 @@ public class Army implements Serializable{
      * if the string variable name is empty
      */
 
-    public Army(String name){
-        if(name.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a name for the army.");
+    public Army(String name) throws EmptyInputException{
+        if(name.isEmpty()) throw new EmptyInputException("The name of the army cannot be empty. Enter a name for the army.");
         this.name = name;
         units = new ArrayList<>();
     }
@@ -183,8 +184,8 @@ public class Army implements Serializable{
      * @param name String - New name of the army
      * @throws IllegalArgumentException If the String army is empty
      */
-    public void setName(String name) throws IllegalArgumentException{
-        if(name.isEmpty()) throw new IllegalArgumentException("The name of the army cannot be empty. Enter a name for the army.");
+    public void setName(String name) throws EmptyInputException{
+        if(name.isEmpty()) throw new EmptyInputException("The name of the army cannot be empty. Enter a name for the army.");
         this.name = name.trim();
     }
 
