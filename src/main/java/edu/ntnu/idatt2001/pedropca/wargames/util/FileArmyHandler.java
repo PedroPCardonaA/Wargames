@@ -6,8 +6,10 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.CommanderUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.InfantryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.RangedUnit;
+import org.apache.commons.collections.Factory;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,27 +71,19 @@ public class FileArmyHandler {
     private static Army readArmyFromCsv(String pathOfFile) throws IOException, IllegalArgumentException{
         Army readArmy = new Army("readArmy");
         List<List<String>> data = new ArrayList<>();
-        FileReader fr = new FileReader(pathOfFile);
-        BufferedReader br = new BufferedReader(fr);
-        String line = br.readLine();
         UnitFactory factory = new UnitFactory();
-        int numberOfLine= 1;
-        while (line !=null){
-            List<String> lineData = Arrays.asList(line.split(","));
-            data.add(lineData);
-            line = br.readLine();
-        }
+        List<String> list = Files.readAllLines(Path.of(pathOfFile));
+        list.forEach(line-> data.add(Arrays.asList(line.split(","))));
+        int numberOfLine=0;
         try {
             for(int i=0;i<data.size();i++){
                 if(i==0){
                     readArmy.setName(data.get(i).get(0));
                 } else {
                     readArmy.add(factory.createUnit(data.get(i).get(0),data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                    numberOfLine++;
                 }
+                numberOfLine++;
             }
-            fr.close();
-            br.close();
             return readArmy;
         }catch (Exception e){
             throw new IllegalArgumentException("The data of the file was corrupted or is not compatible" +

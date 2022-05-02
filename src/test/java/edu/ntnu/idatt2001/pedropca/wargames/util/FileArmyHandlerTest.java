@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -218,5 +220,11 @@ class FileArmyHandlerTest {
                 }
             }
         }
+    }
+
+    @Test
+    void testFiles() throws IOException {
+        List<String> list = Files.readAllLines(Path.of("src/main/resources/Armies/ArmyWithUnits.csv"));
+        list.forEach(System.out::println);
     }
 }
