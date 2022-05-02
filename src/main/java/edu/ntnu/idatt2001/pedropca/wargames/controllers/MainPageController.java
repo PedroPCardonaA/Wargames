@@ -106,7 +106,7 @@ public class MainPageController extends Controller implements Initializable {
         terrainImageView.setFitWidth(550);
         terrainImageView.setFitHeight(150);
         try {
-            this.updateImageView("src/main/resources/Images/Start.jpg");
+            this.updateImageView("src/main/resources/Images/BattleGif.gif");
         } catch (Exception e) {
             this.showError("Error by initialization","It was an error by initialization the GUI.",e.getMessage());
         }
@@ -135,6 +135,25 @@ public class MainPageController extends Controller implements Initializable {
     //Method that show the progress of a battle in realtime. Not finished yet!.
     @FXML
     private void simulateBattleNormal(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Runnable updater = new Runnable() {
+                    @Override
+                    public void run() {
+                        //do
+                    }
+                };
+                while (true){
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //Stop
+                }
+            }
+        });
         PauseTransition pauseTransition = new PauseTransition(Duration.millis(10000));
         pauseTransition.setOnFinished(actionEvent -> this.updateView());
         if(this.checkIfArmiesHaveUnits()){
@@ -165,6 +184,8 @@ public class MainPageController extends Controller implements Initializable {
         }
         return true;
     }
+
+
 
     /**
      * Help method checkContainOfSingletonTerrain that checks if the terrain
