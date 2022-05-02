@@ -93,6 +93,9 @@ public class MainPageController extends Controller implements Initializable {
     @FXML
     private ImageView terrainImageView;
 
+    @FXML
+    private ComboBox<String> speedSimulationComboBox;
+
     /**
      * Initialize method that is called after its root element is loaded.
      * Method defines all elements in the combo box terrain and define the size and
@@ -103,12 +106,25 @@ public class MainPageController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         terrainComboBox.getItems().addAll("Forest","Hills","Plains","Volcano");
+        speedSimulationComboBox.getItems().addAll("Skip","Normal","Slow");
         terrainImageView.setFitWidth(550);
         terrainImageView.setFitHeight(150);
         try {
             this.updateImageView("src/main/resources/Images/BattleGif.gif");
         } catch (Exception e) {
             this.showError("Error by initialization","It was an error by initialization the GUI.",e.getMessage());
+        }
+    }
+
+    @FXML
+    private void simulationBattle(){
+        switch (speedSimulationComboBox.getValue()){
+            case "Skip": this.simulateBattleSkip(); break;
+            case "Normal": this.simulateBattleNormal(); break;
+            case "Slow": this.showAlert("Not implemented yet!","Not implemented yet!","Not implemented yet!"); break;
+            default: this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
+                this.simulateBattleSkip();
+                break;
         }
     }
 
@@ -119,8 +135,7 @@ public class MainPageController extends Controller implements Initializable {
      * updateArmies,updateView and showAlert.
      * It can be called by the javaFx object of the FXML file MainPage.
      */
-    @FXML
-    private void simulateBattle(){
+    private void simulateBattleSkip(){
         if(this.checkIfArmiesHaveUnits()){
             this.checkContainOfSingletonTerrain();
             Battle battle = new Battle(army1,army2);
@@ -133,44 +148,44 @@ public class MainPageController extends Controller implements Initializable {
     }
 
     //Method that show the progress of a battle in realtime. Not finished yet!.
-    @FXML
     private void simulateBattleNormal(){
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Runnable updater = new Runnable() {
-                    @Override
-                    public void run() {
-                        //do
+        this.checkContainOfSingletonTerrain();
+        Battle battle = new Battle(army1,army2);
+        Thread thread = new Thread(()->{
+            Runnable updater = ()->{
+                battle.singularBattle();
+                Army armyA =battle.getArmy1();
+                Army armyB =battle.getArmy2();
+                totalArmy1.setText(armyA.getAllUnits().size()+"");
+                infantryArmy1.setText(armyA.getInfantryUnits().size()+"");
+                rangedArmy1.setText(armyA.getRangedUnits().size()+"");
+                cavalryArmy1.setText(armyA.getCavalryUnits().size()+"");
+                magicianArmy1.setText(armyA.getMagicianUnits().size()+"");
+                commanderArmy1.setText(armyB.getCommanderUnits().size()+"");
+                totalArmy2.setText(armyB.getAllUnits().size()+"");
+                infantryArmy2.setText(armyB.getInfantryUnits().size()+"");
+                rangedArmy2.setText(armyB.getRangedUnits().size()+"");
+                cavalryArmy2.setText(armyB.getCavalryUnits().size()+"");
+                magicianArmy2.setText(armyB.getMagicianUnits().size()+"");
+                commanderArmy2.setText(armyB.getCommanderUnits().size()+"");
+            };
+            while (true){
+                try {
+                    Thread.sleep(300);
+                    if(!battle.bothArmiesHaveUnits()){
+                        Army winner = battle.checkWinnerArmy();
+                        this.updateArmies(winner);
+                        this.updateView();
+                        break;
                     }
-                };
-                while (true){
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    //Stop
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+                Platform.runLater(updater);
             }
         });
-        PauseTransition pauseTransition = new PauseTransition(Duration.millis(10000));
-        pauseTransition.setOnFinished(actionEvent -> this.updateView());
-        if(this.checkIfArmiesHaveUnits()){
-            Battle battle = new Battle(army1,army2);
-            while (battle.bothArmiesHaveUnits()){
-                battle.singularBattle();
-                army1=battle.getArmy1();
-                army2=battle.getArmy2();
-                this.updateView();
-                pauseTransition.play();
-            }
-            Army winner = battle.checkWinnerArmy();
-            this.updateView();
-            this.updateArmies(winner);
-            if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
-            else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
-        }
+        thread.setDaemon(true);
+        thread.start();
     }
 
     private boolean checkIfArmiesHaveUnits(){
@@ -242,7 +257,7 @@ public class MainPageController extends Controller implements Initializable {
     // differentiate the JavaFx objects, and it understands that I repeat the same
     // lines of commands twice.
     @FXML
-    private void updateView(){
+    public void updateView(){
         armyOneName.setText(army1.getName());
         totalArmy1.setText(army1.getAllUnits().size()+"");
         infantryArmy1.setText(army1.getInfantryUnits().size()+"");
@@ -376,7 +391,6 @@ public class MainPageController extends Controller implements Initializable {
         this.openNewScene("/Views/DisplayArmy.fxml", "Display Units");
     }
 
-    //TODO: EDIT GENERATE SYSTEM
     /**
      * Method that defined army stored in the field army1 as a pre-defined army.
      * The user has the possibility to change the name of the pre-define army.

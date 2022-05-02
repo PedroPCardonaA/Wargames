@@ -40,7 +40,7 @@
                 </Label>
                 <Label alignment="CENTER" prefHeight="171.0" prefWidth="796.0">
                     <graphic>
-                        <Button fx:id="simulation" mnemonicParsing="false" onAction="#simulateBattle" prefHeight="52.0" prefWidth="169.0" text="Simulate">
+                        <Button fx:id="simulation" mnemonicParsing="false" onAction="#simulationBattle" prefHeight="52.0" prefWidth="169.0" text="Simulate">
                             <font>
                                 <Font name="Papyrus" size="24.0" />
                             </font>
@@ -50,11 +50,15 @@
                   <Insets />
                </VBox.margin>
                 </Label>
-            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="493.0">
-               <graphic>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="6.0">
+               <children>
                   <ComboBox fx:id="terrainComboBox" onAction="#updateTerrain" promptText="Terrain" />
-               </graphic>
-            </Label>
+                  <ComboBox fx:id="speedSimulationComboBox" layoutX="10.0" layoutY="10.0" promptText="Speed" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </VBox.margin>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <ImageView fx:id="terrainImageView" pickOnBounds="true" preserveRatio="true" />
