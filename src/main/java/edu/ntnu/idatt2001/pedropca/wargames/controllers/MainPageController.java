@@ -118,14 +118,17 @@ public class MainPageController extends Controller implements Initializable {
 
     @FXML
     private void simulationBattle(){
-        switch (speedSimulationComboBox.getValue()){
-            case "Skip": this.simulateBattleSkip(); break;
-            case "Normal": this.simulateBattleNormal(); break;
-            case "Slow": this.showAlert("Not implemented yet!","Not implemented yet!","Not implemented yet!"); break;
-            default: this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
-                this.simulateBattleSkip();
-                break;
+        if(speedSimulationComboBox.getValue() == null){
+            this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
+            this.simulateBattleSkip();
+        } else {
+            switch (speedSimulationComboBox.getValue()){
+                case "Skip": this.simulateBattleSkip(); break;
+                case "Normal": this.simulateBattleNormal(); break;
+                case "Slow": this.showAlert("Not implemented yet!","Not implemented yet!","Not implemented yet!"); break;
+            }
         }
+
     }
 
     /**
@@ -141,7 +144,7 @@ public class MainPageController extends Controller implements Initializable {
             Battle battle = new Battle(army1,army2);
             Army winner = battle.simulate();
             this.updateArmies(winner);
-            this.updateView();
+            this.updateView(army1,army2);
             if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
             else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
         }
@@ -156,26 +159,15 @@ public class MainPageController extends Controller implements Initializable {
                 battle.singularBattle();
                 Army armyA =battle.getArmy1();
                 Army armyB =battle.getArmy2();
-                totalArmy1.setText(armyA.getAllUnits().size()+"");
-                infantryArmy1.setText(armyA.getInfantryUnits().size()+"");
-                rangedArmy1.setText(armyA.getRangedUnits().size()+"");
-                cavalryArmy1.setText(armyA.getCavalryUnits().size()+"");
-                magicianArmy1.setText(armyA.getMagicianUnits().size()+"");
-                commanderArmy1.setText(armyB.getCommanderUnits().size()+"");
-                totalArmy2.setText(armyB.getAllUnits().size()+"");
-                infantryArmy2.setText(armyB.getInfantryUnits().size()+"");
-                rangedArmy2.setText(armyB.getRangedUnits().size()+"");
-                cavalryArmy2.setText(armyB.getCavalryUnits().size()+"");
-                magicianArmy2.setText(armyB.getMagicianUnits().size()+"");
-                commanderArmy2.setText(armyB.getCommanderUnits().size()+"");
+                this.updateView(armyA,armyB);
             };
             while (true){
                 try {
-                    Thread.sleep(300);
+                    Thread.sleep(200);
                     if(!battle.bothArmiesHaveUnits()){
                         Army winner = battle.checkWinnerArmy();
                         this.updateArmies(winner);
-                        this.updateView();
+                        this.updateView(army1,army2);
                         break;
                     }
                 } catch (InterruptedException e) {
@@ -245,7 +237,7 @@ public class MainPageController extends Controller implements Initializable {
         army1 = new Army(singletonArmies.getArmyFromBackUp(0));
         army2 = new Army(singletonArmies.getArmyFromBackUp(1));
         this.updateArmiesInSingleton(singletonArmies.getArmyFromBackUp(0), singletonArmies.getArmyFromBackUp(1));
-        this.updateView();
+        this.updateView(army1,army2);
     }
 
     /**
@@ -257,21 +249,21 @@ public class MainPageController extends Controller implements Initializable {
     // differentiate the JavaFx objects, and it understands that I repeat the same
     // lines of commands twice.
     @FXML
-    public void updateView(){
-        armyOneName.setText(army1.getName());
-        totalArmy1.setText(army1.getAllUnits().size()+"");
-        infantryArmy1.setText(army1.getInfantryUnits().size()+"");
-        rangedArmy1.setText(army1.getRangedUnits().size()+"");
-        cavalryArmy1.setText(army1.getCavalryUnits().size()+"");
-        magicianArmy1.setText(army1.getMagicianUnits().size()+"");
-        commanderArmy1.setText(army1.getCommanderUnits().size()+"");
-        armyTwoName.setText(army2.getName());
-        totalArmy2.setText(army2.getAllUnits().size()+"");
-        infantryArmy2.setText(army2.getInfantryUnits().size()+"");
-        rangedArmy2.setText(army2.getRangedUnits().size()+"");
-        cavalryArmy2.setText(army2.getCavalryUnits().size()+"");
-        magicianArmy2.setText(army2.getMagicianUnits().size()+"");
-        commanderArmy2.setText(army2.getCommanderUnits().size()+"");
+    public void updateView(Army armyA,Army armyB){
+        armyOneName.setText(armyA.getName());
+        totalArmy1.setText(armyA.getAllUnits().size()+"");
+        infantryArmy1.setText(armyA.getInfantryUnits().size()+"");
+        rangedArmy1.setText(armyA.getRangedUnits().size()+"");
+        cavalryArmy1.setText(armyA.getCavalryUnits().size()+"");
+        magicianArmy1.setText(armyA.getMagicianUnits().size()+"");
+        commanderArmy1.setText(armyA.getCommanderUnits().size()+"");
+        armyTwoName.setText(armyB.getName());
+        totalArmy2.setText(armyB.getAllUnits().size()+"");
+        infantryArmy2.setText(armyB.getInfantryUnits().size()+"");
+        rangedArmy2.setText(armyB.getRangedUnits().size()+"");
+        cavalryArmy2.setText(armyB.getCavalryUnits().size()+"");
+        magicianArmy2.setText(armyB.getMagicianUnits().size()+"");
+        commanderArmy2.setText(armyB.getCommanderUnits().size()+"");
     }
 
     /**
@@ -289,7 +281,7 @@ public class MainPageController extends Controller implements Initializable {
                 singletonArmies.setArmyNumber(0);
                 this.checkNameAndUpdateSingleton(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                 army1 = singletonArmies.getArmy(0);
-                this.updateView();
+                this.updateView(army1,army2);
             }
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
@@ -312,7 +304,7 @@ public class MainPageController extends Controller implements Initializable {
                 singletonArmies.setArmyNumber(1);
                 this.checkNameAndUpdateSingleton(FileArmyHandler.readArmy(selectedFile.getAbsolutePath()));
                 army2 = singletonArmies.getArmy(1);
-                this.updateView();
+                this.updateView(army1,army2);
             }
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
@@ -406,7 +398,7 @@ public class MainPageController extends Controller implements Initializable {
             if (!name.isEmpty()){
                 army1 = this.generateArmy(name);
                 this.checkNameAndUpdateSingleton(army1);
-                this.updateView();}
+                this.updateView(army1,army2);}
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
@@ -427,7 +419,7 @@ public class MainPageController extends Controller implements Initializable {
             if (!name.isEmpty()){
                 army2 = this.generateArmy(name);
                 this.checkNameAndUpdateSingleton(army2);
-                this.updateView();}
+                this.updateView(army1,army2);}
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
         }
@@ -485,7 +477,7 @@ public class MainPageController extends Controller implements Initializable {
         this.openANewScene(path,title,armyOneName);
         army1 = new Army(singletonArmies.getArmy(0));
         army2 = new Army(singletonArmies.getArmy(1));
-        this.updateView();
+        this.updateView(army1,army2);
     }
 
     /**
