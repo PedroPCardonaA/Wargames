@@ -35,10 +35,33 @@ import java.util.Objects;
  */
 public abstract class Controller {
 
-    //TODO: Try to implement a system to save the windows open in the system to
-    // avoid a infinite loop of windows.
+    //TODO: Comment how the infinite windows' loop was fixed
 
-    SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+    private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
+
+    protected enum Page{
+        MAIN_PAGE,
+        DISPLAY_ARMY,
+        EDITING_ARMY;
+    }
+
+    private static Page actualPage = Page.MAIN_PAGE;
+
+    protected static void setDisplayArmyAsActualPage(){
+        actualPage=Page.DISPLAY_ARMY;
+    }
+
+    protected static void setEditingArmyAsActualPage(){
+        actualPage=Page.EDITING_ARMY;
+    }
+
+    protected static void setMainPaigeAsActualPage(){
+        actualPage=Page.MAIN_PAGE;
+    }
+
+    protected static Page getActualPage(){
+        return actualPage;
+    }
 
     /**
      * Method that update the current field armies into the unique instance of

@@ -35,8 +35,6 @@ import java.util.stream.Collectors;
  */
 public class DisplayArmyController extends Controller implements Initializable{
 
-    //TODO: Add a search list.
-
     @FXML
     private Label armyNameDisplayUnits;
 
@@ -48,6 +46,9 @@ public class DisplayArmyController extends Controller implements Initializable{
 
     @FXML
     private TextField searchingField;
+
+    @FXML
+    private Menu Editing;
 
     final private SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army = singletonArmies.getArmy(singletonArmies.getArmyNumber());
@@ -63,6 +64,7 @@ public class DisplayArmyController extends Controller implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Editing.setDisable(Controller.getActualPage()==Page.EDITING_ARMY);
         this.createTable();
         this.updateTable();
     }

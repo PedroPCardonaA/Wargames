@@ -182,7 +182,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#generatedArmyEditingArmyController" text="Generate Army" />
                 <MenuItem mnemonicParsing="false" onAction="#loadFromAFileEditingArmyController" text="Load an army" />
                   <MenuItem mnemonicParsing="false" onAction="#saveArmyAsFileFromEditingArmyController" text="Save the army" />
-                  <MenuItem fx:id="openDisplayArmy" mnemonicParsing="false" onAction="#displayAllUnitsEditingArmyController" text="Display all units" />
+                  <MenuItem fx:id="displayAllUnits" mnemonicParsing="false" onAction="#displayAllUnitsEditingArmyController" text="Display all units" />
                   <MenuItem mnemonicParsing="false" onAction="#close" text="Return" />
               </items>
             </MenuButton>

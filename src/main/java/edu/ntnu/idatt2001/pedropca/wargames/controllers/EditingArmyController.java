@@ -8,10 +8,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -23,7 +20,6 @@ import java.util.stream.Collectors;
 public class EditingArmyController extends Controller implements Initializable {
 
     //TODO: ADD JavaDoc
-    //TODO: ADD a search field to list of the units;
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     Army army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
     @FXML
@@ -71,8 +67,12 @@ public class EditingArmyController extends Controller implements Initializable {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private MenuItem displayAllUnits;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        displayAllUnits.setDisable(Controller.getActualPage() == Page.DISPLAY_ARMY);
         unitType.getItems().addAll("Infantry","Cavalry","Ranged","Magician","Commander");
         this.updateView();
     }

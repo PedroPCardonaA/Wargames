@@ -39,7 +39,6 @@ import java.util.*;
  * @since 1.0-SNAPSHOT
  */
 
-//TODO: ADD SPEED SELECTOR FOR THE SIMULATION
 public class MainPageController extends Controller implements Initializable {
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army1 = new Army(singletonArmies.getArmy(0));
@@ -110,7 +109,7 @@ public class MainPageController extends Controller implements Initializable {
         terrainImageView.setFitWidth(550);
         terrainImageView.setFitHeight(150);
         try {
-            this.updateImageView("src/main/resources/Images/BattleGif.gif");
+            this.updateImageView("src/main/resources/Images/Start.jpg");
         } catch (Exception e) {
             this.showError("Error by initialization","It was an error by initialization the GUI.",e.getMessage());
         }
@@ -380,7 +379,9 @@ public class MainPageController extends Controller implements Initializable {
      * @throws IOException the help method openNewScene may throw IOExceptions
      */
     private void displayAllUnits() throws IOException{
+        Controller.setDisplayArmyAsActualPage();
         this.openNewScene("/Views/DisplayArmy.fxml", "Display Units");
+        Controller.setMainPaigeAsActualPage();
     }
 
     /**
@@ -465,7 +466,9 @@ public class MainPageController extends Controller implements Initializable {
      * @throws IOException the help method openNewScene may throw IOExceptions
      */
     private void openEditArmyWindow() throws IOException {
+        Controller.setEditingArmyAsActualPage();
         this.openNewScene("/Views/EditingArmy.fxml", "Editing army");
+        Controller.setMainPaigeAsActualPage();
     }
 
     /**

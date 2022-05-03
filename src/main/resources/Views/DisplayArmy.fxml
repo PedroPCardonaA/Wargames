@@ -36,9 +36,9 @@
                   <Button mnemonicParsing="false" onAction="#generatedArmyDisplayArmyController" text="Generate" />
                </graphic>
             </Menu>
-            <Menu mnemonicParsing="false">
+            <Menu fx:id="Editing" mnemonicParsing="false">
                <graphic>
-                  <Button fx:id="openEditingArmy" mnemonicParsing="false" onAction="#displayEditingDisplayArmyController" text="Edit" />
+                  <Button mnemonicParsing="false" onAction="#displayEditingDisplayArmyController" text="Edit" />
                </graphic>
             </Menu>
          </menus>
