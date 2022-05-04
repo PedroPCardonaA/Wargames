@@ -63,6 +63,8 @@ public abstract class Controller {
         return actualPage;
     }
 
+     protected abstract void updateView();
+
     /**
      * Method that update the current field armies into the unique instance of
      * SingletonArmies class.

@@ -5,19 +5,15 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -66,7 +62,7 @@ public class DisplayArmyController extends Controller implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Editing.setDisable(Controller.getActualPage()==Page.EDITING_ARMY);
         this.createTable();
-        this.updateTable();
+        this.updateView();
     }
 
     /**
@@ -112,7 +108,8 @@ public class DisplayArmyController extends Controller implements Initializable{
      * the current name of the army and update the units into the TableView armyTableView
      * by calling the help method getAllUnitsFromArmy.
      */
-    private void updateTable(){
+    @Override
+    protected void updateView(){
         armyNameDisplayUnits.setText(army.getName());
         armyTableView.setItems(FXCollections.observableList(army.getAllUnits()));
         searchingField.clear();
@@ -149,7 +146,7 @@ public class DisplayArmyController extends Controller implements Initializable{
             if(selectedFile!=null){
                 army = FileArmyHandler.readArmy(selectedFile.getAbsolutePath());
                 this.checkNameAndUpdateSingleton(army);
-                this.updateTable();
+                this.updateView();
             }
         }catch (Exception e){
             this.showError("Error by loading the file!","It was a error by reading the file."
@@ -171,7 +168,7 @@ public class DisplayArmyController extends Controller implements Initializable{
             if(!name.isEmpty()){
                 army = this.generateArmy(name);
                 this.checkNameAndUpdateSingleton(army);
-                this.updateTable();
+                this.updateView();
             }
         }catch (Exception e){
             this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
@@ -188,7 +185,7 @@ public class DisplayArmyController extends Controller implements Initializable{
         try {
             this.openANewScene("/Views/EditingArmy.fxml","Editing army",armyNameDisplayUnits);
             army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
-            this.updateTable();
+            this.updateView();
         } catch (IOException e) {
             this.showError("Error by loading the file!","It was a fail by loading the fxml file from the next scene."
                     , e.getMessage());

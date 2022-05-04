@@ -77,7 +77,8 @@ public class EditingArmyController extends Controller implements Initializable {
         this.updateView();
     }
 
-    private void updateView(){
+    @Override
+    protected void updateView(){
         nameOfTheArmy.setPromptText(army.getName());
         this.updateListView();
     }
