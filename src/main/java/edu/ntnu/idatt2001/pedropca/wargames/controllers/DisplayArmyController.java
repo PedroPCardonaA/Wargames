@@ -214,4 +214,5 @@ public class DisplayArmyController extends Controller implements Initializable{
                 .filter(unit -> unit.getName().contains(searchingField.getText()))
                 .collect(Collectors.toList())));
     }
+
 }

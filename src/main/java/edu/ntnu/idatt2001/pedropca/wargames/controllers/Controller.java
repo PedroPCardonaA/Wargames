@@ -27,7 +27,9 @@ import java.util.Objects;
 
 /**
  * Super class of the Controller hierarchy that contains all the help methods that
- * the other controller use. This class as a SingletonArmies instance as a field.
+ * the other controller use. This class as a SingletonArmies instance as a field,
+ * an enum, Pages, that controls the current page of the GUI and a field that contains an
+ * object of the enum Pages.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -35,26 +37,34 @@ import java.util.Objects;
  */
 public abstract class Controller {
 
-    //TODO: Comment how the infinite windows' loop was fixed
 
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
 
     protected enum Page{
         MAIN_PAGE,
         DISPLAY_ARMY,
-        EDITING_ARMY;
+        EDITING_ARMY,
     }
 
     private static Page actualPage = Page.MAIN_PAGE;
 
+    /**
+     * Protected method that defines field actualPage as DISPLAY_ARMY.
+     */
     protected static void setDisplayArmyAsActualPage(){
         actualPage=Page.DISPLAY_ARMY;
     }
 
+    /**
+     * Protected method that defines field actualPage as EDITING_ARMY.
+     */
     protected static void setEditingArmyAsActualPage(){
         actualPage=Page.EDITING_ARMY;
     }
 
+    /**
+     * Protected method that defines field actualPage as MAIN_PAGE.
+     */
     protected static void setMainPaigeAsActualPage(){
         actualPage=Page.MAIN_PAGE;
     }
@@ -63,7 +73,11 @@ public abstract class Controller {
         return actualPage;
     }
 
-     protected abstract void updateView();
+    /**
+     * Abstract method that will be overridden by sub-classes of the controllers' hierarchy.
+     * This will be used to update the information of the stages.
+     */
+    protected abstract void updateView();
 
     /**
      * Method that update the current field armies into the unique instance of
@@ -223,6 +237,16 @@ public abstract class Controller {
         }
     }
 
+    /**
+     * Protected method that open a new stage by loading FXML file from a defined path.
+     * The title of the new stage is defined in the signature.
+     * Defined a label is relevant because method calls method initOwner of Stage class.
+     * With this the new stage will be always over the parent stage.
+     * @param path String - Path of the location of the FXML file to load.
+     * @param title String - Title of the new stage.
+     * @param label Label - an object of the parent stage.
+     * @throws IOException Method throw an IOException if it is an error by loading FXML file.
+     */
     protected void openANewScene(String path,String title, Label label) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
         Stage stage = new Stage();
@@ -247,4 +271,5 @@ public abstract class Controller {
         alert.setContentText(text);
         alert.showAndWait();
     }
+
 }

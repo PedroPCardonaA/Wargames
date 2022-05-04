@@ -5,19 +5,12 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +31,7 @@ import java.util.*;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-
+//TODO: COMMENT NEW SIMULATION SYSTEM
 public class MainPageController extends Controller implements Initializable {
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army1 = new Army(singletonArmies.getArmy(0));
@@ -117,17 +110,18 @@ public class MainPageController extends Controller implements Initializable {
 
     @FXML
     private void simulationBattle(){
-        if(speedSimulationComboBox.getValue() == null){
-            this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
-            this.simulateBattleSkip();
-        } else {
-            switch (speedSimulationComboBox.getValue()){
-                case "Skip": this.simulateBattleSkip(); break;
-                case "Normal": this.simulateBattleNormal(); break;
-                case "Slow": this.showAlert("Not implemented yet!","Not implemented yet!","Not implemented yet!"); break;
+        if(this.checkIfArmiesHaveUnits()){
+            if(speedSimulationComboBox.getValue() == null){
+                this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
+                this.simulateBattleSkip();
+            } else {
+                switch (speedSimulationComboBox.getValue()){
+                    case "Skip": this.simulateBattleSkip(); break;
+                    case "Normal": this.simulateBattleNormal(); break;
+                    case "Slow": this.showAlert("Not implemented yet!","Not implemented yet!","Not implemented yet!"); break;
+                }
             }
         }
-
     }
 
     /**
@@ -138,15 +132,13 @@ public class MainPageController extends Controller implements Initializable {
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     private void simulateBattleSkip(){
-        if(this.checkIfArmiesHaveUnits()){
-            this.checkContainOfSingletonTerrain();
-            Battle battle = new Battle(army1,army2);
-            Army winner = battle.simulate();
-            this.updateArmies(winner);
-            this.updateView();
-            if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
-            else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
-        }
+        this.checkContainOfSingletonTerrain();
+        Battle battle = new Battle(army1,army2);
+        Army winner = battle.simulate();
+        this.updateArmies(winner);
+        this.updateView();
+        if(winner==null) this.showAlert("Result of the battle.","The result of the battle!", "It was a Draw!");
+        else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
     }
 
 
@@ -170,7 +162,7 @@ public class MainPageController extends Controller implements Initializable {
                         break;
                     }
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    this.showError("Error by simulation","Error by medium simulation!",e.getMessage());
                 }
                 Platform.runLater(updater);
             }
