@@ -282,7 +282,7 @@ class UnitTest {
                     };
                     fail("Method did not throw IllegalArgumentException as expected");
                 } catch (IllegalArgumentException e) {
-                    assertEquals("The critic rate of a unit cannot be lower than 0. Define the hit rate between 0 to 100.",e.getMessage());
+                    assertEquals("The critic rate of a unit cannot be lower than 0. Define the critical rate between 0 to 100.",e.getMessage());
                 }
             }
 
@@ -307,7 +307,7 @@ class UnitTest {
                     };
                     fail("Method did not throw IllegalArgumentException as expected");
                 } catch (IllegalArgumentException e) {
-                    assertEquals("The critic rate of a unit cannot be above than 100. Define the hit rate between 0 to 100.",e.getMessage());
+                    assertEquals("The critic rate of a unit cannot be above than 100. Define the critical rate between 0 to 100.",e.getMessage());
                 }
             }
 

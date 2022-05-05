@@ -31,6 +31,7 @@ public abstract class Unit implements Serializable {
     private final int hitRate;
     private final int criticRate;
     private final int criticDamage;
+    private final int maxHealth;
 
 
     /**
@@ -83,6 +84,7 @@ public abstract class Unit implements Serializable {
         this.hitRate = hitRate;
         this.criticRate = criticRate;
         this.criticDamage = criticDamage;
+        this.maxHealth = health;
     }
 
 
@@ -116,6 +118,10 @@ public abstract class Unit implements Serializable {
 
     public int getCriticDamage() {
         return criticDamage;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     /**

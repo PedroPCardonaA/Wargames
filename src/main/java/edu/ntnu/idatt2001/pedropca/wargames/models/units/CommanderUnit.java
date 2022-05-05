@@ -12,7 +12,6 @@ package edu.ntnu.idatt2001.pedropca.wargames.models.units;
  */
 
 public class CommanderUnit extends CavalryUnit{
-    private final int MAX_HEALTH;
     /**
      * Constructor of the class edu.ntnu.idatt2001.pedropca.CommanderUnit. The signature of this constructor
      * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.CavalryUnit
@@ -33,7 +32,6 @@ public class CommanderUnit extends CavalryUnit{
     public CommanderUnit(String name, int health, int attack, int armor, int attackSpeedPerSecond, int hitRate, int criticRate,int criticDamage)
             throws IllegalArgumentException {
         super(name, health, attack, armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
-        MAX_HEALTH = health;
     }
     /**
      * Default constructor for class edu.ntnu.idatt2001.pedropca.CommanderUnit. The signature of this constructor only takes
@@ -44,7 +42,6 @@ public class CommanderUnit extends CavalryUnit{
      */
     public CommanderUnit(String name, int health) throws IllegalArgumentException {
         super(name, health,25,15,1,90,25,175);
-        this.MAX_HEALTH=health;
     }
 
     /**
@@ -53,7 +50,7 @@ public class CommanderUnit extends CavalryUnit{
      */
     private void healthPointRegeneration(){
 
-        if(this.getHealth()>0 && this.getHealth()<this.getMAX_HEALTH()-1) setHealth(this.getHealth()+2);
+        if(this.getHealth()>0 && this.getHealth()<this.getMaxHealth()-1) setHealth(this.getHealth()+2);
     }
 
     /**
@@ -67,7 +64,4 @@ public class CommanderUnit extends CavalryUnit{
         this.healthPointRegeneration();
     }
 
-    public int getMAX_HEALTH() {
-        return MAX_HEALTH;
-    }
 }
