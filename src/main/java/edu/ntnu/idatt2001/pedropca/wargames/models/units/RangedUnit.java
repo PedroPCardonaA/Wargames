@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 /**
@@ -57,7 +58,7 @@ public class RangedUnit extends Unit{
      */
 
     @Override
-    protected int getAttackBonus(Unit opponent) {
+    public int getAttackBonus(Unit opponent) {
         int attackBonus = 0;
         if(opponent instanceof InfantryUnit)attackBonus +=7;
         else attackBonus +=4;
@@ -79,7 +80,7 @@ public class RangedUnit extends Unit{
      */
 
     @Override
-    protected int getResistBonus(Unit mainUnit) {
+    public int getResistBonus(Unit mainUnit) {
         int resistBonus = 0;
         if(mainUnit instanceof InfantryUnit)resistBonus+= 2;
         if(mainUnit instanceof RangedUnit || mainUnit instanceof MagicianUnit)resistBonus+=1;

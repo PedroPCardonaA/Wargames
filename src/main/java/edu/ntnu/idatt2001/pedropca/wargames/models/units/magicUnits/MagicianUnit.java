@@ -1,7 +1,9 @@
-package edu.ntnu.idatt2001.pedropca.wargames.models.units;
+package edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits;
 
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,7 +16,7 @@ import java.util.Random;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-public class MagicianUnit extends Unit{
+public class MagicianUnit extends MagicUnit {
 
     /**
      * Constructor of the class edu.ntnu.idatt2001.pedropca.Magician. The signature of this constructor
@@ -34,7 +36,7 @@ public class MagicianUnit extends Unit{
      */
     public MagicianUnit(String name, int health, int attack, int armor, int attackSpeedPerSecond, int hitRate, int criticRate, int criticDamage)
             throws IllegalArgumentException {
-        super(name, health, attack, armor, attackSpeedPerSecond, "Ranged", hitRate, criticRate, criticDamage);
+        super(name, health, attack, armor, attackSpeedPerSecond, "Ranged", hitRate, criticRate, criticDamage,200);
     }
 
     /**
@@ -45,7 +47,7 @@ public class MagicianUnit extends Unit{
      * @param health int health points of the unit
      */
     public MagicianUnit(String name, int health)throws IllegalArgumentException {
-        super(name, health, 15, 8, 3, "ranged", 65, 15, 150);
+        super(name, health, 15, 8, 3, "ranged", 65, 15, 150,200);
         }
 
     /**
@@ -56,7 +58,7 @@ public class MagicianUnit extends Unit{
      * @return int the attack bonus.
      */
     @Override
-    protected int getAttackBonus(Unit opponent) {
+    public int getAttackBonus(Unit opponent) {
         int attackBonus = new Random().nextInt(26);
         if(EnumTerrain.getTerrain() == EnumTerrain.VOLCANO) attackBonus+=5;
         return attackBonus;
@@ -71,7 +73,7 @@ public class MagicianUnit extends Unit{
      * @return int the resist bonus.
      */
     @Override
-    protected int getResistBonus(Unit mainUnit) {
+    public int getResistBonus(Unit mainUnit) {
         int resistBonus = new Random().nextInt(6);
         if(EnumTerrain.getTerrain() == EnumTerrain.VOLCANO) resistBonus+=5;
         return resistBonus;
@@ -89,6 +91,11 @@ public class MagicianUnit extends Unit{
         return new MagicianUnit(this.getName(), this.getHealth(),
                 this.getAttack(), this.getArmor(), this.getAttackSpeedPerSecond(), this.getHitRate(),
                 this.getCriticRate(), this.getCriticDamage());
+    }
+
+    @Override
+    void magicAttack(List<Unit> target) {
+        target.forEach(unit -> unit.setHealth(Math.max(unit.getHealth()-10,0)));
     }
 }
 

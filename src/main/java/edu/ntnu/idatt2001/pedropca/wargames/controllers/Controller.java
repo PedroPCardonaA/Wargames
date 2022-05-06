@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.fxml.FXMLLoader;

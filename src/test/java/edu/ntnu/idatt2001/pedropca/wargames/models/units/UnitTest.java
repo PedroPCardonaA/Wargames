@@ -16,12 +16,12 @@ class UnitTest {
                     new Unit(" Footman",100,15,10,2,
                             "Melee",75,20,150) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -40,12 +40,12 @@ class UnitTest {
                     new Unit(" Footman",0,0,0,0,"Melee",0
                             ,0,100) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -64,12 +64,12 @@ class UnitTest {
                 try {
                     new Unit(" Footman",110,1110,11110,11110,"Melee",100,100,10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -91,12 +91,12 @@ class UnitTest {
                 try {
                     new Unit("", 110, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -116,12 +116,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", -10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -141,12 +141,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, -1110, 11110, 11110, "Melee", 100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -166,12 +166,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, 1110, -11110, 11110, "Melee", 100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -191,12 +191,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, 1110, 11110, -11110, "Melee", 100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -216,12 +216,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, 1110, 11110, 11110, "Melee", -100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -241,12 +241,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 1100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -266,12 +266,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, -100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -291,12 +291,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 1100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -316,12 +316,12 @@ class UnitTest {
                 try {
                     new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, -10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -346,12 +346,12 @@ class UnitTest {
             void SetHealthOfAUnitToAboveZero(){
                 Unit testUnit = new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                     @Override
-                    protected int getAttackBonus(Unit opponent) {
+                    public int getAttackBonus(Unit opponent) {
                         return 0;
                     }
 
                     @Override
-                    protected int getResistBonus(Unit mainUnit) {
+                    public int getResistBonus(Unit mainUnit) {
                         return 0;
                     }
 
@@ -367,12 +367,12 @@ class UnitTest {
             void SetHealthOfAUnitToZero(){
                 Unit testUnit = new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                     @Override
-                    protected int getAttackBonus(Unit opponent) {
+                    public int getAttackBonus(Unit opponent) {
                         return 0;
                     }
 
                     @Override
-                    protected int getResistBonus(Unit mainUnit) {
+                    public int getResistBonus(Unit mainUnit) {
                         return 0;
                     }
 
@@ -392,12 +392,12 @@ class UnitTest {
                 try {
                     Unit testUnit=  new Unit("Footman", 10, 1110, 11110, 11110, "Melee", 100, 100, 10000) {
                         @Override
-                        protected int getAttackBonus(Unit opponent) {
+                        public int getAttackBonus(Unit opponent) {
                             return 0;
                         }
 
                         @Override
-                        protected int getResistBonus(Unit mainUnit) {
+                        public int getResistBonus(Unit mainUnit) {
                             return 0;
                         }
 
@@ -423,12 +423,12 @@ class UnitTest {
                 Unit footman = new Unit(" Footman",100,15,10,2,
                         "Melee",75,20,150) {
                     @Override
-                    protected int getAttackBonus(Unit opponent) {
+                    public int getAttackBonus(Unit opponent) {
                         return 0;
                     }
 
                     @Override
-                    protected int getResistBonus(Unit mainUnit) {
+                    public int getResistBonus(Unit mainUnit) {
                         return 0;
                     }
 
@@ -446,12 +446,12 @@ class UnitTest {
                 Unit footman = new Unit(" Spearman",80,25,5,3,
                         "Ranged",60,40,175) {
                     @Override
-                    protected int getAttackBonus(Unit opponent) {
+                    public int getAttackBonus(Unit opponent) {
                         return 0;
                     }
 
                     @Override
-                    protected int getResistBonus(Unit mainUnit) {
+                    public int getResistBonus(Unit mainUnit) {
                         return 0;
                     }
 
@@ -469,12 +469,12 @@ class UnitTest {
                 Unit footman = new Unit(" Mountain king",180,30,20,2,
                         "Melee",90,30,175) {
                     @Override
-                    protected int getAttackBonus(Unit opponent) {
+                    public int getAttackBonus(Unit opponent) {
                         return 0;
                     }
 
                     @Override
-                    protected int getResistBonus(Unit mainUnit) {
+                    public int getResistBonus(Unit mainUnit) {
                         return 0;
                     }
 

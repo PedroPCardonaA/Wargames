@@ -57,7 +57,7 @@ public class InfantryUnit extends Unit{
      * @return int the attack bonus.
      */
     @Override
-    protected int getAttackBonus(Unit opponent){
+    public int getAttackBonus(Unit opponent){
         int attackBonus = 0;
         if(opponent instanceof CavalryUnit)attackBonus += 4;
         if(EnumTerrain.getTerrain()==EnumTerrain.FOREST) attackBonus+=5;
@@ -76,7 +76,7 @@ public class InfantryUnit extends Unit{
      */
 
     @Override
-    protected int getResistBonus(Unit mainUnit){
+    public int getResistBonus(Unit mainUnit){
         int resistBonus = 0;
         if(mainUnit instanceof InfantryUnit)resistBonus += 3;
         if(mainUnit instanceof CavalryUnit)resistBonus += 5;

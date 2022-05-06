@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 

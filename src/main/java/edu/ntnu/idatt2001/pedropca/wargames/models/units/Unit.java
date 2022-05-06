@@ -146,7 +146,7 @@ public abstract class Unit implements Serializable {
      * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return
      */
-    protected abstract int getAttackBonus(Unit opponent);
+    public abstract int getAttackBonus(Unit opponent);
     /**
      * Abstract method that return the bonus armor of the units.
      * Method will be defined in subclasses of units hierarchy.
@@ -158,7 +158,7 @@ public abstract class Unit implements Serializable {
      * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
      * @return
      */
-    protected abstract int getResistBonus(Unit mainUnit);
+    public abstract int getResistBonus(Unit mainUnit);
 
     protected abstract Unit clone();
 

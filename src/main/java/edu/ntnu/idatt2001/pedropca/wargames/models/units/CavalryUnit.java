@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 /**
@@ -65,7 +66,7 @@ public class CavalryUnit extends Unit{
      */
 
     @Override
-    protected int getAttackBonus(Unit opponent) {
+    public int getAttackBonus(Unit opponent) {
         int attackBonus = 0;
         if(isCharging && opponent instanceof RangedUnit){
             this.setCharging(false);
@@ -94,7 +95,7 @@ public class CavalryUnit extends Unit{
      */
 
     @Override
-    protected int getResistBonus(Unit mainUnit) {
+    public int getResistBonus(Unit mainUnit) {
         int resistBonus = 0;
         if(mainUnit instanceof RangedUnit)resistBonus +=7;
         else if(mainUnit instanceof InfantryUnit) resistBonus += 2;
