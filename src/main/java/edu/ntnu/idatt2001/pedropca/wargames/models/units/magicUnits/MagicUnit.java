@@ -6,6 +6,9 @@ import java.util.List;
 
 public abstract class MagicUnit extends Unit {
 
+    //TODO: ADD JAVADOC FOR THIS CLASS
+    //TODO: ADD TEST FOR THIS CLASS
+
     private int mana;
     private final int maxMana;
 
@@ -32,6 +35,6 @@ public abstract class MagicUnit extends Unit {
     @Override
     public void attack(Unit opponent) {
         super.attack(opponent);
-        mana+=5;
+        this.setMana(Math.min(this.getMana()+5,this.getMaxMana()));
     }
 }

@@ -5,10 +5,10 @@ package edu.ntnu.idatt2001.pedropca.wargames.models;
  * for this class. But I am sure that this class is functional :D.
  */
 
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.CommanderUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.InfantryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.RangedUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
 
 import java.util.Scanner;
 

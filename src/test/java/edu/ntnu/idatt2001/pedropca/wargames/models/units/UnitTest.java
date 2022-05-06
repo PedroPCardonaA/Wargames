@@ -26,7 +26,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -50,7 +50,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -74,7 +74,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -101,7 +101,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -126,7 +126,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -151,7 +151,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -176,7 +176,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -201,7 +201,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -226,7 +226,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -251,7 +251,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -276,7 +276,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -301,7 +301,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -326,7 +326,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -356,7 +356,7 @@ class UnitTest {
                     }
 
                     @Override
-                    protected Unit clone() {
+                    public Unit clone() {
                         return null;
                     }
                 };
@@ -377,7 +377,7 @@ class UnitTest {
                     }
 
                     @Override
-                    protected Unit clone() {
+                    public Unit clone() {
                         return null;
                     }
                 };
@@ -402,7 +402,7 @@ class UnitTest {
                         }
 
                         @Override
-                        protected Unit clone() {
+                        public Unit clone() {
                             return null;
                         }
                     };
@@ -433,7 +433,7 @@ class UnitTest {
                     }
 
                     @Override
-                    protected Unit clone() {
+                    public Unit clone() {
                         return null;
                     }
                 };
@@ -456,7 +456,7 @@ class UnitTest {
                     }
 
                     @Override
-                    protected Unit clone() {
+                    public Unit clone() {
                         return null;
                     }
                 };
@@ -479,7 +479,7 @@ class UnitTest {
                     }
 
                     @Override
-                    protected Unit clone() {
+                    public Unit clone() {
                         return null;
                     }
                 };

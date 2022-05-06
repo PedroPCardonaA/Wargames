@@ -2,11 +2,6 @@ package edu.ntnu.idatt2001.pedropca.wargames.util;
 
 import com.opencsv.CSVWriter;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.CommanderUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.InfantryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.RangedUnit;
-import org.apache.commons.collections.Factory;
 
 import java.io.*;
 import java.nio.file.Files;

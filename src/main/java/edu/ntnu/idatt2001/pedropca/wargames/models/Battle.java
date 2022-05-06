@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models;
 
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicUnit;

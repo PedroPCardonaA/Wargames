@@ -1,7 +1,12 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
@@ -144,11 +149,11 @@ public class Army implements Serializable{
      * @return List<Unit> List with all the cavalry units in the army.
      */
     public List<Unit> getCavalryUnits(){
-        return units.stream().filter(unit -> unit instanceof CavalryUnit&&!(unit instanceof CommanderUnit)).collect(Collectors.toList());
+        return units.stream().filter(unit -> unit instanceof CavalryUnit &&!(unit instanceof CommanderUnit)).collect(Collectors.toList());
     }
 
     /**
-     * Method getRangedUnits that return a list of all ranged units in the army.
+     * Method getRangedUnits that return a list of all Ranged units in the army.
      * @return List<Unit> List with all the ranged units in the army.
      */
     public List<Unit> getRangedUnits(){
@@ -156,7 +161,7 @@ public class Army implements Serializable{
     }
 
     /**
-     * Method getCommanderUnits that return a list of all ranged units in the army.
+     * Method getCommanderUnits that return a list of all Commander units in the army.
      * @return List<Unit> List with all the commander units in the army.
      */
     public List<Unit> getCommanderUnits(){
@@ -164,13 +169,20 @@ public class Army implements Serializable{
     }
 
     /**
-     * Method getMagicianUnits that return a list of all ranged units in the army.
+     * Method getMagicianUnits that return a list of all Magician units in the army.
      * @return List<Unit> List with all the magician units in the army.
      */
     public List<Unit> getMagicianUnits(){
         return units.stream().filter(unit -> unit instanceof MagicianUnit).collect(Collectors.toList());
     }
 
+    /**
+     * Method getMagicianUnits that return a list of all Healer units in the army.
+     * @return List<Unit> List with all the Healers units in the army.
+     */
+    public List<Unit> getHealerUnits(){
+        return units.stream().filter(unit -> unit instanceof HealerUnit).collect(Collectors.toList());
+    }
 
     /**
      * Void method that remove all units from the army.

@@ -1,5 +1,6 @@
-package edu.ntnu.idatt2001.pedropca.wargames.models.units;
+package edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits;
 
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
@@ -14,7 +15,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
  * @since 1.0-SNAPSHOT
  */
 
-public class RangedUnit extends Unit{
+public class RangedUnit extends Unit {
     /**
      * Constructor of the class edu.ntnu.idatt2001.pedropca.RangedUnit. The signature of this constructor
      * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.Unit
@@ -95,7 +96,7 @@ public class RangedUnit extends Unit{
      * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
      */
     @Override
-    protected Unit clone(){
+    public Unit clone(){
         return new RangedUnit(this.getName(),this.getHealth(),
                 this.getAttack(),this.getArmor(),this.getAttackSpeedPerSecond(), this.getHitRate(),
                 this.getCriticRate(),this.getCriticDamage());

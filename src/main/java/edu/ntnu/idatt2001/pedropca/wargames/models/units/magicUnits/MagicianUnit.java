@@ -87,7 +87,7 @@ public class MagicianUnit extends MagicUnit {
      * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
      */
     @Override
-    protected Unit clone() {
+    public Unit clone() {
         return new MagicianUnit(this.getName(), this.getHealth(),
                 this.getAttack(), this.getArmor(), this.getAttackSpeedPerSecond(), this.getHitRate(),
                 this.getCriticRate(), this.getCriticDamage());

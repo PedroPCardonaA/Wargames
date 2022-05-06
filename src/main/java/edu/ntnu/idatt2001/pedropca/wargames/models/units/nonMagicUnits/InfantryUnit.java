@@ -1,5 +1,6 @@
-package edu.ntnu.idatt2001.pedropca.wargames.models.units;
+package edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits;
 
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 /**
@@ -12,7 +13,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-public class InfantryUnit extends Unit{
+public class InfantryUnit extends Unit {
 
     /**
      * Constructor of the class edu.ntnu.idatt2001.pedropca.InfantryUnit. The signature of this constructor
@@ -93,7 +94,7 @@ public class InfantryUnit extends Unit{
      */
 
     @Override
-    protected Unit clone(){
+    public Unit clone(){
         return new InfantryUnit(this.getName(),this.getHealth(),
                 this.getAttack(),this.getArmor(),this.getAttackSpeedPerSecond(), this.getHitRate(),
                 this.getCriticRate(),this.getCriticDamage());

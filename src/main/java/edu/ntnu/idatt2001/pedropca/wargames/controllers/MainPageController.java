@@ -74,6 +74,12 @@ public class MainPageController extends Controller implements Initializable {
     private TextField magicianArmy2;
 
     @FXML
+    private TextField healerArmy1;
+
+    @FXML
+    private TextField healerArmy2;
+
+    @FXML
     private Label armyOneName;
 
     @FXML
@@ -248,6 +254,7 @@ public class MainPageController extends Controller implements Initializable {
         rangedArmy1.setText(army1.getRangedUnits().size()+"");
         cavalryArmy1.setText(army1.getCavalryUnits().size()+"");
         magicianArmy1.setText(army1.getMagicianUnits().size()+"");
+        healerArmy1.setText(army1.getHealerUnits().size() +"");
         commanderArmy1.setText(army1.getCommanderUnits().size()+"");
         armyTwoName.setText(army2.getName());
         totalArmy2.setText(army2.getAllUnits().size()+"");
@@ -255,6 +262,7 @@ public class MainPageController extends Controller implements Initializable {
         rangedArmy2.setText(army2.getRangedUnits().size()+"");
         cavalryArmy2.setText(army2.getCavalryUnits().size()+"");
         magicianArmy2.setText(army2.getMagicianUnits().size()+"");
+        healerArmy2.setText(army2.getHealerUnits().size() +"");
         commanderArmy2.setText(army2.getCommanderUnits().size()+"");
     }
 
@@ -386,16 +394,12 @@ public class MainPageController extends Controller implements Initializable {
      */
     @FXML
     private void generateArmy1(){
-        try {
             singletonArmies.setArmyNumber(0);
             String name = stringInputWindow(armyOneName.getScene().getWindow());
             if (!name.isEmpty()){
                 army1 = this.generateArmy(name);
                 this.checkNameAndUpdateSingleton(army1);
                 this.updateView();}
-        }catch (Exception e){
-            this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
-        }
     }
 
     /**

@@ -160,7 +160,7 @@ public abstract class Unit implements Serializable {
      */
     public abstract int getResistBonus(Unit mainUnit);
 
-    protected abstract Unit clone();
+    public abstract Unit clone();
 
     /**
      * Method attack that will calculate the total damage makes by the main unit

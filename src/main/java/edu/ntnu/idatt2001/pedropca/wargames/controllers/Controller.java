@@ -2,7 +2,12 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.fxml.FXMLLoader;
@@ -161,7 +166,10 @@ public abstract class Controller {
             mixedList.add(new CavalryUnit("Cavalry",100));
             mixedList.add(new RangedUnit("Ranged",100));
             mixedList.add(new InfantryUnit("Infantry",100));
+        }
+        for(int i = 0;i<10; i++){
             mixedList.add(new MagicianUnit("Magician",100));
+            mixedList.add(new HealerUnit("Healer", 100));
         }
         mixedList.add(new CommanderUnit("Commander",250));
         army.addAll(mixedList);

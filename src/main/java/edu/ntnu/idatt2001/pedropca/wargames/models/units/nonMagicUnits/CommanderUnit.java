@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001.pedropca.wargames.models.units;
+package edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits;
+
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 
 /**
  *

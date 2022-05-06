@@ -1,5 +1,6 @@
-package edu.ntnu.idatt2001.pedropca.wargames.models.units;
+package edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits;
 
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
@@ -14,7 +15,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
  * @version 1.0
  * @since 1.0
  */
-public class CavalryUnit extends Unit{
+public class CavalryUnit extends Unit {
 
     private Boolean isCharging = true;
 
@@ -112,7 +113,7 @@ public class CavalryUnit extends Unit{
      * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
      */
     @Override
-    protected Unit clone(){
+    public Unit clone(){
         return new CavalryUnit(this.getName(),this.getHealth(),
                 this.getAttack(),this.getArmor(),this.getAttackSpeedPerSecond(), this.getHitRate(),
                 this.getCriticRate(),this.getCriticDamage());

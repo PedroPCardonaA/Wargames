@@ -74,7 +74,7 @@ public class EditingArmyController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayAllUnits.setDisable(Controller.getActualPage() == Page.DISPLAY_ARMY);
-        unitType.getItems().addAll("Infantry","Cavalry","Ranged","Magician","Commander");
+        unitType.getItems().addAll("Infantry","Cavalry","Ranged","Magician","Healer","Commander");
         this.updateView();
     }
 

@@ -1,7 +1,12 @@
 package edu.ntnu.idatt2001.pedropca.wargames.util;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +51,8 @@ public class UnitFactory {
                 return new CommanderUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
             case "MagicianUnit":
                 return new MagicianUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
+            case "HealerUnit":
+                return new HealerUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
             default:
                 throw new IllegalArgumentException("Unknown unit type. Defined a correct unit type");
         }

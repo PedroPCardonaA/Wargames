@@ -83,7 +83,7 @@
                 </Label>
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total number of units:" wrappingWidth="206.205078125">
+                        <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Total number of units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -93,7 +93,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="236.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of infantry units:" wrappingWidth="206.205078125">
+                        <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -103,7 +103,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="275.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of ranged units:" wrappingWidth="206.205078125">
+                        <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -113,7 +113,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="314.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of cavalry units:" wrappingWidth="206.205078125">
+                        <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -123,7 +123,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="353.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of magician units:" wrappingWidth="230.205078125">
+                        <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Magician units : " wrappingWidth="207.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -133,7 +133,17 @@
                 </HBox>
             <HBox alignment="BASELINE_RIGHT">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                  <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Healer units : " wrappingWidth="208.205078125">
+                     <font>
+                        <Font name="Papyrus" size="19.0" />
+                     </font>
+                  </Text>
+                  <TextField id="commanderNumbers1" fx:id="healerArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
+               </children>
+            </HBox>
+            <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="382.0">
+               <children>
+                  <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Commander units : " wrappingWidth="212.205078125">
                      <font>
                         <Font name="Papyrus" size="19.0" />
                      </font>
@@ -166,7 +176,7 @@
                 </Label>
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
-                        <Text id="TotalUnits1" strokeType="OUTSIDE" strokeWidth="0.0" text="Total number of Units:" wrappingWidth="195.205078125">
+                        <Text id="TotalUnits1" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Total number of Units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -176,7 +186,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of infantry units:" wrappingWidth="206.205078125">
+                        <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -186,7 +196,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
-                        <Text id="rangedUnit2" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of ranged units:" wrappingWidth="206.205078125">
+                        <Text id="rangedUnit2" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -196,7 +206,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
-                        <Text id="cavalryUnit2" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of cavalry units:" wrappingWidth="206.205078125">
+                        <Text id="cavalryUnit2" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry units : " wrappingWidth="206.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -206,7 +216,7 @@
                 </HBox>
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of magician units:" wrappingWidth="230.205078125">
+                        <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Magician units : " wrappingWidth="205.205078125">
                             <font>
                                 <Font name="Papyrus" size="19.0" />
                             </font>
@@ -216,7 +226,17 @@
                 </HBox>
             <HBox alignment="BASELINE_RIGHT">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of commander units:" wrappingWidth="230.205078125">
+                  <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Healer units : " wrappingWidth="205.205078125">
+                     <font>
+                        <Font name="Papyrus" size="19.0" />
+                     </font>
+                  </Text>
+                  <TextField id="commanderNumbers1" fx:id="healerArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
+               </children>
+            </HBox>
+            <HBox alignment="BASELINE_RIGHT">
+               <children>
+                  <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Commander units : " wrappingWidth="207.205078125">
                      <font>
                         <Font name="Papyrus" size="19.0" />
                      </font>
