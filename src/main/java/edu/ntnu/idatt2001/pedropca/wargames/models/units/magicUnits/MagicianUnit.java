@@ -36,7 +36,7 @@ public class MagicianUnit extends MagicUnit {
      */
     public MagicianUnit(String name, int health, int attack, int armor, int attackSpeedPerSecond, int hitRate, int criticRate, int criticDamage)
             throws IllegalArgumentException {
-        super(name, health, attack, armor, attackSpeedPerSecond, "Ranged", hitRate, criticRate, criticDamage,200);
+        super(name, health, attack, armor, attackSpeedPerSecond, "Ranged", hitRate, criticRate, criticDamage,100);
     }
 
     /**
@@ -94,8 +94,9 @@ public class MagicianUnit extends MagicUnit {
     }
 
     @Override
-    void magicAttack(List<Unit> target) {
-        target.forEach(unit -> unit.setHealth(Math.max(unit.getHealth()-10,0)));
+    public void magicAttack(List<Unit> target) {
+        target.forEach(unit -> unit.setHealth(Math.max(unit.getHealth()-2,0)));
+        this.setMana(Math.max(this.getMana()-50,0));
     }
 }
 

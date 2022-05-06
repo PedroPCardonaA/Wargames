@@ -27,7 +27,11 @@ public abstract class MagicUnit extends Unit {
         return maxMana;
     }
 
+    abstract public void magicAttack(List<Unit> target);
 
-    abstract void magicAttack(List<Unit> target);
-
+    @Override
+    public void attack(Unit opponent) {
+        super.attack(opponent);
+        mana+=5;
+    }
 }

@@ -2,6 +2,9 @@ package edu.ntnu.idatt2001.pedropca.wargames.models;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 
 /**
  * Class edu.ntnu.idatt2001.pedropca.Battle that represents a battle between two armies in the war games.
@@ -68,6 +71,8 @@ public class Battle {
      * @param unitFromArmy2 Unit from the second army that will fight.
      */
     private void combatBetweenUnits(Unit unitFromArmy1,Unit unitFromArmy2){
+        this.magicAttack(unitFromArmy1);
+        this.magicAttack(unitFromArmy2);
         if(unitFromArmy1.getAttackType().equals("ranged")&& unitFromArmy2.getAttackType().equals("melee")){
             this.rangedVSMelee(unitFromArmy1,unitFromArmy2);
         }
@@ -80,6 +85,26 @@ public class Battle {
         this.removeDefeatedUnitFromArmy(this.getDefeatedUnit(unitFromArmy1,unitFromArmy2));
     }
 
+    private void magicAttack(Unit unit){
+        if(unit instanceof MagicUnit){
+            if(unit instanceof HealerUnit){
+                if(army1.getAllUnits().contains(unit) &&this.checkManaOfHealer((HealerUnit) unit)) ((HealerUnit) unit).magicAttack(army1.getAllUnits());
+                if(army2.getAllUnits().contains(unit) &&this.checkManaOfHealer((HealerUnit) unit)) ((HealerUnit) unit).magicAttack(army2.getAllUnits());
+            }
+            if(unit instanceof MagicianUnit){
+                if(army1.getAllUnits().contains(unit) &&this.checkManaOfMagician((MagicianUnit) unit)) ((MagicianUnit) unit).magicAttack(army2.getAllUnits());
+                if(army2.getAllUnits().contains(unit) &&this.checkManaOfMagician((MagicianUnit) unit)) ((MagicianUnit) unit).magicAttack(army1.getAllUnits());
+            }
+        }
+    }
+
+    private boolean checkManaOfHealer(HealerUnit healerUnit){
+        return healerUnit.getMana()>30;
+    }
+
+    private boolean checkManaOfMagician(MagicianUnit healerUnit){
+        return healerUnit.getMana()>50;
+    }
 
     /**
      * Help method that simulate a combat between two units with the same attack type.

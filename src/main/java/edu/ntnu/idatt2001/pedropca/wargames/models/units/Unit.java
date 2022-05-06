@@ -210,6 +210,10 @@ public abstract class Unit implements Serializable {
                 (opponent.getArmor() + opponent.getResistBonus(this.clone())) / this.getAttackSpeedPerSecond()),0);
     }
 
+    public int getMissingHealth(){
+        return maxHealth-health;
+    }
+
 
     @Override
     public String toString() {

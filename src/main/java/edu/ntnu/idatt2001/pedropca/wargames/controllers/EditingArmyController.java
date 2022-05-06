@@ -99,9 +99,6 @@ public class EditingArmyController extends Controller implements Initializable {
         this.resetTextFields(criticalRate,"25");
         this.resetTextFields(numberToAdd,"25");
         this.resetTextFields(numberToDelete,"15");
-        unitType.getSelectionModel().clearSelection();
-        unitType.setPromptText("Unit type");
-
     }
 
     private void resetTextFields(TextField field,String newText){
