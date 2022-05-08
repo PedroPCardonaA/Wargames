@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
-import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
-import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.NegativeNumberException;
-import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.OverOneHundredPercentException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.NegativeNumberException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.OverOneHundredPercentException;
 
 import java.io.Serializable;
 import java.util.Random;

@@ -7,7 +7,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUn
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
 import java.io.Serializable;

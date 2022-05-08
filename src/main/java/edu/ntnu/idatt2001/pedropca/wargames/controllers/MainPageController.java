@@ -381,7 +381,7 @@ public class MainPageController extends Controller implements Initializable {
      */
     private void displayAllUnits() throws IOException{
         Controller.setDisplayArmyAsActualPage();
-        this.openNewScene("/Views/DisplayArmy.fxml", "Display Units");
+        this.openNewScene("/views/DisplayArmy.fxml", "Display Units");
         Controller.setMainPaigeAsActualPage();
     }
 
@@ -464,7 +464,7 @@ public class MainPageController extends Controller implements Initializable {
      */
     private void openEditArmyWindow() throws IOException {
         Controller.setEditingArmyAsActualPage();
-        this.openNewScene("/Views/EditingArmy.fxml", "Editing army");
+        this.openNewScene("/views/EditingArmy.fxml", "Editing army");
         Controller.setMainPaigeAsActualPage();
     }
 

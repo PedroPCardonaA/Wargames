@@ -183,7 +183,7 @@ public class DisplayArmyController extends Controller implements Initializable{
     @FXML
     private void displayEditingDisplayArmyController(){
         try {
-            this.openANewScene("/Views/EditingArmy.fxml","Editing army",armyNameDisplayUnits);
+            this.openANewScene("/views/EditingArmy.fxml","Editing army",armyNameDisplayUnits);
             army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
             this.updateView();
         } catch (IOException e) {

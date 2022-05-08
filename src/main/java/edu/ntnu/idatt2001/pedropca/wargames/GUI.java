@@ -12,7 +12,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -55,7 +54,7 @@ public class GUI extends Application {
                 this.closeProgram();
             });
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/Views/MainPage.fxml"));
+            loader.setLocation(getClass().getResource("/views/MainPage.fxml"));
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));
             primaryStage.setMaximized(true);

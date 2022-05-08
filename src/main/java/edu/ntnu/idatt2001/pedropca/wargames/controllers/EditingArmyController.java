@@ -2,8 +2,8 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
-import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.EmptyInputException;
-import edu.ntnu.idatt2001.pedropca.wargames.util.Exceptions.NotIntegerException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.NotIntegerException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
@@ -148,7 +148,7 @@ public class EditingArmyController extends Controller implements Initializable {
     @FXML
     private void displayAllUnitsEditingArmyController(){
         try {
-            this.openANewScene("/Views/DisplayArmy.fxml","Editing army",title);
+            this.openANewScene("/views/DisplayArmy.fxml","Editing army",title);
             army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
             this.updateView();
         } catch (IOException e) {
