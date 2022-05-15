@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.util;
 
+//TODO: ADD JAVADOC AND TEST
 public enum EnumUnitType {
     INFANTRY("InfantryUnit"),
     HEALER("HealerUnit"),

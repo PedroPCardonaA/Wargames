@@ -32,6 +32,7 @@ import java.util.*;
  * @since 1.0-SNAPSHOT
  */
 //TODO: COMMENT NEW SIMULATION SYSTEM
+//TODO: FIX THE SIMULATION PROBLEM
 public class MainPageController extends Controller implements Initializable {
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army1 = new Army(singletonArmies.getArmy(0));
