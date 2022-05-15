@@ -87,6 +87,9 @@ public class MainPageController extends Controller implements Initializable {
     private Label armyTwoName;
 
     @FXML
+    private Button simulationButton;
+
+    @FXML
     private ComboBox<String> terrainComboBox;
 
     @FXML
@@ -94,6 +97,21 @@ public class MainPageController extends Controller implements Initializable {
 
     @FXML
     private ComboBox<String> speedSimulationComboBox;
+
+    @FXML
+    private Button editing1;
+
+    @FXML
+    private Button editing2;
+
+    @FXML
+    private Button resetArmies;
+
+    @FXML
+    private MenuButton options1;
+
+    @FXML
+    private MenuButton options2;
 
     /**
      * Initialize method that is called after its root element is loaded.
@@ -125,7 +143,7 @@ public class MainPageController extends Controller implements Initializable {
                 switch (speedSimulationComboBox.getValue()){
                     case "Skip": this.simulateBattleSkip(); break;
                     case "Normal": this.simulateBattleNormal(); break;
-                    case "Slow": this.showAlert("Not implemented yet!","Not implemented yet!","Not implemented yet!"); break;
+                    case "Slow": this.simulateBattleSlow();break;
                 }
             }
         }
@@ -166,16 +184,27 @@ public class MainPageController extends Controller implements Initializable {
                         Army winner = battle.checkWinnerArmy();
                         this.updateArmies(winner);
                         this.updateView();
+                        this.setDisableOfTheButtons(false);
                         break;
                     }
                 } catch (InterruptedException e) {
                     this.showError("Error by simulation","Error by medium simulation!",e.getMessage());
                 }
                 Platform.runLater(updater);
+                this.setDisableOfTheButtons(true);
             }
         });
         thread.setDaemon(true);
         thread.start();
+    }
+
+    private void simulateBattleSlow(){
+        try {
+            this.openNewScene("/views/Simulation.fxml","Slow Simulation");
+        } catch (Exception e) {
+            this.showError("Error by loading the file!","It was a error by reading the file."
+                    , e.getMessage());
+        }
     }
 
     private boolean checkIfArmiesHaveUnits(){
@@ -525,6 +554,17 @@ public class MainPageController extends Controller implements Initializable {
     @FXML
     private void closeTheProgramButton(){
         Platform.exit();
+    }
+
+    private void setDisableOfTheButtons(boolean state){
+        simulationButton.setDisable(state);
+        terrainComboBox.setDisable(state);
+        speedSimulationComboBox.setDisable(state);
+        editing1.setDisable(state);
+        editing2.setDisable(state);
+        resetArmies.setDisable(state);
+        options1.setDisable(state);
+        options2.setDisable(state);
     }
 
 }

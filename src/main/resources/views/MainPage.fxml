@@ -40,7 +40,7 @@
                 </Label>
                 <Label alignment="CENTER" prefHeight="171.0" prefWidth="796.0">
                     <graphic>
-                        <Button fx:id="simulation" mnemonicParsing="false" onAction="#simulationBattle" prefHeight="52.0" prefWidth="169.0" text="Simulate">
+                        <Button fx:id="simulationButton" mnemonicParsing="false" onAction="#simulationBattle" prefHeight="52.0" prefWidth="169.0" text="Simulate">
                             <font>
                                 <Font name="Papyrus" size="24.0" />
                             </font>
@@ -66,7 +66,7 @@
             </HBox>
                 <Label alignment="CENTER" prefHeight="265.0" prefWidth="797.0">
                     <graphic>
-                        <Button mnemonicParsing="false" onAction="#resetArmies" text="Reset armies" />
+                        <Button fx:id="resetArmies" mnemonicParsing="false" onAction="#resetArmies" text="Reset armies" />
                     </graphic>
                 </Label>
             </children>
@@ -152,9 +152,9 @@
                </children>
             </HBox>
             <Label />
-            <Button mnemonicParsing="false" onAction="#editArmyOne" text="Edit" />
+            <Button fx:id="editing1" mnemonicParsing="false" onAction="#editArmyOne" text="Edit" />
             <Label />
-            <MenuButton mnemonicParsing="false" text="Options">
+            <MenuButton fx:id="options1" mnemonicParsing="false" text="Options">
               <items>
                   <MenuItem mnemonicParsing="false" onAction="#generateArmy1" text="Generate army" />
                 <MenuItem mnemonicParsing="false" onAction="#displayAllUnitsFromArmyOne" text="Display all units" />
@@ -245,9 +245,9 @@
                </children>
             </HBox>
             <Label />
-            <Button mnemonicParsing="false" onAction="#editArmyTwo" text="Edit" />
+            <Button fx:id="editing2" mnemonicParsing="false" onAction="#editArmyTwo" text="Edit" />
             <Label />
-            <MenuButton mnemonicParsing="false" text="Options">
+            <MenuButton fx:id="options2" mnemonicParsing="false" text="Options">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#generateArmy2" text="Generate army" />
                   <MenuItem mnemonicParsing="false" onAction="#displayAllUnitsFromArmyTwo" text="Display all units" />
