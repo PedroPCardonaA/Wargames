@@ -256,7 +256,7 @@ public abstract class Controller {
      * @param label Label - an object of the parent stage.
      * @throws IOException Method throw an IOException if it is an error by loading FXML file.
      */
-    protected void openANewScene(String path,String title, Label label) throws IOException {
+    protected void openANewScene(String path, String title, @NotNull Label label) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
         Stage stage = new Stage();
         stage.setTitle(title);

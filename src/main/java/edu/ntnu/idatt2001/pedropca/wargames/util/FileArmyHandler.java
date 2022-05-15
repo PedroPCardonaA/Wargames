@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Static fileHandler class that is used to read local files that contains a
@@ -75,7 +76,7 @@ public class FileArmyHandler {
                 if(i==0){
                     readArmy.setName(data.get(i).get(0));
                 } else {
-                    readArmy.add(factory.createUnit(data.get(i).get(0),data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
+                    readArmy.add(factory.createUnit(Objects.requireNonNull(EnumUnitType.getUnitType(data.get(i).get(0))),data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
                 }
                 numberOfLine++;
             }
@@ -141,8 +142,7 @@ public class FileArmyHandler {
         List<String[]> data = new ArrayList<>();
         data.add(new String[]{armyToWrite.getName()});
         armyToWrite.getAllUnits().forEach(unit ->{
-            String[] names= unit.getClass().toString().split("\\.");
-            data.add(new String[]{names[names.length-1],unit.getName(),unit.getHealth()+"",
+            data.add(new String[]{unit.getClass().getSimpleName(),unit.getName(),unit.getHealth()+"",
                     unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
                     unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""});
         });

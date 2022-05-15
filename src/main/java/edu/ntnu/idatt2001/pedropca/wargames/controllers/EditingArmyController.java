@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumUnitType;
 import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.NotIntegerException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
@@ -169,7 +170,7 @@ public class EditingArmyController extends Controller implements Initializable {
             this.showAlert("Not unit type selected!", "Unit type has not been selected!", "To add a unit it is necessary to define a unit type");
         }  else{
             try {
-                army.addAll(new UnitFactory().createAListOfUnits(unitType.getValue()+"Unit",this.checkName(),this.checkHealth(),this.checkAttack(),this.checkArmor(),this.checkAttackSpeed(),this.checkAccuracy(),this.checkCriticalRate(),this.checkCriticalDamage(),this.checkNumberOfUnits()));
+                army.addAll(new UnitFactory().createAListOfUnits(Objects.requireNonNull(EnumUnitType.getUnitType(unitType.getValue()+"Unit")),this.checkName(),this.checkHealth(),this.checkAttack(),this.checkArmor(),this.checkAttackSpeed(),this.checkAccuracy(),this.checkCriticalRate(),this.checkCriticalDamage(),this.checkNumberOfUnits()));
                 this.showAlert("Success by adding units","The units was successfully added to the army", "");
                 this.updateArmyInBothListInTheSingleton(army,singletonArmies.getArmyNumber());
                 this.updateListView();

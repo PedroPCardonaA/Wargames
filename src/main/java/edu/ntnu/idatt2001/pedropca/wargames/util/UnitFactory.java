@@ -37,21 +37,21 @@ public class UnitFactory {
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */
-    public Unit createUnit(String unitType,String name, int health, int attack, int armor,
+    public Unit createUnit(EnumUnitType unitType,String name, int health, int attack, int armor,
                            int attackSpeedPerSecond, int hitRate,
                            int criticRate, int criticDamage) throws IllegalArgumentException{
         switch (unitType){
-            case "InfantryUnit":
+            case INFANTRY:
                 return new InfantryUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
-            case "RangedUnit":
+            case RANGED:
                 return new RangedUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
-            case "CavalryUnit":
+            case CAVALRY:
                 return new CavalryUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
-            case "CommanderUnit":
+            case COMMANDER:
                 return new CommanderUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
-            case "MagicianUnit":
+            case MAGICIAN:
                 return new MagicianUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
-            case "HealerUnit":
+            case HEALER:
                 return new HealerUnit(name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
             default:
                 throw new IllegalArgumentException("Unknown unit type. Defined a correct unit type");
@@ -103,13 +103,13 @@ public class UnitFactory {
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */
-    public List<Unit> createAListOfUnits(String unitType,String name, int health, int attack, int armor,
+    public List<Unit> createAListOfUnits(EnumUnitType enumUnitType,String name, int health, int attack, int armor,
                                          int attackSpeedPerSecond, int hitRate,
                                          int criticRate, int criticDamage, int numberOfUnits) throws IllegalArgumentException{
         if(numberOfUnits<0) throw new IllegalArgumentException("The number of units to add cannot be lower than 0");
         List<Unit> units = new ArrayList<>();
         for(int i =0; i<numberOfUnits;i++){
-            units.add(this.createUnit(unitType,name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage));
+            units.add(this.createUnit(enumUnitType,name,health,attack,armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage));
         }
         return units;
     }

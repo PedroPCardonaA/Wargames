@@ -7,6 +7,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUn
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.util.EnumUnitType;
 import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
@@ -70,8 +71,7 @@ public class Army implements Serializable{
         this.units = new ArrayList<>();
         UnitFactory factory = new UnitFactory();
         army.getAllUnits().forEach(unit ->{
-            String[] names= unit.getClass().toString().split("\\.");
-            units.add(factory.createUnit(names[names.length-1],unit.getName(),unit.getHealth(),
+            units.add(factory.createUnit(Objects.requireNonNull(EnumUnitType.getUnitType(unit.getClass().getSimpleName())),unit.getName(),unit.getHealth(),
                     unit.getAttack(),unit.getArmor(),unit.getAttackSpeedPerSecond(),
                     unit.getHitRate(),unit.getCriticRate(),unit.getCriticDamage()));
         });

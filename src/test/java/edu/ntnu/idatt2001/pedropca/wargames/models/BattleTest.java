@@ -141,4 +141,8 @@ class BattleTest {
         }
     }
 
+    @Test
+    void testSimpleName(){
+        System.out.println(new RangedUnit("Xd",100).getClass().getSimpleName());
+    }
 }
