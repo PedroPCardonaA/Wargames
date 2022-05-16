@@ -221,4 +221,13 @@ class FileArmyHandlerTest {
             }
         }
     }
+    @Test
+    void tryingReadingACorruptFile(){
+        try {
+            FileArmyHandler.readArmy("src/main/resources/armies/corrupted.csv");
+            fail();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

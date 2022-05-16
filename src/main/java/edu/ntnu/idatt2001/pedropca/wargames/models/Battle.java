@@ -131,7 +131,7 @@ public class Battle {
     // It is possible to represent this advantage with a buff, that is reducing, in the getResistMethod
     // but that way is not realistic enough.
     private void rangedVSMelee(Unit rangedUnit, Unit meleeUnit){
-        for(int i = 0; i<2; i++){
+        for(int i = 0; i<1; i++){
             rangedUnit.attack(meleeUnit);
         }
         while (rangedUnit.getHealth() > 0 && meleeUnit.getHealth() > 0){

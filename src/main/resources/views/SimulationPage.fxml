@@ -19,8 +19,8 @@
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="351.0" prefWidth="588.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="textArea" editable="false" prefHeight="297.0" prefWidth="588.0" />
-            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
+            <TextArea fx:id="textArea" editable="false" prefHeight="297.0" prefWidth="588.0" wrapText="true" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButton" text="Cancel" />
          </children>
          <BorderPane.margin>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
