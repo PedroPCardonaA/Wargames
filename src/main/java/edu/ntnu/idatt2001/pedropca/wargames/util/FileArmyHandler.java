@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-//TODO: TRY TO IMPLEMENT NIO.
 /**
  * Static fileHandler class that is used to read local files that contains a
  * representation of an instance of the class Army. Files can be CSV ( Comma separated value)

@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 //TODO: TRY TO IMPLEMENT BATTLE CLASS
 //TODO: TRY TO DO SIMULATION MORE SMOOTHLY
+//TODO: ADD JAVADOC
 public class SimulationPageController extends Controller implements Initializable {
 
     @FXML
