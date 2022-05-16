@@ -49,7 +49,7 @@ public class HealerUnit extends MagicUnit{
     }
 
     @Override
-    public void magicAttack(List<Unit> target) {
+    public void magicSpell(List<Unit> target) {
         Unit unitTarget= target.stream().sorted(Comparator.comparing(Unit::getMissingHealth)).collect(Collectors.toList()).get(0);
         unitTarget.setHealth(Math.min(unitTarget.getHealth()+30,unitTarget.getMaxHealth()));
         this.setMana(Math.max(this.getMana()-30,0));

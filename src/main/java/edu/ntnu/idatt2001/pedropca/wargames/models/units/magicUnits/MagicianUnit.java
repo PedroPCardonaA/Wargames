@@ -8,9 +8,9 @@ import java.util.Random;
 
 /**
  *
- * Class edu.ntnu.idatt2001.pedropca.MagicianUnit that represents the ranged units in the war games.
- * This class conforms the edu.ntnu.idatt2001.pedropca.Unit hierarchy and has the abstract class edu.ntnu.idatt2001.pedropca.Unit as superclass.
- * This class has the same fields that edu.ntnu.idatt2001.pedropca.Unit class.
+ * Class MagicianUnit that represents the magician units in the war games.
+ * This class conforms the MagiUnit hierarchy and has the abstract MagicUnit as superclass.
+ * This class has the same fields that MagicUnit class.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -19,17 +19,18 @@ import java.util.Random;
 public class MagicianUnit extends MagicUnit {
 
     /**
-     * Constructor of the class edu.ntnu.idatt2001.pedropca.Magician. The signature of this constructor
-     * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.Unit
-     * except the field ATTACK_TYPE because it is pre-defined as "ranged".
-     * @param name String name of the unit
-     * @param health int health points of the unit
-     * @param attack int attack points of the unit
-     * @param armor int armor points of the unit
-     * @param attackSpeedPerSecond int attack speed per second of the unit
-     * @param hitRate int percent chance of not miss the attack
-     * @param criticRate int percent chance of do a critical attack
-     * @param criticDamage int percent that represent the damage from a critical attack in comparison
+     * Constructor of the class Magician. The signature of this constructor
+     * takes all the fields of class the class Unit
+     * except the field ATTACK_TYPE because it is pre-defined as "ranged",
+     * and the mana that is defined as 100.
+     * @param name String - name of the unit
+     * @param health int - health points of the unit
+     * @param attack int - attack points of the unit
+     * @param armor int - armor points of the unit
+     * @param attackSpeedPerSecond - int attack speed per second of the unit
+     * @param hitRate - int percent chance of not miss the attack
+     * @param criticRate - int percent chance of do a critical attack
+     * @param criticDamage - int percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
@@ -40,11 +41,11 @@ public class MagicianUnit extends MagicUnit {
     }
 
     /**
-     * Default constructor for class edu.ntnu.idatt2001.pedropca.MagicianUnit. The signature of this constructor only takes
+     * Default constructor for class MagicianUnit. The signature of this constructor only takes
      * Variable for the field name and health. This constructor will be used for default
      * ranged unit.
-     * @param name String name of the unit
-     * @param health int health points of the unit
+     * @param name String - name of the unit
+     * @param health int - health points of the unit
      */
     public MagicianUnit(String name, int health)throws IllegalArgumentException {
         super(name, health, 15, 8, 3, "ranged", 65, 15, 150,200);
@@ -52,10 +53,10 @@ public class MagicianUnit extends MagicUnit {
 
     /**
      * Help method that overrides abstract method getAttackBonus from the class unit.
-     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get attack bonus.
+     * This method helps method getDamageDone from the class Unit to get attack bonus.
      * This method is based on the luck. But the terrain "Volcano" buffs the attack bonus.
-     * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
-     * @return int the attack bonus.
+     * @param opponent Unit - the opponent unit.
+     * @return int - the attack bonus.
      */
     @Override
     public int getAttackBonus(Unit opponent) {
@@ -67,10 +68,10 @@ public class MagicianUnit extends MagicUnit {
 
     /**
      * Help method that overrides abstract method getResistBonus from the class unit.
-     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get resist bonus.
+     * This method helps method getDamageDone from the class Unit to get resist bonus.
      * This method is based on the luck. But the terrain "Volcano" buffs the attack bonus.
-     * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
-     * @return int the resist bonus.
+     * @param mainUnit Unit - the opponent unit.
+     * @return int - the resist bonus.
      */
     @Override
     public int getResistBonus(Unit mainUnit) {
@@ -83,8 +84,8 @@ public class MagicianUnit extends MagicUnit {
     /**
      * Help method that overrides abstract method clone from the class unit.
      * This method makes and return a deep copy of the unit that calls method.
-     * It will help method getDamageDone from class edu.ntnu.idatt2001.pedropca.Unit and the abstract method getResistBonus()
-     * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
+     * It will help method getDamageDone from class Unit and the abstract method getResistBonus()
+     * @return Unit - Copy of th unit.
      */
     @Override
     public Unit clone() {
@@ -93,8 +94,12 @@ public class MagicianUnit extends MagicUnit {
                 this.getCriticRate(), this.getCriticDamage());
     }
 
+    /**
+     * Method magicAttack that
+     * @param target List of units - The units from the enemy army.
+     */
     @Override
-    public void magicAttack(List<Unit> target) {
+    public void magicSpell(List<Unit> target) {
         target.forEach(unit -> unit.setHealth(Math.max(unit.getHealth()-2,0)));
         this.setMana(Math.max(this.getMana()-50,0));
     }

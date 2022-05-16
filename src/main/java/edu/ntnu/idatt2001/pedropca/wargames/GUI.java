@@ -24,7 +24,7 @@ import java.util.Optional;
  */
 public class GUI extends Application {
 
-    //TODO: ADD THE LAST SPEED OF SIMULATION
+    //TODO: Update old JavaDoc.
     /**
      * Main method that starts the program, generate a unique instance of the SingletonArmies class
      * and calls the JavaFX's method launch.

@@ -88,12 +88,12 @@ public class Battle {
     private void magicAttack(Unit unit){
         if(unit instanceof MagicUnit){
             if(unit instanceof HealerUnit){
-                if(army1.getAllUnits().contains(unit) &&this.checkManaOfHealer((HealerUnit) unit)) ((HealerUnit) unit).magicAttack(army1.getAllUnits());
-                if(army2.getAllUnits().contains(unit) &&this.checkManaOfHealer((HealerUnit) unit)) ((HealerUnit) unit).magicAttack(army2.getAllUnits());
+                if(army1.getAllUnits().contains(unit) &&this.checkManaOfHealer((HealerUnit) unit)) ((HealerUnit) unit).magicSpell(army1.getAllUnits());
+                if(army2.getAllUnits().contains(unit) &&this.checkManaOfHealer((HealerUnit) unit)) ((HealerUnit) unit).magicSpell(army2.getAllUnits());
             }
             if(unit instanceof MagicianUnit){
-                if(army1.getAllUnits().contains(unit) &&this.checkManaOfMagician((MagicianUnit) unit)) ((MagicianUnit) unit).magicAttack(army2.getAllUnits());
-                if(army2.getAllUnits().contains(unit) &&this.checkManaOfMagician((MagicianUnit) unit)) ((MagicianUnit) unit).magicAttack(army1.getAllUnits());
+                if(army1.getAllUnits().contains(unit) &&this.checkManaOfMagician((MagicianUnit) unit)) ((MagicianUnit) unit).magicSpell(army2.getAllUnits());
+                if(army2.getAllUnits().contains(unit) &&this.checkManaOfMagician((MagicianUnit) unit)) ((MagicianUnit) unit).magicSpell(army1.getAllUnits());
             }
         }
     }

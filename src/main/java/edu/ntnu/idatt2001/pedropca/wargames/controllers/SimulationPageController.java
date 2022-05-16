@@ -75,12 +75,12 @@ public class SimulationPageController extends Controller implements Initializabl
     private void checkHealer(Unit unit){
         if(army1.getAllUnits().contains(unit)){
             if(unit instanceof HealerUnit){
-                if ( ((HealerUnit) unit).getMana()>29)  ((HealerUnit) unit).magicAttack(army1.getAllUnits());
+                if ( ((HealerUnit) unit).getMana()>29)  ((HealerUnit) unit).magicSpell(army1.getAllUnits());
                 this.setText(unit.getName() +  "from the army: " + army1.getName() +" casts a healing spell on his allies.");
             }
         }else {
             if(unit instanceof HealerUnit){
-                if ( ((HealerUnit) unit).getMana()>29)  ((HealerUnit) unit).magicAttack(army2.getAllUnits());
+                if ( ((HealerUnit) unit).getMana()>29)  ((HealerUnit) unit).magicSpell(army2.getAllUnits());
                 this.setText(unit.getName() +  "from the army: " + army2.getName() +" casts a healing spell on his allies.");
             }
         }
@@ -90,12 +90,12 @@ public class SimulationPageController extends Controller implements Initializabl
     private void checkMagician(Unit unit){
         if(army1.getAllUnits().contains(unit)){
             if(unit instanceof MagicianUnit){
-                if ( ((MagicianUnit) unit).getMana()>49)  ((MagicianUnit) unit).magicAttack(army2.getAllUnits());
+                if ( ((MagicianUnit) unit).getMana()>49)  ((MagicianUnit) unit).magicSpell(army2.getAllUnits());
                 this.setText(unit.getName() +  "from the army: " + army1.getName() +" casts a fire spell on his enemies.");
             }
         }else {
             if(unit instanceof MagicianUnit){
-                if ( ((MagicianUnit) unit).getMana()>49)  ((MagicianUnit) unit).magicAttack(army1.getAllUnits());
+                if ( ((MagicianUnit) unit).getMana()>49)  ((MagicianUnit) unit).magicSpell(army1.getAllUnits());
                 this.setText(unit.getName() +  "from the army: " + army1.getName() +" casts a fire spell on his enemies.");
             }
         }

@@ -9,10 +9,10 @@ import java.util.Random;
 
 /**
  *
- * Abstract class unit that will be used as superclass to other unit classes.
- * edu.ntnu.idatt2001.pedropca.Unit class represent the most basic object in the units' hierarchy.
- * Object of this class (and its subclasses) will be shape the object for the class edu.ntnu.idatt2001.pedropca.Army.
- * This class has NAME, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND,
+ * Abstract class unit that will be used as superclass for other unit classes.
+ * Unit class represent the most basic object in the units' hierarchy.
+ * Object of this class (and its subclasses) will be shape the object for the class Army.
+ * This class has name, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND,
  * HIT_RATE, CRITIC_RATE and CRITIC_DAMAGE as fields.
  *
  * @author Pedro Cardona
@@ -36,7 +36,7 @@ public abstract class Unit implements Serializable {
 
     /**
      * Constructor for the class, whit name, health, attack, armor, attack speed, attack type,
-     * hit rate, critic rate, critic damage.
+     * hit rate, critic rate, critic damage as signature.
      *
      * @param name String name of the unit
      * @param health int health points of the unit
@@ -143,8 +143,8 @@ public abstract class Unit implements Serializable {
      *
      * I wanted to make a deeper gameplay. That is why I made a " Rock Paper Scissors" game style
      * where some units have an obvious advantage over other and vice versa.
-     * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
-     * @return
+     * @param opponent Unit the opponent unit.
+     * @return int - attack bonus.
      */
     public abstract int getAttackBonus(Unit opponent);
     /**
@@ -155,8 +155,8 @@ public abstract class Unit implements Serializable {
      *
      * I wanted to make a deeper gameplay. That is why I made a " Rock Paper Scissors" game style
      * where some units have an obvious advantage over other and vice versa.
-     * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
-     * @return
+     * @param mainUnit Unit the opponent unit.
+     * @return int - resist bonus.
      */
     public abstract int getResistBonus(Unit mainUnit);
 
@@ -172,7 +172,7 @@ public abstract class Unit implements Serializable {
     public void attack(Unit opponent){
         Random random = new Random();
         if(random.nextInt(101)<this.getHitRate()) {
-            int damage = 0;
+            int damage;
             if(random.nextInt(101)<this.getCriticRate()){
                 damage = this.criticAttack(opponent);
             } else {
@@ -185,7 +185,7 @@ public abstract class Unit implements Serializable {
     /**
      * Help private method that calculate the total damage with help of
      * help method getDamageDone.
-     * @param opponent
+     * @param opponent Unit - the opponent unit
      * @return int damage from a critical attack.
      */
 
@@ -210,6 +210,10 @@ public abstract class Unit implements Serializable {
                 (opponent.getArmor() + opponent.getResistBonus(this.clone())) / this.getAttackSpeedPerSecond()),0);
     }
 
+    /**
+     * Method that return the difference between the maxHealth and the current health.
+     * @return int - the difference between the mac health and the current health.
+     */
     public int getMissingHealth(){
         return maxHealth-health;
     }
