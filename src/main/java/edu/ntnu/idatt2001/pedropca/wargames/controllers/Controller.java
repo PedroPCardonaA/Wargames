@@ -23,10 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
-//TODO: FIX the possible problem with generate army.
-
-
 /**
  * Super class of the Controller hierarchy that contains all the help methods that
  * the other controller use. This class as a SingletonArmies instance as a field,
@@ -132,6 +128,7 @@ public abstract class Controller {
         File file = this.openFileChooser("Save army as a file.").showSaveDialog(null);
         if(file !=null){
             FileArmyHandler.writeAFile(new Army(singletonArmies.getArmy(index)),file.getParent(),file.getName());
+            this.showAlert("Saving army","The army was correctly saved","");
         }
     }
 
