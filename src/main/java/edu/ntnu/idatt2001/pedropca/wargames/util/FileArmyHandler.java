@@ -7,9 +7,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 //TODO: TRY TO IMPLEMENT NIO.
 /**
@@ -67,24 +67,20 @@ public class FileArmyHandler {
      */
     private static Army readArmyFromCsv(String pathOfFile) throws IOException, IllegalArgumentException{
         Army readArmy = new Army("readArmy");
-        List<List<String>> data = new ArrayList<>();
         UnitFactory factory = new UnitFactory();
-        List<String> list = Files.readAllLines(Path.of(pathOfFile));
-        list.forEach(line-> data.add(Arrays.asList(line.split(","))));
-        int numberOfLine=0;
-        try {
-            for(int i=0;i<data.size();i++){
-                if(i==0){
-                    readArmy.setName(data.get(i).get(0));
-                } else {
-                    readArmy.add(factory.createUnit(Objects.requireNonNull(EnumUnitType.getUnitType(data.get(i).get(0))),data.get(i).get(1),Integer.parseInt(data.get(i).get(2)),Integer.parseInt(data.get(i).get(3)),Integer.parseInt(data.get(i).get(4)),Integer.parseInt(data.get(i).get(5)),Integer.parseInt(data.get(i).get(6)),Integer.parseInt(data.get(i).get(7)),Integer.parseInt(data.get(i).get(8))));
-                }
-                numberOfLine++;
-            }
+        Path file = Path.of(pathOfFile);
+        final int[] numberOfLine={1};
+        try(Stream<String> lines = Files.lines(file)) {
+            lines.forEach(line->{
+                String [] info = line.split(",");
+                if(info.length==1) readArmy.setName(info[0]);
+                else readArmy.add(factory.createUnit(Objects.requireNonNull(EnumUnitType.getUnitType(info[0])),info[1],Integer.parseInt(info[2]),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[5]),Integer.parseInt(info[6]),Integer.parseInt(info[7]),Integer.parseInt(info[8])));
+                numberOfLine[0]++;
+            });
             return readArmy;
         }catch (Exception e){
             throw new IllegalArgumentException("The data of the file was corrupted or is not compatible" +
-                    "with this program. \nThe error was: " + e.getMessage() +" In the line " +numberOfLine +" of the file.");
+                    "with this program. \nThe error was: " + e.getMessage() +" In the line " +numberOfLine[0] +" of the file.");
         }
     }
 
@@ -149,6 +145,8 @@ public class FileArmyHandler {
         });
         writer.writeAll(data);
         writer.close();
+
+
     }
 
     /**

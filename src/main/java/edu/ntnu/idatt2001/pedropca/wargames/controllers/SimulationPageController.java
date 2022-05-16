@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//TODO: TRY TO IMPLEMENT BATTLE CLASS
+//TODO: TRY TO DO SIMULATION MORE SMOOTHLY
 public class SimulationPageController extends Controller implements Initializable {
 
     @FXML
