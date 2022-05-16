@@ -273,7 +273,6 @@ public class EditingArmyController extends Controller implements Initializable {
             if(!unitListView.getFocusModel().getFocusedItem().isEmpty()){
                 int sum = 0;
                 String name = this.getRealNameOfTheUnit();
-                System.out.println(name);
                 for(int i = 0; i<this.checkNumberToDelete();i++){
                     if(army.getAllUnits().contains(army.returnAUnitByName(name))) sum++;
                     army.removeUnit(army.returnAUnitByName(name));

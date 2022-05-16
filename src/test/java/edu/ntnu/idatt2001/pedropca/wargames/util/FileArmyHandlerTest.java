@@ -9,6 +9,8 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUni
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,7 @@ class FileArmyHandlerTest {
                     mixedList.add(new CommanderUnit("Commander",100));
                     army.addAll(mixedList);
                     FileArmyHandler.writeAFile(army, "src/main/resources/Armies","ArmyWithUnits.csv");
+                    Files.delete(Path.of("src/main/resources/Armies/ArmyWithUnits.csv"));
                 }catch (Exception e){
                     fail();
                 }
@@ -41,6 +44,7 @@ class FileArmyHandlerTest {
             void saveAnArmyWithoutUnitsInACsvFile(){
                 try {
                     FileArmyHandler.writeAFile(new Army("Army"), "src/main/resources/Armies","ArmyWithoutUnits.csv");
+                    Files.delete(Path.of("src/main/resources/Armies/ArmyWithoutUnits.csv"));
                 }catch (Exception e){
                     fail();
                 }
@@ -74,6 +78,7 @@ class FileArmyHandlerTest {
             void saveAnArmyWithAFunnyName(){
                 try {
                     FileArmyHandler.writeAFile(new Army("XDFGSJSJYD¤#¤##2&%¤"), "src/main/resources/Armies","XDFGSJSJYD¤#¤##2&%¤");
+                    Files.delete(Path.of("src/main/resources/Armies/XDFGSJSJYD¤#¤##2&%¤.csv"));
                 }catch (Exception e){
                     fail();
                 }
@@ -148,6 +153,7 @@ class FileArmyHandlerTest {
                     Army readFile =FileArmyHandler.readArmy("src/main/resources/Armies/ArmyWithUnits.csv");
                     assertEquals(army.getName(),readFile.getName());
                     assertEquals(army.getAllUnits().size(),readFile.getAllUnits().size());
+                    Files.delete(Path.of("src/main/resources/Armies/ArmyWithUnits.csv"));
                 }catch (Exception e){
                     fail();
                 }
@@ -160,6 +166,7 @@ class FileArmyHandlerTest {
                     Army readFile =FileArmyHandler.readArmy("src/main/resources/Armies/ArmyWithoutUnits.csv");
                     assertEquals(army.getName(),readFile.getName());
                     assertEquals(army.getAllUnits().size(),readFile.getAllUnits().size());
+                    Files.delete(Path.of("src/main/resources/Armies/ArmyWithoutUnits.csv"));
                 }catch (Exception e){
                     fail();
                 }
@@ -219,15 +226,6 @@ class FileArmyHandlerTest {
                             " Define " + "A correct file.",e.getMessage());
                 }
             }
-        }
-    }
-    @Test
-    void tryingReadingACorruptFile(){
-        try {
-            FileArmyHandler.readArmy("src/main/resources/armies/corrupted.csv");
-            fail();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
         }
     }
 }

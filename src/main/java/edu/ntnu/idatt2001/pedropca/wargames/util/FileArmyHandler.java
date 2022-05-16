@@ -6,6 +6,7 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -129,23 +130,21 @@ public class FileArmyHandler {
      * @param fileName String - Defined name of the new file.
      * @throws IOException If it is an error by manipulating the new file.
      */
-    private static void WriteAFileAsCsv(Army armyToWrite, String pathOfFile, String fileName) throws IOException {
-        File file = new File(pathOfFile+"\\"+fileName);
-        FileWriter armyFile = new FileWriter(file);
-        CSVWriter writer = new CSVWriter(armyFile, ',',
-                CSVWriter.NO_QUOTE_CHARACTER,
-                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                CSVWriter.DEFAULT_LINE_END);
-        List<String[]> data = new ArrayList<>();
-        data.add(new String[]{armyToWrite.getName()});
-        armyToWrite.getAllUnits().forEach(unit ->{
-            data.add(new String[]{unit.getClass().getSimpleName(),unit.getName(),unit.getHealth()+"",
-                    unit.getAttack()+"",unit.getArmor()+"",unit.getAttackSpeedPerSecond()+"",
-                    unit.getHitRate()+"",unit.getCriticRate()+"",unit.getCriticDamage()+""});
-        });
-        writer.writeAll(data);
-        writer.close();
+    public static void WriteAFileAsCsv(Army armyToWrite, String pathOfFile, String fileName) throws IOException{
+        Path path = Paths.get(pathOfFile+"\\"+fileName);
+        List<String> data2 = new ArrayList<>();
+        if(Files.exists(path)) throw new IOException("This file already exists. Try with other name");
+        else {
+            Path finishDocument = Files.createFile(path);
+            data2.add(armyToWrite.getName());
+            armyToWrite.getAllUnits().forEach(unit ->{
+                data2.add(unit.getClass().getSimpleName()+","+ unit.getName()+","+unit.getHealth()+","+
+                        unit.getAttack()+","+unit.getArmor()+","+unit.getAttackSpeedPerSecond()+","+
+                        unit.getHitRate()+","+unit.getCriticRate()+","+unit.getCriticDamage()+"");
+            });
+            Files.write(finishDocument,data2);
 
+        }
 
     }
 

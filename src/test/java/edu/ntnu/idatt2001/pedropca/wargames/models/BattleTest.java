@@ -113,7 +113,6 @@ class BattleTest {
                     if(winner.equals(alliance)) allianceWinner++;
                     if(winner.equals(horde)) hordeWinner++;
                 }
-                System.out.println(allianceWinner + "    " + hordeWinner);
                 assertTrue(allianceWinner>100);
                 assertTrue(hordeWinner>100);
             }
@@ -139,10 +138,5 @@ class BattleTest {
                 assertEquals("Battle between " + "Ukraine" + " and " + "Russia" + ".",battle.toString());
             }
         }
-    }
-
-    @Test
-    void testSimpleName(){
-        System.out.println(new RangedUnit("Xd",100).getClass().getSimpleName());
     }
 }
