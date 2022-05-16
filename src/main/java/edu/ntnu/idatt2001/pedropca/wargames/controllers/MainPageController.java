@@ -7,10 +7,15 @@ import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -140,6 +145,7 @@ public class MainPageController extends Controller implements Initializable {
                 this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
                 this.simulateBattleSkip();
             } else {
+                this.checkContainOfSingletonTerrain();
                 switch (speedSimulationComboBox.getValue()){
                     case "Skip": this.simulateBattleSkip(); break;
                     case "Normal": this.simulateBattleNormal(); break;
@@ -157,7 +163,6 @@ public class MainPageController extends Controller implements Initializable {
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     private void simulateBattleSkip(){
-        this.checkContainOfSingletonTerrain();
         Battle battle = new Battle(army1,army2);
         Army winner = battle.simulate();
         this.updateArmies(winner);
@@ -168,7 +173,6 @@ public class MainPageController extends Controller implements Initializable {
 
 
     private void simulateBattleNormal(){
-        this.checkContainOfSingletonTerrain();
         Battle battle = new Battle(army1,army2);
         Thread thread = new Thread(()->{
             Runnable updater = ()->{
@@ -200,10 +204,9 @@ public class MainPageController extends Controller implements Initializable {
 
     private void simulateBattleSlow(){
         try {
-            this.openNewScene("/views/Simulation.fxml","Slow Simulation");
-        } catch (Exception e) {
-            this.showError("Error by loading the file!","It was a error by reading the file."
-                    , e.getMessage());
+            this.openNewSceneFromMainPage("/views/SimulationPage.fxml","Testing");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -411,7 +414,7 @@ public class MainPageController extends Controller implements Initializable {
      */
     private void displayAllUnits() throws IOException{
         Controller.setDisplayArmyAsActualPage();
-        this.openNewScene("/views/DisplayArmy.fxml", "Display Units");
+        this.openNewSceneFromMainPage("/views/DisplayArmy.fxml", "Display Units");
         Controller.setMainPaigeAsActualPage();
     }
 
@@ -494,7 +497,7 @@ public class MainPageController extends Controller implements Initializable {
      */
     private void openEditArmyWindow() throws IOException {
         Controller.setEditingArmyAsActualPage();
-        this.openNewScene("/views/EditingArmy.fxml", "Editing army");
+        this.openNewSceneFromMainPage("/views/EditingArmy.fxml", "Editing army");
         Controller.setMainPaigeAsActualPage();
     }
 
@@ -503,7 +506,7 @@ public class MainPageController extends Controller implements Initializable {
      * @param path String - Path of the field to load.
      * @param title String - Tittle of the new window.
      */
-    private void openNewScene(String path,String title) throws IOException {
+    private void openNewSceneFromMainPage(String path, String title) throws IOException {
         this.openANewScene(path,title,armyOneName);
         army1 = new Army(singletonArmies.getArmy(0));
         army2 = new Army(singletonArmies.getArmy(1));

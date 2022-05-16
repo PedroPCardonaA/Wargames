@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label text="Battle simulation" textFill="RED" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Papyrus" size="36.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea prefHeight="297.0" prefWidth="588.0" />
+            <Button mnemonicParsing="false" text="Cancel" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>
