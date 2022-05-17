@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.NegativeNumberException;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public abstract class MagicUnit extends Unit {
      */
     public MagicUnit(String name, int health, int attack, int armor, int attackSpeedPerSecond, String attackType, int hitRate, int criticRate, int criticDamage, int mana) throws IllegalArgumentException {
         super(name, health, attack, armor, attackSpeedPerSecond, attackType, hitRate, criticRate, criticDamage);
+        if(mana<0) throw new NegativeNumberException("The mana points cannot be negative. Defined it as zero or above zero!");
         this.mana = mana;
         this.maxMana = mana;
     }
@@ -45,8 +47,9 @@ public abstract class MagicUnit extends Unit {
         return mana;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
+    public void setMana(int mana) throws NegativeNumberException {
+        if(mana<0) throw new NegativeNumberException("The mana points cannot be negative. Defined it as zero or above zero!");
+        this.mana = Math.min(mana,this.getMaxMana());
     }
 
     public int getMaxMana() {
@@ -69,6 +72,6 @@ public abstract class MagicUnit extends Unit {
     @Override
     public void attack(Unit opponent) {
         super.attack(opponent);
-        this.setMana(Math.min(this.getMana()+5,this.getMaxMana()));
+        this.setMana(this.getMana()+5);
     }
 }

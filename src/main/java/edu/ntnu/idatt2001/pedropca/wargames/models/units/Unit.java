@@ -130,8 +130,8 @@ public abstract class Unit implements Serializable {
      * @throws IllegalArgumentException this method may throw an illegal argument exception
      * if the new health is lower than 0.
      */
-    public void setHealth(int health)throws IllegalArgumentException {
-        if(health<0) throw new IllegalArgumentException("The health points of a unit cannot be lower than 0. Define the health points above 0.");
+    public void setHealth(int health)throws NegativeNumberException {
+        if(health<0) throw new NegativeNumberException("The health points of a unit cannot be lower than 0. Define the health points above 0.");
         this.health = health;
     }
 
