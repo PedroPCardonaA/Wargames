@@ -49,12 +49,12 @@ public class RangedUnit extends Unit {
     }
     /**
      * Help method that overrides abstract method getAttackBonus from the class unit.
-     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get attack bonus.
-     * This method will return the attack bonus of infantry units. The value of the bonus may change
-     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is an infantry unit. Method returns 7. Else,
+     * This method helps method getDamageDone from the class Unit to get attack bonus.
+     * This method will return the attack bonus of ranged units. The value of the bonus may change
+     * depending on the opponent Unit. If the opponent is an infantry unit. Method returns 7. Else,
      * the method returns 4.
      * The forest terrain de-buffs the attack bonus and the hill terrain buffs the attack bonus.
-     * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
+     * @param opponent Unit the opponent unit.
      * @return int the attack bonus.
      */
 
@@ -70,13 +70,13 @@ public class RangedUnit extends Unit {
 
     /**
      * Help method that overrides abstract method getResistBonus from the class unit.
-     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get resist bonus.
+     * This method helps method getDamageDone from the class Unit to get resist bonus.
      * This method will return the resist bonus of ranged units. The value of the bonus may change
-     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is another ranged unit, this method will return 1.
+     * depending on the opponent Unit. If the opponent is another ranged unit, this method will return 1.
      * If the opponent is an infantry unit, this method will return 2;
      * And if the opponent is a cavalry unit, this method will return 0;
      * The volcano terrain de-buffs the resist bonus.
-     * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the main unit that called method getDamageDone.
+     * @param mainUnit Unit the main unit that called method getDamageDone.
      * @return int the attack bonus.
      */
 
@@ -92,8 +92,8 @@ public class RangedUnit extends Unit {
     /**
      * Help method that overrides abstract method clone from the class unit.
      * This method makes and return a deep copy of the unit that calls method.
-     * It will help method getDamageDone from class edu.ntnu.idatt2001.pedropca.Unit and the abstract method getResistBonus()
-     * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
+     * It will help method getDamageDone from class Unit and the abstract method getResistBonus()
+     * @return Unit Copy of th unit.
      */
     @Override
     public Unit clone(){

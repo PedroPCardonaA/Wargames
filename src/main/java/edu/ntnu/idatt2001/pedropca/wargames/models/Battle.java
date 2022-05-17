@@ -99,11 +99,11 @@ public class Battle {
     }
 
     private boolean checkManaOfHealer(HealerUnit healerUnit){
-        return healerUnit.getMana()>30;
+        return healerUnit.getMana()>=30;
     }
 
     private boolean checkManaOfMagician(MagicianUnit healerUnit){
-        return healerUnit.getMana()>50;
+        return healerUnit.getMana()>=50;
     }
 
     /**
