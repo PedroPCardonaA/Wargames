@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-//TODO: ADD TEST FOR THIS CLASS
 public class HealerUnit extends MagicUnit{
     /**
      * Constructor of the class Magician. The signature of this constructor

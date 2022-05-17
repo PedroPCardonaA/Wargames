@@ -53,7 +53,7 @@ public class DisplayArmyController extends Controller implements Initializable{
     /**
      * Initialize method that is called after its root element is loaded.
      * Method that add all the needed columns to the TableView armyTableView and
-     * add all the units of army to the table by calling the help method createTable and UpdateTable;
+     * add all the units of army to the table by calling the help method createTable and UpdateTable.
      *
      * @param url url - The location of the fxml file.
      * @param resourceBundle ResourceBundle - The resource used to localize the root object.

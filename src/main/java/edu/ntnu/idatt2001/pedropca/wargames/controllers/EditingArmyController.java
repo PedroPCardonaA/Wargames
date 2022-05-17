@@ -18,10 +18,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * DisplayArmyController class that is a part of the Controller hierarchy, extends
+ * the class Controller and controls over the FXML file EditingArmy.fxml
+ * by defining all relevant JavaFx object in the FXML and all methods
+ * that user can call them by interacting with the JavaFX objects.
+ * This class has two fields, one SingletonArmies instance and one Army instance,
+ * and several JavaFx fields.
+ *
+ * @author Pedro Cardona
+ * @version 1.0
+ * @since 1.0-SNAPSHOT
+ */
 public class EditingArmyController extends Controller implements Initializable {
 
-    //TODO: ADD JavaDoc
     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     Army army = new Army(singletonArmies.getArmy(singletonArmies.getArmyNumber()));
     @FXML
@@ -72,6 +82,14 @@ public class EditingArmyController extends Controller implements Initializable {
     @FXML
     private MenuItem displayAllUnits;
 
+    /**
+     * Initialize method that is called after its root element is loaded.
+     * Method that add all the different unit types into the comboBox unitType and
+     * calls the help method updateView.
+     *
+     * @param url url - The location of the fxml file.
+     * @param resourceBundle ResourceBundle - The resource used to localize the root object.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayAllUnits.setDisable(Controller.getActualPage() == Page.DISPLAY_ARMY);
@@ -79,13 +97,15 @@ public class EditingArmyController extends Controller implements Initializable {
         this.updateView();
     }
 
+    /**
+     * Method that update the GUI by resetting the content of the text field "nameOfTheArmy"
+     * setting the current name of the army as prompt text, setting the rest of the text field
+     * with standard values by using the help method resetTextFields
+     * and updating the table view of the units by calling the help method getUnitsName.
+     */
     @Override
     protected void updateView(){
         nameOfTheArmy.setPromptText(army.getName());
-        this.updateListView();
-    }
-
-    private void updateListView() {
         unitListView.getItems().clear();
         unitListView.getItems().addAll(this.getUnitsName(""));
         this.resetTextFields(searchField,"Search field");
@@ -102,12 +122,24 @@ public class EditingArmyController extends Controller implements Initializable {
         this.resetTextFields(numberToDelete,"15");
     }
 
+    /**
+     * Help method that gets a TextField in the signature, cleans all the content in the
+     * text field and adding a new prompt text also defined in the signature.
+     * @param field TextField - the text field to be edited
+     * @param newText String - the new content of the field.
+     */
     private void resetTextFields(TextField field,String newText){
         field.clear();
         field.setPromptText(newText);
     }
 
-
+    /**
+     * Method that defined army stored in the field army as a pre-defined army.
+     * The user has the possibility to change the name of the pre-define army.
+     * This method gets help from methods generateArmy, stringInputWindow, updateArmyInBothListInTheSingleton
+     * and update view.
+     * It can be called by the javaFx object of the FXML file EditingArmy.
+     */
     @FXML
     private void generatedArmyEditingArmyController(){
         try {
@@ -121,6 +153,14 @@ public class EditingArmyController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Method that open a file from the local system by calling the method openFileChooser, defines file's path,
+     * runs method readAFileArmy from FileArmyHandler class and define army as the result of it,
+     * and calls help checkName.
+     * This method calls help method updateArmyOneInBothListInTheSingleton to update
+     * the both list of armies in SingletonArmies class correctly.
+     * It can be called by the javaFx object of the FXML file EditingArmy.
+     */
     @FXML
     private void loadFromAFileEditingArmyController(){
         try {
@@ -136,6 +176,10 @@ public class EditingArmyController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Method that save the current army by calling the help method saveArmyAsAFile.
+     * It can be called by the javaFx object of the FXML file DisplayArmy.
+     */
     @FXML
     private void saveArmyAsFileFromEditingArmyController(){
         try {
@@ -146,6 +190,11 @@ public class EditingArmyController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * JavaFX's method that open a new window where the army contained in the filed army is displayed
+     * by calling the help method openANewScene and updating the info by calling the help method updateView
+     * It can be called by the javaFx object of the FXML file EditingArmy.
+     */
     @FXML
     private void displayAllUnitsEditingArmyController(){
         try {
@@ -157,105 +206,72 @@ public class EditingArmyController extends Controller implements Initializable {
                     , e.getMessage());
         }
     }
-
+    /**
+     * Method for close the current stage.
+     * It can be called by the javaFx object of the FXML file EditingArmy.
+     */
     @FXML
     private void close(){
         Stage stage = (Stage) nameOfTheArmy.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * JavaFx's method that add a number of new units to the army contained in the field army
+     * based on the information given by the user. The  information is read by the use
+     * of the help method checkName and checkIfParsable. Method will return an alert
+     * with the result of adding. The new army will be saved globally by calling the method
+     * updateArmyInTheBothListInTheSingleton.
+     * It can be called by the javaFx object of the FXML file EditingArmy.
+     */
     @FXML
-    private void addUnit(){
+    private void addUnit() {
         if(unitType.getValue() == null){
             this.showAlert("Not unit type selected!", "Unit type has not been selected!", "To add a unit it is necessary to define a unit type");
         }  else{
             try {
-                army.addAll(new UnitFactory().createAListOfUnits(Objects.requireNonNull(EnumUnitType.getUnitType(unitType.getValue()+"Unit")),this.checkName(),this.checkHealth(),this.checkAttack(),this.checkArmor(),this.checkAttackSpeed(),this.checkAccuracy(),this.checkCriticalRate(),this.checkCriticalDamage(),this.checkNumberOfUnits()));
+                army.addAll(new UnitFactory().createAListOfUnits(Objects.requireNonNull(EnumUnitType.getUnitType(unitType.getValue()+"Unit")),
+                        this.checkName(),this.checkIfParsable(health.getText(),100,"The health of the unit"),this.checkIfParsable(attack.getText(),25,"The attack of the unit"),this.checkIfParsable(armor.getText(),12,"The armor of the unit"),this.checkIfParsable(attackSpeed.getText(),2,"The attack speed of the unit"),
+                        this.checkIfParsable(accuracy.getText(),70,"The accuracy of the unit"),this.checkIfParsable(criticalRate.getText(),25,"The critical rate of the unit"),this.checkIfParsable(criticalDamage.getText(),145,"The critical damage of the unit"),this.checkIfParsable(numberToAdd.getText(),25,"The number of units to add")));
                 this.showAlert("Success by adding units","The units was successfully added to the army", "");
                 this.updateArmyInBothListInTheSingleton(army,singletonArmies.getArmyNumber());
-                this.updateListView();
+                this.updateView();
             }catch (Exception e){
                 this.showError("Error by adding a Units","It was an error by adding the units", e.getMessage());
             }
         }
     }
 
+    /**
+     * Help method that check if the user have defined a name or not.
+     * @return String - A default name or the name gave by the user
+     */
     private String checkName(){
         if(name.getText().isEmpty()) return "Name";
         else return name.getText();
     }
 
-    private int checkHealth() throws EmptyInputException {
+    /**
+     * Help method that check if a string is empty or not. If not the method try to parse it as an integer.
+     * @param intToParse String - String to be parsed as an integer
+     * @param defaultValue int - default value if the string to parse is empty
+     * @param failMessage string - fail message if pars is not possible.
+     * @return int - the parsed integer.
+     */
+    private int checkIfParsable(String intToParse,int defaultValue, String failMessage) throws IllegalArgumentException{
         try {
-            if(health.getText().isEmpty()) return 100;
-            else return Integer.parseInt(health.getText());
+            if(intToParse.isEmpty()) return defaultValue;
+            else return Integer.parseInt(intToParse);
         }catch (Exception e){
-            throw new NotIntegerException
-                    ("The health of the unit must be a integer number. Define it as integer number");
-        }
-    }
-    private int checkAttack() throws EmptyInputException{
-        try {
-            if(attack.getText().isEmpty()) return 25;
-            else return Integer.parseInt(attack.getText());
-        }catch (Exception e){
-            throw new NotIntegerException
-                    ("The attack of the unit must be a integer number. Define it as integer number");
-        }
-    }
-    private int checkArmor() throws EmptyInputException{
-        try {
-            if(armor.getText().isEmpty()) return 12;
-            else return Integer.parseInt(armor.getText());
-        }catch (Exception e){
-            throw new NotIntegerException
-                    ("The armor of the unit must be a integer number. Define it as integer number");
-        }
-    }
-    private int checkAttackSpeed() throws EmptyInputException{
-        try {
-            if(attackSpeed.getText().isEmpty()) return 2;
-            else return Integer.parseInt(attackSpeed.getText());
-        }catch (Exception e){
-            throw new NotIntegerException
-                    ("The attack speed of the unit must be a integer number. Define it as integer number");
-        }
-    }
-    private int checkAccuracy() throws EmptyInputException{
-        try {
-            if(accuracy.getText().isEmpty()) return 70;
-            else return Integer.parseInt(accuracy.getText());
-        }catch (Exception e){
-            throw new NotIntegerException
-                    ("The accuracy of the unit must be a integer number. Define it as integer number");
-        }
-    }
-    private int checkCriticalRate() throws EmptyInputException{
-        try {
-            if(criticalRate.getText().isEmpty()) return 25;
-            else return Integer.parseInt(criticalRate.getText());
-        }catch (Exception e){
-            throw new NotIntegerException
-                    ("The critical of the unit rate must be a integer number. Define it as integer number");
-        }
-    }
-    private int checkCriticalDamage() throws EmptyInputException{
-        try {
-            if(criticalDamage.getText().isEmpty()) return 145;
-            else return Integer.parseInt(criticalDamage.getText());
-        }catch (Exception e){
-            throw new NotIntegerException("The critical damage of the unit must be a integer number. Define it as integer number");
-        }
-    }
-    private int checkNumberOfUnits() throws EmptyInputException{
-        try {
-            if(numberToAdd.getText().isEmpty()) return 25;
-            else return Integer.parseInt(numberToAdd.getText());
-        }catch (Exception e){
-            throw new NotIntegerException("The number of units to add must be a integer number. Define it as integer number");
+            throw new NotIntegerException( failMessage +" must be a integer number. Define it as integer number");
         }
     }
 
+    /**
+     * JavaFx's method that change the name of the army contained in the field army based on the
+     * information given by the user. After the proses the application show an alert with the result.
+     * c
+     */
     @FXML
     private void editName(){
         if(nameOfTheArmy.getText().isEmpty()) this.showAlert("Editing name of the army", "You have not changed the name of the army yet!","");
@@ -267,27 +283,35 @@ public class EditingArmyController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * JavaFx's method that delete a number of a selected unit based on the information given by
+     * the user and update the army globally. To complete it, the method calls different help method as
+     * UpdateArmyInBothListInTheSingleton, updateView showAlert.
+     * It can be called by the javaFx object of the FXML file EditingArmy.
+     */
     @FXML
     private void deleteUnit(){
         try {
             if(!unitListView.getFocusModel().getFocusedItem().isEmpty()){
                 int sum = 0;
                 String name = this.getRealNameOfTheUnit();
-                for(int i = 0; i<this.checkNumberToDelete();i++){
+                for(int i = 0; i<this.checkIfParsable(numberToDelete.getText(),15,"The number of units to delete");i++){
                     if(army.getAllUnits().contains(army.returnAUnitByName(name))) sum++;
                     army.removeUnit(army.returnAUnitByName(name));
                 }
                 this.updateArmyInBothListInTheSingleton(army,singletonArmies.getArmyNumber());
                 this.updateView();
                 this.showAlert("Success by deleting units","You have delete the selected unit correctly","You have deleted " + sum + " of unit: " + name + " correctly!!" + "\nThey are " + this.getNumberOfTheSameUnitIntTheArmy(name) + " of them in the army now.");
-
-            }
-            else this.showAlert("Unit was not selected", "You must select a unit to delete them","");
+            } else this.showAlert("Unit was not selected", "You must select a unit to delete them","");
         }catch (Exception e){
             this.showError("Error by deleting units", "It was an error by deleting the units",e.getMessage());
         }
     }
 
+    /**
+     * Help method that returns the current name of the unit selected in the table view.
+     * @return String - the real name of the selected unit.
+     */
     private String getRealNameOfTheUnit(){
         String selectedUnitName = unitListView.getSelectionModel().getSelectedItem();
         List<Integer> indexes = new ArrayList<>();
@@ -297,22 +321,24 @@ public class EditingArmyController extends Controller implements Initializable {
         return selectedUnitName.substring(0,indexes.get(indexes.size()-1));
     }
 
-    private int checkNumberToDelete() throws EmptyInputException{
-        try {
-            if(numberToDelete.getText().isEmpty()) return 15;
-            else return Integer.parseInt(numberToDelete.getText());
-        }catch (Exception e){
-            throw new NotIntegerException("The number of units to delete must be a integer number. Define it as integer number");
-        }
-    }
 
-
+    /**
+     * Method that search i the table list the unit that match with the string given by the user
+     * by calling the help method getUnitsName.
+     * It can be called by the javaFx object of the FXML file EditingArmy.
+     */
     @FXML
     private void searchInTableView(){
         unitListView.getItems().clear();
         unitListView.getItems().addAll(this.getUnitsName(searchField.getText()));
     }
 
+    /**
+     * Help method that return the names of all units that matches with the input from the user
+     * plus the sum of the same unit in the army in the form of a Lis.
+     * @param input String - input
+     * @return List<String> - all the names of the units
+     */
     private List<String> getUnitsName(String input){
         List<String> names= new ArrayList<>();
         army.getAllUnits().forEach(unit->{
@@ -324,6 +350,11 @@ public class EditingArmyController extends Controller implements Initializable {
         return names;
     }
 
+    /**
+     * Help method that return the number of times that a units is in the army.
+     * @param name String - name of the unit.
+     * @return int - number of the same unit in the army.
+     */
     private int getNumberOfTheSameUnitIntTheArmy(String name){
         return  Collections.frequency(army.getAllUnits()
                 .stream().map(Unit::getName).collect(Collectors.toList()), name);
