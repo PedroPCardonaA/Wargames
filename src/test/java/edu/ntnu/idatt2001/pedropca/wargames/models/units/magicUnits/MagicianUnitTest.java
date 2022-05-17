@@ -127,20 +127,20 @@ class MagicianUnitTest {
         @Nested
         class Positive{
             @Test
-            void makingACloneOfAnArcher(){
+            void makingACloneOfASpellsCaster(){
                 Unit spellsCaster = new MagicianUnit("SpellsCaster",100);
                 Unit spellsCasterCopy = spellsCaster.clone();
                 assertEquals(spellsCaster.toString(),spellsCasterCopy.toString());
             }
             @Test
-            void makingACloneOfARifleman(){
+            void makingACloneOfASummoner(){
                 Unit summoner = new MagicianUnit("Summoner",100,30,12,4,75,50,200);
                 Unit summonerClone = summoner.clone();
                 assertEquals(summoner.toString(),summonerClone.toString());
             }
 
             @Test
-            void makingACloneOfASpearman(){
+            void makingACloneOfAWarlock(){
                 Unit warlock = new MagicianUnit("Warlock",125,15,12,1,70,25,150);
                 Unit warlockClone = warlock.clone();
                 assertEquals(warlock.toString(),warlockClone.toString());

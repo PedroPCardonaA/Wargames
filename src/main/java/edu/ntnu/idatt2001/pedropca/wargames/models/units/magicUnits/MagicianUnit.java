@@ -95,8 +95,10 @@ public class MagicianUnit extends MagicUnit {
     }
 
     /**
-     * Method magicAttack that
-     * @param target List of units - The units from the enemy army.
+     * Method that overrides abstract method form MagicUnit Class.
+     * This method represents a fire spell that is cast over the enemies.
+     * Method reduces the current health of all the opponents by 2. Spell cost 50 mana points.
+     * @param target list of units - target of the spell
      */
     @Override
     public void magicSpell(List<Unit> target) {

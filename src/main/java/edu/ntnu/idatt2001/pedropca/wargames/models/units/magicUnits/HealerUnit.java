@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-//TODO: ADD JAVADOC FOR THIS CLASS
 //TODO: ADD TEST FOR THIS CLASS
 public class HealerUnit extends MagicUnit{
     /**
@@ -92,7 +91,7 @@ public class HealerUnit extends MagicUnit{
         int resistBonus = 5;
         if(EnumTerrain.getTerrain() == EnumTerrain.VOLCANO) resistBonus -=5;
         if(mainUnit instanceof CavalryUnit) resistBonus -= 5;
-        if(mainUnit instanceof InfantryUnit) resistBonus -= 5;
+        if(mainUnit instanceof InfantryUnit) resistBonus -= 2;
         if(mainUnit instanceof MagicianUnit) resistBonus += 15;
         return resistBonus;
     }
@@ -114,13 +113,15 @@ public class HealerUnit extends MagicUnit{
      * Method that overrides abstract method form MagicUnit Class.
      * This method represents a healing spell that is cast over allies.
      * Method gets the unit from the target with the highest difference between
-     * maxHealth and current health and heals it by 30.
+     * maxHealth and current health and heals it by 30. Spell cost 30 mana points.
      * @param target list of units - target of the spell
      */
     @Override
     public void magicSpell(List<Unit> target) {
-        Unit unitTarget= target.stream().sorted(Comparator.comparing(Unit::getMissingHealth)).collect(Collectors.toList()).get(0);
-        unitTarget.setHealth(Math.min(unitTarget.getHealth()+30,unitTarget.getMaxHealth()));
-        this.setMana(Math.max(this.getMana()-30,0));
+        Unit unitTarget= target.stream().sorted(Comparator.comparing(Unit::getMissingHealth).reversed()).collect(Collectors.toList()).get(0);
+        if(!(unitTarget.getMissingHealth()==0)){
+            unitTarget.setHealth(Math.min(unitTarget.getHealth()+30,unitTarget.getMaxHealth()));
+            this.setMana(Math.max(this.getMana()-30,0));
+        }
     }
 }
