@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -53,11 +54,11 @@ public class GUI extends Application {
                 windowEvent.consume();
                 this.closeProgram();
             });
+            primaryStage.setMaximized(true);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/views/MainPage.fxml"));
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));
-            primaryStage.setMaximized(true);
             primaryStage.show();
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

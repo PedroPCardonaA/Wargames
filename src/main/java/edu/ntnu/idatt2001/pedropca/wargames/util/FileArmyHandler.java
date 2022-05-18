@@ -131,17 +131,17 @@ public class FileArmyHandler {
      */
     public static void WriteAFileAsCsv(Army armyToWrite, String pathOfFile, String fileName) throws IOException{
         Path path = Paths.get(pathOfFile+"\\"+fileName);
-        List<String> data2 = new ArrayList<>();
+        List<String> data  = new ArrayList<>();
         if(Files.exists(path)) throw new IOException("This file already exists. Try with other name");
         else {
             Path finishDocument = Files.createFile(path);
-            data2.add(armyToWrite.getName());
+            data.add(armyToWrite.getName());
             armyToWrite.getAllUnits().forEach(unit ->{
-                data2.add(unit.getClass().getSimpleName()+","+ unit.getName()+","+unit.getHealth()+","+
+                data.add(unit.getClass().getSimpleName()+","+ unit.getName()+","+unit.getHealth()+","+
                         unit.getAttack()+","+unit.getArmor()+","+unit.getAttackSpeedPerSecond()+","+
                         unit.getHitRate()+","+unit.getCriticRate()+","+unit.getCriticDamage()+"");
             });
-            Files.write(finishDocument,data2);
+            Files.write(finishDocument,data);
 
         }
 

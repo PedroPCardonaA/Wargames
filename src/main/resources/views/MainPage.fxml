@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -73,7 +74,7 @@
         </VBox>
     </center>
     <left>
-        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" spacing="6.0" BorderPane.alignment="CENTER">
             <children>
                 <Label prefHeight="145.0" prefWidth="223.0" />
                 <Label id="labelArmy1" fx:id="armyOneName" alignment="CENTER" prefHeight="66.0" prefWidth="275.0" text="Army #1" textFill="#047541">
@@ -91,6 +92,7 @@
                         <TextField id="totalNumberOfUnits1" fx:id="totalArmy1" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
+            <Line endX="100.0" startX="-100.0" />
                 <HBox alignment="BASELINE_RIGHT" layoutX="10.0" layoutY="236.0">
                     <children>
                         <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry units : " wrappingWidth="206.205078125">
@@ -166,7 +168,7 @@
         </VBox>
     </left>
     <right>
-        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" spacing="6.0" BorderPane.alignment="CENTER">
             <children>
                 <Label prefHeight="149.0" prefWidth="199.0" />
                 <Label id="labelArmy2" fx:id="armyTwoName" alignment="CENTER" prefHeight="66.0" prefWidth="275.0" text="Army #2" textFill="#0b32a8">
@@ -184,6 +186,7 @@
                         <TextField id="totalNumberOfUnits2" fx:id="totalArmy2" editable="false" prefHeight="11.0" prefWidth="35.0" text="0" />
                     </children>
                 </HBox>
+            <Line endX="100.0" startX="-100.0" />
                 <HBox alignment="BASELINE_RIGHT">
                     <children>
                         <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry units : " wrappingWidth="206.205078125">

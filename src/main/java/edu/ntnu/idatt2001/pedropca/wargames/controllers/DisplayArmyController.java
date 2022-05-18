@@ -192,10 +192,10 @@ public class DisplayArmyController extends Controller implements Initializable{
         }
     }
 
-    /**
-     * Method for close the current stage.
-     * It can be called by the javaFx object of the FXML file DisplayArmy.
-     */
+        /**
+         * Method for close the current stage.
+         * It can be called by the javaFx object of the FXML file DisplayArmy.
+         */
     @FXML
     private void close(){
         Stage stage = (Stage) closeButton.getScene().getWindow();

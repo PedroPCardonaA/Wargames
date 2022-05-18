@@ -11,6 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -89,7 +92,7 @@ public class MainPageController extends Controller implements Initializable {
     private Button simulationButton;
 
     @FXML
-    private ComboBox<String> terrainComboBox;
+    private ComboBox<EnumTerrain> terrainComboBox;
 
     @FXML
     private ImageView terrainImageView;
@@ -121,12 +124,17 @@ public class MainPageController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        terrainComboBox.getItems().addAll("Forest","Hills","Plains","Volcano");
+        terrainComboBox.getItems().addAll(EnumTerrain.FOREST,EnumTerrain.HILL,EnumTerrain.PLAINS,EnumTerrain.VOLCANO);
         speedSimulationComboBox.getItems().addAll("Skip","Normal","Slow");
         terrainImageView.setFitWidth(550);
         terrainImageView.setFitHeight(150);
         try {
             this.updateImageView("src/main/resources/Images/Start.jpg");
+            //Media media = new Media("src/main/resources/Audio/alexander-nakarada-chase.mp3");
+            //MediaPlayer mediaPlayer = new MediaPlayer(media);
+            //mediaPlayer.setAutoPlay(true);
+            AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/Audio/alexander-nakarada-chase.mp3")).toString());
+            audioClip.play();
         } catch (Exception e) {
             this.showError("Error by initialization","It was an error by initialization the GUI.",e.getMessage());
         }
@@ -421,12 +429,12 @@ public class MainPageController extends Controller implements Initializable {
      */
     @FXML
     private void generateArmy1(){
-            singletonArmies.setArmyNumber(0);
-            String name = stringInputWindow(armyOneName.getScene().getWindow());
-            if (!name.isEmpty()){
-                army1 = this.generateArmy(name);
-                this.checkNameAndUpdateSingleton(army1);
-                this.updateView();}
+        singletonArmies.setArmyNumber(0);
+        String name = stringInputWindow(armyOneName.getScene().getWindow());
+        if (!name.isEmpty()){
+            army1 = this.generateArmy(name);
+            this.checkNameAndUpdateSingleton(army1);
+            this.updateView();}
     }
 
     /**
@@ -516,19 +524,19 @@ public class MainPageController extends Controller implements Initializable {
     private void updateTerrain(){
         try {
             switch (terrainComboBox.getValue()) {
-                case "Forest":
+                case FOREST:
                     EnumTerrain.setForest();
                     this.updateImageView("src/main/resources/Images/forest.jpg");
                     break;
-                case "Hills":
+                case HILL:
                     EnumTerrain.setHILL();
                     this.updateImageView("src/main/resources/Images/hills.jpg");
                     break;
-                case "Plains":
+                case PLAINS:
                     EnumTerrain.setPLAINS();
                     this.updateImageView("src/main/resources/Images/plain.jpg");
                     break;
-                case "Volcano":
+                case VOLCANO:
                     EnumTerrain.setVolcano();
                     this.updateImageView("src/main/resources/Images/Volcano.jpg");
                     break;
