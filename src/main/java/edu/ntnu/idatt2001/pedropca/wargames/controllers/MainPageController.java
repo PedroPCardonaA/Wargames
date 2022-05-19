@@ -130,15 +130,13 @@ public class MainPageController extends Controller implements Initializable {
         terrainImageView.setFitHeight(150);
         try {
             this.updateImageView("src/main/resources/Images/Start.jpg");
-            //Media media = new Media("src/main/resources/Audio/alexander-nakarada-chase.mp3");
-            //MediaPlayer mediaPlayer = new MediaPlayer(media);
-            //mediaPlayer.setAutoPlay(true);
-            AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/Audio/alexander-nakarada-chase.mp3")).toString());
-            audioClip.play();
+            this.playTheSong();
         } catch (Exception e) {
             this.showError("Error by initialization","It was an error by initialization the GUI.",e.getMessage());
         }
     }
+
+
 
     @FXML
     private void simulationBattle(){
@@ -147,6 +145,7 @@ public class MainPageController extends Controller implements Initializable {
                 this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
                 this.simulateBattleSkip();
             } else {
+                this.playTheSong();
                 this.checkContainOfSingletonTerrain();
                 switch (speedSimulationComboBox.getValue()){
                     case "Skip": this.simulateBattleSkip(); break;
@@ -572,4 +571,8 @@ public class MainPageController extends Controller implements Initializable {
         options2.setDisable(state);
     }
 
+    private void playTheSong() {
+        AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/Audio/alexander-nakarada-chase.mp3")).toString());
+        audioClip.play();
+    }
 }

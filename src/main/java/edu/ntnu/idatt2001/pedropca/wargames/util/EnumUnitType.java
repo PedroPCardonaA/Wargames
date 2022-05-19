@@ -1,5 +1,8 @@
 package edu.ntnu.idatt2001.pedropca.wargames.util;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Enum class that contains the different types of units that "Wargames" application support til now.
  * The Purpose of this class is to limit the possible units that can be made from the factory class UnitFactory.
@@ -34,9 +37,8 @@ public enum EnumUnitType {
      * @return EnumUnitType value- the correspondent enum value with the correct unit type.
      */
     public static EnumUnitType getUnitType(String nameString){
-        for(EnumUnitType enumUnitType : values()){
-            if(enumUnitType.unitType.equals(nameString)) return enumUnitType;
-        }
-        return null;
+        return Arrays.stream(EnumUnitType.class.getEnumConstants()).
+                filter(enumUnitType -> enumUnitType.unitType.equals(nameString)).
+                collect(Collectors.toList()).get(0);
     }
 }
