@@ -48,6 +48,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
+            FXMLLoader loader = new FXMLLoader();
             primaryStage = new Stage();
             primaryStage.setTitle("War Games");
             primaryStage.setOnCloseRequest(windowEvent -> {
@@ -55,13 +56,12 @@ public class GUI extends Application {
                 this.closeProgram();
             });
             primaryStage.setMaximized(true);
-            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/views/MainPage.fxml"));
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.setTitle("Error by starting!");
             alert.setHeaderText("It was an error by starting the program!");
