@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class SingletonArmies {
 
-    private static SingletonArmies singletonArmies = new SingletonArmies();
+    private static SingletonArmies singletonArmies;
     private final List<Army> listOfArmies;
     private final List<Army> listOfArmiesBackUp;
     private int armyNumber;

@@ -16,7 +16,7 @@ import java.util.Optional;
 
 /**
  * Main class that has as goal to generate a unique instance of the SingletonArmies class
- * and open a JavaFX's window based on the FXML file MainPage.
+ * and open a JavaFX's window based on the FXML file loadingView.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -41,7 +41,7 @@ public class GUI extends Application {
 
     /**
      * JavaFX's method that generate a primary stage to display by loading
-     * the FXML file MainPage.
+     * the FXML file LoadingPage.
      * @param primaryStage Stage - Main stage to display.
      */
     @Override

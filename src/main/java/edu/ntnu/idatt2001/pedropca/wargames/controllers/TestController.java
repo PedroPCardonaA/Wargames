@@ -12,7 +12,8 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
+//TODO: JavaDOC
+//TODO: CODE SIMULATION.
 public class TestController extends Controller implements Initializable {
     @FXML
     final CategoryAxis xAxis = new CategoryAxis();
@@ -122,28 +123,28 @@ public class TestController extends Controller implements Initializable {
         xAxis.setCategories(FXCollections.observableList(Arrays.asList(army1.getName(),army2.getName())));
 
         infantrySeries.setName("Infantry");
-        infantrySeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveInfantryUnits(army1,startNumbersOfUnitsFromArmyTwo)));
+        infantrySeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveInfantryUnits(army1,startNumbersOfUnitsFromArmyOne)));
         infantrySeries.getData().add(new XYChart.Data<String,Number>(army2.getName(),getPercentOfAliveInfantryUnits(army2,startNumbersOfUnitsFromArmyTwo)));
 
 
         rangedSeries.setName("Ranged");
-        rangedSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveRangedUnits(army1,startNumbersOfUnitsFromArmyTwo)));
+        rangedSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveRangedUnits(army1,startNumbersOfUnitsFromArmyOne)));
         rangedSeries.getData().add(new XYChart.Data<String,Number>(army2.getName(),getPercentOfAliveRangedUnits(army2,startNumbersOfUnitsFromArmyTwo)));
 
         cavalrySeries.setName("Cavalry");
-        cavalrySeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveCavalryUnits(army1,startNumbersOfUnitsFromArmyTwo)));
+        cavalrySeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveCavalryUnits(army1,startNumbersOfUnitsFromArmyOne)));
         cavalrySeries.getData().add(new XYChart.Data<String,Number>(army2.getName(),getPercentOfAliveCavalryUnits(army2,startNumbersOfUnitsFromArmyTwo)));
 
         magicianSeries.setName("Magician");
-        magicianSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveMagicianUnits(army1,startNumbersOfUnitsFromArmyTwo)));
+        magicianSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveMagicianUnits(army1,startNumbersOfUnitsFromArmyOne)));
         magicianSeries.getData().add(new XYChart.Data<String,Number>(army2.getName(),getPercentOfAliveMagicianUnits(army2,startNumbersOfUnitsFromArmyTwo)));
 
         healerSeries.setName("Healer");
-        healerSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveHealerUnits(army1,startNumbersOfUnitsFromArmyTwo)));
+        healerSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveHealerUnits(army1,startNumbersOfUnitsFromArmyOne)));
         healerSeries.getData().add(new XYChart.Data<String,Number>(army2.getName(),getPercentOfAliveHealerUnits(army2,startNumbersOfUnitsFromArmyTwo)));
 
         commanderSeries.setName("Commander");
-        commanderSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveCommanderUnits(army1,startNumbersOfUnitsFromArmyTwo)));
+        commanderSeries.getData().add(new XYChart.Data<String,Number>(army1.getName(),getPercentOfAliveCommanderUnits(army1,startNumbersOfUnitsFromArmyOne)));
         commanderSeries.getData().add(new XYChart.Data<String,Number>(army2.getName(),getPercentOfAliveCommanderUnits(army2,startNumbersOfUnitsFromArmyTwo)));
 
         barChart.getData().addAll(infantrySeries,rangedSeries,cavalrySeries,magicianSeries,healerSeries,commanderSeries);

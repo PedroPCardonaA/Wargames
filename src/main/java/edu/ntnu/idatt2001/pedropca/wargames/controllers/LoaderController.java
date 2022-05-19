@@ -21,6 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+//TODO: ADD JavaDoc
 public class LoaderController extends Controller implements Initializable{
     @FXML
     private ImageView imageView;
