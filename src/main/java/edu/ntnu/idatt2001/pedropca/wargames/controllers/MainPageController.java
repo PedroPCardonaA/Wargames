@@ -203,7 +203,7 @@ public class MainPageController extends Controller implements Initializable {
 
     private void simulateBattleSlow(){
         try {
-            this.openNewSceneFromMainPage("/views/SimulationPage.fxml","Testing");
+            this.openNewSceneFromMainPage("/views/test.fxml","Testing");
         } catch (IOException e) {
             e.printStackTrace();
         }

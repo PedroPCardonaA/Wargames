@@ -44,7 +44,7 @@ public class LoaderController extends Controller implements Initializable{
         @Override
         public void run(){
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3500);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
