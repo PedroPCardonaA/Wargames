@@ -54,7 +54,6 @@ public class GUI extends Application {
                 windowEvent.consume();
                 this.closeProgram();
             });
-            primaryStage.setMaximized(true);
             loader.setLocation(getClass().getResource("/views/LoadingView.fxml"));
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));

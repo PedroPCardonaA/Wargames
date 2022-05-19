@@ -33,6 +33,7 @@ public class LoaderController extends Controller implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             AudioClip audioClip = new AudioClip(Objects.requireNonNull(getClass().getResource("/audio/you are not prepared.mp3")).toString());
+            audioClip.setVolume(50);
             audioClip.play();
             new LoadingView().start();
         }catch (Exception e){
@@ -61,7 +62,6 @@ public class LoaderController extends Controller implements Initializable{
                             windowEvent.consume();
                             closeProgram();
                         });
-                        stage.setMaximized(true);
                         stage.setScene(new Scene(Objects.requireNonNull(root)));
                         stage.show();
                         pane.getScene().getWindow().hide();

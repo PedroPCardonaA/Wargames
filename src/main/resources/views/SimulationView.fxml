@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.TestController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="603.0" prefWidth="1088.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.SimulationController">
    <top>
       <Label text="Battle simulation" textFill="RED" BorderPane.alignment="CENTER">
          <font>
@@ -196,7 +196,7 @@
       </VBox>
    </left>
    <bottom>
-      <VBox alignment="CENTER" spacing="6.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="218.0" prefWidth="1076.0" spacing="6.0" BorderPane.alignment="CENTER">
          <children>
             <Text fill="RED" layoutX="478.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Units">
                <font>
@@ -205,13 +205,13 @@
             </Text>
             <HBox alignment="CENTER" spacing="6.0">
                <children>
-                  <TextField alignment="CENTER" />
+                  <TextField fx:id="unitOne" alignment="CENTER" editable="false" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vs">
                      <font>
                         <Font name="Papyrus" size="24.0" />
                      </font>
                   </Text>
-                  <TextField alignment="CENTER" layoutX="436.0" layoutY="10.0" />
+                  <TextField fx:id="unitTwo" alignment="CENTER" editable="false" layoutX="436.0" layoutY="10.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
@@ -224,13 +224,13 @@
             </Text>
             <HBox alignment="CENTER" layoutX="16.0" layoutY="60.0" spacing="6.0">
                <children>
-                  <TextField alignment="CENTER" />
+                  <TextField fx:id="magicSpellOne" alignment="CENTER" editable="false" prefHeight="39.0" prefWidth="407.0" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vs">
                      <font>
                         <Font name="Papyrus" size="24.0" />
                      </font>
                   </Text>
-                  <TextField alignment="CENTER" layoutX="436.0" layoutY="10.0" />
+                  <TextField fx:id="magicSpellTwo" alignment="CENTER" editable="false" layoutX="436.0" layoutY="10.0" prefHeight="39.0" prefWidth="397.0" />
                </children>
             </HBox>
             <Text layoutX="478.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graveyard">
@@ -238,7 +238,7 @@
                   <Font name="Papyrus" size="24.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" layoutX="10.0" layoutY="55.0" />
+            <TextField fx:id="graveyard" alignment="CENTER" editable="false" layoutX="10.0" layoutY="55.0" />
          </children>
          <BorderPane.margin>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />

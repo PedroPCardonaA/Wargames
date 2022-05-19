@@ -203,7 +203,7 @@ public class MainPageController extends Controller implements Initializable {
 
     private void simulateBattleSlow(){
         try {
-            this.openNewSceneFromMainPage("/views/test.fxml","Testing");
+            this.openNewSceneFromMainPage("/views/SimulationView.fxml","Testing");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -570,7 +570,11 @@ public class MainPageController extends Controller implements Initializable {
     }
 
     private void playTheSong() {
-        AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/audio/alexander-nakarada-chase.mp3")).toString());
+        //I really wanted to implement MediaPlayer, but it was completely impossible. The song stops after 5 seconds.
+        //I read on the internet that MediaPlayer object was very buggy when it is related to only play audio files.
+        AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/audio/alexander-nakarada-chase.mp3")).toExternalForm());
+        audioClip.setCycleCount(AudioClip.INDEFINITE);
+        audioClip.setVolume(0.30);
         audioClip.play();
     }
 }

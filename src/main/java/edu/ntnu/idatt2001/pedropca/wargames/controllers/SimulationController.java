@@ -2,6 +2,9 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
 import javafx.application.Platform;
@@ -16,10 +19,10 @@ import org.jetbrains.annotations.NotNull;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 //TODO: JavaDOC
-//TODO: CODE SIMULATION.
-public class TestController extends Controller implements Initializable {
+public class SimulationController extends Controller implements Initializable {
     @FXML
     final CategoryAxis xAxis = new CategoryAxis();
     @FXML
@@ -74,7 +77,16 @@ public class TestController extends Controller implements Initializable {
 
     @FXML
     private Label armyTwoName;
-
+    @FXML
+    private TextField unitOne;
+    @FXML
+    private TextField unitTwo;
+    @FXML
+    private TextField magicSpellOne;
+    @FXML
+    private TextField magicSpellTwo;
+    @FXML
+    private TextField graveyard;
     @FXML
     private final XYChart.Series<String,Number> infantrySeries= new XYChart.Series<String,Number>();
     @FXML
@@ -120,12 +132,30 @@ public class TestController extends Controller implements Initializable {
             };
             while (true){
                 try {
-                    battle.singularBattle();
+                    List<Unit> units = battle.singularBattleForSlowAnimation();
                     army1 =battle.getArmy1();
                     army2 =battle.getArmy2();
                     this.updateArmyInBothListInTheSingleton(army1,0);
                     this.updateArmyInBothListInTheSingleton(army2,1);
-                    Thread.sleep(2000);
+                    for (int i = 0; i<2;i++){
+                        Unit unit = units.get(i);
+                        if(i==0){
+                            unitOne.setText(unit.getName());
+                            if(unit instanceof MagicUnit){
+                                if(unit instanceof HealerUnit) magicSpellOne.setText(unit.getName() + " cast a healing spell on his allies!");
+                                if(unit instanceof MagicianUnit) magicSpellOne.setText(unit.getName() + " cast a fire spell on his enemies!");
+                            } else magicSpellOne.setText("None magic spell!");
+                        }else {
+                            unitTwo.setText(unit.getName());
+                            if(unit instanceof  MagicUnit){
+                                if(unit instanceof HealerUnit) magicSpellTwo.setText(unit.getName() + " cast a healing spell on his allies!");
+                                if(unit instanceof MagicianUnit) magicSpellTwo.setText(unit.getName() + " cast a fire spell on his enemies!");
+                            } else magicSpellTwo.setText("None magic spell!");
+                        }
+                    }
+                    if(army1.getAllUnits().contains(units.get(0))) graveyard.setText(units.get(1).getName() + " from the army: "+ army2.getName() + " has died as a hero!");
+                    else graveyard.setText(units.get(0).getName() + " from the army: "+ army1.getName() + " has died as a hero!");
+                    Thread.sleep(2500);
                     if(!(army1.hasUnit() && army2.hasUnit())){
                         break;
                     }
@@ -133,7 +163,7 @@ public class TestController extends Controller implements Initializable {
                     this.showError("Error by simulation","Error by medium simulation!",e.getMessage());
                 }
                 //Update information in the barChart was more complicated that expected
-                // and the result was not smooth as expected but good enough I think :D.
+                //and the result was not smooth as expected but good enough I think :D.
                 Platform.runLater(this::updateView);
             }
         });

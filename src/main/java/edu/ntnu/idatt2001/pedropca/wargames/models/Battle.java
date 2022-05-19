@@ -6,6 +6,9 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class edu.ntnu.idatt2001.pedropca.Battle that represents a battle between two armies in the war games.
  * This class will be the core of the war games because th entire project goes around
@@ -198,5 +201,16 @@ public class Battle {
 
     public Army getArmy2() {
         return army2;
+    }
+
+    public List<Unit> singularBattleForSlowAnimation() {
+        List<Unit> units = new ArrayList<>();
+        Unit unitFromArmy1 = army1.getRandom();
+        Unit unitFromArmy2 = army2.getRandom();
+        units.add(unitFromArmy1);
+        units.add(unitFromArmy2);
+        this.setChargeToCavalryUnit(unitFromArmy1,unitFromArmy2);
+        this.combatBetweenUnits(unitFromArmy1,unitFromArmy2);
+        return units;
     }
 }
