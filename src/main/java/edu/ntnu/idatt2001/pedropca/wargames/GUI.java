@@ -12,7 +12,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -50,13 +49,13 @@ public class GUI extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             primaryStage = new Stage();
-            primaryStage.setTitle("War Games");
+            primaryStage.setTitle("Loading");
             primaryStage.setOnCloseRequest(windowEvent -> {
                 windowEvent.consume();
                 this.closeProgram();
             });
             primaryStage.setMaximized(true);
-            loader.setLocation(getClass().getResource("/views/MainPage.fxml"));
+            loader.setLocation(getClass().getResource("/views/LoadingView.fxml"));
             Parent root = loader.load();
             primaryStage.setScene(new Scene(root));
             primaryStage.show();

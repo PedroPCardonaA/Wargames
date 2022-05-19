@@ -12,8 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -572,7 +570,7 @@ public class MainPageController extends Controller implements Initializable {
     }
 
     private void playTheSong() {
-        AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/Audio/alexander-nakarada-chase.mp3")).toString());
+        AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/audio/alexander-nakarada-chase.mp3")).toString());
         audioClip.play();
     }
 }
