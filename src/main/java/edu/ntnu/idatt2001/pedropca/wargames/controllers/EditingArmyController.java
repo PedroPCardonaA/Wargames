@@ -98,7 +98,7 @@ public class EditingArmyController extends Controller implements Initializable {
     }
 
     /**
-     * Method that update the GUI by resetting the content of the text field "nameOfTheArmy"
+     * Method that update the WarGamesApp by resetting the content of the text field "nameOfTheArmy"
      * setting the current name of the army as prompt text, setting the rest of the text field
      * with standard values by using the help method resetTextFields
      * and updating the table view of the units by calling the help method getUnitsName.

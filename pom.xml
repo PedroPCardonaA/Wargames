@@ -30,7 +30,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                edu.ntnu.idatt2001.pedropca.wargames.GUI
+                                edu.ntnu.idatt2001.pedropca.wargames.WarGamesApp
                             </mainClass>
                         </configuration>
                     </execution>

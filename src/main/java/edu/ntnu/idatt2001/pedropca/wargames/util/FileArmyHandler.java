@@ -89,7 +89,7 @@ public class FileArmyHandler {
      * as a csv file if the name of the file ends with csv (Commas separated value) extension
      * or as a txt (Serialized) if the name of the file ends with txt extension, to
      * be opened and user later by this application.
-     * This method will be called from the GUI and combine with class FileChooser of javaFx.
+     * This method will be called from the WarGamesApp and combine with class FileChooser of javaFx.
      * @param army Army -  Instance of the class army to be saved.
      * @param pathOfFile String - Defined path of the new file.
      * @param fileName String - Defined name of the new file.

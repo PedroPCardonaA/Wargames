@@ -130,7 +130,7 @@ public class MainPageController extends Controller implements Initializable {
             this.updateImageView("src/main/resources/Images/Start.jpg");
             this.playTheSong();
         } catch (Exception e) {
-            this.showError("Error by initialization","It was an error by initialization the GUI.",e.getMessage());
+            this.showError("Error by initialization","It was an error by initialization the WarGamesApp.",e.getMessage());
         }
     }
 
@@ -259,7 +259,7 @@ public class MainPageController extends Controller implements Initializable {
 
     /**
      * Method that "Resets" the main armies by defined them as copies of the back-up armies.
-     * After the restarting of the armies' method updates the GUI by calling help method updateView().
+     * After the restarting of the armies' method updates the WarGamesApp by calling help method updateView().
      */
     @FXML
     private void resetArmies(){
@@ -270,7 +270,7 @@ public class MainPageController extends Controller implements Initializable {
     }
 
     /**
-     * Help method that update the visible information from the army to the GUI.
+     * Help method that update the visible information from the army to the WarGamesApp.
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @SuppressWarnings("DuplicatedCode")

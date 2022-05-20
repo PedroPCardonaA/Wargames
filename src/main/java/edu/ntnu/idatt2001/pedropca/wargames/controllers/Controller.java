@@ -26,7 +26,7 @@ import java.util.*;
 /**
  * Super class of the Controller hierarchy that contains all the help methods that
  * the other controller use. This class as a SingletonArmies instance as a field,
- * an enum, Pages, that controls the current page of the GUI and a field that contains an
+ * an enum, Pages, that controls the current page of the WarGamesApp and a field that contains an
  * object of the enum Pages.
  *
  * @author Pedro Cardona

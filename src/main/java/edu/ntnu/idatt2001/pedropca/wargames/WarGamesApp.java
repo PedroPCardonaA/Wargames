@@ -22,7 +22,7 @@ import java.util.Optional;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-public class GUI extends Application {
+public class WarGamesApp extends Application {
 
     //TODO: Update old JavaDoc.
     /**
