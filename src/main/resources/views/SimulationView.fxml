@@ -11,13 +11,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="603.0" prefWidth="1088.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.SimulationController">
-   <top>
-      <Label text="Battle simulation" textFill="RED" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Papyrus" size="36.0" />
-         </font>
-      </Label>
-   </top>
    <right>
       <VBox spacing="6.0" BorderPane.alignment="CENTER">
          <children>
@@ -255,4 +248,25 @@
         </yAxis>
       </StackedBarChart>
    </center>
+   <top>
+      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Settings">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#closeSimulation" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#resetSimulation" text="Reset" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Label text="Battle simulation" textFill="RED">
+               <font>
+                  <Font name="Papyrus" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

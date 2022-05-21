@@ -47,7 +47,7 @@ public class FileArmyHandler {
     /**
      * Help method that return an instance of army class by reading a txt file
      * that contains a serialized army.
-     * @param pathOfFile
+     * @param pathOfFile String - Path of the file
      * @return Army - Army from the file.
      * @throws IOException if it happens an error by reading the file
      * @throws ClassNotFoundException if the txt file does not contain data from a serializable class

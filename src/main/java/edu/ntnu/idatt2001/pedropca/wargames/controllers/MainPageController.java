@@ -135,7 +135,13 @@ public class MainPageController extends Controller implements Initializable {
     }
 
 
-
+    /**
+     * Method that start the running of the correct simulation that depends on the simulation speed.
+     * The simulation speed is defined by the content
+     * of the comboBox speedSimulation. This method get helps of the help methods
+     * showAlert, checkIfArmiesHaveUnits, CheckContainsOfTheSingletonTerrain
+     * simulateBattleSkip, simulateBattleNormal and simulateBattleSlow.
+     */
     @FXML
     private void simulationBattle(){
         if(this.checkIfArmiesHaveUnits()){
@@ -143,7 +149,6 @@ public class MainPageController extends Controller implements Initializable {
                 this.showAlert("Speed was not defined!", "The speed of the simulation was not defined!", "It simulation will be skipped");
                 this.simulateBattleSkip();
             } else {
-                this.playTheSong();
                 this.checkContainOfSingletonTerrain();
                 switch (speedSimulationComboBox.getValue()){
                     case "Skip": this.simulateBattleSkip(); break;
@@ -155,10 +160,10 @@ public class MainPageController extends Controller implements Initializable {
     }
 
     /**
-     * simulateBattle method that makes an instance of Battle class with
+     * Help method that makes an instance of Battle class with
      * the two armies of the class and simulates a battle between them.
-     * Method gets help from the help methods checkContainOfSingletonTerrain,
-     * updateArmies,updateView and showAlert.
+     * The result is returned to the form of an information alert.
+     * Method gets help from the help updateArmies,updateView and showAlert.
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     private void simulateBattleSkip(){
@@ -170,7 +175,12 @@ public class MainPageController extends Controller implements Initializable {
         else this.showAlert("Result of the battle.","The result of the battle!", "The winner was: " +winner.getName() + " !");
     }
 
-
+    /**
+     * Help method that simulate a battle with a fast animation that show the current number of unit from both armies.
+     * The simulation stops when one of the armies loses every single unit. In every iteration the information
+     * that is showed be is update. The other buttons are disabled to avoid possible errors while simulation.
+     *
+     */
     private void simulateBattleNormal(){
         Battle battle = new Battle(army1,army2);
         Thread thread = new Thread(()->{
@@ -552,6 +562,7 @@ public class MainPageController extends Controller implements Initializable {
 
     /**
      * Method for a button in the menu bar that close the program.
+     * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
     private void closeTheProgramButton(){

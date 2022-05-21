@@ -12,16 +12,12 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * SimulationController class that is a part of the Controller hierarchy, extends
@@ -43,7 +39,7 @@ public class SimulationController extends Controller implements Initializable {
     @FXML
     final NumberAxis yAxis = new NumberAxis();
     @FXML
-    private StackedBarChart<String,Number> barChart = new StackedBarChart<String,Number>(xAxis,yAxis);
+    private StackedBarChart<String,Number> barChart = new StackedBarChart<>(xAxis,yAxis);
 
     @FXML
     private TextField totalArmy1;
@@ -114,9 +110,10 @@ public class SimulationController extends Controller implements Initializable {
     private final XYChart.Series<String,Number> healerSeries= new XYChart.Series<>();
     @FXML
     private final XYChart.Series<String,Number> commanderSeries= new XYChart.Series<>();
-
     private Army army1= SingletonArmies.getSingletonArmies().getArmy(0);
     private Army army2= SingletonArmies.getSingletonArmies().getArmy(1);
+
+    private boolean isRunning = false;
 
     /**
      * Initialize method that is called after its root element is loaded.
@@ -144,51 +141,9 @@ public class SimulationController extends Controller implements Initializable {
         commanderSeries.setName("Commander");
         rangedSeries.setName("Ranged");
 
-        Battle battle = new Battle(army1,army2);
-        Thread thread = new Thread(()->{
-            Runnable updater = ()->{
-
-            };
-            while (true){
-                try {
-                    List<Unit> units = battle.singularBattleForSlowAnimation();
-                    army1 =battle.getArmy1();
-                    army2 =battle.getArmy2();
-                    this.updateArmiesInSingleton(army1,army2);
-                    for (int i = 0; i<2;i++){
-                        Unit unit = units.get(i);
-                        if(i==0){
-                            unitOne.setText(unit.getName());
-                            if(unit instanceof MagicUnit){
-                                if(unit instanceof HealerUnit) magicSpellOne.setText(unit.getName() + " cast a healing spell on his allies!");
-                                if(unit instanceof MagicianUnit) magicSpellOne.setText(unit.getName() + " cast a fire spell on his enemies!");
-                            } else magicSpellOne.setText("None magic spell!");
-                        }else {
-                            unitTwo.setText(unit.getName());
-                            if(unit instanceof  MagicUnit){
-                                if(unit instanceof HealerUnit) magicSpellTwo.setText(unit.getName() + " cast a healing spell on his allies!");
-                                if(unit instanceof MagicianUnit) magicSpellTwo.setText(unit.getName() + " cast a fire spell on his enemies!");
-                            } else magicSpellTwo.setText("None magic spell!");
-                        }
-                    }
-                    if(army1.getAllUnits().contains(units.get(0))) graveyard.setText(units.get(1).getName() + " from the army: "+ army2.getName() + " has died as a hero!");
-                    else graveyard.setText(units.get(0).getName() + " from the army: "+ army1.getName() + " has died as a hero!");
-                    Thread.sleep(2500);
-                    if(!(army1.hasUnit() && army2.hasUnit()) || !armyOneName.getScene().getWindow().isShowing()){
-                        this.updateView();
-                        break;
-                    }
-                } catch (InterruptedException e) {
-                    this.showError("Error by simulation","Error by medium simulation!",e.getMessage());
-                }
-                //Update information in the barChart was more complicated that expected
-                //and the result was not smooth as expected but good enough I think :D.
-                Platform.runLater(this::updateView);
-            }
-        });
-        thread.setDaemon(true);
-        thread.start();
+        this.simulateBattle();
     }
+
 
     /**
      * Help method that update the data of the text fields that contains the number of units and
@@ -248,6 +203,95 @@ public class SimulationController extends Controller implements Initializable {
 
         commanderSeries.getData().add(new XYChart.Data<>(army1.getName(),army1.getCommanderUnits().size()));
         commanderSeries.getData().add(new XYChart.Data<>(army2.getName(),army2.getCommanderUnits().size()));
+    }
+
+    /**
+     * Method for a button in the menu bar that close the program.
+     * It can be called by the javaFx object of the FXML file Sim.
+     */
+    @FXML
+    private void closeSimulation(){
+        Stage stage= (Stage) armyOneName.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * Method for a button in the menu bar that resets the current simulation by stopping the current simulation
+     * and resetting the data in contained in the field army1 and army2. This method has mayor problem, because by
+     * stopping the current thread in the middle of an iteration it will the bar chart will throw an error that cannot be handled.
+     * It will not crash the system but is not very safe.
+     */
+    @FXML
+    private void resetSimulation(){
+        try {
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle("Reset the simulation");
+            confirmation.setHeaderText("Are you sure you want to reset the animation?");
+            confirmation.setContentText("This option may cause some errors that cannot be handler correctly. The errors will be not crash the program, but" +
+                    "it is more recommend to close this window and reset the simulation from the main page");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if(result.get()==ButtonType.OK){
+                army1 = SingletonArmies.getSingletonArmies().getArmyFromBackUp(0);
+                army2 = SingletonArmies.getSingletonArmies().getArmyFromBackUp(1);
+                isRunning=true;
+                this.simulateBattle();
+            }
+        }catch (Exception e){
+            this.showError("Error by simulation","It happened an error by resetting the simulation", e.getMessage());
+        }
+    }
+
+    /**
+     * Help method that simulates the battle between to armies and shows the information to the user in real time
+     * by using an object from the class thread that update the info of the armies every 2.5 seconds.
+     */
+    private void simulateBattle() {
+        Battle battle = new Battle(army1,army2);
+        Thread thread = new Thread(()->{
+            Runnable updater = ()->{
+            };
+            while (true){
+                try {
+                    Thread.sleep(2500);
+                    if(!(army1.hasUnit() && army2.hasUnit()) || !armyOneName.getScene().getWindow().isShowing() ||isRunning){
+                        isRunning = false;
+                        this.updateView();
+                        break;
+                    }
+                } catch (InterruptedException e) {
+                    this.showError("Error by simulation","Error by running simulation!",e.getMessage());
+                }
+                //Update information in the barChart was more complicated that expected
+                //and the result was not smooth as expected but good enough I think :D.
+                Platform.runLater(()->{
+                    List<Unit> units = battle.singularBattleForSlowAnimation();
+                    army1 =battle.getArmy1();
+                    army2 =battle.getArmy2();
+                    this.updateArmiesInSingleton(army1,army2);
+                    for (int i = 0; i<2;i++){
+                        Unit unit = units.get(i);
+                        if(i==0){
+                            unitOne.setText(unit.getName());
+                            if(unit instanceof MagicUnit){
+                                if(unit instanceof HealerUnit) magicSpellOne.setText(unit.getName() + " cast a healing spell on his allies!");
+                                if(unit instanceof MagicianUnit) magicSpellOne.setText(unit.getName() + " cast a fire spell on his enemies!");
+                            } else magicSpellOne.setText("None magic spell!");
+                        }else {
+                            unitTwo.setText(unit.getName());
+                            if(unit instanceof  MagicUnit){
+                                if(unit instanceof HealerUnit) magicSpellTwo.setText(unit.getName() + " cast a healing spell on his allies!");
+                                if(unit instanceof MagicianUnit) magicSpellTwo.setText(unit.getName() + " cast a fire spell on his enemies!");
+                            } else magicSpellTwo.setText("None magic spell!");
+                        }
+                    }
+                    if(army1.getAllUnits().contains(units.get(0))) graveyard.setText(units.get(1).getName() + " from the army: "+ army2.getName() + " has died as a hero!");
+                    else graveyard.setText(units.get(0).getName() + " from the army: "+ army1.getName() + " has died as a hero!");
+                    this.updateView();
+                });
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
 }
