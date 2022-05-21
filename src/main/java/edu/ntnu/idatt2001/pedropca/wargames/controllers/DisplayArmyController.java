@@ -23,7 +23,8 @@ import java.util.stream.Collectors;
  * by defining all relevant JavaFx object in the FXML and all methods
  * that user can call them by interacting with the JavaFX objects.
  * This class has two fields, one SingletonArmies instance and one Army instance,
- * and several JavaFx fields.
+ * and several JavaFx fields. The goal of this class is display all units from the current army in
+ * a table view.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -52,7 +53,7 @@ public class DisplayArmyController extends Controller implements Initializable{
 
     /**
      * Initialize method that is called after its root element is loaded.
-     * Method that add all the needed columns to the TableView armyTableView and
+     * Method adds all the needed columns to the TableView armyTableView and
      * add all the units of army to the table by calling the help method createTable and UpdateTable.
      *
      * @param url url - The location of the fxml file.

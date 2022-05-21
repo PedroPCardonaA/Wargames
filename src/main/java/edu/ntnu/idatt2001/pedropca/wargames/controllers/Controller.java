@@ -35,7 +35,6 @@ import java.util.*;
  */
 public abstract class Controller {
 
-//TODO: CHANGE NUMBER OF UNITS OF GENERATE METHOD
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
 
     protected enum Page{
