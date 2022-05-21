@@ -21,14 +21,31 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-//TODO: ADD JavaDoc
+/**
+ * LoaderController class that is a part of the Controller hierarchy, extends
+ * the class Controller and controls over the FXML file LoadingView.fxml
+ * by defining all relevant JavaFx object in the FXML and all methods
+ * that user can call them by interacting with the JavaFX objects.
+ * LoaderController has as goal to display a load window with an image and an audio clip
+ * before the main page.
+ *
+ * @author Pedro Cardona
+ * @version 1.0
+ * @since 1.0-SNAPSHOT
+ */
 public class LoaderController extends Controller implements Initializable{
-    @FXML
-    private ImageView imageView;
 
     @FXML
     private Pane pane;
 
+    /**
+     * Initialize method that is called after its root element is loaded.
+     * This method define a new audio clip loading it from mp3 file
+     * and play it. This also calls the help method start from the class LoadingView.
+     *
+     * @param url url - The location of the fxml file.
+     * @param resourceBundle ResourceBundle - The resource used to localize the root object.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -42,6 +59,10 @@ public class LoaderController extends Controller implements Initializable{
         }
     }
 
+    /**
+     * Class LoadingView that extends the class Thread. This class is only used to have a timer
+     * that define when the loading screen is closed.
+     */
     class LoadingView extends Thread{
         @Override
         public void run(){
@@ -72,6 +93,9 @@ public class LoaderController extends Controller implements Initializable{
             }
         }
 
+        /**
+         * Method that check if the user want to close the main page.
+         */
         private void closeProgram(){
             Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
             closeAlert.setTitle("Close window");
@@ -82,8 +106,11 @@ public class LoaderController extends Controller implements Initializable{
         }
     }
 
+    /**
+     * LoaderController extends from the Controller abstract class,
+     * but the abstract method updateView is not used here.
+     */
     @Override
     protected void updateView() {
-
     }
 }

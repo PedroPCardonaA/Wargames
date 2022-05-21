@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
  * by defining all relevant JavaFx object in the FXML and all methods
  * that user can call them by interacting with the JavaFX objects.
  * This class has two fields, one SingletonArmies instance and one Army instance,
- * and several JavaFx fields.
+ * and several JavaFx fields. Editing army has the goal to record the information from the user
+ * to edit the current armies.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -84,7 +85,7 @@ public class EditingArmyController extends Controller implements Initializable {
 
     /**
      * Initialize method that is called after its root element is loaded.
-     * Method that add all the different unit types into the comboBox unitType and
+     * Method adds all the different unit types into the comboBox unitType and
      * calls the help method updateView.
      *
      * @param url url - The location of the fxml file.

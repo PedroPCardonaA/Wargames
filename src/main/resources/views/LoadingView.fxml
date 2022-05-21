@@ -9,7 +9,7 @@
 
 <Pane fx:id="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.idatt2001.pedropca.wargames.controllers.LoaderController">
    <children>
-      <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true">
+      <ImageView  pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Studio_Project.jpeg" />
          </image></ImageView>
