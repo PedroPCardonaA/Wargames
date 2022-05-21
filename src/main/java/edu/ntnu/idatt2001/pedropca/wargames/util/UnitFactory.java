@@ -69,18 +69,20 @@ public class UnitFactory {
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */
-    public Unit createUnit(String unitType,String name, int health) throws IllegalArgumentException{
+    public Unit createUnit(EnumUnitType unitType,String name, int health) throws IllegalArgumentException{
         switch (unitType){
-            case "InfantryUnit":
+            case INFANTRY:
                 return new InfantryUnit(name,health);
-            case "RangedUnit":
+            case RANGED:
                 return new RangedUnit(name,health);
-            case "CavalryUnit":
+            case CAVALRY:
                 return new CavalryUnit(name,health);
-            case "CommanderUnit":
+            case COMMANDER:
                 return new CommanderUnit(name,health);
-            case "MagicianUnit":
+            case MAGICIAN:
                 return new MagicianUnit(name,health);
+            case HEALER:
+                return new HealerUnit(name,health);
             default:
                 throw new IllegalArgumentException("Unknown unit type. Defined a correct unit type");
         }
@@ -126,7 +128,7 @@ public class UnitFactory {
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */
-    public List<Unit> createAListOfUnits(String unitType,String name, int health,int numberOfUnits) throws IllegalArgumentException{
+    public List<Unit> createAListOfUnits(EnumUnitType unitType,String name, int health,int numberOfUnits) throws IllegalArgumentException{
         if(numberOfUnits<0) throw new IllegalArgumentException("The number of units to add cannot be lower than 0");
         List<Unit> units = new ArrayList<>();
         for(int i =0; i<numberOfUnits;i++){

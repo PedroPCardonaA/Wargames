@@ -154,18 +154,13 @@ public abstract class Controller {
      */
     protected @NotNull Army generateArmy(String name) throws IllegalArgumentException{
         Army army = new Army( name);
-        List<Unit> mixedList = new ArrayList<>();
-        for(int i =0;i<50;i++){
-            mixedList.add(new CavalryUnit("Cavalry",100));
-            mixedList.add(new RangedUnit("Ranged",100));
-            mixedList.add(new InfantryUnit("Infantry",100));
-        }
-        for(int i = 0;i<10; i++){
-            mixedList.add(new MagicianUnit("Magician",100));
-            mixedList.add(new HealerUnit("Healer", 100));
-        }
-        mixedList.add(new CommanderUnit("Commander",250));
-        army.addAll(mixedList);
+        UnitFactory unitFactory = new UnitFactory();
+        army.addAll(unitFactory.createAListOfUnits(EnumUnitType.getUnitType("RangedUnit"),"Ranged",100,20));
+        army.addAll(unitFactory.createAListOfUnits(EnumUnitType.getUnitType("InfantryUnit"),"Infantry",100,20));
+        army.addAll(unitFactory.createAListOfUnits(EnumUnitType.getUnitType("CavalryUnit"),"Cavalry",100,20));
+        army.addAll(unitFactory.createAListOfUnits(EnumUnitType.getUnitType("MagicianUnit"),"Magician",100,5));
+        army.addAll(unitFactory.createAListOfUnits(EnumUnitType.getUnitType("HealerUnit"),"Healer",100,5));
+        army.add(unitFactory.createUnit(EnumUnitType.getUnitType("CommanderUnit"),"Commander",250));
         return army;
     }
 

@@ -574,7 +574,7 @@ public class MainPageController extends Controller implements Initializable {
         //I read on the internet that MediaPlayer object was very buggy when it is related to only play audio files.
         AudioClip audioClip = new AudioClip(Objects.requireNonNull(this.getClass().getResource("/audio/alexander-nakarada-chase.mp3")).toExternalForm());
         audioClip.setCycleCount(AudioClip.INDEFINITE);
-        audioClip.setVolume(0.30);
+        audioClip.setVolume(0.25);
         audioClip.play();
     }
 }
