@@ -32,7 +32,6 @@ import java.util.*;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-//TODO: COMMENT NEW SIMULATION SYSTEM
 public class MainPageController extends Controller implements Initializable {
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army1 = new Army(singletonArmies.getArmy(0));
@@ -211,14 +210,22 @@ public class MainPageController extends Controller implements Initializable {
         thread.start();
     }
 
+    /**
+     * Help method that open the FXML file SimulationView and its controller to proceed with a closer view of the simulation.
+     */
     private void simulateBattleSlow(){
         try {
             this.openNewSceneFromMainPage("/views/SimulationView.fxml","Testing");
         } catch (IOException e) {
-            e.printStackTrace();
+            this.showError("Error by loading the file!","It was a fail by loading the fxml file from the next scene."
+                    , e.getMessage());
         }
     }
 
+    /**
+     * Help method that open a
+     * @return Boolean - true if both armies has units, false if one of them does not have units.
+     */
     private boolean checkIfArmiesHaveUnits(){
         if(!army1.hasUnit()){
             this.showAlert("No simulation","The first army does not have unit!", "The first army does not have any unit. Add units, generate a new army or load a old army with units to simulate a battle!");
@@ -555,6 +562,11 @@ public class MainPageController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Help method that ipdate the instance of ImageView terrainImageView by showing a new image.
+     * @param imagePath String - path of the new image.
+     * @throws FileNotFoundException If the path does not exist.
+     */
     private void updateImageView(String imagePath) throws FileNotFoundException {
         terrainImageView.setImage(new Image(new FileInputStream(imagePath)));
     }
@@ -580,6 +592,10 @@ public class MainPageController extends Controller implements Initializable {
         options2.setDisable(state);
     }
 
+    /**
+     * Help method that play a background song that
+     * improves the atmosphere and immersion of the game.
+     */
     private void playTheSong() {
         //I really wanted to implement MediaPlayer, but it was completely impossible. The song stops after 5 seconds.
         //I read on the internet that MediaPlayer object was very buggy when it is related to only play audio files.
