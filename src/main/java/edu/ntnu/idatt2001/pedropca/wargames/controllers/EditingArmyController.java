@@ -3,7 +3,6 @@ package edu.ntnu.idatt2001.pedropca.wargames.controllers;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumUnitType;
-import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.NotIntegerException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.FileArmyHandler;
 import edu.ntnu.idatt2001.pedropca.wargames.util.SingletonArmies;
@@ -145,7 +144,7 @@ public class EditingArmyController extends Controller implements Initializable {
     private void generatedArmyEditingArmyController(){
         try {
             String name = this.stringInputWindow(nameOfTheArmy.getScene().getWindow());
-            if(!name.isEmpty()){
+            if(!name.isBlank()){
                 army = this.generateArmy(name);
                 this.checkNameAndUpdateSingleton(army);
                 this.updateView();}
@@ -248,12 +247,12 @@ public class EditingArmyController extends Controller implements Initializable {
      * @return String - A default name or the name gave by the user
      */
     private String checkName(){
-        if(name.getText().isEmpty()) return "Name";
+        if(name.getText().isBlank()) return "Name";
         else return name.getText();
     }
 
     /**
-     * Help method that check if a string is empty or not. If not the method try to parse it as an integer.
+     * Help method that check if a string is blank or not. If not the method try to parse it as an integer.
      * @param intToParse String - String to be parsed as an integer
      * @param defaultValue int - default value if the string to parse is empty
      * @param failMessage string - fail message if pars is not possible.
@@ -261,7 +260,7 @@ public class EditingArmyController extends Controller implements Initializable {
      */
     private int checkIfParsable(String intToParse,int defaultValue, String failMessage) throws IllegalArgumentException{
         try {
-            if(intToParse.isEmpty()) return defaultValue;
+            if(intToParse.isBlank()) return defaultValue;
             else return Integer.parseInt(intToParse);
         }catch (Exception e){
             throw new NotIntegerException( failMessage +" must be a integer number. Define it as integer number");
@@ -275,7 +274,7 @@ public class EditingArmyController extends Controller implements Initializable {
      */
     @FXML
     private void editName(){
-        if(nameOfTheArmy.getText().isEmpty()) this.showAlert("Editing name of the army", "You have not changed the name of the army yet!","");
+        if(nameOfTheArmy.getText().isBlank()) this.showAlert("Editing name of the army", "You have not changed the name of the army yet!","");
         else{
             army.setName(nameOfTheArmy.getText());
             this.checkNameAndUpdateSingleton(army);

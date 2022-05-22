@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class edu.ntnu.idatt2001.pedropca.Battle that represents a battle between two armies in the war games.
+ * Class Battle that represents a battle between two armies in the war games.
  * This class will be the core of the war games because th entire project goes around
  * the simulation of a battle. This class has two final armies as fields.
  */
@@ -19,26 +19,25 @@ public class Battle {
     private final Army army1;
     private final Army army2;
 
+
     /**
-     * Constructor of the class edu.ntnu.idatt2001.pedropca.Battle. This constructor has two object from class edu.ntnu.idatt2001.pedropca.Army as
-     * Signature. This constructor does not throw illegal argument exception when one of the armies is
-     * equals to "null", because that case cannot happend.
-     * @param army1 First army of the battle
-     * @param army2 Second army of the battle
+     * Constructor of the class Battle. This constructor has two object from class Army as signature.
+     * @param army1 army - First army of the battle
+     * @param army2 army - Second army of the battle
+     * @throws NullPointerException if one of the armies is defined as null. It is not 100% necessary,
+     * but it is wanted to throw custom error message.
      */
     public Battle(Army army1, Army army2) throws NullPointerException{
-        if(army1==null||army2==null){
-            throw new NullPointerException("One of the armies is not defined. Enter a correct army");
-        }
+        if(army1==null||army2==null) throw new NullPointerException("One of the armies is not defined. Enter a correct army");
+
         this.army1 = new Army(army1);
         this.army2 = new Army(army2);
     }
 
     /**
      * Method that simulate the battle between two armies and returns the winner between them.
-     * To return the winner, this method gets help of help method like setChargeToInfantryUnit,
-     * combatBetweenUnits and checkWinnerArmy.
-     * @return edu.ntnu.idatt2001.pedropca.Army the winner army of the battle.
+     * To return the winner, this method gets help of the help method singular battle.
+     * @return Army - the winner army of the battle.
      */
     public Army simulate(){
         while (this.bothArmiesHaveUnits()){
@@ -47,6 +46,10 @@ public class Battle {
         return this.checkWinnerArmy();
     }
 
+    /**
+     * Help method that represent an iteration of the simulate method.
+     * This gets one random unit for each army, calls setChargeToCavalryUnit and combatBetweenUnits.
+     */
     public void singularBattle(){
         Unit unitFromArmy1 = army1.getRandom();
         Unit unitFromArmy2 = army2.getRandom();
@@ -56,10 +59,10 @@ public class Battle {
 
     /**
      * Help method that set the boolean field isCharging to true if the units that will
-     * fight are instances of class edu.ntnu.idatt2001.pedropca.CavalryUnit. It is important because isCharging changes
+     * fight are instances of class CavalryUnit. It is important because isCharging changes
      * the return value of method getAttackBonus.
-     * @param unitFromArmy1 edu.ntnu.idatt2001.pedropca.Unit from the army number one that will be checked
-     * @param unitFromArmy2 edu.ntnu.idatt2001.pedropca.Unit from the army number two that will be checked
+     * @param unitFromArmy1 Unit - Unit from the army number one that will be checked
+     * @param unitFromArmy2 Unit - Unit from the army number two that will be checked
      */
     private void setChargeToCavalryUnit(Unit unitFromArmy1, Unit unitFromArmy2){
         if(unitFromArmy1 instanceof CavalryUnit)((CavalryUnit) unitFromArmy1).setCharging(true);
@@ -69,9 +72,9 @@ public class Battle {
     /**
      * Help method that simulate a single combat between two defined units, that will
      * remove the defeat unit after the combat. This method gets help from some help method
-     * as rangedVSMelee, sameAttackType and removeDefeatedUnitArmy.
-     * @param unitFromArmy1 Unit from the first army that will fight.
-     * @param unitFromArmy2 Unit from the second army that will fight.
+     * as magicAttack, rangedVSMelee, sameAttackType and removeDefeatedUnitArmy.
+     * @param unitFromArmy1 Unit - Unit from the first army that will fight.
+     * @param unitFromArmy2 Unit - Unit from the second army that will fight.
      */
     private void combatBetweenUnits(Unit unitFromArmy1,Unit unitFromArmy2){
         this.magicAttack(unitFromArmy1);
@@ -88,6 +91,11 @@ public class Battle {
         this.removeDefeatedUnitFromArmy(this.getDefeatedUnit(unitFromArmy1,unitFromArmy2));
     }
 
+    /**
+     * Help method that "cast" a magic spell from a magic unit. Method check if the unit from the signatures
+     * is an object from the magicUnit hierarchy and if unit has enough mana. If yes, unit cast the correct spell.
+     * @param unit Unit - Unit that try to cast a spell
+     */
     private void magicAttack(Unit unit){
         if(unit instanceof MagicUnit){
             if(unit instanceof HealerUnit){
@@ -101,19 +109,29 @@ public class Battle {
         }
     }
 
-    private boolean checkManaOfHealer(HealerUnit healerUnit){
-        return healerUnit.getMana()>=30;
+    /**
+     * Help method that check the current mana of a Healer unit.
+     * @param magicUnit MagicUnit - MagicUnit to be tested.
+     * @return boolean - true if mana of the unit is over 29, false else.
+     */
+    private boolean checkManaOfHealer(MagicUnit magicUnit){
+        return magicUnit.getMana()>=30;
     }
 
-    private boolean checkManaOfMagician(MagicianUnit healerUnit){
-        return healerUnit.getMana()>=50;
+    /**
+     * Help method that check the current mana of a magician unit.
+     * @param magicUnit MagicUnit - MagicUnit to be tested.
+     * @return boolean - true if mana of the unit is over 29, false else.
+     */
+    private boolean checkManaOfMagician(MagicUnit magicUnit){
+        return magicUnit.getMana()>=50;
     }
 
     /**
      * Help method that simulate a combat between two units with the same attack type.
      * This method is composed by a combat loop until one of the units get defeated.
-     * @param unitFromArmy1 Unit from the first army that will fight.
-     * @param unitFromArmy2 Unit from the second army that will fight.
+     * @param unitFromArmy1 Unit - Unit from the first army that will fight.
+     * @param unitFromArmy2 Unit -Unit from the second army that will fight.
      */
     private void sameAttackType(Unit unitFromArmy1, Unit unitFromArmy2) {
         while (unitFromArmy1.getHealth() > 0 && unitFromArmy2.getHealth() > 0) {
@@ -127,8 +145,8 @@ public class Battle {
      * This method is composed by two loops. The for loop represents the ranged advantage of ranged units
      * against melee units. The second loop represents the normal combat until
      * one of the units get defeated.
-     * @param rangedUnit the ranged unit in the combat.
-     * @param meleeUnit the melee unit in the combat.
+     * @param rangedUnit Unit - the ranged unit in the combat.
+     * @param meleeUnit Unit - the melee unit in the combat.
      */
     // I think this is the way best to represent the advantage of a ranged unit against a melee unit.
     // It is possible to represent this advantage with a buff, that is reducing, in the getResistMethod
@@ -146,8 +164,8 @@ public class Battle {
     /**
      * Help method that checks the health points of both unit and return the unit
      * that does not have more health points ( The defeated unit).
-     * @param unitFromArmy1 Unit from the first army that will fight.
-     * @param unitFromArmy2 Unit from the second army that will fight.
+     * @param unitFromArmy1 Unit - unit from the first army that will fight.
+     * @param unitFromArmy2 Unit - unit from the second army that will fight.
      * @return The defeated unit
      */
     private Unit getDefeatedUnit(Unit unitFromArmy1,Unit unitFromArmy2){
@@ -158,7 +176,7 @@ public class Battle {
 
     /**
      * Help method that removes the defeated unit defined by the help method getDefeatedUnit.
-     * @param defeatedUnit the defeated unit from the method getDefeatedUnit.
+     * @param defeatedUnit Unit - the defeated unit from the method getDefeatedUnit.
      */
     private void removeDefeatedUnitFromArmy(Unit defeatedUnit){
         if(army1.getAllUnits().contains(defeatedUnit)) army1.removeUnit(defeatedUnit);
@@ -203,6 +221,11 @@ public class Battle {
         return army2;
     }
 
+    /**
+     *  Circumstantial method that do the same that the normal singularBattle method but
+     *  this return a list with the Unit that fight to be printed in the GUI later.
+     * @return List<Unit> - List of units that were involved in the singular battle.
+     */
     public List<Unit> singularBattleForSlowAnimation() {
         List<Unit> units = new ArrayList<>();
         Unit unitFromArmy1 = army1.getRandom();

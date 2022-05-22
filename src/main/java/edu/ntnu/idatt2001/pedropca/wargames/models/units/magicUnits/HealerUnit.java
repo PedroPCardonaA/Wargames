@@ -60,8 +60,8 @@ public class HealerUnit extends MagicUnit{
      * depending on the opponent Unit. If the opponent is a cavalry unit. Method will return -5.
      * Else if the opponent is Magician unit, Method will return 25. Else the attack bonus will be zero.
      * The forest terrain and the volcano terrain de-buffs.
-     * @param opponent Unit the opponent unit.
-     * @return int the attack bonus.
+     * @param opponent Unit - the opponent unit.
+     * @return int - the attack bonus.
      */
     @Override
     public int getAttackBonus(Unit opponent) {
@@ -81,8 +81,8 @@ public class HealerUnit extends MagicUnit{
      * If the opponent is an infantry unit, this method will return 2;
      * And if the opponent is a cavalry unit, this method will return 0;
      * The volcano terrain de-buffs the resist bonus.
-     * @param mainUnit Unit the main unit that called method getDamageDone.
-     * @return int the attack bonus.
+     * @param mainUnit Unit - the main unit that called method getDamageDone.
+     * @return int - the resist bonus.
      */
 
     @Override

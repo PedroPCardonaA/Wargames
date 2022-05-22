@@ -437,39 +437,43 @@ public class MainPageController extends Controller implements Initializable {
     /**
      * Method that defined army stored in the field army1 as a pre-defined army.
      * The user has the possibility to change the name of the pre-define army.
-     * This method gets help from methods generateArmy, stringInputWindow, updateArmyInBothListInTheSingleton
-     * and update view.
+     * This method gets help from methods generateArmy1
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
     private void generateArmy1(){
-        singletonArmies.setArmyNumber(0);
-        String name = stringInputWindow(armyOneName.getScene().getWindow());
-        if (!name.isEmpty()){
-            army1 = this.generateArmy(name);
-            this.checkNameAndUpdateSingleton(army1);
-            this.updateView();}
+        this.generateArmyFromMainPage(0);
     }
 
     /**
      * Method that defined army stored in the field army2 as a pre-defined army.
      * The user has the possibility to change the name of the pre-define army.
-     * This method gets help from methods generateArmy, stringInputWindow, updateArmyInBothListInTheSingleton
-     * and update view.
+     * This method gets help from methods generateArmy1
      * It can be called by the javaFx object of the FXML file MainPage.
      */
     @FXML
     private void generateArmy2(){
-        try {
-            singletonArmies.setArmyNumber(1);
-            String name = stringInputWindow(armyOneName.getScene().getWindow());
-            if (!name.isEmpty()){
+        this.generateArmyFromMainPage(1);
+    }
+
+    /**
+     * Method that generate a new army for one of the armies field of the class.
+     * The signature fo the method contains the number of the army to be generated.
+     *
+     * @param armyNumber int - index of the army in the singletonArmy class
+     */
+    private void generateArmyFromMainPage(int armyNumber){
+        singletonArmies.setArmyNumber(armyNumber);
+        String name = stringInputWindow(armyOneName.getScene().getWindow());
+        if (!name.isBlank()){
+            if(armyNumber == 0){
+                army1 = this.generateArmy(name);
+                this.checkNameAndUpdateSingleton(army1);
+            } else {
                 army2 = this.generateArmy(name);
                 this.checkNameAndUpdateSingleton(army2);
-                this.updateView();}
-        }catch (Exception e){
-            this.showError("Error by generating an Army!", "It was an error by generating the army: ", e.getMessage());
-        }
+            }
+            this.updateView();}
     }
 
 

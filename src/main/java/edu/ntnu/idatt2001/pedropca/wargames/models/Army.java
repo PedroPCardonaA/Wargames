@@ -1,14 +1,10 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models;
 
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.HealerUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.*;
+import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.*;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumUnitType;
-import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.BlankInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.UnitFactory;
 
 import java.io.Serializable;
@@ -16,7 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * edu.ntnu.idatt2001.pedropca.Army class that represents an army in the war games.
+ * Army class that represents an army in the war games.
  * The armies are composed by a final field NAME that contains the name of the army
  * and by a final list with all the units tha the army has. Objects of this class
  * will be used to simulate a battle between armies in the war games.
@@ -32,41 +28,42 @@ public class Army implements Serializable{
     private final List<Unit> units;
 
     /**
-     * Constructor of class edu.ntnu.idatt2001.pedropca.Army that has a String variable and a list of object units as signature.
+     * Constructor of class Army that has a String variable and a list of object units as signature.
      * This constructor will be used when the list of units is defined before the army object.
-     * @param name name of the army
-     * @param units list of units
-     * @throws IllegalArgumentException this constructor may throw illegal argument exception
-     * if the string variable name is empty or if the units list is defined as null
+     * @param name String - name of the army
+     * @param units List<Unit> - list of units
+     * @throws BlankInputException this constructor may throw illegal argument exception
+     * if the string variable name is blank or if the units list is defined as null
      */
 
-    public Army(String name, List<Unit> units) throws EmptyInputException{
-        if(name.isEmpty()) throw new EmptyInputException("The name of the army cannot be empty. Enter a name for the army.");
-        if(units == null) throw new EmptyInputException("List of unit cannot be defined as null. Enter a correct unit list.");
+    public Army(String name, List<Unit> units) throws BlankInputException {
+        if(name.isBlank()) throw new BlankInputException("The name of the army cannot be blank. Enter a name for the army.");
+        if(units == null) throw new BlankInputException("List of unit cannot be defined as null. Enter a correct unit list.");
         this.name = name.trim();
         this.units = units;
     }
 
     /**
-     * Constructor of class edu.ntnu.idatt2001.pedropca.Army that has a String variable as signature.
+     * Constructor of class Army that has a String variable as signature.
      * This constructor will be used when the list of units is not defined before the army object.
-     * @param name name of the army
-     * @throws IllegalArgumentException this constructor may throw illegal argument exception
-     * if the string variable name is empty
+     * @param name String - name of the army
+     * @throws BlankInputException this constructor may throw illegal argument exception
+     * if the string variable name is blank
      */
 
-    public Army(String name) throws EmptyInputException{
-        if(name.isEmpty()) throw new EmptyInputException("The name of the army cannot be empty. Enter a name for the army.");
+    public Army(String name) throws BlankInputException {
+        if(name.isBlank()) throw new BlankInputException("The name of the army cannot be blank. Enter a name for the army.");
         this.name = name;
         units = new ArrayList<>();
     }
 
     /**
-     * COpy constructor that makes a new instance of this class
-     * based on other army object.
+     * Copy constructor that makes a new instance of this class
+     * based on another army object.
      * @param army Army - army to be copied.
      */
     public Army(Army army){
+        // Method may throw a nullPointException here if th army in the signature
         this.name = army.getName();
         this.units = new ArrayList<>();
         UnitFactory factory = new UnitFactory();
@@ -83,8 +80,8 @@ public class Army implements Serializable{
 
     /**
      * Method that add a defined unit into list UNITS and ergo into the army.
-     * This method has on object of class edu.ntnu.idatt2001.pedropca.Unit as signature.
-     * @param unit edu.ntnu.idatt2001.pedropca.Unit to be added into the army.
+     * This method has on object of class Unit as signature.
+     * @param unit Unit - Unit to be added into the army.
      */
     public void add(Unit unit){
         this.units.add(unit);
@@ -92,8 +89,8 @@ public class Army implements Serializable{
 
     /**
      * Method that add a defined list of units into list UNITS and ergo into the army.
-     * This method has a list of objects of class edu.ntnu.idatt2001.pedropca.Unit as signature.
-     * @param units List of units to be added into army
+     * This method has a list of objects of Unit as signature.
+     * @param units List<Unit> - list of units to be added into army
      */
     public void addAll(List<Unit> units){
         this.units.addAll(units);
@@ -101,7 +98,7 @@ public class Army implements Serializable{
 
     /**
      * Method that remove a defined unit from the list UNITS and ergo from the army.
-     * @param unit edu.ntnu.idatt2001.pedropca.Unit to be removed from the army.
+     * @param unit Unit - Unit to be removed from the army.
      */
     public void removeUnit(Unit unit){
         this.units.remove(unit);
@@ -109,7 +106,7 @@ public class Army implements Serializable{
 
     /**
      * Method that checks if the list UNITS has elements inside or in other words is not empty.
-     * @return boolean true if army has unit or false if not.
+     * @return boolean - true if army has unit or false if not.
      */
     public boolean hasUnit(){
         return (!this.units.isEmpty());
@@ -117,7 +114,7 @@ public class Army implements Serializable{
 
     /**
      * Method that returns current list of units of the army
-     * @return current list of units
+     * @return List<Unit> - current list of units
      */
     public List<Unit> getAllUnits() {
         return this.units;
@@ -127,7 +124,7 @@ public class Army implements Serializable{
      * Method that return a random unit from the list by using Random class.
      * Using av Random class is necessary to get a random integer that represents an index of the list,
      * and return the unit related to that index
-     * @return edu.ntnu.idatt2001.pedropca.Unit related to the random index
+     * @return Unit - Unit related to the random index
      */
     public Unit getRandom(){
         // This method may throw a nullPointerException when list UNITS is empty
@@ -138,7 +135,7 @@ public class Army implements Serializable{
 
     /**
      * Method getInfantryUnits that return a list of all infantry units in the army.
-     * @return List<Unit> List with all the infantry units in the army.
+     * @return List<Unit> - List with all the infantry units in the army.
      */
     public List<Unit> getInfantryUnits(){
         return units.stream().filter(unit -> unit instanceof InfantryUnit).collect(Collectors.toList());
@@ -146,7 +143,7 @@ public class Army implements Serializable{
 
     /**
      * Method getCavalryUnits that return a list of all cavalry units in the army.
-     * @return List<Unit> List with all the cavalry units in the army.
+     * @return List<Unit> - List with all the cavalry units in the army.
      */
     public List<Unit> getCavalryUnits(){
         return units.stream().filter(unit -> unit instanceof CavalryUnit &&!(unit instanceof CommanderUnit)).collect(Collectors.toList());
@@ -154,7 +151,7 @@ public class Army implements Serializable{
 
     /**
      * Method getRangedUnits that return a list of all Ranged units in the army.
-     * @return List<Unit> List with all the ranged units in the army.
+     * @return List<Unit> - List with all the ranged units in the army.
      */
     public List<Unit> getRangedUnits(){
         return units.stream().filter(unit -> unit instanceof RangedUnit).collect(Collectors.toList());
@@ -162,7 +159,7 @@ public class Army implements Serializable{
 
     /**
      * Method getCommanderUnits that return a list of all Commander units in the army.
-     * @return List<Unit> List with all the commander units in the army.
+     * @return List<Unit> - List with all the commander units in the army.
      */
     public List<Unit> getCommanderUnits(){
         return units.stream().filter(unit -> unit instanceof CommanderUnit).collect(Collectors.toList());
@@ -170,7 +167,7 @@ public class Army implements Serializable{
 
     /**
      * Method getMagicianUnits that return a list of all Magician units in the army.
-     * @return List<Unit> List with all the magician units in the army.
+     * @return List<Unit> - List with all the magician units in the army.
      */
     public List<Unit> getMagicianUnits(){
         return units.stream().filter(unit -> unit instanceof MagicianUnit).collect(Collectors.toList());
@@ -178,7 +175,7 @@ public class Army implements Serializable{
 
     /**
      * Method getMagicianUnits that return a list of all Healer units in the army.
-     * @return List<Unit> List with all the Healers units in the army.
+     * @return List<Unit> - List with all the Healers units in the army.
      */
     public List<Unit> getHealerUnits(){
         return units.stream().filter(unit -> unit instanceof HealerUnit).collect(Collectors.toList());
@@ -195,12 +192,18 @@ public class Army implements Serializable{
     /**
      * Set method tha defines a new for the army
      * @param name String - New name of the army
-     * @throws IllegalArgumentException If the String army is empty
+     * @throws BlankInputException If the String name is blank
      */
-    public void setName(String name) throws EmptyInputException{
-        if(name.isEmpty()) throw new EmptyInputException("The name of the army cannot be empty. Enter a name for the army.");
+    public void setName(String name) throws BlankInputException {
+        if(name.isBlank()) throw new BlankInputException("The name of the army cannot be blank. Enter a name for the army.");
         this.name = name.trim();
     }
+
+    /**
+     * Method that returns a single unit that matched the filter name.
+     * @param nameOfUnit String - name of the unit to search
+     * @return Unit - Unit with a name that matches the filter string
+     */
 
     public Unit returnAUnitByName(String nameOfUnit){
         return units.stream().filter(unit -> unit.getName().equals(nameOfUnit))

@@ -36,7 +36,7 @@ public class CommanderUnit extends CavalryUnit{
         super(name, health, attack, armor,attackSpeedPerSecond,hitRate,criticRate,criticDamage);
     }
     /**
-     * Default constructor for class edu.ntnu.idatt2001.pedropca.CommanderUnit. The signature of this constructor only takes
+     * Default constructor for class CommanderUnit. The signature of this constructor only takes
      * Variable for the field name and health. This constructor will be used for default
      * cavalry units.
      * @param name String name of the unit
@@ -44,6 +44,19 @@ public class CommanderUnit extends CavalryUnit{
      */
     public CommanderUnit(String name, int health) throws IllegalArgumentException {
         super(name, health,25,15,1,90,25,175);
+    }
+
+
+
+    /**
+     * Override method that just add help method to healthPointRegeneration to the method in the
+     * abstract class Unit.
+     * @param opponent Unit - opponent unit
+     */
+    @Override
+    public void attack(Unit opponent){
+        super.attack(opponent);
+        this.healthPointRegeneration();
     }
 
     /**
@@ -54,16 +67,4 @@ public class CommanderUnit extends CavalryUnit{
 
         if(this.getHealth()>0 && this.getHealth()<this.getMaxHealth()-1) setHealth(this.getHealth()+2);
     }
-
-    /**
-     * Override method that just add help method to healthPointRegeneration to the method in the
-     * abstract class edu.ntnu.idatt2001.pedropca.Unit.
-     * @param opponent edu.ntnu.idatt2001.pedropca.Unit opponent unit
-     */
-    @Override
-    public void attack(Unit opponent){
-        super.attack(opponent);
-        this.healthPointRegeneration();
-    }
-
 }

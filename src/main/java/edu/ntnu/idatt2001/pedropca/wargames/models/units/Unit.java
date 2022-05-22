@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units;
 
-import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.EmptyInputException;
+import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.BlankInputException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.NegativeNumberException;
 import edu.ntnu.idatt2001.pedropca.wargames.util.exceptions.OverOneHundredPercentException;
 
@@ -12,8 +12,8 @@ import java.util.Random;
  * Abstract class unit that will be used as superclass for other unit classes.
  * Unit class represent the most basic object in the units' hierarchy.
  * Object of this class (and its subclasses) will be shape the object for the class Army.
- * This class has name, health, ATTACK, ARMOR, ATTACK_SPEED_PER_SECOND,
- * HIT_RATE, CRITIC_RATE and CRITIC_DAMAGE as fields.
+ * This class has a name, health, attack, armor, attack speed,
+ * hit rate, critical rate and critical damage as fields.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -38,15 +38,15 @@ public abstract class Unit implements Serializable {
      * Constructor for the class, whit name, health, attack, armor, attack speed, attack type,
      * hit rate, critic rate, critic damage as signature.
      *
-     * @param name String name of the unit
-     * @param health int health points of the unit
-     * @param attack int attack points of the unit
-     * @param armor int armor points of the unit
-     * @param attackSpeedPerSecond int attack speed per second of the unit
-     * @param attackType string attack type of the unit
-     * @param hitRate int percent chance of not miss the attack
-     * @param criticRate int percent chance of do a critical attack
-     * @param criticDamage int percent that represent the damage from a critical attack in comparison
+     * @param name String - name of the unit
+     * @param health int - health points of the unit
+     * @param attack int - attack points of the unit
+     * @param armor int - armor points of the unit
+     * @param attackSpeedPerSecond int - attack speed per second of the unit
+     * @param attackType string - attack type of the unit
+     * @param hitRate int - percent chance of not miss the attack
+     * @param criticRate int - percent chance of do a critical attack
+     * @param criticDamage int - percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
@@ -54,7 +54,7 @@ public abstract class Unit implements Serializable {
     public Unit(String name, int health, int attack, int armor,
                 int attackSpeedPerSecond, String attackType, int hitRate,
                 int criticRate, int criticDamage) throws IllegalArgumentException {
-        if (name.isEmpty())throw new EmptyInputException
+        if (name.isBlank())throw new BlankInputException
                 ("All unit must have a name. Define a name for the unit.");
         if(health<0)throw new NegativeNumberException
                 ("The health points of a unit cannot be lower than 0. Define the health points above 0.");
@@ -126,7 +126,7 @@ public abstract class Unit implements Serializable {
 
     /**
      * Mutator method that change the content of field health
-     * @param health int new health of the unit
+     * @param health int - new health of the unit
      * @throws IllegalArgumentException this method may throw an illegal argument exception
      * if the new health is lower than 0.
      */
@@ -143,7 +143,7 @@ public abstract class Unit implements Serializable {
      *
      * I wanted to make a deeper gameplay. That is why I made a " Rock Paper Scissors" game style
      * where some units have an obvious advantage over other and vice versa.
-     * @param opponent Unit the opponent unit.
+     * @param opponent Unit - the opponent unit.
      * @return int - attack bonus.
      */
     public abstract int getAttackBonus(Unit opponent);
@@ -155,7 +155,7 @@ public abstract class Unit implements Serializable {
      *
      * I wanted to make a deeper gameplay. That is why I made a " Rock Paper Scissors" game style
      * where some units have an obvious advantage over other and vice versa.
-     * @param mainUnit Unit the opponent unit.
+     * @param mainUnit Unit - the opponent unit.
      * @return int - resist bonus.
      */
     public abstract int getResistBonus(Unit mainUnit);
@@ -167,7 +167,7 @@ public abstract class Unit implements Serializable {
      * to the opponent unit and reducing the current health of the opponent by the damage done.
      * This method will also check if the attack hit or miss and if the attack is a critical
      * or non-critical by using the random class.
-     * @param opponent edu.ntnu.idatt2001.pedropca.Unit opponent unit
+     * @param opponent Unit - opponent unit
      */
     public void attack(Unit opponent){
         Random random = new Random();
@@ -186,7 +186,7 @@ public abstract class Unit implements Serializable {
      * Help private method that calculate the total damage with help of
      * help method getDamageDone.
      * @param opponent Unit - the opponent unit
-     * @return int damage from a critical attack.
+     * @return int - damage from a critical attack.
      */
 
     private int criticAttack(Unit opponent){

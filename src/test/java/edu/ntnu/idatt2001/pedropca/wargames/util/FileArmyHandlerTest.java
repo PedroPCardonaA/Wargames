@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.pedropca.wargames.util;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
+import edu.ntnu.idatt2001.pedropca.wargames.models.Battle;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.*;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CommanderUnit;
@@ -92,7 +93,7 @@ class FileArmyHandlerTest {
                     FileArmyHandler.writeAFile(new Army("Army"), "","XDFGSJSJYD¤#¤##2&%¤");
                     fail();
                 }catch (Exception e){
-                    assertEquals("The path of file cannot be empty. Define a path of the file.",e.getMessage());
+                    assertEquals("The path of file cannot be blank. Define a path of the file.",e.getMessage());
                 }
             }
             @Test
@@ -101,7 +102,7 @@ class FileArmyHandlerTest {
                     FileArmyHandler.writeAFile(new Army("Army"), "src/main/resources/Armies","");
                     fail();
                 }catch (Exception e){
-                    assertEquals("The name of file cannot be empty. Define the name of the file.",e.getMessage());
+                    assertEquals("The name of file cannot be blank. Define the name of the file.",e.getMessage());
                 }
             }
             @Test
@@ -213,7 +214,7 @@ class FileArmyHandlerTest {
                     FileArmyHandler.readArmy("");
                     fail();
                 }catch (Exception e){
-                    assertEquals("The path of file cannot be empty. Define a path of the file",e.getMessage());
+                    assertEquals("The path of file cannot be blank. Define a path of the file",e.getMessage());
                 }
             }
             @Test
@@ -228,4 +229,5 @@ class FileArmyHandlerTest {
             }
         }
     }
+
 }

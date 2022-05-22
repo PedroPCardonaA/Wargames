@@ -166,7 +166,7 @@ public class DisplayArmyController extends Controller implements Initializable{
     private void generatedArmyDisplayArmyController(){
         try {
             String name = this.stringInputWindow(armyNameDisplayUnits.getScene().getWindow());
-            if(!name.isEmpty()){
+            if(!name.isBlank()){
                 army = this.generateArmy(name);
                 this.checkNameAndUpdateSingleton(army);
                 this.updateView();

@@ -51,7 +51,7 @@ class ArmyTest {
                     new Army("");
                     fail();
                 }catch (Exception e){
-                    assertEquals("The name of the army cannot be empty. Enter a name for the army.",e.getMessage());
+                    assertEquals("The name of the army cannot be blank. Enter a name for the army.",e.getMessage());
 
                 }
             }
@@ -67,7 +67,7 @@ class ArmyTest {
                     new Army("",unitMix);
                     fail();
                 } catch (Exception e) {
-                    assertEquals("The name of the army cannot be empty. Enter a name for the army.",e.getMessage());
+                    assertEquals("The name of the army cannot be blank. Enter a name for the army.",e.getMessage());
                 }
             }
             @Test
@@ -85,7 +85,7 @@ class ArmyTest {
                     new Army("",null);
                     fail();
                 } catch (Exception e) {
-                    assertEquals("The name of the army cannot be empty. Enter a name for the army.",e.getMessage());
+                    assertEquals("The name of the army cannot be blank. Enter a name for the army.",e.getMessage());
                 }
             }
         }

@@ -23,16 +23,16 @@ public abstract class MagicUnit extends Unit {
     /**
      *Constructor of the abstract class MagicUnit that contains the same elements in the signature
      * than super class Unit, adding filed mana.
-     * @param name String name of the unit
-     * @param health int health points of the unit
-     * @param attack int attack points of the unit
-     * @param armor int armor points of the unit
-     * @param attackSpeedPerSecond int attack speed per second of the unit
-     * @param hitRate int percent chance of not miss the attack
-     * @param criticRate int percent chance of do a critical attack
-     * @param criticDamage int percent that represent the damage from a critical attack in comparison
+     * @param name String - name of the unit
+     * @param health int - health points of the unit
+     * @param attack int - attack points of the unit
+     * @param armor int - armor points of the unit
+     * @param attackSpeedPerSecond int - attack speed per second of the unit
+     * @param hitRate int - percent chance of not miss the attack
+     * @param criticRate int - percent chance of do a critical attack
+     * @param criticDamage int - percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
-     * @param mana int
+     * @param mana int - mana points of the units.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
      */

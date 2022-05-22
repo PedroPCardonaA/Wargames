@@ -5,9 +5,9 @@ import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 
 /**
  *
- * Class edu.ntnu.idatt2001.pedropca.InfantryUnit that represents the infantry units in the war games.
- * This class conforms the edu.ntnu.idatt2001.pedropca.Unit hierarchy and has the abstract class edu.ntnu.idatt2001.pedropca.Unit as superclass.
- * This class has the same fields that edu.ntnu.idatt2001.pedropca.Unit class.
+ * Class InfantryUnit that represents the infantry units in the war games.
+ * This class conforms the Unit hierarchy and has the abstract class Unit as superclass.
+ * This class has the same fields that Unit class.
  *
  * @author Pedro Cardona
  * @version 1.0
@@ -16,17 +16,17 @@ import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 public class InfantryUnit extends Unit {
 
     /**
-     * Constructor of the class edu.ntnu.idatt2001.pedropca.InfantryUnit. The signature of this constructor
-     * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.Unit
+     * Constructor of the class InfantryUnit. The signature of this constructor
+     * takes all the fields of class the class Unit
      * except the field ATTACK_TYPE because it is pre-defined as "melee".
-     * @param name String name of the unit
-     * @param health int health points of the unit
-     * @param attack int attack points of the unit
-     * @param armor int armor points of the unit
-     * @param attackSpeedPerSecond int attack speed per second of the unit
-     * @param hitRate int percent chance of not miss the attack
-     * @param criticRate int percent chance of do a critical attack
-     * @param criticDamage int percent that represent the damage from a critical attack in comparison
+     * @param name String - name of the unit
+     * @param health int - health points of the unit
+     * @param attack int - attack points of the unit
+     * @param armor int - armor points of the unit
+     * @param attackSpeedPerSecond int - attack speed per second of the unit
+     * @param hitRate int - percent chance of not miss the attack
+     * @param criticRate int - percent chance of do a critical attack
+     * @param criticDamage int - percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
      * if the given parameters are not inside the defined areas.
@@ -37,11 +37,11 @@ public class InfantryUnit extends Unit {
     }
 
     /**
-     * Default constructor for class edu.ntnu.idatt2001.pedropca.InfantryUnit. The signature of this constructor only takes
+     * Default constructor for class InfantryUnit. The signature of this constructor only takes
      * Variable for the field name and health. This constructor will be used for default
      * infantry unit.
-     * @param name String name of the unit
-     * @param health int health points of the unit
+     * @param name String - name of the unit
+     * @param health int - health points of the unit
      */
     public InfantryUnit(String name, int health)throws IllegalArgumentException {
         super(name,health,15,10,1,"melee",85,20,135);
@@ -49,13 +49,13 @@ public class InfantryUnit extends Unit {
 
     /**
      * Help method that overrides abstract method getAttackBonus from the class unit.
-     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get attack bonus.
+     * This method helps method getDamageDone from the class Unit to get attack bonus.
      * This method will return the attack bonus of infantry units. The value of the bonus may change
-     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is a calvary unit. Method returns 4. Else,
-     * the method returns 2.
+     * depending on the opponent Unit. If the opponent is a calvary unit. attack bonus becomes 4. Else,
+     * the attack bonus becomes 2.
      * The forest terrain buffs the attack bonus.
-     * @param opponent edu.ntnu.idatt2001.pedropca.Unit the opponent unit.
-     * @return int the attack bonus.
+     * @param opponent Unit - the opponent unit.
+     * @return int - the attack bonus.
      */
     @Override
     public int getAttackBonus(Unit opponent){
@@ -67,13 +67,13 @@ public class InfantryUnit extends Unit {
 
     /**
      * Help method that overrides abstract method getResistBonus from the class unit.
-     * This method helps method getDamageDone from the class edu.ntnu.idatt2001.pedropca.Unit to get resist bonus.
+     * This method helps method getDamageDone from the class Unit to get resist bonus.
      * This method will return the resist bonus of infantry units. The value of the bonus may change
-     * depending on the opponent edu.ntnu.idatt2001.pedropca.Unit. If the opponent is another infantry unit. Method returns 3. Else,
-     * the method returns 2.
+     * depending on the opponent Unit. If the opponent is another infantry unit. resist bonus becomes 3. Else,
+     * the resist bonus becomes 2.
      * The forest terrain buffs the resist bonus and the volcano terrain de-buffs the resist bonus.
-     * @param mainUnit edu.ntnu.idatt2001.pedropca.Unit the main unit that called method getDamageDone.
-     * @return int the attack bonus.
+     * @param mainUnit Unit - the main unit that called method getDamageDone.
+     * @return int - the resist bonus.
      */
 
     @Override
@@ -89,8 +89,8 @@ public class InfantryUnit extends Unit {
     /**
      * Help method that overrides abstract method clone from the class unit.
      * This method makes and return a deep copy of the unit that calls method.
-     * It will help method getDamageDone from class edu.ntnu.idatt2001.pedropca.Unit and the abstract method getResistBonus()
-     * @return edu.ntnu.idatt2001.pedropca.Unit Copy of th unit.
+     * It will help method getDamageDone from class Unit and the abstract method getResistBonus()
+     * @return Unit - Copy of th unit.
      */
 
     @Override

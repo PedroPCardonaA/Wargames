@@ -33,8 +33,8 @@ public class FileArmyHandler {
      * @throws IllegalArgumentException if the data in csv is corrupted.
      */
     public static Army readArmy(String pathOfFile) throws IOException, ClassNotFoundException, IllegalArgumentException{
-        if(pathOfFile.isEmpty()){
-            throw new IOException("The path of file cannot be empty. Define a path of the file");
+        if(pathOfFile.isBlank()){
+            throw new IOException("The path of file cannot be blank. Define a path of the file");
         }
         if(!pathOfFile.toLowerCase().endsWith(".csv") && !pathOfFile.toLowerCase().endsWith(".txt")){
             throw new IOException("The defined file is not a .csv (Comma separated value) or .txt (Serializable.)" +
@@ -97,11 +97,11 @@ public class FileArmyHandler {
      */
     public static void writeAFile(Army army ,String pathOfFile, String fileName) throws IOException {
         boolean b = !fileName.toLowerCase().endsWith(".csv") && !fileName.toLowerCase().endsWith(".txt");
-        if (pathOfFile.isEmpty())
-            throw new IOException("The path of file cannot be empty. Define a path of the file.");
+        if (pathOfFile.isBlank())
+            throw new IOException("The path of file cannot be blank. Define a path of the file.");
 
-        if (fileName.isEmpty())
-            throw new IOException("The name of file cannot be empty. Define the name of the file.");
+        if (fileName.isBlank())
+            throw new IOException("The name of file cannot be blank. Define the name of the file.");
 
         if (fileName.contains(".") && b)
             throw new IOException("The name of the file cannot contain a '.'. Define a correct name.");
