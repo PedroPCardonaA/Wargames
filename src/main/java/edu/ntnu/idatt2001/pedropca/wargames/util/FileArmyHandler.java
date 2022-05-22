@@ -1,6 +1,4 @@
 package edu.ntnu.idatt2001.pedropca.wargames.util;
-
-import com.opencsv.CSVWriter;
 import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 
 import java.io.*;
@@ -62,10 +60,9 @@ public class FileArmyHandler {
      * Help method that returns an instance of the army class by reading a csv file.
      * @param pathOfFile String - Path of the file
      * @return Army - an instance of army class from the file
-     * @throws IOException if it happens an error by reading the file
      * @throws IllegalArgumentException if the data in csv is corrupted.
      */
-    private static Army readArmyFromCsv(String pathOfFile) throws IOException, IllegalArgumentException{
+    private static Army readArmyFromCsv(String pathOfFile) throws  IllegalArgumentException{
         Army readArmy = new Army("readArmy");
         UnitFactory factory = new UnitFactory();
         Path file = Path.of(pathOfFile);

@@ -24,14 +24,15 @@ public class UnitFactory {
     /**
      * Method that returns an instances of one of the classes' in the unit hierarchy based
      * on the unitType parameter. That parameter defined the class of the new unit from unit hierarchy.
-     * @param name String name of the unit
-     * @param health int health points of the unit
-     * @param attack int attack points of the unit
-     * @param armor int armor points of the unit
-     * @param attackSpeedPerSecond int attack speed per second of the unit
-     * @param hitRate int percent chance of not miss the attack
-     * @param criticRate int percent chance of do a critical attack
-     * @param criticDamage int percent that represent the damage from a critical attack in comparison
+     * @param unitType EnumUnitType - unit type of the unit to be generated
+     * @param name String - name of the unit
+     * @param health int - health points of the unit
+     * @param attack int - attack points of the unit
+     * @param armor int - armor points of the unit
+     * @param attackSpeedPerSecond int - attack speed per second of the unit
+     * @param hitRate int - percent chance of not miss the attack
+     * @param criticRate int - percent chance of do a critical attack
+     * @param criticDamage int - percent that represent the damage from a critical attack in comparison
      *                      to a non-critical attack.
      * @return Unit - the new unit made by the factory.
      * @throws IllegalArgumentException this constructor may trow illegal argument exception
@@ -63,6 +64,7 @@ public class UnitFactory {
      * on the unitType parameter. That parameter defined the class of the new unit from unit hierarchy.
      * But this constructor use pre-defined values for attack ,armor, attackSpeedPerSecond, hitRate,
      * criticRate and criticDamage.
+     * @param unitType EnumUnitType - unit type of the unit to be generated
      * @param name String name of the unit
      * @param health int health points of the unit
      * @return Unit - the new unit made by the factory.
@@ -91,6 +93,7 @@ public class UnitFactory {
     /**
      * Method that returns a list of instances of one of the classes' in the unit hierarchy based
      * on the unitType parameter. That parameter defined the class of the new units from unit hierarchy.
+     * @param enumUnitType EnumUnitType - unit type of the unit to be generated
      * @param name String name of the unit
      * @param health int health points of the unit
      * @param attack int attack points of the unit
@@ -121,6 +124,7 @@ public class UnitFactory {
      * on the unitType parameter. That parameter defined the class of the new units from unit hierarchy.
      * But this constructor use pre-defined values for attack ,armor, attackSpeedPerSecond, hitRate,
      * criticRate and criticDamage.
+     * @param unitType EnumUnitType - unit type of the unit to be generated
      * @param name String name of the unit
      * @param health int health points of the unit
      * @param numberOfUnits int number of new units
