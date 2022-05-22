@@ -84,8 +84,8 @@ public abstract class Controller {
      */
     protected void updateArmiesInSingleton(Army armyOne, Army armyTwo){
         singletonArmies.setEmptySingletonArmy();
-        singletonArmies.putArmy(new Army(armyOne));
-        singletonArmies.putArmy(new Army(armyTwo));
+        singletonArmies.putArmy(new Army(armyOne),0);
+        singletonArmies.putArmy(new Army(armyTwo),1);
     }
 
     /**
@@ -95,26 +95,10 @@ public abstract class Controller {
      * @param index int - the index of the armies on the list.
      */
     protected void updateArmyInBothListInTheSingleton(Army army, int index){
-        if(index == 0){
-            Army save = singletonArmies.getArmy(1);
-            Army saveBackUp = singletonArmies.getArmyFromBackUp(1);
-            singletonArmies.setEmptySingletonArmy();
-            singletonArmies.setEmptyArmyBackUp();
-            singletonArmies.putArmy(new Army(army));
-            singletonArmies.putArmy(new Army(save));
-            singletonArmies.putArmyInBackUp(new Army(army));
-            singletonArmies.putArmyInBackUp(new Army(saveBackUp));
-        }
-        else{
-            Army save = singletonArmies.getArmy(0);
-            Army saveBackUp = singletonArmies.getArmyFromBackUp(0);
-            singletonArmies.setEmptySingletonArmy();
-            singletonArmies.setEmptyArmyBackUp();
-            singletonArmies.putArmy(new Army(save));
-            singletonArmies.putArmy(new Army(army));
-            singletonArmies.putArmyInBackUp(new Army(saveBackUp));
-            singletonArmies.putArmyInBackUp(new Army(army));
-        }
+        singletonArmies.removeArmy(index);
+        singletonArmies.removeArmyBackUp(index);
+        singletonArmies.putArmy(army,index);
+        singletonArmies.putArmyInBackUp(army,index);
     }
 
     /**

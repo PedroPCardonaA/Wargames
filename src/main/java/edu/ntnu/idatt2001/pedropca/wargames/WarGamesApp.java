@@ -32,10 +32,10 @@ public class WarGamesApp extends Application {
      */
     public static void main(String[] args) {
         SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-        singletonArmies.putArmy(new Army("Army#1"));
-        singletonArmies.putArmy(new Army("Army#2"));
-        singletonArmies.putArmyInBackUp(new Army("Army#1"));
-        singletonArmies.putArmyInBackUp(new Army("Army#2"));
+        singletonArmies.putArmy(new Army("Army#1"),0);
+        singletonArmies.putArmy(new Army("Army#2"),1);
+        singletonArmies.putArmyInBackUp(new Army("Army#1"),0);
+        singletonArmies.putArmyInBackUp(new Army("Army#2"),1);
         launch(args);
     }
 

@@ -69,32 +69,32 @@ public class SingletonArmies {
      * Method that add a new army into the list of armies.
      * @param army Army - army to be added into the list of armies.
      */
-    public void putArmy(Army army){
-        this.listOfArmies.add(army);
+    public void putArmy(Army army, int index){
+        this.listOfArmies.add(index, army);
     }
 
     /**
      * Method that add a new army into the backup list of armies.
      * @param army Army - army to be added into the backup list of armies.
      */
-    public void putArmyInBackUp(Army army){
-        this.listOfArmiesBackUp.add(army);
+    public void putArmyInBackUp(Army army, int index){
+        this.listOfArmiesBackUp.add(index,army);
     }
 
     /**
      * Method that remove a defined army from the list of armies.
      * @param army Army - army to be removed from the list of armies.
      */
-    public void removeArmy(Army army){
-        this.listOfArmies.remove(army);
+    public void removeArmy(int index){
+        this.listOfArmies.remove(index);
     }
 
     /**
      * Method that remove a defined army from the backup list of armies.
      * @param army Army - army to be removed from the backup list of armies.
      */
-    public void removeArmyBackUp(Army army){
-        this.listOfArmiesBackUp.remove(army);
+    public void removeArmyBackUp(int index){
+        this.listOfArmiesBackUp.remove(index);
     }
 
     /**

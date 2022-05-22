@@ -50,9 +50,8 @@ class SingletonArmiesTest {
             @Test
             void getAnArmyFromSingleton(){
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                Army army = new Army("army");
-                singletonArmies.putArmy(army);
-                assertEquals(army,singletonArmies.getArmy(0));
+                singletonArmies.putArmy( new Army("army"),0);
+                assertEquals(new Army("army"),singletonArmies.getArmy(0));
             }
         }
 
@@ -62,8 +61,7 @@ class SingletonArmiesTest {
             @Test
             void getAnArmyFromSingletonWithANegativeIndex(){
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                Army army = new Army("army");
-                singletonArmies.putArmy(army);
+                singletonArmies.putArmy( new Army("army"),0);
                 try {
                     singletonArmies.getArmy(-10);
                     fail();
@@ -74,8 +72,7 @@ class SingletonArmiesTest {
             @Test
             void getAnArmyFromSingletonWithATwoAsIndex(){
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                Army army = new Army("army");
-                singletonArmies.putArmy(army);
+                singletonArmies.putArmy( new Army("army"),0);
                 try {
                     singletonArmies.getArmy(2);
                     fail();
@@ -95,9 +92,8 @@ class SingletonArmiesTest {
             @Test
             void getAnArmyFromSingleton(){
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                Army army = new Army("army");
-                singletonArmies.putArmyInBackUp(army);
-                assertEquals(army,singletonArmies.getArmyFromBackUp(0));
+                singletonArmies.putArmyInBackUp( new Army("army"),0);
+                assertEquals(new Army("army"),singletonArmies.getArmyFromBackUp(0));
             }
         }
 
@@ -107,8 +103,7 @@ class SingletonArmiesTest {
             @Test
             void getAnArmyFromSingletonWithANegativeIndex(){
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                Army army = new Army("army");
-                singletonArmies.putArmyInBackUp(army);
+                singletonArmies.putArmyInBackUp( new Army("army"),0);
                 try {
                     singletonArmies.getArmyFromBackUp(-10);
                     fail();
@@ -119,8 +114,7 @@ class SingletonArmiesTest {
             @Test
             void getAnArmyFromSingletonWithATwoAsIndex(){
                 SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                Army army = new Army("army");
-                singletonArmies.putArmy(army);
+                singletonArmies.putArmy( new Army("army"),0);
                 try {
                     singletonArmies.getArmyFromBackUp(2);
                     fail();
@@ -141,8 +135,7 @@ class SingletonArmiesTest {
             void setEmptyInTheArmiesListOfTheSingleton(){
                 try {
                     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                    Army army = new Army("army");
-                    singletonArmies.putArmy(army);
+                    singletonArmies.putArmy( new Army("army"),0);
                     singletonArmies.setEmptySingletonArmy();
                 }catch (Exception e){
                     fail();
@@ -159,11 +152,10 @@ class SingletonArmiesTest {
         class Positive{
 
             @Test
-            void setEmptyInTheArmiesListOfTheSingleton(){
+            void setEmptyInTheBackUpArmiesListOfTheSingleton(){
                 try {
                     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                    Army army = new Army("army");
-                    singletonArmies.putArmyInBackUp(army);
+                    singletonArmies.putArmyInBackUp( new Army("army"),0);
                     singletonArmies.setEmptyArmyBackUp();
                 }catch (Exception e){
                     fail();
@@ -180,9 +172,8 @@ class SingletonArmiesTest {
             void removeAnArmyFromMainArmyList(){
                 try {
                     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                    Army army = new Army("army");
-                    singletonArmies.putArmy(army);
-                    singletonArmies.removeArmy(army);
+                    singletonArmies.putArmy( new Army("army"),0);
+                    singletonArmies.removeArmy(0);
                 }catch (Exception e){
                     fail();
                 }
@@ -195,12 +186,11 @@ class SingletonArmiesTest {
         @Nested
         class Positive{
             @Test
-            void removeAnArmyFromMainArmyList(){
+            void removeAnArmyFromBackUpList(){
                 try {
                     SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
-                    Army army = new Army("army");
-                    singletonArmies.putArmyInBackUp(army);
-                    singletonArmies.removeArmyBackUp(army);
+                    singletonArmies.putArmyInBackUp( new Army("army"),0);
+                    singletonArmies.removeArmyBackUp(0);
                 }catch (Exception e){
                     fail();
                 }
