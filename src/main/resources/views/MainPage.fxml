@@ -27,7 +27,7 @@
         </VBox>
     </top>
     <center>
-        <VBox BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="152.0" prefWidth="797.0" text="WAR GAMES" textFill="#d70404">
                     <font>

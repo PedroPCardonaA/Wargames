@@ -51,9 +51,12 @@ public class FileArmyHandler {
      * @throws ClassNotFoundException if the txt file does not contain data from a serializable class
      */
     private static Army readArmyFromSerializable(String pathOfFile) throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(pathOfFile);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        return (Army) ois.readObject();
+        try (FileInputStream fis = new FileInputStream(pathOfFile); ObjectInputStream ois = new ObjectInputStream(fis)) {
+            return (Army) ois.readObject();
+        } catch (Exception e) {
+            throw new IOException("Reading the army from the txt file:" + pathOfFile + " failed!" + " It was corrupted");
+        }
+
     }
 
     /**
@@ -62,7 +65,7 @@ public class FileArmyHandler {
      * @return Army - an instance of army class from the file
      * @throws IllegalArgumentException if the data in csv is corrupted.
      */
-    private static Army readArmyFromCsv(String pathOfFile) throws  IllegalArgumentException{
+    private static Army readArmyFromCsv(String pathOfFile) throws  IOException{
         Army readArmy = new Army("readArmy");
         UnitFactory factory = new UnitFactory();
         Path file = Path.of(pathOfFile);
@@ -76,8 +79,8 @@ public class FileArmyHandler {
             });
             return readArmy;
         }catch (Exception e){
-            throw new IllegalArgumentException("The data of the file was corrupted or is not compatible" +
-                    "with this program. \nThe error was: " + e.getMessage() +" In the line " +numberOfLine[0] +" of the file.");
+            throw new IOException("The data of the file was corrupted or is not compatible" +
+                    " with this program. \nThe error was: " + e.getMessage() +" In the line " +numberOfLine[0] +" of the file.");
         }
     }
 
@@ -108,6 +111,9 @@ public class FileArmyHandler {
 
         if (fileName.contains("\\"))
             throw new IOException("The name of the file cannot contain a '\\'. Define a correct name.");
+
+        if (fileName.contains("?"))
+            throw new IOException("The name of the file cannot contain a '?'. Define a correct name.");
 
         if (b) fileName += ".csv";
 
