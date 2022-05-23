@@ -9,10 +9,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,7 +36,7 @@ import java.util.*;
  * @version 1.0
  * @since 1.0-SNAPSHOT
  */
-public class MainPageController extends Controller implements Initializable {
+public class MainPageController extends Controller implements Initializable{
     private final SingletonArmies singletonArmies = SingletonArmies.getSingletonArmies();
     private Army army1 = new Army(singletonArmies.getArmy(0));
     private Army army2 = new Army(singletonArmies.getArmy(1));
@@ -582,7 +586,7 @@ public class MainPageController extends Controller implements Initializable {
      */
     @FXML
     private void closeTheProgramButton(){
-        Platform.exit();
+        armyOneName.getScene().getWindow().hide();
     }
 
     private void setDisableOfTheButtons(boolean state){
@@ -607,5 +611,19 @@ public class MainPageController extends Controller implements Initializable {
         audioClip.setCycleCount(AudioClip.INDEFINITE);
         audioClip.setVolume(0.25);
         audioClip.play();
+    }
+
+    @FXML
+    private void openHints(){
+        try {
+            File file = new File("src/main/resources/documents/userGuide.pdf");
+            if(file.exists()){
+                if(Desktop.isDesktopSupported()){
+                    Desktop.getDesktop().open(file);
+                }
+            }
+        }catch (IOException e){
+            this.showError("Error by loading hints","It happened an error by loading the pdf document with the user guide", "The error was : " +e.getMessage());
+        }
     }
 }

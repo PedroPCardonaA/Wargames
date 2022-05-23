@@ -4,8 +4,8 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 
 /**
  *
- * Class edu.ntnu.idatt2001.pedropca.CommanderUnit that represents the cavalry  units in the war games.
- * This class conforms the edu.ntnu.idatt2001.pedropca.Unit hierarchy and has the abstract class cavalryUnit as superclass.
+ * Class CommanderUnit that represents the cavalry  units in the war games.
+ * This class conforms the Unit hierarchy and has the abstract class cavalryUnit as superclass.
  * This class has the same fields that CalvaryUnit.
  *
  * @author Pedro Cardona
@@ -15,8 +15,8 @@ import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 
 public class CommanderUnit extends CavalryUnit{
     /**
-     * Constructor of the class edu.ntnu.idatt2001.pedropca.CommanderUnit. The signature of this constructor
-     * takes all the fields of class the class edu.ntnu.idatt2001.pedropca.CavalryUnit
+     * Constructor of the class CommanderUnit. The signature of this constructor
+     * takes all the fields of class the class CavalryUnit
      * except the field ATTACK_TYPE because it is pre-defined as "melee"
      * and field isCharging that is defined as true when the object is made.
      * @param name String name of the unit

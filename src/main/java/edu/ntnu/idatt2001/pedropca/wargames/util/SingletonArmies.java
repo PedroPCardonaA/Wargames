@@ -83,7 +83,7 @@ public class SingletonArmies {
 
     /**
      * Method that remove a defined army from the list of armies.
-     * @param army Army - army to be removed from the list of armies.
+     * @param index int - index of the army to be removed from the list of armies.
      */
     public void removeArmy(int index){
         this.listOfArmies.remove(index);
@@ -91,7 +91,7 @@ public class SingletonArmies {
 
     /**
      * Method that remove a defined army from the backup list of armies.
-     * @param army Army - army to be removed from the backup list of armies.
+     * @param index int - index of the army to be removed from the backup list of armies.
      */
     public void removeArmyBackUp(int index){
         this.listOfArmiesBackUp.remove(index);
