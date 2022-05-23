@@ -342,9 +342,9 @@ public class EditingArmyController extends Controller implements Initializable {
     private List<String> getUnitsName(String input){
         List<String> names= new ArrayList<>();
         army.getAllUnits().forEach(unit->{
-            if(!names.contains(unit.getName() + " X" + this.getNumberOfTheSameUnitIntTheArmy(unit.getName()))
+            if(!names.contains(unit.getName()+ " (" +unit.getClass().getSimpleName()+")" + " X" + this.getNumberOfTheSameUnitIntTheArmy(unit.getName()))
                     && unit.getName().contains(input)) {
-                names.add(unit.getName() +  " X" + this.getNumberOfTheSameUnitIntTheArmy(unit.getName()));
+                names.add(unit.getName() + " (" +unit.getClass().getSimpleName()+")" + " X" + this.getNumberOfTheSameUnitIntTheArmy(unit.getName()));
             }
         });
         return names;
