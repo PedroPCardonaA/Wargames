@@ -547,11 +547,11 @@ public class MainPageController extends Controller implements Initializable {
                     this.updateImageView("src/main/resources/Images/forest.jpg");
                     break;
                 case HILL:
-                    EnumTerrain.setHILL();
+                    EnumTerrain.setHill();
                     this.updateImageView("src/main/resources/Images/hills.jpg");
                     break;
                 case PLAINS:
-                    EnumTerrain.setPLAINS();
+                    EnumTerrain.setPlains();
                     this.updateImageView("src/main/resources/Images/plain.jpg");
                     break;
                 case VOLCANO:

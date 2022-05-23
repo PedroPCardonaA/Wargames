@@ -2,9 +2,6 @@ package edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -39,22 +36,22 @@ class RangedUnitTest {
 
             @Test
             void getAttackBonusAgainstInfantryWhenTerrainIsHills() {
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(10, new RangedUnit("Ranged",100).getAttackBonus(new InfantryUnit(" Infantry",100)));
             }
             @Test
             void getAttackBonusAgainstRangedTWhenTerrainIsHills(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(7, new RangedUnit("Ranged",100).getAttackBonus(new RangedUnit("Ranged",100)));
             }
             @Test
             void getAttackBonusAgainstCavalryWhenTerrainIsHills(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(7, new RangedUnit("Ranged",100).getAttackBonus(new CavalryUnit("Cavalry",100)));
             }
             @Test
             void getAttackBonusAgainstMagicianWhenTerrainIsHills(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(7, new RangedUnit("Ranged",100).getAttackBonus(new MagicianUnit("Cavalry",100)));
             }
 

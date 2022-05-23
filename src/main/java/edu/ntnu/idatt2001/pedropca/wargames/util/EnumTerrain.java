@@ -21,10 +21,10 @@ public enum EnumTerrain {
     public static void setForest(){
         terrain = FOREST;
     }
-    public static void setHILL(){
+    public static void setHill(){
         terrain = HILL;
     }
-    public static void setPLAINS(){
+    public static void setPlains(){
         terrain = PLAINS;
     }
     public static void setVolcano(){

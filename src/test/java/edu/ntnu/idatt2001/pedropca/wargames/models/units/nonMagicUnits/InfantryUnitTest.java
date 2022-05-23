@@ -2,9 +2,6 @@ package edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits;
 
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits.MagicianUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
-import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.RangedUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.util.EnumTerrain;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,22 +15,22 @@ class InfantryUnitTest {
         class Positive{
             @Test
             void getAttackBonusAgainstInfantryWhenTheTerrainIsNotForest() {
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(0, new InfantryUnit("Infantry",100).getAttackBonus(new InfantryUnit(" Infantry",100)));
             }
             @Test
             void getAttackBonusAgainstRangedWhenTheTerrainIsNotForest(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(0, new InfantryUnit("Infantry",100).getAttackBonus(new RangedUnit("Ranged",100)));
             }
             @Test
             void getAttackBonusAgainstCavalryWhenTheTerrainIsNotForest(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(4, new InfantryUnit("Infantry",100).getAttackBonus(new CavalryUnit("Cavalry",100)));
             }
             @Test
             void getAttackBonusAgainstMagicianWhenTheTerrainIsNotForest(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(0, new InfantryUnit("Infantry",100).getAttackBonus(new MagicianUnit("Cavalry",100)));
             }
             @Test
@@ -105,22 +102,22 @@ class InfantryUnitTest {
             }
             @Test
             void getResistBonusAgainstInfantryWhenIsHillOrPlains() {
-                EnumTerrain.setPLAINS();
+                EnumTerrain.setPlains();
                 assertEquals(3, new InfantryUnit("Infantry",100).getResistBonus(new InfantryUnit(" Infantry",100)));
             }
             @Test
             void getResistBonusAgainstRangedWhenIsHillOrPlains(){
-                EnumTerrain.setPLAINS();
+                EnumTerrain.setPlains();
                 assertEquals(0, new InfantryUnit("Infantry",100).getResistBonus(new RangedUnit("Ranged",100)));
             }
             @Test
             void getResistBonusAgainstCavalryWhenIsHillOrPlains(){
-                EnumTerrain.setPLAINS();
+                EnumTerrain.setPlains();
                 assertEquals(5, new InfantryUnit("Infantry",100).getResistBonus(new CavalryUnit("Cavalry",100)));
             }
             @Test
             void getResistBonusAgainstMagicianWhenIsHillOrPlains(){
-                EnumTerrain.setPLAINS();
+                EnumTerrain.setPlains();
                 assertEquals(0, new InfantryUnit("Infantry",100).getResistBonus(new MagicianUnit("Cavalry",100)));
             }
         }

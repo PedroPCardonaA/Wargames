@@ -42,25 +42,25 @@ class MagicianUnitTest {
             }
             @Test
             void getAttackBonusAgainstInfantryWhenTerrainIsNotVolcano() {
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getAttackBonus(new InfantryUnit(" Infantry",100))>-1
                         && new MagicianUnit("Magician",100).getAttackBonus(new InfantryUnit(" Infantry",100)) <26);
             }
             @Test
             void getAttackBonusAgainstRangedWhenTerrainIsNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getAttackBonus(new RangedUnit("Ranged",100))>-1
                         && new MagicianUnit("Magician",100).getAttackBonus(new RangedUnit("Ranged",100)) <26);
             }
             @Test
             void getAttackBonusAgainstCavalryWhenTerrainIsNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getAttackBonus(new CavalryUnit("Cavalry",100))>-1
                         && new MagicianUnit("Magician",100).getAttackBonus(new CavalryUnit("Cavalry",100)) <26);
             }
             @Test
             void getAttackBonusAgainstMagicianWhenTerrainIsNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getAttackBonus(new MagicianUnit("Cavalry",100))>-1
                         && new MagicianUnit("Magician",100).getAttackBonus(new MagicianUnit("Cavalry",100)) <26);
             }
@@ -97,25 +97,25 @@ class MagicianUnitTest {
             }
             @Test
             void getResistBonusAgainstInfantryWhenTerrainIsNotVolcano() {
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getResistBonus(new InfantryUnit(" Infantry",100))>-1
                         && new MagicianUnit("Magician",100).getResistBonus(new InfantryUnit(" Infantry",100)) <6);
             }
             @Test
             void getResistBonusAgainstRangedWhenTerrainIsNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getResistBonus(new RangedUnit("Ranged",100))>-1
                         && new MagicianUnit("Magician",100).getResistBonus(new RangedUnit("Ranged",100)) <6);
             }
             @Test
             void getResistBonusAgainstCavalryWhenTerrainIsNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getResistBonus(new CavalryUnit("Cavalry",100))>-1
                         && new MagicianUnit("Magician",100).getResistBonus(new CavalryUnit("Cavalry",100)) <6);
             }
             @Test
             void getResistBonusAgainstMagicianWhenTerrainIsNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertTrue(new MagicianUnit("Magician",100).getResistBonus(new MagicianUnit("Cavalry",100))>-1
                         && new MagicianUnit("Magician",100).getResistBonus(new MagicianUnit("Cavalry",100)) <6);
             }

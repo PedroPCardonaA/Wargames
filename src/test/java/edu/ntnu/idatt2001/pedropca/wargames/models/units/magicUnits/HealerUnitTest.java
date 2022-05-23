@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2001.pedropca.wargames.models.units.magicUnits;
 
-import edu.ntnu.idatt2001.pedropca.wargames.models.Army;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.Unit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.CavalryUnit;
 import edu.ntnu.idatt2001.pedropca.wargames.models.units.nonMagicUnits.InfantryUnit;
@@ -31,7 +30,7 @@ class HealerUnitTest {
             }
             @Test
             void getAttackBonusAgainstCavalryWhenTheTerrainIsNotVolcanoAndNotForest() {
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(-5, new HealerUnit("Healer",100).getAttackBonus(new CavalryUnit(" Cavalry",100)));
             }
             @Test
@@ -46,7 +45,7 @@ class HealerUnitTest {
             }
             @Test
             void getAttackBonusAgainstMagicianWhenTheTerrainIsNotVolcanoAndNotForest() {
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(25, new HealerUnit("Healer",100).getAttackBonus(new MagicianUnit("Magician",100)));
             }
             @Test
@@ -61,7 +60,7 @@ class HealerUnitTest {
             }
             @Test
             void getAttackBonusAgainstHealerRangedAndInfantryWhenTheTerrainIsNotForestAndNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(0, new HealerUnit("Healer",100).getAttackBonus(new InfantryUnit("Infantry",100)));
             }
         }
@@ -77,7 +76,7 @@ class HealerUnitTest {
             }
             @Test
             void getResistBonusAgainstCavalryWhenTheTerrainIsNotVolcano() {
-                EnumTerrain.setPLAINS();
+                EnumTerrain.setPlains();
                 assertEquals(0, new HealerUnit("Healer",100).getResistBonus(new CavalryUnit(" Cavalry",100)));
             }
             @Test
@@ -87,7 +86,7 @@ class HealerUnitTest {
             }
             @Test
             void getResistBonusAgainstInfantryWhenTheTerrainIsNotVolcano() {
-                EnumTerrain.setPLAINS();
+                EnumTerrain.setPlains();
                 assertEquals(3, new HealerUnit("Healer",100).getResistBonus(new InfantryUnit("Infantry",100)));
             }
             @Test
@@ -97,7 +96,7 @@ class HealerUnitTest {
             }
             @Test
             void getResistBonusAgainstMagicianWhenTheTerrainIsNotVolcano() {
-                EnumTerrain.setPLAINS();
+                EnumTerrain.setPlains();
                 assertEquals(20, new HealerUnit("Healer",100).getResistBonus(new MagicianUnit("Magician",100)));
             }
             @Test
@@ -107,7 +106,7 @@ class HealerUnitTest {
             }
             @Test
             void getResistBonusAgainstHealerAndRangedWhenTerrainIsNotVolcano(){
-                EnumTerrain.setHILL();
+                EnumTerrain.setHill();
                 assertEquals(5, new HealerUnit("Healer",100).getResistBonus(new HealerUnit("Healer",100)));
             }
         }
