@@ -24,7 +24,6 @@ import java.util.Optional;
  */
 public class WarGamesApp extends Application {
 
-    //TODO: Update old JavaDoc.
     /**
      * Main method that starts the program, generate a unique instance of the SingletonArmies class
      * and calls the JavaFX's method launch.

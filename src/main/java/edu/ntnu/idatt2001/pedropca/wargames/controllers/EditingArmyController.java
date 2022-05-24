@@ -296,8 +296,11 @@ public class EditingArmyController extends Controller implements Initializable {
                 int sum = 0;
                 String name = this.getRealNameOfTheUnit();
                 for(int i = 0; i<this.checkIfParsable(numberToDelete.getText(),15,"The number of units to delete");i++){
-                    if(army.getAllUnits().contains(army.returnAUnitByName(name))) sum++;
-                    army.removeUnit(army.returnAUnitByName(name));
+                    if(army.getAllUnits().contains(army.returnAUnitByName(name))){
+                        army.removeUnit(army.returnAUnitByName(name));
+                        sum++;
+                    }
+
                 }
                 this.updateArmyInBothListInTheSingleton(army,singletonArmies.getArmyNumber());
                 this.updateView();
@@ -318,7 +321,7 @@ public class EditingArmyController extends Controller implements Initializable {
         for (int i=0;i<selectedUnitName.length()-1;i++){
             if(selectedUnitName.charAt(i)== ' ') indexes.add(i);
         }
-        return selectedUnitName.substring(0,indexes.get(indexes.size()-1));
+        return selectedUnitName.substring(0,indexes.get(indexes.size()-2));
     }
 
 

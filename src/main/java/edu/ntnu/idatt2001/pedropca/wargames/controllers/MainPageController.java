@@ -613,6 +613,10 @@ public class MainPageController extends Controller implements Initializable{
         audioClip.play();
     }
 
+    /**
+     * Method that open an extern pdf document that contains the user guide of the application.
+     * Document is very relevant for a correct use of the application.
+     */
     @FXML
     private void openHints(){
         try {
