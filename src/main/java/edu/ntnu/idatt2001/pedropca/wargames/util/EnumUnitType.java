@@ -1,7 +1,6 @@
 package edu.ntnu.idatt2001.pedropca.wargames.util;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Enum class that contains the different types of units that "Wargames" application support til now.
@@ -38,7 +37,6 @@ public enum EnumUnitType {
      */
     public static EnumUnitType getUnitType(String nameString){
         return Arrays.stream(EnumUnitType.class.getEnumConstants()).
-                filter(enumUnitType -> enumUnitType.unitType.equals(nameString)).
-                collect(Collectors.toList()).get(0);
+                filter(enumUnitType -> enumUnitType.unitType.equals(nameString)).findFirst().orElse(null);
     }
 }

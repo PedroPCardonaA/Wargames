@@ -206,9 +206,9 @@ public class Army implements Serializable{
      */
 
     public Unit returnAUnitByName(String nameOfUnit){
-        return units.stream().filter(unit -> unit.getName().equals(nameOfUnit))
-                .collect(Collectors.toList()).get(0);
+        return units.stream().filter(unit -> unit.getName().equals(nameOfUnit)).findFirst().orElse(null);
     }
+
 
     @Override
     public String toString() {
