@@ -92,6 +92,7 @@ public class EditingArmyController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(unitListView.getSelectionModel().getSelectedItem());
         displayAllUnits.setDisable(Controller.getActualPage() == Page.DISPLAY_ARMY);
         unitType.getItems().addAll("Infantry","Cavalry","Ranged","Magician","Healer","Commander");
         this.updateView();
@@ -292,7 +293,7 @@ public class EditingArmyController extends Controller implements Initializable {
     @FXML
     private void deleteUnit(){
         try {
-            if(!unitListView.getFocusModel().getFocusedItem().isEmpty()){
+            if(unitListView.getSelectionModel().getSelectedItem() !=null){
                 int sum = 0;
                 String name = this.getRealNameOfTheUnit();
                 for(int i = 0; i<this.checkIfParsable(numberToDelete.getText(),15,"The number of units to delete");i++){
