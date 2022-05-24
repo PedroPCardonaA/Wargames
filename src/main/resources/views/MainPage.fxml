@@ -18,7 +18,7 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
-                        <MenuItem mnemonicParsing="false" onAction="#openHints" text="Hints" />
+                        <MenuItem mnemonicParsing="false" onAction="#openUserManual" text="Manual" />
                                 <MenuItem fx:id="closeButton" mnemonicParsing="false" onAction="#closeTheProgramButton" text="Close" />
                             </items>
                         </Menu>

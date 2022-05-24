@@ -306,7 +306,7 @@ public class EditingArmyController extends Controller implements Initializable {
                 this.updateArmyInBothListInTheSingleton(army,singletonArmies.getArmyNumber());
                 this.updateView();
                 this.showAlert("Success by deleting units","You have delete the selected unit correctly","You have deleted " + sum + " of unit: " + name + " correctly!!" + "\nThey are " + this.getNumberOfTheSameUnitIntTheArmy(name) + " of them in the army now.");
-            } else this.showAlert("Unit was not selected", "You must select a unit to delete them","");
+            } else this.showAlert("Unit was not selected", "You must select a unit to delete them"," You must select a unit in the list view in the left side of the screen!");
         }catch (Exception e){
             this.showError("Error by deleting units", "It was an error by deleting the units",e.getMessage());
         }

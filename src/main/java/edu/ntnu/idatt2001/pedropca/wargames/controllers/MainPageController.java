@@ -618,9 +618,9 @@ public class MainPageController extends Controller implements Initializable{
      * Document is very relevant for a correct use of the application.
      */
     @FXML
-    private void openHints(){
+    private void openUserManual(){
         try {
-            File file = new File("src/main/resources/documents/userGuide.pdf");
+            File file = new File("src/main/resources/documents/User manual.pdf");
             if(file.exists()){
                 if(Desktop.isDesktopSupported()){
                     Desktop.getDesktop().open(file);
